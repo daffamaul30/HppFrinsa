@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">Hpp</string>
+    <string name="app_name">Frinsa Hpp</string>
     <string name="www_javafrinsaestate_com">www.javafrinsaestate.com</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_btn_masuk">Masuk</string>
 </resources>
