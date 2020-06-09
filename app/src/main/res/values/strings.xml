@@ -4,4 +4,21 @@
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
     <string name="login_btn_masuk">Masuk</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="varietas">Varietas</string>
+    <string name="tgl_input">DD/MM/YYYY</string>
+    <string name="blok">Blok</string>
+    <string name="berat">Berat</string>
+    <string name="kolektif_dari">Kolektif Dari</string>
+    <string name="biaya">Biaya</string>
+    <string name="proses">Proses</string>
 </resources>

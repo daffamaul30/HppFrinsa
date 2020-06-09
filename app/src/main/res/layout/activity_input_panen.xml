@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputPanen">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.cardview.widget.CardView
+            style="@style/Card"
+            android:id="@+id/card_panen">
+
+            <LinearLayout
+                style="@style/InsideCard">
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/tanggal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/input_tgl"
+                        android:layout_width="95dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="15sp"
+                        android:text="@string/tgl_input"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:textSize="10sp"
+                        android:background="@drawable/button_input"
+                        android:text="Pilih Tanggal"/>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/varietas"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinner_varietas"
+                        android:layout_width="150dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/btn_spinner"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="center"/>
+
+                    <Button
+                        android:id="@+id/btn_tmbh_varietas"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_toEndOf="@+id/spinner_varietas"
+                        android:background="@drawable/btn_add_spinner"
+                        android:text="+"
+                        android:textSize="20sp"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/blok"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinner_blok"
+                        android:layout_width="150dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/btn_spinner"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="center"/>
+
+                    <Button
+                        android:id="@+id/btn_tmbh_blok"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_toEndOf="@+id/spinner_blok"
+                        android:background="@drawable/btn_add_spinner"
+                        android:text="+"
+                        android:textSize="20sp"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/berat"/>
+
+                <EditText
+                    android:id="@+id/et_berat"
+                    style="@style/ET"/>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/kolektif_dari"/>
+
+                <EditText
+                    android:id="@+id/et_kolektif"
+                    style="@style/ET"/>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/biaya"/>
+
+                <EditText
+                    android:id="@+id/et_biaya"
+                    style="@style/ET"/>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/proses"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinner_biaya"
+                        android:layout_width="150dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/btn_spinner"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="center"/>
+
+                    <Button
+                        android:id="@+id/btn_tmbh_blok"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_toEndOf="@+id/spinner_biaya"
+                        android:background="@drawable/btn_add_spinner"
+                        android:text="+"
+                        android:textSize="20sp"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            style="@style/Button.Kirim"
+            android:id="@+id/btn_kirim_panen"
+            android:text="kirim"
+            android:layout_below="@+id/card_panen"
+            android:elevation="10dp"
+            android:background="@drawable/btn_kirim"/>
+    </RelativeLayout>
+
+</ScrollView>
