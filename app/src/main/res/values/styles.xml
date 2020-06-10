@@ -24,6 +24,9 @@
     <style name="Teks.TV">
         <item name="android:textSize">18sp</item>
     </style>
+    <style name="Teks.White">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
     <style name="Input">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

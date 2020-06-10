@@ -21,4 +21,7 @@
     <string name="kolektif_dari">Kolektif Dari</string>
     <string name="biaya">Biaya</string>
     <string name="proses">Proses</string>
+    <string name="tmbh_varietas">Masukkan Varietas Baru</string>
+    <string name="batal">Batal</string>
+    <string name="tambahkan">Tambahkan</string>
 </resources>

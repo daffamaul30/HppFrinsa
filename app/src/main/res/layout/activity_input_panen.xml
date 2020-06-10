@@ -38,12 +38,20 @@
                         android:textSize="15sp"
                         android:text="@string/tgl_input"/>
                     <Button
+                        android:id="@+id/btn_datepicker"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:textSize="10sp"
                         android:background="@drawable/button_input"
                         android:text="Pilih Tanggal"/>
                 </LinearLayout>
+
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Beli dari kebun lain" />
 
                 <TextView
                     style="@style/Teks.TV"
@@ -65,6 +73,7 @@
                         android:textAlignment="center"/>
 
                     <Button
+                        style="@style/Teks.White"
                         android:id="@+id/btn_tmbh_varietas"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -95,6 +104,7 @@
                         android:textAlignment="center"/>
 
                     <Button
+                        style="@style/Teks.White"
                         android:id="@+id/btn_tmbh_blok"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -111,14 +121,17 @@
 
                 <EditText
                     android:id="@+id/et_berat"
+                    android:inputType="numberDecimal"
                     style="@style/ET"/>
 
                 <TextView
+                    android:id="@+id/tv_kolektif"
                     style="@style/Teks.TV"
                     android:text="@string/kolektif_dari"/>
 
                 <EditText
                     android:id="@+id/et_kolektif"
+                    android:inputType="text"
                     style="@style/ET"/>
 
                 <TextView
@@ -127,6 +140,7 @@
 
                 <EditText
                     android:id="@+id/et_biaya"
+                    android:inputType="number"
                     style="@style/ET"/>
 
                 <TextView
@@ -141,7 +155,7 @@
                     android:orientation="horizontal">
 
                     <Spinner
-                        android:id="@+id/spinner_biaya"
+                        android:id="@+id/spinner_proses"
                         android:layout_width="150dp"
                         android:layout_height="35dp"
                         android:background="@drawable/btn_spinner"
@@ -149,10 +163,11 @@
                         android:textAlignment="center"/>
 
                     <Button
-                        android:id="@+id/btn_tmbh_blok"
+                        style="@style/Teks.White"
+                        android:id="@+id/btn_tmbh_proses"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_toEndOf="@+id/spinner_biaya"
+                        android:layout_toEndOf="@+id/spinner_proses"
                         android:background="@drawable/btn_add_spinner"
                         android:text="+"
                         android:textSize="20sp"/>

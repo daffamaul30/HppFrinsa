@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/dialog">
+
+    <EditText
+        android:id="@+id/edt_dialog_tmbh_varietas"
+        android:hint="@string/tmbh_varietas"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/batal_tmbh_varietas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/submit_tmbh_varietas"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/btn_batal"
+            android:text="@string/batal"
+            />
+
+        <Button
+            android:id="@+id/submit_tmbh_varietas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Button.Kirim"
+            android:layout_marginEnd="0dp"
+            android:padding="5dp"
+            android:background="@drawable/btn_kirim"
+            android:text="@string/tambahkan"
+            />
+    </RelativeLayout>
+</LinearLayout>
