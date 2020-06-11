@@ -24,4 +24,13 @@
     <string name="tmbh_varietas">Masukkan Varietas Baru</string>
     <string name="batal">Batal</string>
     <string name="tambahkan">Tambahkan</string>
+    <string name="beli_dari_kebun_lain">Beli dari kebun lain</string>
+    <string name="isi_nanti">Isi nanti</string>
+    <string name="tidak">tidak</string>
+    <string name="ya">ya</string>
+    <string name="cv_frinsa_agrolestari">CV FRINSA AGROLESTARI</string>
+    <string name="kirim">kirim</string>
+    <string name="lanjutkan_produksi">Lanjutkan Produksi</string>
+    <string name="mulai_produksi">Mulai Produksi</string>
+    <string name="daftar_produksi">Daftar Produksi</string>
 </resources>

@@ -30,15 +30,17 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_panen)
 
-        var edtKolektif: EditText = findViewById(R.id.et_kolektif)
-        var tvKolektif: TextView = findViewById(R.id.tv_kolektif)
-        edtKolektif.isEnabled = false
-//        tvKolektif.setTextColor()
+        //Input Field Kolektif Dari Disables
+        setDisable(et_kolektif,tv_kolektif)
 
         //set action bar title
         if (supportActionBar != null) {
             (supportActionBar as ActionBar).title = "Hasil Panen"
         }
+
+        //Handling Checkbox
+        cb_kolektif.setOnClickListener(this)
+        cb_isi_nanti.setOnClickListener(this)
 
         //call setSpinner function
         setSpinner()
@@ -156,6 +158,16 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    fun setDisable(a: EditText, b: TextView) {
+        a.isEnabled = false
+        b.setTextColor(Color.parseColor("#c2a7a9"))
+    }
+
+    fun setEnable(a: EditText, b: TextView) {
+        a.isEnabled = true
+        b.setTextColor(Color.parseColor("#000000"))
+    }
+
     override fun onClick(v: View) {
         when (v.id){
             R.id.btn_datepicker -> {
@@ -237,6 +249,22 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 }
                 dialog.batal_tmbh_varietas.setOnClickListener{
                     alertDialog.dismiss()
+                }
+            }
+            R.id.cb_kolektif -> {
+                if (cb_kolektif.isChecked) {
+                    setEnable(et_kolektif,tv_kolektif)
+                } else {
+                    setDisable(et_kolektif,tv_kolektif)
+                }
+            }
+            R.id.cb_isi_nanti -> {
+                if (cb_isi_nanti.isChecked) {
+                    spinner_proses.isEnabled = false
+                    tv_proses.setTextColor(Color.parseColor("#c2a7a9"))
+                } else {
+                    spinner_proses.isEnabled = true
+                    tv_proses.setTextColor(Color.parseColor("#000000"))
                 }
             }
         }

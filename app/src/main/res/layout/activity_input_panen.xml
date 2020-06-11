@@ -4,17 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/card"
     tools:context=".InputPanen">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
 
         <androidx.cardview.widget.CardView
             style="@style/Card"
-            android:id="@+id/card_panen">
+            android:id="@+id/card_panen"
+            app:cardElevation="6dp">
 
             <LinearLayout
                 style="@style/InsideCard">
@@ -48,10 +51,10 @@
 
 
                 <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="match_parent"
+                    android:id="@+id/cb_kolektif"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Beli dari kebun lain" />
+                    android:text="@string/beli_dari_kebun_lain" />
 
                 <TextView
                     style="@style/Teks.TV"
@@ -143,9 +146,22 @@
                     android:inputType="number"
                     style="@style/ET"/>
 
-                <TextView
-                    style="@style/Teks.TV"
-                    android:text="@string/proses"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_proses"
+                        style="@style/Teks.TV"
+                        android:text="@string/proses"/>
+
+                    <CheckBox
+                        android:id="@+id/cb_isi_nanti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/isi_nanti"
+                        android:textAlignment="textEnd"/>
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -179,7 +195,7 @@
         <Button
             style="@style/Button.Kirim"
             android:id="@+id/btn_kirim_panen"
-            android:text="kirim"
+            android:text="@string/kirim"
             android:layout_below="@+id/card_panen"
             android:elevation="10dp"
             android:background="@drawable/btn_kirim"/>

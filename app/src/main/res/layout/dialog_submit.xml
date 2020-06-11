@@ -5,20 +5,19 @@
     android:padding="10dp"
     android:background="@drawable/dialog">
 
-    <EditText
+    <TextView
         android:id="@+id/edt_dialog_tmbh_varietas"
-        android:hint="@string/tmbh_varietas"
+        style="@style/Teks"
+        android:text="Apakah anda yakin?"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_width="match_parent"
-        android:inputType="text"
-        android:layout_height="wrap_content"
+        android:textSize="20sp"
         />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         >
@@ -31,7 +30,7 @@
             android:textColor="#FFFFFF"
             android:layout_marginEnd="10dp"
             android:background="@drawable/btn_batal"
-            android:text="@string/batal"
+            android:text="@string/tidak"
             />
 
         <Button
@@ -42,7 +41,7 @@
             android:layout_marginEnd="0dp"
             android:padding="5dp"
             android:background="@drawable/btn_kirim"
-            android:text="@string/tambahkan"
+            android:text="@string/ya"
             />
     </RelativeLayout>
 </LinearLayout>

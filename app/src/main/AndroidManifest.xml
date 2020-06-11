@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".InputPanen"></activity>
+<!--        <activity-->
+<!--            android:name=".ui.login.LoginActivity"-->
+<!--            android:label="@string/title_activity_login" />-->
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".Dashboard" />
+            android:name=".Dashboard"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
