@@ -23,10 +23,10 @@
         >
 
         <Button
-            android:id="@+id/batal_tmbh_varietas"
+            android:id="@+id/batal_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/submit_tmbh_varietas"
+            android:layout_toLeftOf="@+id/submit_submit"
             android:textColor="#FFFFFF"
             android:layout_marginEnd="10dp"
             android:background="@drawable/btn_batal"
@@ -34,7 +34,7 @@
             />
 
         <Button
-            android:id="@+id/submit_tmbh_varietas"
+            android:id="@+id/submit_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Button.Kirim"

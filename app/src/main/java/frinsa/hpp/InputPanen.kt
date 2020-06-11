@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import kotlinx.android.synthetic.main.activity_input_panen.*
+import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.edt_dialog_tmbh_varietas
@@ -52,6 +53,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         btn_tmbh_varietas.setOnClickListener(this)
         btn_tmbh_blok.setOnClickListener(this)
         btn_tmbh_proses.setOnClickListener(this)
+        btn_kirim_panen.setOnClickListener(this)
     }
 
     fun setSpinner() {
@@ -265,6 +267,22 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 } else {
                     spinner_proses.isEnabled = true
                     tv_proses.setTextColor(Color.parseColor("#000000"))
+                }
+            }
+            R.id.btn_kirim_panen -> {
+                val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
+                val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
+                val alertDialog =  builder.show()
+
+                dialog.submit_submit.setOnClickListener {
+                    //Ambil data untuk ke database
+
+                    //Intent menggunakan putextra
+
+                    alertDialog.dismiss()
+                }
+                dialog.batal_submit.setOnClickListener{
+                    alertDialog.dismiss()
                 }
             }
         }

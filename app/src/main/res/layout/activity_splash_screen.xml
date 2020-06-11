@@ -18,13 +18,13 @@
             android:layout_centerVertical="true"
             android:src="@drawable/frinsa"/>
 
-        <TextView
-            style="@style/Teks.White"
-            android:text="@string/cv_frinsa_agrolestari"
-            android:layout_below="@+id/splash_logo"
-            android:textAlignment="center"
-            android:textSize="23dp"
-            android:textStyle="bold"            />
+<!--        <TextView-->
+<!--            style="@style/Teks.White"-->
+<!--            android:text="@string/cv_frinsa_agrolestari"-->
+<!--            android:layout_below="@+id/splash_logo"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="23dp"-->
+<!--            android:textStyle="bold"            />-->
 
         <TextView
             android:layout_width="wrap_content"
