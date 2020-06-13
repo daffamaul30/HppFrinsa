@@ -2,6 +2,7 @@ package frinsa.hpp
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.edt_dialog_tmbh_varietas
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -25,6 +27,16 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     private val blok: MutableList<String> = ArrayList()
     private val varietas: MutableList<String> = ArrayList()
     private val proses: MutableList<String> = ArrayList()
+
+    private lateinit var spinVarietas: String
+    private lateinit var spinBlok: String
+    private lateinit var spinProses: String
+    private lateinit var tvTanggal: String
+    private lateinit var edtBerat: String
+    private lateinit var edtKolektif: String
+    private lateinit var edtBiaya: String
+
+    private var isiNanti: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +76,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         varietas.add("Arabica")
         varietas.add("Robusta")
 
+        //Load dari database
+
         //Style and populate the spinner
         val adapterVarietas = ArrayAdapter(this, android.R.layout.simple_spinner_item, varietas)
         //Dropdown layout style
@@ -78,11 +92,11 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 position: Int,
                 id: Long
             ) {
+                spinVarietas = parent.getItemAtPosition(position).toString()
                 if (parent.getItemAtPosition(position) === "Pilih Varietas" ) {
 
                 } else {
-                    var item = parent.getItemAtPosition(position).toString()
-                    Toast.makeText(parent.context, item, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(parent.context, spinVarietas, Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -98,6 +112,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         blok.add("A")
         blok.add("B")
 
+        //Load dari database
+
         //Style and populate the spinner
         val adapterBlok = ArrayAdapter(this, android.R.layout.simple_spinner_item, blok)
         //Dropdown layout style
@@ -112,11 +128,11 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 position: Int,
                 id: Long
             ) {
+                spinBlok = parent.getItemAtPosition(position).toString()
                 if (parent.getItemAtPosition(position) === "Pilih Blok" ) {
 
                 } else {
-                    var item = parent.getItemAtPosition(position).toString()
-                    Toast.makeText(parent.context, item, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(parent.context, spinBlok, Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -132,6 +148,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         proses.add("A")
         proses.add("B")
 
+        //Load dari database
+
         //Style and populate the spinner
         val adapterProses = ArrayAdapter(this, android.R.layout.simple_spinner_item, proses)
         //Dropdown layout style
@@ -146,11 +164,11 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 position: Int,
                 id: Long
             ) {
+                spinProses = parent.getItemAtPosition(position).toString()
                 if (parent.getItemAtPosition(position) === "Pilih Proses" ) {
 
                 } else {
-                    var item = parent.getItemAtPosition(position).toString()
-                    Toast.makeText(parent.context, item, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(parent.context, spinProses, Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -168,6 +186,53 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     fun setEnable(a: EditText, b: TextView) {
         a.isEnabled = true
         b.setTextColor(Color.parseColor("#000000"))
+    }
+
+    fun validationKosong(): Boolean {
+        var valid: Boolean = false
+        tvTanggal = input_tgl.text.toString()
+        edtBerat = et_berat.text.toString()
+        edtKolektif = et_kolektif.text.toString()
+        edtBiaya = et_biaya.text.toString()
+
+        var isEmptyFields = false
+
+        if (tvTanggal == "DD/MM/YYYY") {
+            isEmptyFields = true
+            input_tgl.setError("Pilih tanggal")
+        }
+
+        if (spinVarietas == "Pilih Varietas") {
+            isEmptyFields = true
+        }
+
+        if (spinBlok == "Pilih Blok") {
+            isEmptyFields = true
+        }
+
+        if (spinProses == "Pilih Proses") {
+            isEmptyFields = true
+        }
+
+        if (edtBerat.isEmpty()) {
+            isEmptyFields = true
+            et_berat.error = "Field ini tidak boleh kosong"
+        }
+
+        if (et_kolektif.isEnabled && edtKolektif.isEmpty()) {
+            isEmptyFields = true
+            et_kolektif.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtBiaya.isEmpty()) {
+            isEmptyFields = true
+            et_biaya.error = "Field ini tidak boleh kosong"
+        }
+
+        if (!isEmptyFields) {
+            valid = true
+        }
+        return valid
     }
 
     override fun onClick(v: View) {
@@ -262,6 +327,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             }
             R.id.cb_isi_nanti -> {
                 if (cb_isi_nanti.isChecked) {
+                    isiNanti = true
                     spinner_proses.isEnabled = false
                     tv_proses.setTextColor(Color.parseColor("#c2a7a9"))
                 } else {
@@ -270,19 +336,37 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.btn_kirim_panen -> {
-                val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
-                val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
-                val alertDialog =  builder.show()
+                //Validasi inputan kosong
+                val valid = validationKosong()
+                println(valid)
 
-                dialog.submit_submit.setOnClickListener {
-                    //Ambil data untuk ke database
+                if (valid) {
+                    val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
+                    val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
+                    val alertDialog =  builder.show()
 
-                    //Intent menggunakan putextra
+                    dialog.submit_submit.setOnClickListener {
+                        val kolektif = if (edtKolektif.isEmpty()) edtKolektif else "-"
+                        val proses = if (isiNanti) "-" else spinProses
+                        //Ambil data untuk ke database
 
-                    alertDialog.dismiss()
-                }
-                dialog.batal_submit.setOnClickListener{
-                    alertDialog.dismiss()
+                        //Intent menggunakan putextra
+                        val intent = Intent(this@InputPanen, ReviewHasilPanen::class.java)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_TGL, tvTanggal)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_VARIETAS, spinVarietas)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_BLOK, spinBlok)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_BERAT, edtBerat)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_KOLEKTIF, kolektif)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, edtBiaya)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_PROSES, proses)
+                        startActivity(intent)
+                        finish()
+
+                        alertDialog.dismiss()
+                    }
+                    dialog.batal_submit.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
                 }
             }
         }
