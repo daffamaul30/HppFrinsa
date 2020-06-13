@@ -210,7 +210,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             isEmptyFields = true
         }
 
-        if (spinProses == "Pilih Proses") {
+        if (spinProses == "Pilih Proses" && isiNanti == false) {
             isEmptyFields = true
         }
 
@@ -331,6 +331,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     spinner_proses.isEnabled = false
                     tv_proses.setTextColor(Color.parseColor("#c2a7a9"))
                 } else {
+                    isiNanti = false
                     spinner_proses.isEnabled = true
                     tv_proses.setTextColor(Color.parseColor("#000000"))
                 }
@@ -346,7 +347,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     val alertDialog =  builder.show()
 
                     dialog.submit_submit.setOnClickListener {
-                        val kolektif = if (edtKolektif.isEmpty()) edtKolektif else "-"
+                        val kolektif = if (edtKolektif.isEmpty()) "-" else edtKolektif
                         val proses = if (isiNanti) "-" else spinProses
                         //Ambil data untuk ke database
 
