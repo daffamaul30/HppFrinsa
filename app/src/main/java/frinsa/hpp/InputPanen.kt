@@ -2,27 +2,34 @@ package frinsa.hpp
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.edt_dialog_tmbh_varietas
-import org.w3c.dom.Text
+import java.io.BufferedReader
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.InputStreamReader
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class InputPanen : AppCompatActivity(), View.OnClickListener {
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
+
+    private val FILE_VARIETAS = "varietas.txt"
+    private val FILE_BLOK = "blok.txt"
+    private val FILE_PROSES = "proses.txt"
 
     private val blok: MutableList<String> = ArrayList()
     private val varietas: MutableList<String> = ArrayList()
@@ -71,10 +78,14 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     fun setSpinner() {
         //Spinner Varietas
         val spinnerVarietas:Spinner = findViewById(R.id.spinner_varietas)
-
+        val list = readFile(FILE_VARIETAS).split(",").toTypedArray()
+        varietas.clear()
         varietas.add(0, "Pilih Varietas")
-        varietas.add("Arabica")
-        varietas.add("Robusta")
+        if (list.size > 0) {
+            list.forEach {
+                varietas.add(it)
+            }
+        }
 
         //Load dari database
 
@@ -108,6 +119,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         //Spinner Blok
         val spinnerBlok:Spinner = findViewById(R.id.spinner_blok)
 
+        blok.clear()
         blok.add(0, "Pilih Blok")
         blok.add("A")
         blok.add("B")
@@ -144,6 +156,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         //Spinner Proses
         val spinnerProses:Spinner = findViewById(R.id.spinner_proses)
 
+        proses.clear()
         proses.add(0, "Pilih Proses")
         proses.add("A")
         proses.add("B")
@@ -264,7 +277,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        varietas.add(inputTambahVarietas)
+                        writeFile(FILE_VARIETAS,inputTambahVarietas)
+                        setSpinner()
                         alertDialog.dismiss()
                     }
                 }
@@ -287,7 +301,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        blok.add(inputTambahBlok)
+                        writeFile(FILE_BLOK,inputTambahBlok)
+                        setSpinner()
                         alertDialog.dismiss()
                     }
                 }
@@ -310,7 +325,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        proses.add(inputTambahProses)
+                        writeFile(FILE_PROSES,inputTambahProses)
+                        setSpinner()
                         alertDialog.dismiss()
                     }
                 }
@@ -371,5 +387,45 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    fun writeFile(FILE_NAME: String, textToSave: String) {
+        var list = readFile(FILE_NAME)
+        val text:String
+        if (list.isNotEmpty()) {
+            text = list + "," + textToSave
+        } else {
+            text = textToSave
+        }
+        try {
+            val fileOutputStream = openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
+            fileOutputStream.write(text.toByteArray())
+            fileOutputStream.close()
+//            Toast.makeText(applicationContext, "Text Saved", Toast.LENGTH_SHORT).show()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun readFile(FILE_NAME: String): String {
+        val stringBuffer = StringBuffer()
+        try {
+            val fileInputStream = openFileInput(FILE_NAME)
+            val inputStreamReader = InputStreamReader(fileInputStream)
+            val bufferedReader = BufferedReader(inputStreamReader)
+            var lines: String? = null
+            while ({ lines = bufferedReader.readLine(); lines }() != null) {
+                stringBuffer.append(lines)
+            }
+//            val array = stringBuffer.split(" ").toTypedArray()
+//            displayText!!.text = stringBuffer.toString()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return stringBuffer.toString()
     }
 }
