@@ -45,10 +45,15 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
     private var isiNanti: Boolean = false
 
+    private val context = this
+    private lateinit var db: DBLocal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_panen)
+
+        //CREATE DATABASE
+        db = DBLocal(context)
 
         //Input Field Kolektif Dari Disables
         setDisable(et_kolektif,tv_kolektif)
@@ -78,12 +83,12 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     fun setSpinner() {
         //Spinner Varietas
         val spinnerVarietas:Spinner = findViewById(R.id.spinner_varietas)
-        val list = readFile(FILE_VARIETAS).split(",").toTypedArray()
+        val listV = db.readVarietas()
         varietas.clear()
         varietas.add(0, "Pilih Varietas")
-        if (list.size > 0) {
-            list.forEach {
-                varietas.add(it)
+        if (listV.size > 0) {
+            for (i in 0..(listV.size-1)) {
+                varietas.add(listV.get(i).name)
             }
         }
 
@@ -118,11 +123,14 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         //Spinner Blok
         val spinnerBlok:Spinner = findViewById(R.id.spinner_blok)
-
+        val listB = db.readBlok()
         blok.clear()
         blok.add(0, "Pilih Blok")
-        blok.add("A")
-        blok.add("B")
+        if (listB.size > 0) {
+            for (i in 0..(listB.size-1)) {
+                blok.add(listB.get(i).name)
+            }
+        }
 
         //Load dari database
 
@@ -155,11 +163,14 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         //Spinner Proses
         val spinnerProses:Spinner = findViewById(R.id.spinner_proses)
-
+        val listP = db.readProses()
         proses.clear()
         proses.add(0, "Pilih Proses")
-        proses.add("A")
-        proses.add("B")
+        if (listP.size > 0) {
+            for (i in 0..(listP.size-1)) {
+                proses.add(listP.get(i).name)
+            }
+        }
 
         //Load dari database
 
@@ -277,7 +288,9 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        writeFile(FILE_VARIETAS,inputTambahVarietas)
+//                        writeFile(FILE_VARIETAS,inputTambahVarietas)
+                        var vari = Varietas(inputTambahVarietas)
+                        db.insertVarietas(vari)
                         setSpinner()
                         alertDialog.dismiss()
                     }
