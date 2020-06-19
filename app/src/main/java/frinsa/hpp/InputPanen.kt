@@ -13,7 +13,6 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
-import kotlinx.android.synthetic.main.dialog_tmbh_varietas.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.edt_dialog_tmbh_varietas
 import java.io.BufferedReader
@@ -26,10 +25,6 @@ import kotlin.collections.ArrayList
 
 class InputPanen : AppCompatActivity(), View.OnClickListener {
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
-
-    private val FILE_VARIETAS = "varietas.txt"
-    private val FILE_BLOK = "blok.txt"
-    private val FILE_PROSES = "proses.txt"
 
     private val blok: MutableList<String> = ArrayList()
     private val varietas: MutableList<String> = ArrayList()
@@ -46,14 +41,14 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     private var isiNanti: Boolean = false
 
     private val context = this
-    private lateinit var db: DBLocal
+    private lateinit var db: DBPanen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_panen)
 
         //CREATE DATABASE
-        db = DBLocal(context)
+        db = DBPanen(context)
 
         //Input Field Kolektif Dari Disables
         setDisable(et_kolektif,tv_kolektif)
@@ -212,6 +207,10 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         b.setTextColor(Color.parseColor("#000000"))
     }
 
+    fun toastMessage(text: String) {
+        Toast.makeText(this,text,Toast.LENGTH_SHORT).show()
+    }
+
     fun validationKosong(): Boolean {
         var valid: Boolean = false
         tvTanggal = input_tgl.text.toString()
@@ -228,14 +227,17 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         if (spinVarietas == "Pilih Varietas") {
             isEmptyFields = true
+            toastMessage("Varietas tidak boleh kosong")
         }
 
         if (spinBlok == "Pilih Blok") {
             isEmptyFields = true
+            toastMessage("Blok tidak boleh kosong")
         }
 
         if (spinProses == "Pilih Proses" && isiNanti == false) {
             isEmptyFields = true
+            toastMessage("Proses tidak boleh kosong")
         }
 
         if (edtBerat.isEmpty()) {
@@ -288,8 +290,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-//                        writeFile(FILE_VARIETAS,inputTambahVarietas)
-                        var vari = Varietas(inputTambahVarietas)
+                        var vari = Varietas(name = inputTambahVarietas)
                         db.insertVarietas(vari)
                         setSpinner()
                         alertDialog.dismiss()
@@ -314,7 +315,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        writeFile(FILE_BLOK,inputTambahBlok)
+                        var blk = Blok(name = inputTambahBlok)
+                        db.insertBlok(blk)
                         setSpinner()
                         alertDialog.dismiss()
                     }
@@ -338,7 +340,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        writeFile(FILE_PROSES,inputTambahProses)
+                        var pros = Proses(name = inputTambahProses)
+                        db.insertProses(pros)
                         setSpinner()
                         alertDialog.dismiss()
                     }
@@ -378,7 +381,10 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         val kolektif = if (edtKolektif.isEmpty()) "-" else edtKolektif
                         val proses = if (isiNanti) "-" else spinProses
-                        //Ambil data untuk ke database
+                        //INSERT TO DATABASE
+                        var data = Panen(tanggal = tvTanggal, varietas = spinVarietas, kolektif = kolektif, proses = proses)
+                        var cheri = Cherry(berat = edtBerat.toDouble(), biaya = edtBiaya.toInt())
+                        db.insertPanen(data,cheri)
 
                         //Intent menggunakan putextra
                         val intent = Intent(this@InputPanen, ReviewHasilPanen::class.java)
@@ -400,45 +406,5 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
-    }
-
-    fun writeFile(FILE_NAME: String, textToSave: String) {
-        var list = readFile(FILE_NAME)
-        val text:String
-        if (list.isNotEmpty()) {
-            text = list + "," + textToSave
-        } else {
-            text = textToSave
-        }
-        try {
-            val fileOutputStream = openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
-            fileOutputStream.write(text.toByteArray())
-            fileOutputStream.close()
-//            Toast.makeText(applicationContext, "Text Saved", Toast.LENGTH_SHORT).show()
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
-
-    fun readFile(FILE_NAME: String): String {
-        val stringBuffer = StringBuffer()
-        try {
-            val fileInputStream = openFileInput(FILE_NAME)
-            val inputStreamReader = InputStreamReader(fileInputStream)
-            val bufferedReader = BufferedReader(inputStreamReader)
-            var lines: String? = null
-            while ({ lines = bufferedReader.readLine(); lines }() != null) {
-                stringBuffer.append(lines)
-            }
-//            val array = stringBuffer.split(" ").toTypedArray()
-//            displayText!!.text = stringBuffer.toString()
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return stringBuffer.toString()
     }
 }
