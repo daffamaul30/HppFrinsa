@@ -1,12 +1,10 @@
 package frinsa.hpp
 
 import android.content.Intent
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
-import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
 class Dashboard : AppCompatActivity(), View.OnClickListener {
@@ -25,6 +23,10 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.card_mulai -> {
                 val intent = Intent(this@Dashboard, InputPanen::class.java)
+                startActivity(intent)
+            }
+            R.id.card_daftar -> {
+                val intent = Intent(this@Dashboard, MainDaftarProduksi::class.java)
                 startActivity(intent)
             }
         }
