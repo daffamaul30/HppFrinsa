@@ -100,32 +100,36 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, nu
         }
     }
 
-//    fun getPanen() {
-//        var daftarPanen: MutableList<Panen> = ArrayList()
-//        val db = this.readableDatabase
-//        val result = db.rawQuery("SELECT * FROM $TABLE_PANEN JOIN $TABLE_CHERRY ON $COL_ID_CHERRY = $COL_ID_PANEN", null)
-//        if (result.moveToFirst()) {
-//            do {
-//                var panen = Panen()
-//                panen.id = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
-//                panen.tanggal = result.getString(result.getColumnIndex(COL_TGL))
-//                panen.varietas = result.getString(result.getColumnIndex(COL_VARIETAS))
-//                panen.blok = result.getString(result.getColumnIndex(COL_BLOK))
-//                panen.kolektif = result.getString(result.getColumnIndex(COL_KOLEKTIF))
-//                panen.proses = result.getString(result.getColumnIndex(COL_PROSES))
-//                panen.status = result.getString(result.getColumnIndex(COL_STATUS))
-//
-//                var cheri = Cherry()
-//                cheri.id = result.getString(result.getColumnIndex(COL_ID_CHERRY)).toInt()
-//                cheri.id2 = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
-//                cheri.berat = result.getString(result.getColumnIndex(COL_BERAT)).toDouble()
-//                cheri.biaya = result.getString(result.getColumnIndex(COL_BIAYA)).toInt()
-//
-//                daftarPanen.add(panen)
-//
-//            }
-//        }
-//    }
+    fun getPanen(): Pair<MutableList<Panen>, MutableList<Cherry>> {
+        var daftarPanen: MutableList<Panen> = ArrayList()
+        var daftarCheri: MutableList<Cherry> = ArrayList()
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_PANEN JOIN $TABLE_CHERRY ON $COL_ID_CHERRY = $COL_ID_PANEN", null)
+        if (result.moveToFirst()) {
+            do {
+                var panen = Panen()
+                panen.id = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
+                panen.tanggal = result.getString(result.getColumnIndex(COL_TGL))
+                panen.varietas = result.getString(result.getColumnIndex(COL_VARIETAS))
+                panen.blok = result.getString(result.getColumnIndex(COL_BLOK))
+                panen.kolektif = result.getString(result.getColumnIndex(COL_KOLEKTIF))
+                panen.proses = result.getString(result.getColumnIndex(COL_PROSES))
+                panen.status = result.getString(result.getColumnIndex(COL_STATUS))
+
+                var cheri = Cherry()
+                cheri.id = result.getString(result.getColumnIndex(COL_ID_CHERRY)).toInt()
+                cheri.id2 = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
+                cheri.berat = result.getString(result.getColumnIndex(COL_BERAT)).toDouble()
+                cheri.biaya = result.getString(result.getColumnIndex(COL_BIAYA)).toInt()
+
+                daftarPanen.add(panen)
+                daftarCheri.add(cheri)
+            }while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return Pair(daftarPanen,daftarCheri)
+    }
 
     fun getId(TABLE_NAME: String): Int {
         val db = this.readableDatabase
