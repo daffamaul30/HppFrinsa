@@ -149,29 +149,3 @@
 
 </androidx.cardview.widget.CardView>
 
-
-
-
-<TableRow
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginBottom="5dp"
-android:layout_weight="2"
-android:gravity="right">
-
-<Button
-    android:id="@+id/btn_dp_delete"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
-    android:elevation="6dp"
-    android:layout_weight="1"
-    android:background="@drawable/btn_edit"/>
-<Button
-    android:id="@+id/btn_dp_klik"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
-    android:layout_weight="1"
-    android:elevation="6dp"
-    android:background="@drawable/btn_batal"/>
-</TableRow>
-
