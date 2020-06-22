@@ -35,4 +35,5 @@
     <string name="daftar_produksi">Daftar Produksi</string>
     <string name="kembali">Kembali ke Dashboard</string>
     <string name="value">Value</string>
+    <string name="tahap">Tahap</string>
 </resources>
