@@ -6,7 +6,9 @@ import android.view.Menu
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import frinsa.hpp.daftar_produksi.DaftarProduksiAdapter
 import frinsa.hpp.daftar_produksi.FragmentProses
+import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import kotlinx.android.synthetic.main.fragment_produksi.*
 
 class SubProses: AppCompatActivity() {
@@ -17,8 +19,25 @@ class SubProses: AppCompatActivity() {
         if (supportActionBar != null) {
             (supportActionBar as ActionBar).title = "SubProses Kumulatif"
         }
+        val DPlist = ModelDaftarProduksi(
+            "27-04-2020",
+            "A",
+            "Arabica",
+            10.0,
+            "Full-Wash",
+            2000000.00,
+            "terakhir"
+        )
+        val dpList: MutableList<ModelDaftarProduksi> = ArrayList()
+        dpList.add(DPlist)
+        dpList.add(DPlist)
+        dpList.add(DPlist)
+        dpList.add(DPlist)
+        dpList.add(DPlist)
+
+
         rv_produksi.layoutManager = LinearLayoutManager(this)
-        val cardViewHeroAdapter = SubProsesAdapter(this, FragmentProses.getDPList())
+        val cardViewHeroAdapter = SubProsesAdapter(this, dpList)
         rv_produksi.adapter = cardViewHeroAdapter
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
