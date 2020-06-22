@@ -19,9 +19,11 @@ import java.io.BufferedReader
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStreamReader
+import java.sql.DriverManager.println
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.io.println as println1
 
 class InputPanen : AppCompatActivity(), View.OnClickListener {
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
@@ -63,7 +65,9 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         cb_isi_nanti.setOnClickListener(this)
 
         //call setSpinner function
-        setSpinner()
+        setSpinnerVarietas()
+        setSpinnerBlok()
+        setSpinnerProses()
 
         //DatePicker
         btn_datepicker.setOnClickListener(this)
@@ -75,15 +79,15 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         btn_kirim_panen.setOnClickListener(this)
     }
 
-    fun setSpinner() {
+    fun setSpinnerVarietas() {
         //Spinner Varietas
         val spinnerVarietas:Spinner = findViewById(R.id.spinner_varietas)
         val listV = db.readVarietas()
         varietas.clear()
         varietas.add(0, "Pilih Varietas")
         if (listV.size > 0) {
-            for (i in 0..(listV.size-1)) {
-                varietas.add(listV.get(i).name)
+            for (i in 0 until listV.size) {
+                varietas.add(listV[i].name)
             }
         }
 
@@ -105,7 +109,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             ) {
                 spinVarietas = parent.getItemAtPosition(position).toString()
                 if (parent.getItemAtPosition(position) === "Pilih Varietas" ) {
-
+                    //
                 } else {
                     Toast.makeText(parent.context, spinVarietas, Toast.LENGTH_SHORT).show()
                 }
@@ -115,15 +119,17 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 TODO("Not yet implemented")
             }
         }
+    }
 
+    fun setSpinnerBlok() {
         //Spinner Blok
         val spinnerBlok:Spinner = findViewById(R.id.spinner_blok)
         val listB = db.readBlok()
         blok.clear()
         blok.add(0, "Pilih Blok")
         if (listB.size > 0) {
-            for (i in 0..(listB.size-1)) {
-                blok.add(listB.get(i).name)
+            for (i in 0 until listB.size) {
+                blok.add(listB[i].name)
             }
         }
 
@@ -145,7 +151,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             ) {
                 spinBlok = parent.getItemAtPosition(position).toString()
                 if (parent.getItemAtPosition(position) === "Pilih Blok" ) {
-
+                    //
                 } else {
                     Toast.makeText(parent.context, spinBlok, Toast.LENGTH_SHORT).show()
                 }
@@ -155,15 +161,17 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 TODO("Not yet implemented")
             }
         }
+    }
 
+    fun setSpinnerProses() {
         //Spinner Proses
         val spinnerProses:Spinner = findViewById(R.id.spinner_proses)
         val listP = db.readProses()
         proses.clear()
         proses.add(0, "Pilih Proses")
         if (listP.size > 0) {
-            for (i in 0..(listP.size-1)) {
-                proses.add(listP.get(i).name)
+            for (i in 0 until listP.size) {
+                proses.add(listP[i].name)
             }
         }
 
@@ -185,7 +193,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             ) {
                 spinProses = parent.getItemAtPosition(position).toString()
                 if (parent.getItemAtPosition(position) === "Pilih Proses" ) {
-
+                    //
                 } else {
                     Toast.makeText(parent.context, spinProses, Toast.LENGTH_SHORT).show()
                 }
@@ -197,21 +205,21 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun setDisable(a: EditText, b: TextView) {
+    private fun setDisable(a: EditText, b: TextView) {
         a.isEnabled = false
         b.setTextColor(Color.parseColor("#c2a7a9"))
     }
 
-    fun setEnable(a: EditText, b: TextView) {
+    private fun setEnable(a: EditText, b: TextView) {
         a.isEnabled = true
         b.setTextColor(Color.parseColor("#000000"))
     }
 
-    fun toastMessage(text: String) {
+    private fun toastMessage(text: String) {
         Toast.makeText(this,text,Toast.LENGTH_SHORT).show()
     }
 
-    fun validationKosong(): Boolean {
+    private fun validationKosong(): Boolean {
         var valid: Boolean = false
         tvTanggal = input_tgl.text.toString()
         edtBerat = et_berat.text.toString()
@@ -227,7 +235,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         if (spinVarietas == "Pilih Varietas") {
             isEmptyFields = true
-            toastMessage("Varietas tidak boleh kosong")
+            toastMessage("Var[ietas tidak boleh kosong")
         }
 
         if (spinBlok == "Pilih Blok") {
@@ -284,15 +292,13 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 dialog.submit_tmbh_varietas.setOnClickListener{
                     val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
                     val inputTambahVarietas = edtTambahVarietas.text.toString()
-                    var isEmptyFields = false
 
                     if (inputTambahVarietas.isEmpty()) {
-                        isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        var vari = Varietas(name = inputTambahVarietas)
+                        val vari = Varietas(name = inputTambahVarietas)
                         db.insertVarietas(vari)
-                        setSpinner()
+                        setSpinnerVarietas()
                         alertDialog.dismiss()
                     }
                 }
@@ -309,15 +315,13 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 dialog.submit_tmbh_varietas.setOnClickListener{
                     val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
                     val inputTambahBlok = edtTambahVarietas.text.toString()
-                    var isEmptyFields = false
 
                     if (inputTambahBlok.isEmpty()) {
-                        isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        var blk = Blok(name = inputTambahBlok)
+                        val blk = Blok(name = inputTambahBlok)
                         db.insertBlok(blk)
-                        setSpinner()
+                        setSpinnerBlok()
                         alertDialog.dismiss()
                     }
                 }
@@ -334,15 +338,13 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 dialog.submit_tmbh_varietas.setOnClickListener{
                     val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
                     val inputTambahProses = edtTambahVarietas.text.toString()
-                    var isEmptyFields = false
 
                     if (inputTambahProses.isEmpty()) {
-                        isEmptyFields = true
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        var pros = Proses(name = inputTambahProses)
+                        val pros = Proses(name = inputTambahProses)
                         db.insertProses(pros)
-                        setSpinner()
+                        setSpinnerProses()
                         alertDialog.dismiss()
                     }
                 }
@@ -371,7 +373,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             R.id.btn_kirim_panen -> {
                 //Validasi inputan kosong
                 val valid = validationKosong()
-                println(valid)
+//                println1(valid)
 
                 if (valid) {
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
@@ -382,9 +384,21 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         val kolektif = if (edtKolektif.isEmpty()) "-" else edtKolektif
                         val proses = if (isiNanti) "-" else spinProses
                         //INSERT TO DATABASE
-                        var data = Panen(tanggal = tvTanggal, varietas = spinVarietas, kolektif = kolektif, proses = proses)
-                        var cheri = Cherry(berat = edtBerat.toDouble(), biaya = edtBiaya.toInt())
+                        val data = Panen(tanggal = tvTanggal, varietas = spinVarietas, blok = spinBlok,kolektif = kolektif, proses = proses)
+                        val cheri = Cherry(berat = edtBerat.toDouble(), biaya = edtBiaya.toInt())
                         db.insertPanen(data,cheri)
+
+                        //test getData
+                        val (panen,ceri) = db.getPanen()
+                        if (panen.size > 0 && ceri.size > 0) {
+                            for (i in 0..(panen.size-1)) {
+                                if (panen.get(i).id == ceri.get(i).id2) {
+                                    val text = "Data $i," + panen[i].id + "," + panen[i].tanggal + "," + panen[i].varietas + "," + panen[i].blok + "," + panen[i].kolektif + "," + panen.get(i).proses + "," +
+                                            panen[i].status + "," + ceri[i].id + "," + ceri[i].id2 + "," + ceri[i].berat + "," + ceri[i].biaya
+                                    println1(text)
+                                }
+                            }
+                        }
 
                         //Intent menggunakan putextra
                         val intent = Intent(this@InputPanen, ReviewHasilPanen::class.java)

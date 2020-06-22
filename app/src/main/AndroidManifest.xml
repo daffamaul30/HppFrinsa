@@ -12,8 +12,6 @@
         <activity android:name=".ReviewHasilPanen"></activity>
         <activity android:name=".InputPanen" /> <!-- <activity -->
         <activity android:name=".daftar_produksi.MainDaftarProduksi"/>
-        <!-- android:name=".ui.login.LoginActivity" -->
-        <!-- android:label="@string/title_activity_login" /> -->
         <activity
             android:name=".Dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
