@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/card"
+    android:layout_marginBottom="20dp"
     tools:context=".InputPanen">
 
     <RelativeLayout
@@ -141,10 +142,42 @@
                     style="@style/Teks.TV"
                     android:text="@string/biaya"/>
 
-                <EditText
-                    android:id="@+id/et_biaya"
-                    android:inputType="number"
-                    style="@style/ET"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_petik"
+                        style="@style/Teks.TV"
+                        android:text="@string/ongkos_petik"/>
+
+                    <EditText
+                        android:id="@+id/et_ongkos_petik"
+                        android:inputType="number"
+                        style="@style/ET"/>
+
+                    <TextView
+                        style="@style/Teks.TV"
+                        android:text="@string/ojek"/>
+
+                    <EditText
+                        android:id="@+id/et_ojek"
+                        android:inputType="number"
+                        style="@style/ET"/>
+                    <TextView
+                        style="@style/Teks.TV"
+                        android:text="@string/ongkos_cuci"/>
+
+                    <EditText
+                        android:id="@+id/et_ongkos_cuci"
+                        android:inputType="number"
+                        style="@style/ET"/>
+                </LinearLayout>
+
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"

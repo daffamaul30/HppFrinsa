@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".tahapan_proses.Transportasi_Fragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_panen1"
+            style="@style/Card">
+
+            <LinearLayout
+                style="@style/InsideCard">
+                <TextView
+                    style="@style/Teks.TV"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/varietas"/>
+
+                <TextView
+                    android:id="@+id/tv_varietas_transportasi"
+                    android:text="@string/value"
+                    android:textSize="15sp"
+                    style="@style/Teks.Value"/>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/blok"/>
+
+                <TextView
+                    android:id="@+id/tv_blok_transportasi"
+                    android:text="@string/value"
+                    android:textSize="15sp"
+                    style="@style/Teks.Value"/>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tanggal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/input_tgl_transportasi"
+                        android:layout_width="95dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="15sp"
+                        android:text="@string/tgl_input"/>
+                    <Button
+                        android:id="@+id/btn_datepicker_transportasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:textSize="10sp"
+                        android:background="@drawable/button_input"
+                        android:text="Pilih Tanggal"/>
+                </LinearLayout>
+
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/berat"/>
+
+                <EditText
+                    android:id="@+id/et_berat_transportasi"
+                    android:inputType="numberDecimal"
+                    style="@style/ET"/>
+
+                <TextView
+                    style="@style/Teks.TV"
+                    android:text="@string/biaya"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        style="@style/Teks.TV"
+                        android:text="@string/ongkos_transportasi"/>
+
+
+                    <EditText
+                        android:id="@+id/et_ongkos_transportasi"
+                        android:inputType="number"
+                        style="@style/ET"/>
+
+                    <TextView
+                        style="@style/Teks.TV"
+                        android:text="@string/ongkos_pengawalan"/>
+
+                    <EditText
+                        android:id="@+id/et_ongkos_pengawalan_transportasi"
+                        android:inputType="number"
+                        style="@style/ET"/>
+
+                    <TextView
+                        style="@style/Teks.TV"
+                        android:text="@string/ongkos_bongkar"/>
+
+                    <EditText
+                        android:id="@+id/et_ongkos_bongkar_transportasi"
+                        android:inputType="number"
+                        style="@style/ET"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            style="@style/Button.Kirim"
+            android:id="@+id/btn_kirim_transportasi"
+            android:text="@string/kirim"
+            android:layout_below="@+id/card_panen1"
+            android:elevation="10dp"
+            android:background="@drawable/btn_kirim"/>
+    </RelativeLayout>
+
+</FrameLayout>

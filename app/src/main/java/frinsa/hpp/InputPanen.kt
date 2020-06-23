@@ -33,7 +33,10 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvTanggal: String
     private lateinit var edtBerat: String
     private lateinit var edtKolektif: String
-    private lateinit var edtBiaya: String
+    private lateinit var edtOngkosPetik: String
+    private lateinit var edtOjek: String
+    private lateinit var edtOngkosCuci: String
+    private lateinit var kodeKolektif: String
 
     private var isiNanti: Boolean = false
 
@@ -57,7 +60,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         //Handling Checkbox
         cb_kolektif.setOnClickListener(this)
-        cb_isi_nanti.setOnClickListener(this)
+        cb_isi_nanti.setOnClickListener(this )
 
         //call setSpinner function
         setSpinnerVarietas()
@@ -219,7 +222,9 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         tvTanggal = input_tgl.text.toString()
         edtBerat = et_berat.text.toString()
         edtKolektif = et_kolektif.text.toString()
-        edtBiaya = et_biaya.text.toString()
+        edtOngkosPetik = et_ongkos_petik.text.toString()
+        edtOjek = et_ojek.text.toString()
+        edtOngkosCuci = et_ongkos_cuci.text.toString()
 
         var isEmptyFields = false
 
@@ -253,9 +258,19 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             et_kolektif.error = "Field ini tidak boleh kosong"
         }
 
-        if (edtBiaya.isEmpty()) {
+        if (edtOngkosPetik.isEmpty()) {
             isEmptyFields = true
-            et_biaya.error = "Field ini tidak boleh kosong"
+            et_ongkos_petik.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtOngkosPetik.isEmpty()) {
+            isEmptyFields = true
+            et_ojek.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtOngkosPetik.isEmpty()) {
+            isEmptyFields = true
+            et_ongkos_cuci.error = "Field ini tidak boleh kosong"
         }
 
         if (!isEmptyFields) {
@@ -352,6 +367,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             R.id.cb_kolektif -> {
                 if (cb_kolektif.isChecked) {
                     setEnable(et_kolektif,tv_kolektif)
+                    tv_petik.text = "Harga Ceri"
+                    kodeKolektif = "aktif"
                 } else {
                     setDisable(et_kolektif,tv_kolektif)
                 }
@@ -380,6 +397,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         val kolektif = if (edtKolektif.isEmpty()) "-" else edtKolektif
                         val proses = if (isiNanti) "-" else spinProses
+                        val biaya = edtOngkosPetik.toInt() + edtOjek.toInt() + edtOngkosCuci.toInt()
+
                         //INSERT TO DATABASE
                         val data = Panen(
                             tanggal = tvTanggal,
@@ -390,7 +409,9 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         )
                         val cheri = Cherry(
                             berat = edtBerat.toDouble(),
-                            biaya = edtBiaya.toInt()
+                            ongkosPetik_atau_hargaCeri = edtOngkosPetik.toInt(),
+                            ojek = edtOjek.toInt(),
+                            ongkosCuci = edtOngkosCuci.toInt()
                         )
                         db.insertPanen(data,cheri)
 
@@ -400,7 +421,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                             for (i in 0..(panen.size-1)) {
                                 if (panen.get(i).id == ceri.get(i).id2) {
                                     val text = "Data $i," + panen[i].id + "," + panen[i].tanggal + "," + panen[i].varietas + "," + panen[i].blok + "," + panen[i].kolektif + "," + panen.get(i).proses + "," +
-                                            panen[i].status + "," + ceri[i].id + "," + ceri[i].id2 + "," + ceri[i].berat + "," + ceri[i].biaya
+                                            panen[i].status + "," + ceri[i].id + "," + ceri[i].id2 + "," + ceri[i].berat + "," + ceri[i].ongkosPetik_atau_hargaCeri + "," + ceri[i].ojek + "," + ceri[i].ongkosCuci
                                     println1(text)
                                 }
                             }
@@ -413,7 +434,11 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         intent.putExtra(ReviewHasilPanen.EXTRA_BLOK, spinBlok)
                         intent.putExtra(ReviewHasilPanen.EXTRA_BERAT, edtBerat)
                         intent.putExtra(ReviewHasilPanen.EXTRA_KOLEKTIF, kolektif)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, edtBiaya)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, biaya)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_PETIK, edtOngkosPetik)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_OJEK, edtOjek)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_CUCI, edtOngkosCuci)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_KODE_KOLEKTIF, kodeKolektif)
                         intent.putExtra(ReviewHasilPanen.EXTRA_PROSES, proses)
                         startActivity(intent)
                         finish()

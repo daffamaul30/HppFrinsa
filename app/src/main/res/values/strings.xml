@@ -36,4 +36,22 @@
     <string name="kembali">Kembali ke Dashboard</string>
     <string name="value">Value</string>
     <string name="tahap">Tahap</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ongkos_petik">Ongkos Petik</string>
+    <string name="ojek">Ojek</string>
+    <string name="ongkos_cuci">Ongkos Cuci</string>
+    <string name="total_biaya">Total Biaya</string>
+    <string name="ongkos_muat">Ongkos Muat</string>
+    <string name="ongkos_fermentasi">Ongkos Fermentasi</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="ongkos_transportasi">Ongkos Transportasi</string>
+    <string name="ongkos_pengawalan">Ongkos Pengawalan</string>
+    <string name="ongkos_bongkar">Ongkos Bongkar</string>
+    <string name="ongkos_hulling">Ongkos Hulling</string>
+    <string name="pilih_tanggal">Pilih Tanggal</string>
+    <string name="ongkos_suton_grading">Ongkos Suton Grading</string>
+    <string name="ongkos_size_grading">Ongkos Size Grading</string>
+    <string name="ongkos_color_sorter">Ongkos Color Sorter</string>
+    <string name="ongkos_hand_pick">Ongkos Hand Pick</string>
 </resources>
