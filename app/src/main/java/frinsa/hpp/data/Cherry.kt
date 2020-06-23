@@ -1,4 +1,4 @@
-package frinsa.hpp
+package frinsa.hpp.data
 
 data class Cherry(
     var id:Int = 0,

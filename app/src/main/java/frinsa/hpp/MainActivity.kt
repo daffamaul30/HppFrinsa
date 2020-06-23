@@ -34,16 +34,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //            var isInvalidFormat = false
 
             if (inputUsername.isEmpty()) {
-//                isEmptyFields = true
+                isEmptyFields = true
                 edtUsername.error ="Username tidak boleh kosong"
             }
 
             if (inputPassword.isEmpty()) {
-//                isEmptyFields = true
+                isEmptyFields = true
                 edtPassword.error ="Password tidak boleh kosong"
             }
 
-            if (inputUsername == "frinsa" && inputPassword == "frinsa") {
+            if (inputUsername == "frinsa" && inputPassword == "frinsa" && !isEmptyFields) {
                 var intent = Intent(this@MainActivity, Dashboard::class.java)
                 startActivity(intent)
                 finish()

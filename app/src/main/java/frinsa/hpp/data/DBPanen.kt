@@ -1,12 +1,10 @@
-package frinsa.hpp
+package frinsa.hpp.data
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
-import androidx.core.content.contentValuesOf
-import java.security.AccessControlContext
 
 val DATABASE_NAME ="MyDB"
 val COL_STATUS = "status"
@@ -32,7 +30,8 @@ val COL_BERAT = "berat"
 val COL_BIAYA = "biaya"
 
 
-class DBPanen(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
+class DBPanen(var context: Context): SQLiteOpenHelper(context,
+    DATABASE_NAME, null, 1) {
     val createTablePanen = "CREATE TABLE " + TABLE_PANEN + "(" +
             COL_ID_PANEN + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COL_TGL + " DATE, " +
@@ -47,7 +46,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, nu
             COL_ID2 + " INTEGER, " +
             COL_BERAT + " REAL, " +
             COL_BIAYA + ", INTEGER, " +
-            " FOREIGN KEY ("+ COL_ID2+") REFERENCES "+ TABLE_PANEN+"("+COL_ID_PANEN+"))"
+            " FOREIGN KEY ("+ COL_ID2 +") REFERENCES "+ TABLE_PANEN +"("+ COL_ID_PANEN +"))"
 
     fun createTableSpinner(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
             COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

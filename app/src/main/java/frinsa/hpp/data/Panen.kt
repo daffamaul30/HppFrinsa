@@ -1,4 +1,4 @@
-package frinsa.hpp
+package frinsa.hpp.data
 
 data class Panen(
     var id:Int = 0,

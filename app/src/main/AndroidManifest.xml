@@ -9,15 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SubProses"></activity>
-        <activity android:name=".ReviewHasilPanen" />
+        <activity android:name=".ReviewHasilPanen"></activity>
         <activity android:name=".InputPanen" /> <!-- <activity -->
-<<<<<<< HEAD
-        <activity android:name=".daftar_produksi.MainDaftarProduksi" /> <!-- android:name=".ui.login.LoginActivity" -->
-        <!-- android:label="@string/title_activity_login" /> -->
-=======
         <activity android:name=".daftar_produksi.MainDaftarProduksi"/>
->>>>>>> 4948744c39261ae4ad3917597f3a1213a3ca2880
         <activity
             android:name=".Dashboard"
             android:theme="@style/AppTheme.NoActionBar" />

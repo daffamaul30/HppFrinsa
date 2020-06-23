@@ -1,6 +1,6 @@
-package frinsa.hpp
+package frinsa.hpp.data
 
-data class Varietas(
+data class Blok(
     var id:Int = 0,
     var name:String = ""
 )

@@ -2,7 +2,6 @@ package frinsa.hpp
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -11,15 +10,11 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import frinsa.hpp.data.*
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.edt_dialog_tmbh_varietas
-import java.io.BufferedReader
-import java.io.FileNotFoundException
-import java.io.IOException
-import java.io.InputStreamReader
-import java.sql.DriverManager.println
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -296,7 +291,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     if (inputTambahVarietas.isEmpty()) {
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        val vari = Varietas(name = inputTambahVarietas)
+                        val vari =
+                            Varietas(name = inputTambahVarietas)
                         db.insertVarietas(vari)
                         setSpinnerVarietas()
                         alertDialog.dismiss()
@@ -342,7 +338,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     if (inputTambahProses.isEmpty()) {
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
-                        val pros = Proses(name = inputTambahProses)
+                        val pros =
+                            Proses(name = inputTambahProses)
                         db.insertProses(pros)
                         setSpinnerProses()
                         alertDialog.dismiss()
@@ -384,8 +381,17 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         val kolektif = if (edtKolektif.isEmpty()) "-" else edtKolektif
                         val proses = if (isiNanti) "-" else spinProses
                         //INSERT TO DATABASE
-                        val data = Panen(tanggal = tvTanggal, varietas = spinVarietas, blok = spinBlok,kolektif = kolektif, proses = proses)
-                        val cheri = Cherry(berat = edtBerat.toDouble(), biaya = edtBiaya.toInt())
+                        val data = Panen(
+                            tanggal = tvTanggal,
+                            varietas = spinVarietas,
+                            blok = spinBlok,
+                            kolektif = kolektif,
+                            proses = proses
+                        )
+                        val cheri = Cherry(
+                            berat = edtBerat.toDouble(),
+                            biaya = edtBiaya.toInt()
+                        )
                         db.insertPanen(data,cheri)
 
                         //test getData
