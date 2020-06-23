@@ -33,7 +33,7 @@
                         android:text="@string/tanggal" />
 
                     <TextView
-                        android:id="@+id/value_tanggal"
+                        android:id="@+id/value_tanggal_beli"
                         style="@style/Teks.Value"
                         android:gravity="right"
                         android:text="@string/value" />
@@ -50,7 +50,7 @@
                         android:text="@string/varietas" />
 
                     <TextView
-                        android:id="@+id/value_varietas"
+                        android:id="@+id/value_varietas_beli"
                         style="@style/Teks.Value"
                         android:gravity="right"
                         android:text="@string/value" />
@@ -67,7 +67,7 @@
                         android:text="@string/blok" />
 
                     <TextView
-                        android:id="@+id/value_blok"
+                        android:id="@+id/value_blok_beli"
                         style="@style/Teks.Value"
                         android:gravity="right"
                         android:text="@string/value" />
@@ -84,7 +84,24 @@
                         android:text="@string/berat" />
 
                     <TextView
-                        android:id="@+id/value_berat"
+                        android:id="@+id/value_berat_beli"
+                        style="@style/Teks.Value"
+                        android:gravity="right"
+                        android:text="@string/value" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        style="@style/Teks"
+                        android:layout_column="1"
+                        android:text="@string/beli_dari" />
+
+                    <TextView
+                        android:id="@+id/value_kolektif_beli"
                         style="@style/Teks.Value"
                         android:gravity="right"
                         android:text="@string/value" />
@@ -101,7 +118,7 @@
                         android:text="@string/proses" />
 
                     <TextView
-                        android:id="@+id/value_proses"
+                        android:id="@+id/value_proses_beli"
                         style="@style/Teks.Value"
                         android:gravity="right"
                         android:text="@string/value" />
@@ -120,30 +137,12 @@
                     android:layout_marginBottom="20dp">
 
                     <TextView
-                        android:id="@+id/tv_ongkos_petik"
                         style="@style/Teks"
                         android:layout_column="1"
-                        android:text="@string/ongkos_petik" />
+                        android:text="@string/harga_beli" />
 
                     <TextView
-                        android:id="@+id/value_ongkos_petik"
-                        style="@style/Teks.Value"
-                        android:gravity="right"
-                        android:text="@string/value" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp">
-
-                    <TextView
-                        style="@style/Teks"
-                        android:layout_column="1"
-                        android:text="@string/ojek" />
-
-                    <TextView
-                        android:id="@+id/value_ojek"
+                        android:id="@+id/value_harga_beli"
                         style="@style/Teks.Value"
                         android:gravity="right"
                         android:text="@string/value" />
@@ -160,7 +159,7 @@
                         android:text="@string/ongkos_cuci" />
 
                     <TextView
-                        android:id="@+id/value_ongkos_cuci"
+                        android:id="@+id/value_ongkos_cuci_beli"
                         style="@style/Teks.Value"
                         android:gravity="right"
                         android:text="@string/value" />
@@ -177,7 +176,7 @@
                         android:text="@string/total_biaya" />
 
                     <TextView
-                        android:id="@+id/value_total_biaya"
+                        android:id="@+id/value_total_biaya_beli"
                         style="@style/Teks.Value"
                         android:gravity="right"
                         android:text="@string/value" />
@@ -188,7 +187,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/btn_kembali_dashboard"
+            android:id="@+id/btn_kembali_dashboard_beli"
             style="@style/Button.Kirim"
             android:layout_below="@+id/card_panen"
             android:background="@drawable/btn_kirim"

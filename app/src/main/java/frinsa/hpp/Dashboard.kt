@@ -1,11 +1,16 @@
 package frinsa.hpp
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.dialog_menu_mulai_produksi.view.*
 
 class Dashboard : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,8 +27,20 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.card_mulai -> {
-                val intent = Intent(this@Dashboard, InputPanen::class.java)
-                startActivity(intent)
+                val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_menu_mulai_produksi, null)
+                val builder = AlertDialog.Builder(this).setView(dialog)
+                val alertDialog =  builder.show()
+                alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.card_panen_sendiri.setOnClickListener{
+                    val intent = Intent(this@Dashboard, InputPanen::class.java)
+                    startActivity(intent)
+                    alertDialog.dismiss()
+                }
+                dialog.card_beli.setOnClickListener{
+                    val intent = Intent(this@Dashboard, InputBeli::class.java)
+                    startActivity(intent)
+                    alertDialog.dismiss()
+                }
             }
             R.id.card_daftar -> {
                 val intent = Intent(this@Dashboard, MainDaftarProduksi::class.java)

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
     android:background="@drawable/dialog">
 
     <TextView
-        android:id="@+id/edt_dialog_tmbh_varietas"
         style="@style/Teks"
         android:text="Apakah anda yakin?"
         android:layout_marginStart="10dp"

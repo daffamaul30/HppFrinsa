@@ -75,7 +75,7 @@
 
                 <EditText
                     android:id="@+id/et_berat_jemur2"
-                    android:inputType="numberDecima2"
+                    android:inputType="number"
                     style="@style/ET"/>
 
                 <TextView

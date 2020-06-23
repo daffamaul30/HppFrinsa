@@ -13,7 +13,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="tanggal">Tanggal</string>
     <string name="varietas">Varietas</string>
     <string name="tgl_input">DD/MM/YYYY</string>
     <string name="blok">Blok</string>
@@ -43,7 +42,6 @@
     <string name="ongkos_cuci">Ongkos Cuci</string>
     <string name="total_biaya">Total Biaya</string>
     <string name="ongkos_muat">Ongkos Muat</string>
-    <string name="ongkos_fermentasi">Ongkos Fermentasi</string>
     <string name="tanggal">Tanggal</string>
     <string name="ongkos_transportasi">Ongkos Transportasi</string>
     <string name="ongkos_pengawalan">Ongkos Pengawalan</string>
@@ -57,4 +55,11 @@
     <string name="ongkos_pulping">Ongkos Pulping</string>
     <string name="ongkos_jemur">Ongkos Jemur</string>
     <string name="ongkos_fermentasi">Ongkos Fermentasi</string>
+    <string name="panen">Panen</string>
+    <string name="beli">Beli</string>
+    <string name="beli_dari">Beli dari</string>
+    <string name="harga_beli">Harga Beli</string>
+    <string name="ceri">Ceri</string>
+    <string name="gabah">Gabah</string>
+    <string name="asalan">Asalan</string>
 </resources>
