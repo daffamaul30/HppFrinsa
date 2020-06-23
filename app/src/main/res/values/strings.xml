@@ -54,4 +54,7 @@
     <string name="ongkos_size_grading">Ongkos Size Grading</string>
     <string name="ongkos_color_sorter">Ongkos Color Sorter</string>
     <string name="ongkos_hand_pick">Ongkos Hand Pick</string>
+    <string name="ongkos_pulping">Ongkos Pulping</string>
+    <string name="ongkos_jemur">Ongkos Jemur</string>
+    <string name="ongkos_fermentasi">Ongkos Fermentasi</string>
 </resources>
