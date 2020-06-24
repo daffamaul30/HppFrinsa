@@ -48,10 +48,7 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
         when (v.id) {
             R.id.btn_kirim_fermentasi -> {
                 val valid = validasiForm()
-<<<<<<< HEAD
-                println(valid)
-=======
->>>>>>> 145cd3e87cdab9fefb59b3b80c6a152c1d9fe54a
+//                println(valid)
 
                 if (valid) {
                     val dialog = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_submit, null)
