@@ -39,7 +39,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             COL_TGL + " DATE, " +
             COL_VARIETAS + " VARCHAR(30), " +
             COL_BLOK + " VARCHAR(30), " +
-            COL_KOLEKTIF + " VARCHAR(60), " +
             COL_PROSES + " VARCHAR(50), " +
             COL_STATUS + " VARCHAR(20) NOT NULL DEFAULT 'cherry')"
 
@@ -99,6 +98,8 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         var resultC = db.insert(TABLE_CHERRY, null, cvC)
 
         if ((resultP == -1.toLong()) || (resultC == -1.toLong())) {
+            println(resultP)
+            println(resultC)
             toastMessage("Gagal")
         }else {
             toastMessage("Berhasil")

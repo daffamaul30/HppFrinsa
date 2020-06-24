@@ -391,7 +391,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         intent.putExtra(ReviewHasilPanen.EXTRA_VARIETAS, spinVarietas)
                         intent.putExtra(ReviewHasilPanen.EXTRA_BLOK, spinBlok)
                         intent.putExtra(ReviewHasilPanen.EXTRA_BERAT, edtBerat)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, biaya)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, biaya.toString())
                         intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_PETIK, edtOngkosPetik)
                         intent.putExtra(ReviewHasilPanen.EXTRA_OJEK, edtOjek)
                         intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_CUCI, edtOngkosCuci)
