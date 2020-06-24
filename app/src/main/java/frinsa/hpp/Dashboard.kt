@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
+import frinsa.hpp.tahapan_proses.TahapanProses
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.dialog_menu_mulai_produksi.view.*
 
@@ -47,7 +48,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.card_lanjut -> {
-                val intent = Intent(this@Dashboard, SubProses::class.java)
+                val intent = Intent(this@Dashboard, TahapanProses::class.java)
                 startActivity(intent)
             }
         }

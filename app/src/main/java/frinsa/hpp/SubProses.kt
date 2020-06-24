@@ -1,16 +1,13 @@
 package frinsa.hpp
 
-<<<<<<< HEAD
 import android.content.Context
-=======
->>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-<<<<<<< HEAD
+
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import kotlinx.android.synthetic.main.activity_sub_proses.*
 import kotlinx.android.synthetic.main.fragment_produksi.*
@@ -18,18 +15,13 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class SubProses: AppCompatActivity() {
-    private val context = this
-    private lateinit var data : DBPanen
+//    private val context = this
+//    private lateinit var data : DBPanen
     val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
-=======
-import frinsa.hpp.daftar_produksi.DaftarProduksiAdapter
-import frinsa.hpp.daftar_produksi.FragmentProses
-import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
-import kotlinx.android.synthetic.main.fragment_produksi.*
 
-class SubProses: AppCompatActivity() {
->>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_proses)
@@ -37,15 +29,14 @@ class SubProses: AppCompatActivity() {
         if (supportActionBar != null) {
             (supportActionBar as ActionBar).title = "SubProses Kumulatif"
         }
-<<<<<<< HEAD
+
 //        rv_hasil_produksi.layoutManager = LinearLayoutManager(this)
 ////        val cardViewHeroAdapter = SubProsesAdapter(this, FragmentProses.getDPList())
 ////        rv_hasil_produksi.adapter = cardViewHeroAdapter
         if (supportActionBar != null) {
             (supportActionBar as ActionBar).title = "SubProses Kumulatif"
         }
-=======
->>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
+
         val DPlist = ModelDaftarProduksi(
             "27-04-2020",
             "A",
@@ -55,13 +46,13 @@ class SubProses: AppCompatActivity() {
             2000000.00,
             "terakhir"
         )
-<<<<<<< HEAD
+
         val DPlist1 = ModelDaftarProduksi(
             "27-04-2020",
             "A",
             "Arabica",
             10.0,
-            "Lactic Fully Washed",
+            "Lact Fully Washed",
             2000000.00,
             "terakhir"
         )
@@ -96,19 +87,7 @@ class SubProses: AppCompatActivity() {
         val cardViewHeroAdapter = SubProsesAdapter(this, displayList)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
 
-=======
-        val dpList: MutableList<ModelDaftarProduksi> = ArrayList()
-        dpList.add(DPlist)
-        dpList.add(DPlist)
-        dpList.add(DPlist)
-        dpList.add(DPlist)
-        dpList.add(DPlist)
 
-
-        rv_produksi.layoutManager = LinearLayoutManager(this)
-        val cardViewHeroAdapter = SubProsesAdapter(this, dpList)
-        rv_produksi.adapter = cardViewHeroAdapter
->>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -120,7 +99,7 @@ class SubProses: AppCompatActivity() {
                     return true
                 }
                 override fun onQueryTextChange(newText: String?): Boolean {
-<<<<<<< HEAD
+
 
                     if (newText!!.isNotEmpty()){
                         displayList.clear()
@@ -136,16 +115,11 @@ class SubProses: AppCompatActivity() {
                         displayList.addAll(spList)
                         rv_hasil_produksi.adapter?.notifyDataSetChanged()
                     }
-=======
->>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
+
                     return true
                 }
             })
         }
         return true
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
 }

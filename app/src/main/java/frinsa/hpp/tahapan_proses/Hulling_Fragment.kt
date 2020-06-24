@@ -1,60 +1,116 @@
 package frinsa.hpp.tahapan_proses
 
+import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import frinsa.hpp.R
+import kotlinx.android.synthetic.main.dialog_submit.view.*
+import kotlinx.android.synthetic.main.fragment_fermentasi_.*
+import kotlinx.android.synthetic.main.fragment_fermentasi_.view.*
+import kotlinx.android.synthetic.main.fragment_hand_pick_.*
+import kotlinx.android.synthetic.main.fragment_hulling_.*
+import java.text.SimpleDateFormat
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Hulling_Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Hulling_Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class Hulling_Fragment : Fragment(), View.OnClickListener {
+    private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    //Deklarasi semua edit text / textview yg akan divalidasi
+    private lateinit var tvTgl: String
+    private lateinit var edtBerat: String
+    private lateinit var edtOngkosHulling: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hulling_, container, false)
+        val view = inflater.inflate(R.layout.fragment_hulling_, container, false)
+
+        //set text varietas dan blok berdasarkan yang dipilih
+
+        view.btn_kirim_fermentasi.setOnClickListener(this)
+        view.btn_datepicker_fermentasi.setOnClickListener(this)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Hulling_Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Hulling_Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btn_kirim_hulling -> {
+                val valid = validasiForm()
+                println(valid)
+
+                if (valid) {
+                    val dialog = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_submit, null)
+                    val builder = AlertDialog.Builder(requireContext()).setView(dialog).setTitle("")
+                    val alertDialog =  builder.show()
+
+                    dialog.submit_submit.setOnClickListener {
+                        //INSERT TO DATABASE
+
+                        //test getData
+
+                        alertDialog.dismiss()
+                        activity?.finish()
+                    }
+                    dialog.batal_submit.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
                 }
             }
+            R.id.btn_datepicker_hulling -> {
+                val now = Calendar.getInstance()
+                val datePicker = DatePickerDialog(
+                    requireContext(), DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                        now.set(Calendar.YEAR, year)
+                        now.set(Calendar.MONTH, month)
+                        now.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                        input_tgl_hulling.text = dateFormat.format(now.time)
+                    },
+                    now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
+                )
+                datePicker.show()
+            }
+        }
+    }
+
+    fun toastMessage(text: String) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
+    }
+    private fun validasiForm(): Boolean {
+        var valid: Boolean = false
+        //ambil value dari form
+        tvTgl = input_tgl_hulling.text.toString()
+        edtBerat = et_berat_hulling.text.toString()
+        edtOngkosHulling = et_ongkos_hand_pick.text.toString()
+
+        var isEmptyFields = false
+
+        if (tvTgl == "DD/MM/YYYY") {
+            isEmptyFields = true
+            input_tgl_hulling.setError("Pilih tanggal")
+        }
+
+        if (edtBerat.isEmpty()) {
+            isEmptyFields = true
+            et_berat_hulling.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtOngkosHulling.isEmpty()) {
+            isEmptyFields = true
+            et_ongkos_hulling.error = "Field ini tidak boleh kosong"
+        }
+
+        if (!isEmptyFields) {
+            valid = true
+        }
+        return valid
     }
 }

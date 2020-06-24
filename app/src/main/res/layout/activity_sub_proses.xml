@@ -8,19 +8,12 @@
     android:layout_height="match_parent"
     tools:context=".SubProses"
     android:orientation="vertical">
-<<<<<<< HEAD
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_hasil_produksi"
         android:layout_width="match_parent"
-        android:layout_height="710dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-=======
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
->>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
+
         android:scrollbars="vertical"
         tools:listitem="@layout/cardviewproses">
 
@@ -29,14 +22,10 @@
     <Button
         android:id="@+id/btn_proses"
         style="@style/Button.Kirim"
-<<<<<<< HEAD
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="-5dp"
         android:layout_marginBottom="0dp"
-=======
-        android:layout_alignParentBottom="true"
->>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
         android:background="@drawable/btn_kirim"
         android:elevation="10dp"
         android:padding="5dp"
