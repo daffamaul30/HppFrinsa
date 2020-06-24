@@ -29,6 +29,10 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this@Dashboard, MainDaftarProduksi::class.java)
                 startActivity(intent)
             }
+            R.id.card_lanjut -> {
+                val intent = Intent(this@Dashboard, SubProses::class.java)
+                startActivity(intent)
+            }
         }
     }
 
