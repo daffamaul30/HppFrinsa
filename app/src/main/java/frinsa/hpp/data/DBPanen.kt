@@ -85,7 +85,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cvP.put(COL_TGL, p.tanggal)
         cvP.put(COL_VARIETAS, p.varietas)
         cvP.put(COL_BLOK, p.blok)
-        cvP.put(COL_KOLEKTIF, p.kolektif)
         cvP.put(COL_PROSES, p.proses)
         var resultP = db.insert(TABLE_PANEN, null, cvP)
 
@@ -118,7 +117,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 panen.tanggal = result.getString(result.getColumnIndex(COL_TGL))
                 panen.varietas = result.getString(result.getColumnIndex(COL_VARIETAS))
                 panen.blok = result.getString(result.getColumnIndex(COL_BLOK))
-                panen.kolektif = result.getString(result.getColumnIndex(COL_KOLEKTIF))
                 panen.proses = result.getString(result.getColumnIndex(COL_PROSES))
                 panen.status = result.getString(result.getColumnIndex(COL_STATUS))
 

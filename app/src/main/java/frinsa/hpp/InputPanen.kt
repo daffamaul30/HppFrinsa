@@ -32,7 +32,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     private lateinit var spinProses: String
     private lateinit var tvTanggal: String
     private lateinit var edtBerat: String
-    private lateinit var edtKolektif: String
     private lateinit var edtOngkosPetik: String
     private lateinit var edtOjek: String
     private lateinit var edtOngkosCuci: String
@@ -356,7 +355,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     val alertDialog =  builder.show()
 
                     dialog.submit_submit.setOnClickListener {
-                        val kolektif = if (edtKolektif.isEmpty()) "-" else edtKolektif
                         val proses = if (isiNanti) "-" else spinProses
                         val biaya = edtOngkosPetik.toInt() + edtOjek.toInt() + edtOngkosCuci.toInt()
 
@@ -365,7 +363,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                             tanggal = tvTanggal,
                             varietas = spinVarietas,
                             blok = spinBlok,
-                            kolektif = kolektif,
                             proses = proses
                         )
                         val cheri = Cherry(
@@ -377,16 +374,16 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         db.insertPanen(data,cheri)
 
                         //test getData
-                        val (panen,ceri) = db.getPanen()
-                        if (panen.size > 0 && ceri.size > 0) {
-                            for (i in 0..(panen.size-1)) {
-                                if (panen.get(i).id == ceri.get(i).id2) {
-                                    val text = "Data $i," + panen[i].id + "," + panen[i].tanggal + "," + panen[i].varietas + "," + panen[i].blok + "," + panen[i].kolektif + "," + panen.get(i).proses + "," +
-                                            panen[i].status + "," + ceri[i].id + "," + ceri[i].id2 + "," + ceri[i].berat + "," + ceri[i].ongkosPetik_atau_hargaCeri + "," + ceri[i].ojek + "," + ceri[i].ongkosCuci
-                                    println1(text)
-                                }
-                            }
-                        }
+//                        val (panen,ceri) = db.getPanen()
+//                        if (panen.size > 0 && ceri.size > 0) {
+//                            for (i in 0..(panen.size-1)) {
+//                                if (panen.get(i).id == ceri.get(i).id2) {
+//                                    val text = "Data $i," + panen[i].id + "," + panen[i].tanggal + "," + panen[i].varietas + "," + panen[i].blok + "," + panen[i].kolektif + "," + panen.get(i).proses + "," +
+//                                            panen[i].status + "," + ceri[i].id + "," + ceri[i].id2 + "," + ceri[i].berat + "," + ceri[i].ongkosPetik_atau_hargaCeri + "," + ceri[i].ojek + "," + ceri[i].ongkosCuci
+//                                    println1(text)
+//                                }
+//                            }
+//                        }
 
                         //Intent menggunakan putextra
                         val intent = Intent(this@InputPanen, ReviewHasilPanen::class.java)
@@ -394,7 +391,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         intent.putExtra(ReviewHasilPanen.EXTRA_VARIETAS, spinVarietas)
                         intent.putExtra(ReviewHasilPanen.EXTRA_BLOK, spinBlok)
                         intent.putExtra(ReviewHasilPanen.EXTRA_BERAT, edtBerat)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_KOLEKTIF, kolektif)
                         intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, biaya)
                         intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_PETIK, edtOngkosPetik)
                         intent.putExtra(ReviewHasilPanen.EXTRA_OJEK, edtOjek)
