@@ -24,7 +24,7 @@ val COL_KOLEKTIF = "kolektif_dari"
 val COL_PROSES = "tipe_proses"
 //Cherry
 val TABLE_CHERRY = "Cherry"
-val COL_ID_CHERRY = "id_cherry"
+val COL_ID_CHERRY = "Cherry"
 val COL_ID2 = "id_panen"
 val COL_BERAT = "berat"
 val COL_ONGKOS_PETIK_ATAU_HARGA_CERI = "ongkos_atau_harga"
@@ -110,7 +110,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         var daftarPanen: MutableList<Panen> = ArrayList()
         var daftarCheri: MutableList<Cherry> = ArrayList()
         val db = this.readableDatabase
-        val result = db.rawQuery("SELECT * FROM $TABLE_PANEN JOIN $TABLE_CHERRY ON " + TABLE_CHERRY + "." + COL_ID_CHERRY + " = " + TABLE_PANEN + "." + COL_ID_PANEN, null)
+        val result = db.rawQuery("SELECT * FROM $TABLE_PANEN JOIN $TABLE_CHERRY ON " + TABLE_CHERRY + "." + COL_ID_CHERRY  +"="  + TABLE_PANEN + "." + COL_ID_PANEN, null)
         if (result.moveToFirst()) {
             do {
                 var panen = Panen()
@@ -242,6 +242,5 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
     fun toastMessage(text: String) {
         Toast.makeText(context,text,Toast.LENGTH_SHORT).show()
     }
-
 
 }
