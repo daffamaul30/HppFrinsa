@@ -66,7 +66,7 @@
                         android:layout_height="25dp"
                         android:textSize="10sp"
                         android:background="@drawable/button_input"
-                        android:text="Pilih Tanggal"/>
+                        android:text="@string/pilih_tanggal"/>
                 </LinearLayout>
 
 

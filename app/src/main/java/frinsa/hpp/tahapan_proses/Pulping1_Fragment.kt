@@ -1,60 +1,140 @@
 package frinsa.hpp.tahapan_proses
 
+import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import frinsa.hpp.R
+import kotlinx.android.synthetic.main.dialog_submit.view.*
+import kotlinx.android.synthetic.main.fragment_pulping1_.*
+import kotlinx.android.synthetic.main.fragment_pulping1_.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class Pulping1_Fragment : Fragment(), View.OnClickListener {
+    private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Pulping1_Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Pulping1_Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    //Deklarasi semua edit text / textview yg akan divalidasi
+    private lateinit var tvTgl: String
+    private lateinit var edtBerat: String
+    private lateinit var edtOngkospulping1: String
+    private lateinit var edtOngkosFermentasiPulping: String
+    private lateinit var edtOngkosCuciPulping: String
+    private lateinit var edtOngkosJemurPulping: String
+    private lateinit var edtOngkosMuatPulping: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pulping1_, container, false)
+        val view = inflater.inflate(R.layout.fragment_pulping1_, container, false)
+
+        view.btn_kirim_pulping1.setOnClickListener(this)
+        view.btn_datepicker_pulping1.setOnClickListener(this)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Pulping1_Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Pulping1_Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btn_kirim_pulping1 -> {
+                val valid = validasiForm()
+
+                if (valid) {
+                    val dialog = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_submit, null)
+                    val builder = AlertDialog.Builder(requireContext()).setView(dialog).setTitle("")
+                    val alertDialog =  builder.show()
+
+                    dialog.submit_submit.setOnClickListener {
+                        //INSERT TO DATABASE
+
+                        //test getData
+
+                        alertDialog.dismiss()
+                        activity?.finish()
+                    }
+                    dialog.batal_submit.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
                 }
             }
+            R.id.btn_datepicker_pulping1 -> {
+                val now = Calendar.getInstance()
+                val datePicker = DatePickerDialog(
+                    requireContext(), DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                        now.set(Calendar.YEAR, year)
+                        now.set(Calendar.MONTH, month)
+                        now.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                        input_tgl_pulping1.text = dateFormat.format(now.time)
+                    },
+                    now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
+                )
+                datePicker.show()
+            }
+        }
+    }
+
+    fun toastMessage(text: String) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
+    }
+
+    private fun validasiForm(): Boolean {
+        var valid: Boolean = false
+        //ambil value dari form
+        tvTgl = input_tgl_pulping1.text.toString()
+        edtBerat = et_berat_pulping1.text.toString()
+        edtOngkospulping1 = et_ongkos_pulping1.text.toString()
+        edtOngkosFermentasiPulping = et_ongkos_fermentasi_pulping1.text.toString()
+        edtOngkosCuciPulping = et_ongkos_cuci_pulping1.text.toString()
+        edtOngkosJemurPulping = et_ongkos_jemur_pulping1.text.toString()
+        edtOngkosMuatPulping = et_ongkos_muat_pulping1.text.toString()
+
+        var isEmptyFields = false
+
+        if (tvTgl == "DD/MM/YYYY") {
+            isEmptyFields = true
+            input_tgl_pulping1.setError("Pilih tanggal")
+        }
+
+        if (edtBerat.isEmpty()) {
+            isEmptyFields = true
+            et_berat_pulping1.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtOngkospulping1.isEmpty()) {
+            isEmptyFields = true
+            et_ongkos_pulping1.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtOngkosFermentasiPulping.isEmpty()) {
+            isEmptyFields = true
+            et_ongkos_fermentasi_pulping1.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtOngkosCuciPulping.isEmpty()) {
+            isEmptyFields = true
+            et_ongkos_cuci_pulping1.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtOngkosJemurPulping.isEmpty()) {
+            isEmptyFields = true
+            et_ongkos_jemur_pulping1.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtOngkosMuatPulping.isEmpty()) {
+            isEmptyFields = true
+            et_ongkos_muat_pulping1.error = "Field ini tidak boleh kosong"
+        }
+
+        if (!isEmptyFields) {
+            valid = true
+        }
+        return valid
     }
 }
