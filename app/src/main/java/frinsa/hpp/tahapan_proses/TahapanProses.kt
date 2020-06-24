@@ -14,8 +14,8 @@ class TahapanProses : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tahapan_proses)
-        val kode = intent.getStringExtra(KODE_FRAG)
-//        val kode = "pulping1"
+//        val kode = intent.getStringExtra(KODE_FRAG)
+        val kode = "pulping1"
         val judul = intent.getStringExtra(TITLE)
 
         //set action bar title
@@ -25,7 +25,6 @@ class TahapanProses : AppCompatActivity() {
         when (kode) {
             "fermentasi" -> fermentasi()
             "transportasi" -> transportasi()
-
             "hulling" -> hulling()
             "suton grader" -> sutonGrader()
             "size grading" -> sizeGrading()
