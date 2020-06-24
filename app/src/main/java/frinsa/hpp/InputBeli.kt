@@ -39,6 +39,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
     private var id: Int = 0
 
     private var isiNanti: Boolean = false
+    private var cek: Boolean = false
 
     private val context = this
     private lateinit var db: DBPanen
@@ -212,7 +213,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
             et_ongkos_petik.error = "Field ini tidak boleh kosong"
         }
 
-        if (edtOngkosCuci.isEmpty()) {
+        if (edtOngkosCuci.isEmpty() && !cek) {
             isEmptyFields = true
             et_ojek.error = "Field ini tidak boleh kosong"
         }
@@ -350,6 +351,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
 
             if (terpilih == "Gabah" || terpilih == "Asalan") {
                 setDisable(et_ongkos_cuci_beli, tv_cuci_beli)
+                cek = true
+                println(cek)
             }
             else {
                 setEnable(et_ongkos_cuci_beli, tv_cuci_beli)
