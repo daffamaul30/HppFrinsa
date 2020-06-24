@@ -9,18 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
 
-=======
->>>>>>> 145cd3e87cdab9fefb59b3b80c6a152c1d9fe54a
         <activity android:name=".SubProses"/>
         <activity android:name=".ReviewHasilBeli"/>
         <activity android:name=".InputBeli" />
         <activity android:name=".tahapan_proses.TahapanProses" />
-<<<<<<< HEAD
 
-=======
->>>>>>> 145cd3e87cdab9fefb59b3b80c6a152c1d9fe54a
         <activity android:name=".ReviewHasilPanen" />
         <activity android:name=".InputPanen" /> <!-- <activity -->
         <activity android:name=".daftar_produksi.MainDaftarProduksi" />

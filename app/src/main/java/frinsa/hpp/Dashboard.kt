@@ -48,11 +48,8 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.card_lanjut -> {
-<<<<<<< HEAD
-=======
 //                val intent = Intent(this@Dashboard, SubProses::class.java)
->>>>>>> 145cd3e87cdab9fefb59b3b80c6a152c1d9fe54a
-                val intent = Intent(this@Dashboard, TahapanProses::class.java)
+                val intent = Intent(this@Dashboard, SubProses::class.java)
                 startActivity(intent)
             }
         }
