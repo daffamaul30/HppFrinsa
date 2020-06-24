@@ -77,6 +77,7 @@ class TahapanProses : AppCompatActivity() {
         val fragCS: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragCS.replace(R.id.container_tahapan,cs)
         fragCS.commit()
+
     }
 
     fun handPick() {
