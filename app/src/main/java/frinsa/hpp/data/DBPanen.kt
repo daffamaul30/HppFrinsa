@@ -1,4 +1,4 @@
-package frinsa.hpp
+package frinsa.hpp.data
 
 import android.content.ContentValues
 import android.content.Context
@@ -27,10 +27,13 @@ val TABLE_CHERRY = "Cherry"
 val COL_ID_CHERRY = "Cherry"
 val COL_ID2 = "id_panen"
 val COL_BERAT = "berat"
-val COL_BIAYA = "biaya"
+val COL_ONGKOS_PETIK_ATAU_HARGA_CERI = "ongkos_atau_harga"
+val COL_OJEK = "ojek"
+val COL_ONGKOS_CUCI = "ongkos_cuci"
 
 
-class DBPanen(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
+class DBPanen(var context: Context): SQLiteOpenHelper(context,
+    DATABASE_NAME, null, 1) {
     val createTablePanen = "CREATE TABLE " + TABLE_PANEN + "(" +
             COL_ID_PANEN + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COL_TGL + " DATE, " +
@@ -44,8 +47,10 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, nu
             COL_ID_CHERRY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COL_ID2 + " INTEGER, " +
             COL_BERAT + " REAL, " +
-            COL_BIAYA + ", INTEGER, " +
-            " FOREIGN KEY ("+ COL_ID2+") REFERENCES "+ TABLE_PANEN+"("+COL_ID_PANEN+"))"
+            COL_ONGKOS_PETIK_ATAU_HARGA_CERI + " INTEGER, " +
+            COL_OJEK + " INTEGER, " +
+            COL_ONGKOS_CUCI + " INTEGER, " +
+            " FOREIGN KEY ("+ COL_ID2 +") REFERENCES "+ TABLE_PANEN +"("+ COL_ID_PANEN +"))"
 
     fun createTableSpinner(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
             COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -67,6 +72,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, nu
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_BLOK)
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PROSES)
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PANEN)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_CHERRY)
         onCreate(db)
     }
 
@@ -88,7 +94,9 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, nu
         var cvC = ContentValues()
         cvC.put(COL_ID2, idPanen)
         cvC.put(COL_BERAT, c.berat)
-        cvC.put(COL_BIAYA, c.biaya)
+        cvC.put(COL_ONGKOS_PETIK_ATAU_HARGA_CERI, c.ongkosPetik_atau_hargaCeri)
+        cvC.put(COL_OJEK, c.ojek)
+        cvC.put(COL_ONGKOS_CUCI, c.ongkosCuci)
         var resultC = db.insert(TABLE_CHERRY, null, cvC)
 
         if ((resultP == -1.toLong()) || (resultC == -1.toLong())) {
@@ -118,7 +126,9 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context, DATABASE_NAME, nu
                 cheri.id = result.getString(result.getColumnIndex(COL_ID_CHERRY)).toInt()
                 cheri.id2 = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
                 cheri.berat = result.getString(result.getColumnIndex(COL_BERAT)).toDouble()
-                cheri.biaya = result.getString(result.getColumnIndex(COL_BIAYA)).toInt()
+                cheri.ongkosPetik_atau_hargaCeri = result.getString(result.getColumnIndex(COL_ONGKOS_PETIK_ATAU_HARGA_CERI)).toInt()
+                cheri.ojek = result.getString(result.getColumnIndex(COL_OJEK)).toInt()
+                cheri.ongkosCuci = result.getString(result.getColumnIndex(COL_ONGKOS_CUCI)).toInt()
 
                 daftarPanen.add(panen)
                 daftarCheri.add(cheri)

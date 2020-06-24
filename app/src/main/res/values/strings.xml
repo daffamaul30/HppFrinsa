@@ -13,7 +13,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="tanggal">Tanggal</string>
     <string name="varietas">Varietas</string>
     <string name="tgl_input">DD/MM/YYYY</string>
     <string name="blok">Blok</string>
@@ -35,4 +34,32 @@
     <string name="daftar_produksi">Daftar Produksi</string>
     <string name="kembali">Kembali ke Dashboard</string>
     <string name="value">Value</string>
+    <string name="tahap">Tahap</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ongkos_petik">Ongkos Petik</string>
+    <string name="ojek">Ojek</string>
+    <string name="ongkos_cuci">Ongkos Cuci</string>
+    <string name="total_biaya">Total Biaya</string>
+    <string name="ongkos_muat">Ongkos Muat</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="ongkos_transportasi">Ongkos Transportasi</string>
+    <string name="ongkos_pengawalan">Ongkos Pengawalan</string>
+    <string name="ongkos_bongkar">Ongkos Bongkar</string>
+    <string name="ongkos_hulling">Ongkos Hulling</string>
+    <string name="pilih_tanggal">Pilih Tanggal</string>
+    <string name="ongkos_suton_grading">Ongkos Suton Grading</string>
+    <string name="ongkos_size_grading">Ongkos Size Grading</string>
+    <string name="ongkos_color_sorter">Ongkos Color Sorter</string>
+    <string name="ongkos_hand_pick">Ongkos Hand Pick</string>
+    <string name="ongkos_pulping">Ongkos Pulping</string>
+    <string name="ongkos_jemur">Ongkos Jemur</string>
+    <string name="ongkos_fermentasi">Ongkos Fermentasi</string>
+    <string name="panen">Panen</string>
+    <string name="beli">Beli</string>
+    <string name="beli_dari">Beli dari</string>
+    <string name="harga_beli">Harga Beli</string>
+    <string name="ceri">Ceri</string>
+    <string name="gabah">Gabah</string>
+    <string name="asalan">Asalan</string>
 </resources>

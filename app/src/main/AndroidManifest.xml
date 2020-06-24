@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".SubProses"></activity>
+=======
+        <activity android:name=".ReviewHasilBeli"></activity>
+        <activity android:name=".InputBeli" />
+        <activity android:name=".MenuMulaiProduksi" />
+        <activity android:name=".tahapan_proses.TahapanProses" />
+>>>>>>> 70eacecc46c2c774de9b37023db65ff61bfda145
         <activity android:name=".ReviewHasilPanen" />
         <activity android:name=".InputPanen" /> <!-- <activity -->
         <activity android:name=".daftar_produksi.MainDaftarProduksi" />

@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import frinsa.hpp.R
+import frinsa.hpp.SubProsesAdapter
 import kotlinx.android.synthetic.main.fragment_produksi.*
 
 class FragmentProses: Fragment() {
 
 
     lateinit var v :View
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,7 +34,6 @@ class FragmentProses: Fragment() {
             2000000.00,
             "terakhir"
         )
-        val dpList: MutableList<ModelDaftarProduksi> = ArrayList()
         dpList.add(DPlist)
         dpList.add(DPlist)
         dpList.add(DPlist)
@@ -45,5 +44,11 @@ class FragmentProses: Fragment() {
         rv_produksi.setHasFixedSize(true)
         rv_produksi.adapter = DaftarProduksiAdapter(context,dpList)
     }
+    companion object{
+        val dpList: ArrayList<ModelDaftarProduksi> = ArrayList()
 
+        fun getDPList(): ArrayList<ModelDaftarProduksi> {
+            return dpList
+        }
+    }
 }
