@@ -210,7 +210,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         if (spinVarietas == "Pilih Varietas") {
             isEmptyFields = true
-            toastMessage("Var[ietas tidak boleh kosong")
+            toastMessage("Varietas tidak boleh kosong")
         }
 
         if (spinBlok == "Pilih Blok") {
