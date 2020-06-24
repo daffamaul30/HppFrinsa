@@ -24,32 +24,27 @@
                 <RadioGroup
                     android:id="@+id/rg_bentuk_beli"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <RadioButton
+                        android:id="@+id/rb_ceri"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal">
+                        android:text="@string/ceri" />
 
-                        <RadioButton
-                            android:id="@+id/rb_ceri"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ceri" />
+                    <RadioButton
+                        android:id="@+id/rb_gabah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gabah" />
 
-                        <RadioButton
-                            android:id="@+id/rb_gabah"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/gabah" />
-
-                        <RadioButton
-                            android:id="@+id/rb_asalan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/asalan" />
-                    </LinearLayout>
-
+                    <RadioButton
+                        android:id="@+id/rb_asalan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/asalan" />
                 </RadioGroup>
 
                 <TextView
@@ -159,6 +154,7 @@
                         android:inputType="number" />
 
                     <TextView
+                        android:id="@+id/tv_cuci_beli"
                         style="@style/Teks.TV"
                         android:text="@string/ongkos_cuci" />
 

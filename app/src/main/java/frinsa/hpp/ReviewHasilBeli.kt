@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_review_hasil_panen.btn_kembali_da
 
 class ReviewHasilBeli : AppCompatActivity(), View.OnClickListener {
     companion object {
+        const val EXTRA_TITLE = "beli"
         const val EXTRA_TGL  = "extra_tgl"
         const val EXTRA_VARIETAS = "extra_varietas"
         const val EXTRA_BLOK = "extra_blok"
@@ -26,12 +27,8 @@ class ReviewHasilBeli : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_review_hasil_beli)
 
-        //set action bar title
-        if (supportActionBar != null) {
-            (supportActionBar as ActionBar).title = "Beli Dari Kebun Lain"
-        }
-
         //Ambil data yang dikirim page InputPanen
+        val title = intent.getStringExtra(EXTRA_TITLE)
         val tgl = intent.getStringExtra(EXTRA_TGL)
         val varietas = intent.getStringExtra(EXTRA_VARIETAS)
         val blok = intent.getStringExtra(EXTRA_BLOK)
@@ -41,6 +38,11 @@ class ReviewHasilBeli : AppCompatActivity(), View.OnClickListener {
         val ongkosPetik = intent.getStringExtra(EXTRA_ONGKOS_PETIK)
         val ongkosCuci = intent.getStringExtra(EXTRA_ONGKOS_CUCI)
         val proses = intent.getStringExtra(EXTRA_PROSES)
+
+        //set action bar title
+        if (supportActionBar != null) {
+            (supportActionBar as ActionBar).title = "Beli $title"
+        }
 
         //Set ke value
         value_tanggal_beli.text = tgl

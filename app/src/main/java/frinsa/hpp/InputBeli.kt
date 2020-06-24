@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class InputBeli : AppCompatActivity(), View.OnClickListener {
+class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     private val blok: MutableList<String> = ArrayList()
@@ -35,6 +35,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener {
     private lateinit var edtKolektif: String
     private lateinit var edtHargaBeli: String
     private lateinit var edtOngkosCuci: String
+    private lateinit var terpilih: String
+    private var id: Int = 0
 
     private var isiNanti: Boolean = false
 
@@ -67,6 +69,9 @@ class InputBeli : AppCompatActivity(), View.OnClickListener {
         btn_tmbh_varietas_beli.setOnClickListener(this)
         btn_tmbh_proses_beli.setOnClickListener(this)
         btn_kirim_beli.setOnClickListener(this)
+
+        //RadioButton
+        rg_bentuk_beli.setOnCheckedChangeListener(this)
     }
 
     fun setSpinnerVarietas() {
@@ -171,6 +176,11 @@ class InputBeli : AppCompatActivity(), View.OnClickListener {
         edtOngkosCuci = et_ongkos_cuci_beli.text.toString()
 
         var isEmptyFields = false
+
+        if (id == -1) {
+            isEmptyFields = true
+            toastMessage("Bentuk beli harus dipilih")
+        }
 
         if (tvTanggal == "DD/MM/YYYY") {
             isEmptyFields = true
@@ -307,15 +317,16 @@ class InputBeli : AppCompatActivity(), View.OnClickListener {
 
                         //Intent menggunakan putextra
                         val intent = Intent(this@InputBeli, ReviewHasilBeli::class.java)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_TGL, tvTanggal)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_VARIETAS, spinVarietas)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_BLOK, edtBlok)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_BERAT, edtBerat)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_KOLEKTIF, edtKolektif)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, biaya.toString())
-                        intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_PETIK, edtHargaBeli)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_CUCI, ongkosCuci.toString())
-                        intent.putExtra(ReviewHasilPanen.EXTRA_PROSES, proses)
+                        intent.putExtra(ReviewHasilBeli.EXTRA_TITLE, terpilih)
+                        intent.putExtra(ReviewHasilBeli.EXTRA_TGL, tvTanggal)
+                        intent.putExtra(ReviewHasilBeli.EXTRA_VARIETAS, spinVarietas)
+                        intent.putExtra(ReviewHasilBeli.EXTRA_BLOK, edtBlok)
+                        intent.putExtra(ReviewHasilBeli.EXTRA_BERAT, edtBerat)
+                        intent.putExtra(ReviewHasilBeli.EXTRA_KOLEKTIF, edtKolektif)
+                        intent.putExtra(ReviewHasilBeli.EXTRA_BIAYA, biaya.toString())
+                        intent.putExtra(ReviewHasilBeli.EXTRA_ONGKOS_PETIK, edtHargaBeli)
+                        intent.putExtra(ReviewHasilBeli.EXTRA_ONGKOS_CUCI, ongkosCuci.toString())
+                        intent.putExtra(ReviewHasilBeli.EXTRA_PROSES, proses)
                         startActivity(intent)
                         finish()
 
@@ -325,6 +336,23 @@ class InputBeli : AppCompatActivity(), View.OnClickListener {
                         alertDialog.dismiss()
                     }
                 }
+            }
+        }
+    }
+
+    override fun onCheckedChanged(group: RadioGroup, checkedId: Int) {
+        id = rg_bentuk_beli.checkedRadioButtonId
+
+        if (id != -1) {
+            val radio: RadioButton = findViewById(id)
+            terpilih = radio.text.toString()
+            toastMessage("$terpilih terpilih")
+
+            if (terpilih == "Gabah" || terpilih == "Asalan") {
+                setDisable(et_ongkos_cuci_beli, tv_cuci_beli)
+            }
+            else {
+                setEnable(et_ongkos_cuci_beli, tv_cuci_beli)
             }
         }
     }
