@@ -52,7 +52,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="300dp"
             android:layout_below="@+id/card_header"
             android:layout_marginTop="-25dp"
             android:background="@drawable/coffe" />
