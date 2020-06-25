@@ -10,9 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
 import kotlinx.android.synthetic.main.dialog_submit.view.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.view.*
 import kotlinx.android.synthetic.main.fragment_jemur1_.*
+import kotlinx.android.synthetic.main.fragment_jemur1_.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,6 +25,7 @@ class Jemur1_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtOngkosPengawalan: String
     private lateinit var edtOngkosBongkar: String
     private lateinit var edtOngkosJemur: String
+    private lateinit var edtKadarAir: String
 
 
     override fun onCreateView(
@@ -37,8 +37,8 @@ class Jemur1_Fragment : Fragment(), View.OnClickListener {
 
         //set text varietas dan blok berdasarkan yang dipilih
 
-        view.btn_kirim_fermentasi.setOnClickListener(this)
-        view.btn_datepicker_fermentasi.setOnClickListener(this)
+        view.btn_kirim_jemur1.setOnClickListener(this)
+        view.btn_datepicker_jemur1.setOnClickListener(this)
 
         return view
     }
@@ -95,6 +95,7 @@ class Jemur1_Fragment : Fragment(), View.OnClickListener {
         edtOngkosTransport = et_ongkos_transportasi_jemur1.text.toString()
         edtOngkosJemur = et_ongkos_jemur_jemur1.text.toString()
         edtOngkosBongkar = et_ongkos_bongkar_jemur1.text.toString()
+        edtKadarAir = et_kadar_air_jemur1.text.toString()
 
         var isEmptyFields = false
 
@@ -106,6 +107,11 @@ class Jemur1_Fragment : Fragment(), View.OnClickListener {
         if (edtBerat.isEmpty()) {
             isEmptyFields = true
             et_berat_jemur1.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtKadarAir.isEmpty()) {
+            isEmptyFields = true
+            et_kadar_air_jemur1.error = "Field ini tidak boleh kosong"
         }
 
         if (edtOngkosTransport.isEmpty()) {

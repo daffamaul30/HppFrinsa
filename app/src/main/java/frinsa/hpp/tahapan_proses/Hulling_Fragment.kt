@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
 import kotlinx.android.synthetic.main.dialog_submit.view.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.view.*
 import kotlinx.android.synthetic.main.fragment_hand_pick_.*
 import kotlinx.android.synthetic.main.fragment_hulling_.*
+import kotlinx.android.synthetic.main.fragment_hulling_.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,6 +23,7 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
     //Deklarasi semua edit text / textview yg akan divalidasi
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
+    private lateinit var edtKadarAir: String
     private lateinit var edtOngkosHulling: String
 
     override fun onCreateView(
@@ -35,8 +35,8 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
 
         //set text varietas dan blok berdasarkan yang dipilih
 
-        view.btn_kirim_fermentasi.setOnClickListener(this)
-        view.btn_datepicker_fermentasi.setOnClickListener(this)
+        view.btn_kirim_hulling.setOnClickListener(this)
+        view.btn_datepicker_hulling.setOnClickListener(this)
 
         return view
     }
@@ -101,6 +101,11 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
         if (edtBerat.isEmpty()) {
             isEmptyFields = true
             et_berat_hulling.error = "Field ini tidak boleh kosong"
+        }
+
+        if (edtKadarAir.isEmpty()) {
+            isEmptyFields = true
+            et_kadar_air_hulling.error = "Field ini tidak boleh kosong"
         }
 
         if (edtOngkosHulling.isEmpty()) {

@@ -81,6 +81,15 @@
 
                 <TextView
                     style="@style/Teks.TV"
+                    android:text="@string/kadar_air"/>
+
+                <EditText
+                    android:id="@+id/et_kadar_air_hulling"
+                    android:inputType="number"
+                    style="@style/ET"/>
+
+                <TextView
+                    style="@style/Teks.TV"
                     android:text="@string/biaya"/>
 
                 <LinearLayout

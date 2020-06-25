@@ -30,10 +30,12 @@ class TahapanProses : AppCompatActivity() {
             "size grading" -> sizeGrading()
             "color sorter" -> colorSorter()
             "hand pick" -> handPick()
-            "pulping1" -> pulping1()
-            "pulping2" -> pulping2()
-            "jemur1" -> jemur1()
-            "jemur2" -> jemur2()
+            "pulping Ceri - Gabah Basah" -> pulping1()
+            "pulping Ceri Peram - Gabah Basah" -> pulping2()
+            "jemur Gabah Basah - Gabah Kering1" -> jemur1()
+            "jemur Ceri Param - Ceri Kering" -> jemur2()
+            "jemur Labu - Asalan" -> jemur2()
+            "jemur Gabah Basah - Gabah Kering2" -> jemur3()
         }
     }
 
@@ -113,6 +115,13 @@ class TahapanProses : AppCompatActivity() {
         val fragJem2: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragJem2.replace(R.id.container_tahapan,jem2)
         fragJem2.commit()
+    }
+
+    fun jemur3() {
+        val jem3 = Jemur3_Fragment()
+        val fragJem3: FragmentTransaction = supportFragmentManager.beginTransaction()
+        fragJem3.replace(R.id.container_tahapan,jem3)
+        fragJem3.commit()
     }
 
 }
