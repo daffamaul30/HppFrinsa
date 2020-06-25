@@ -26,10 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:elevation="10dp"
-        android:outlineSpotShadowColor="@android:color/black"
-        android:outlineAmbientShadowColor="@android:color/black"
-        app:cardBackgroundColor="@android:color/black">
+        android:elevation="10dp">
 
         <TableLayout
             android:layout_width="match_parent"
