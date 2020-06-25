@@ -40,6 +40,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
     private val context = this
     private lateinit var db: DBPanen
+    private lateinit var vari: Varietas
+    private lateinit var blk: Blok
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,10 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         //CREATE DATABASE
         db = DBPanen(context)
+        //CREATE VARIETAS OBJECT
+        vari = Varietas(context)
+        //CREATE BLOK OBJECT
+        blk = Blok(context)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -74,14 +80,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     fun setSpinnerVarietas() {
         //Spinner Varietas
         val spinnerVarietas:Spinner = findViewById(R.id.spinner_varietas)
-        val listV = db.readVarietas()
-        varietas.clear()
-        varietas.add(0, "Pilih Varietas")
-        if (listV.size > 0) {
-            for (i in 0 until listV.size) {
-                varietas.add(listV[i].name)
-            }
-        }
+
+        val varietas = vari.getVarietas()
         //Style and populate the spinner
         val adapterVarietas = ArrayAdapter(this, android.R.layout.simple_spinner_item, varietas)
         //Dropdown layout style
@@ -113,14 +113,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     fun setSpinnerBlok() {
         //Spinner Blok
         val spinnerBlok:Spinner = findViewById(R.id.spinner_blok)
-        val listB = db.readBlok()
-        blok.clear()
-        blok.add(0, "Pilih Blok")
-        if (listB.size > 0) {
-            for (i in 0 until listB.size) {
-                blok.add(listB[i].name)
-            }
-        }
+
+        val blok = blk.getBlok()
         //Style and populate the spinner
         val adapterBlok = ArrayAdapter(this, android.R.layout.simple_spinner_item, blok)
         //Dropdown layout style
