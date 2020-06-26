@@ -57,6 +57,9 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
 //                    floatingActionButton.animation = mNormal
         floatingActionButton.setImageResource(R.drawable.ic_baseline_add_24)
 
+        varietas_baru.isClickable = false
+        blok_baru.isClickable = false
+        proses_baru.isClickable = false
 
         tv_varietas_baru.visibility = View.INVISIBLE
         tv_blok_baru.visibility = View.INVISIBLE
