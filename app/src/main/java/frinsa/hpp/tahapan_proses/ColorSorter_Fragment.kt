@@ -11,8 +11,7 @@ import android.widget.Toast
 import frinsa.hpp.R
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_color_sorter_.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.view.*
+import kotlinx.android.synthetic.main.fragment_color_sorter_.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,8 +33,8 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
 
         //set text varietas dan blok berdasarkan yang dipilih
 
-        view.btn_kirim_fermentasi.setOnClickListener(this)
-        view.btn_datepicker_fermentasi.setOnClickListener(this)
+        view.btn_kirim_color_sorter.setOnClickListener(this)
+        view.btn_datepicker_color_sorter.setOnClickListener(this)
 
         return view
     }
@@ -64,7 +63,7 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
                     }
                 }
             }
-            R.id.btn_datepicker_fermentasi -> {
+            R.id.btn_datepicker_color_sorter -> {
                 val now = Calendar.getInstance()
                 val datePicker = DatePickerDialog(
                     requireContext(), DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->

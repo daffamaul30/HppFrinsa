@@ -5,7 +5,6 @@ data class Panen(
     var tanggal:String = "",
     var varietas: String = "",
     var blok: String = "",
-    var kolektif: String = "",
     var proses: String = "",
     var status: String = ""
 )

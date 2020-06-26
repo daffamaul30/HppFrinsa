@@ -10,10 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
 import kotlinx.android.synthetic.main.dialog_submit.view.*
-import kotlinx.android.synthetic.main.fragment_color_sorter_.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.view.*
 import kotlinx.android.synthetic.main.fragment_hand_pick_.*
+import kotlinx.android.synthetic.main.fragment_hand_pick_.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,8 +33,8 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
 
         //set text varietas dan blok berdasarkan yang dipilih
 
-        view.btn_kirim_fermentasi.setOnClickListener(this)
-        view.btn_datepicker_fermentasi.setOnClickListener(this)
+        view.btn_kirim_hand_pick.setOnClickListener(this)
+        view.btn_datepicker_hand_pick.setOnClickListener(this)
 
         return view
     }

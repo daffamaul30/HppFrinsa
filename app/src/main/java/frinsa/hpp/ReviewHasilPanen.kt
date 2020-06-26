@@ -13,7 +13,6 @@ class ReviewHasilPanen : AppCompatActivity(), View.OnClickListener {
         const val EXTRA_VARIETAS = "extra_varietas"
         const val EXTRA_BLOK = "extra_blok"
         const val EXTRA_BERAT = "extra_berat"
-        const val EXTRA_KOLEKTIF = "extra_kolektif"
         const val EXTRA_BIAYA = "extra_biaya"
         const val EXTRA_ONGKOS_PETIK= "ongkos_petik"
         const val EXTRA_OJEK = "ojek"
@@ -35,7 +34,6 @@ class ReviewHasilPanen : AppCompatActivity(), View.OnClickListener {
         val varietas = intent.getStringExtra(EXTRA_VARIETAS)
         val blok = intent.getStringExtra(EXTRA_BLOK)
         val berat = intent.getStringExtra(EXTRA_BERAT)
-        val kolektif = intent.getStringExtra(EXTRA_KOLEKTIF)
         val biaya = intent.getStringExtra(EXTRA_BIAYA)
         val ongkosPetik = intent.getStringExtra(EXTRA_ONGKOS_PETIK)
         val ojek = intent.getStringExtra(EXTRA_OJEK)

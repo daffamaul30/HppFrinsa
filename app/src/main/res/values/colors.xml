@@ -11,5 +11,6 @@
     <color name="batal">#f00e21</color>
     <color name="disable">#c2a7a9</color>
     <color name="icon_frinsa_background">#FFFFFF</color>
-
+    <color name="background">#EEEEEE</color>
+    <color name="lightGray">#ededed</color>
 </resources>

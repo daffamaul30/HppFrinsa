@@ -39,16 +39,21 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
     private var id: Int = 0
 
     private var isiNanti: Boolean = false
+    private var cek: Boolean = false
 
     private val context = this
     private lateinit var db: DBPanen
+    private lateinit var vari: Varietas
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_beli)
 
         //CREATE DATABASE
+        db = DBPanen(context)//CREATE DATABASE
         db = DBPanen(context)
+        //CREATE VARIETAS OBJECT
+        vari = Varietas(context)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -77,14 +82,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
     fun setSpinnerVarietas() {
         //Spinner Varietas
         val spinnerVarietas: Spinner = findViewById(R.id.spinner_varietas_beli)
-        val listV = db.readVarietas()
-        varietas.clear()
-        varietas.add(0, "Pilih Varietas")
-        if (listV.size > 0) {
-            for (i in 0 until listV.size) {
-                varietas.add(listV[i].name)
-            }
-        }
+
+        val varietas = vari.getVarietas()
         //Style and populate the spinner
         val adapterVarietas = ArrayAdapter(this, android.R.layout.simple_spinner_item, varietas)
         //Dropdown layout style
@@ -212,7 +211,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
             et_ongkos_petik.error = "Field ini tidak boleh kosong"
         }
 
-        if (edtOngkosCuci.isEmpty()) {
+        if (edtOngkosCuci.isEmpty() && !cek) {
             isEmptyFields = true
             et_ojek.error = "Field ini tidak boleh kosong"
         }
@@ -350,6 +349,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
 
             if (terpilih == "Gabah" || terpilih == "Asalan") {
                 setDisable(et_ongkos_cuci_beli, tv_cuci_beli)
+                cek = true
+                println(cek)
             }
             else {
                 setEnable(et_ongkos_cuci_beli, tv_cuci_beli)

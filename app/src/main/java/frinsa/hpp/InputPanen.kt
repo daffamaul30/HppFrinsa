@@ -32,7 +32,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     private lateinit var spinProses: String
     private lateinit var tvTanggal: String
     private lateinit var edtBerat: String
-    private lateinit var edtKolektif: String
     private lateinit var edtOngkosPetik: String
     private lateinit var edtOjek: String
     private lateinit var edtOngkosCuci: String
@@ -41,6 +40,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
     private val context = this
     private lateinit var db: DBPanen
+    private lateinit var vari: Varietas
+    private lateinit var blk: Blok
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,10 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         //CREATE DATABASE
         db = DBPanen(context)
+        //CREATE VARIETAS OBJECT
+        vari = Varietas(context)
+        //CREATE BLOK OBJECT
+        blk = Blok(context)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -75,14 +80,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     fun setSpinnerVarietas() {
         //Spinner Varietas
         val spinnerVarietas:Spinner = findViewById(R.id.spinner_varietas)
-        val listV = db.readVarietas()
-        varietas.clear()
-        varietas.add(0, "Pilih Varietas")
-        if (listV.size > 0) {
-            for (i in 0 until listV.size) {
-                varietas.add(listV[i].name)
-            }
-        }
+
+        val varietas = vari.getVarietas()
         //Style and populate the spinner
         val adapterVarietas = ArrayAdapter(this, android.R.layout.simple_spinner_item, varietas)
         //Dropdown layout style
@@ -114,14 +113,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     fun setSpinnerBlok() {
         //Spinner Blok
         val spinnerBlok:Spinner = findViewById(R.id.spinner_blok)
-        val listB = db.readBlok()
-        blok.clear()
-        blok.add(0, "Pilih Blok")
-        if (listB.size > 0) {
-            for (i in 0 until listB.size) {
-                blok.add(listB[i].name)
-            }
-        }
+
+        val blok = blk.getBlok()
         //Style and populate the spinner
         val adapterBlok = ArrayAdapter(this, android.R.layout.simple_spinner_item, blok)
         //Dropdown layout style
@@ -210,7 +203,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
         if (spinVarietas == "Pilih Varietas") {
             isEmptyFields = true
-            toastMessage("Var[ietas tidak boleh kosong")
+            toastMessage("Varietas tidak boleh kosong")
         }
 
         if (spinBlok == "Pilih Blok") {
@@ -356,7 +349,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     val alertDialog =  builder.show()
 
                     dialog.submit_submit.setOnClickListener {
-                        val kolektif = if (edtKolektif.isEmpty()) "-" else edtKolektif
                         val proses = if (isiNanti) "-" else spinProses
                         val biaya = edtOngkosPetik.toInt() + edtOjek.toInt() + edtOngkosCuci.toInt()
 
@@ -365,7 +357,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                             tanggal = tvTanggal,
                             varietas = spinVarietas,
                             blok = spinBlok,
-                            kolektif = kolektif,
                             proses = proses
                         )
                         val cheri = Cherry(
@@ -377,16 +368,16 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         db.insertPanen(data,cheri)
 
                         //test getData
-                        val (panen,ceri) = db.getPanen()
-                        if (panen.size > 0 && ceri.size > 0) {
-                            for (i in 0..(panen.size-1)) {
-                                if (panen.get(i).id == ceri.get(i).id2) {
-                                    val text = "Data $i," + panen[i].id + "," + panen[i].tanggal + "," + panen[i].varietas + "," + panen[i].blok + "," + panen[i].kolektif + "," + panen.get(i).proses + "," +
-                                            panen[i].status + "," + ceri[i].id + "," + ceri[i].id2 + "," + ceri[i].berat + "," + ceri[i].ongkosPetik_atau_hargaCeri + "," + ceri[i].ojek + "," + ceri[i].ongkosCuci
-                                    println1(text)
-                                }
-                            }
-                        }
+//                        val (panen,ceri) = db.getPanen()
+//                        if (panen.size > 0 && ceri.size > 0) {
+//                            for (i in 0..(panen.size-1)) {
+//                                if (panen.get(i).id == ceri.get(i).id2) {
+//                                    val text = "Data $i," + panen[i].id + "," + panen[i].tanggal + "," + panen[i].varietas + "," + panen[i].blok + "," + panen[i].kolektif + "," + panen.get(i).proses + "," +
+//                                            panen[i].status + "," + ceri[i].id + "," + ceri[i].id2 + "," + ceri[i].berat + "," + ceri[i].ongkosPetik_atau_hargaCeri + "," + ceri[i].ojek + "," + ceri[i].ongkosCuci
+//                                    println1(text)
+//                                }
+//                            }
+//                        }
 
                         //Intent menggunakan putextra
                         val intent = Intent(this@InputPanen, ReviewHasilPanen::class.java)
@@ -394,8 +385,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         intent.putExtra(ReviewHasilPanen.EXTRA_VARIETAS, spinVarietas)
                         intent.putExtra(ReviewHasilPanen.EXTRA_BLOK, spinBlok)
                         intent.putExtra(ReviewHasilPanen.EXTRA_BERAT, edtBerat)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_KOLEKTIF, kolektif)
-                        intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, biaya)
+                        intent.putExtra(ReviewHasilPanen.EXTRA_BIAYA, biaya.toString())
                         intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_PETIK, edtOngkosPetik)
                         intent.putExtra(ReviewHasilPanen.EXTRA_OJEK, edtOjek)
                         intent.putExtra(ReviewHasilPanen.EXTRA_ONGKOS_CUCI, edtOngkosCuci)
