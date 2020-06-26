@@ -135,8 +135,6 @@
                     android:elevation="20dp" />
             </LinearLayout>
         </TableLayout>
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
 

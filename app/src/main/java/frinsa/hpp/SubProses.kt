@@ -1,6 +1,5 @@
 package frinsa.hpp
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,14 +8,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
+import frinsa.hpp.data.DBPanen
 import kotlinx.android.synthetic.main.activity_sub_proses.*
-import kotlinx.android.synthetic.main.fragment_produksi.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 class SubProses: AppCompatActivity() {
 //    private val context = this
-//    private lateinit var data : DBPanen
+    private lateinit var data : DBPanen
     val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
 
@@ -80,15 +79,17 @@ class SubProses: AppCompatActivity() {
         spList.add(DPlist3)
         spList.add(DPlist)
         displayList.addAll(spList)
-//        data = DBPanen(context)
+        data = DBPanen(this)
 //        data.getPanen()
 //        var proses : ArrayList() = data.getPanen()
         rv_hasil_produksi.layoutManager = LinearLayoutManager(this)
         val cardViewHeroAdapter = SubProsesAdapter(this, displayList)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
-
-
     }
+//    private fun viewProses(){
+//        val displayproses : Pair<MutableList<Panen>, MutableList<Cherry>> = data.getPanen()
+//        val adapterproses = SubProsesAdapter (this, displayproses)
+//    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         val searchItem = menu?.findItem(R.id.menu_search)
