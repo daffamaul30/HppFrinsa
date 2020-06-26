@@ -42,6 +42,9 @@ class Varietas {
                 alertDialog.dismiss()
             }
         }
+        dialog.batal_tmbh_varietas.setOnClickListener{
+            alertDialog.dismiss()
+        }
     }
 
     fun getVarietas(): MutableList<String> {
