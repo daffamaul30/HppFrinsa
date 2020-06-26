@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".tahapan_proses.Jemur2_Fragment">
+    tools:context=".tahapan_proses.JemurI_Fragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

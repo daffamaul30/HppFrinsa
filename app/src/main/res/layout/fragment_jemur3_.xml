@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".tahapan_proses.Jemur3_Fragment">
+    tools:context=".tahapan_proses.JemurII_Fragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -75,15 +75,6 @@
 
                 <EditText
                     android:id="@+id/et_berat_jemur3"
-                    android:inputType="number"
-                    style="@style/ET"/>
-
-                <TextView
-                    style="@style/Teks.TV"
-                    android:text="@string/kadar_air"/>
-
-                <EditText
-                    android:id="@+id/et_kadar_air_jemur3"
                     android:inputType="number"
                     style="@style/ET"/>
 

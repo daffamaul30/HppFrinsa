@@ -123,7 +123,9 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                     blok_baru.setOnClickListener {
                         blk.addBlok()
                     }
-
+                    proses_baru.setOnClickListener {
+                        //
+                    }
                 }
             }
         }
