@@ -14,7 +14,8 @@ val TABLE_BLOK="Blok"
 val TABLE_PROSES="Proses"
 val COL_NAME = "name"
 val COL_ID = "id"
-//Panen
+val COL_STEP = "step"
+//Produksi
 val COL_ID_PANEN = "id_panen"
 val TABLE_PANEN = "Panen"
 val COL_TGL = "tanggal"
@@ -55,12 +56,17 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COL_NAME + " VARCHAR(50))"
 
+    fun createTableProses(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
+            COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_NAME + " VARCHAR(50), " +
+            COL_STEP + " TEXT)"
+
     fun selectAll(TABLE_NAME: String) = "Select * from " + TABLE_NAME
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(createTableSpinner(TABLE_VARIETAS))
         db?.execSQL(createTableSpinner(TABLE_BLOK))
-        db?.execSQL(createTableSpinner(TABLE_PROSES))
+        db?.execSQL(createTableProses(TABLE_PROSES))
         db?.execSQL(createTablePanen)
         db?.execSQL(createTableCherry)
 
@@ -175,6 +181,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         val db = this.writableDatabase
         var cv = ContentValues()
         cv.put(COL_NAME, p.name)
+        cv.put(COL_STEP, p.step)
 
         var result = db.insert(TABLE_PROSES, null, cv)
         if (result == -1.toLong()) {

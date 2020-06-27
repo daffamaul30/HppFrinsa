@@ -189,19 +189,9 @@
                         android:id="@+id/spinner_proses"
                         android:layout_width="150dp"
                         android:layout_height="35dp"
-                        android:background="@drawable/btn_spinner"
+                        android:background="@drawable/btn_spinner2"
                         android:layout_centerVertical="true"
                         android:textAlignment="center"/>
-
-                    <Button
-                        style="@style/Teks.White"
-                        android:id="@+id/btn_tmbh_proses"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_toEndOf="@+id/spinner_proses"
-                        android:background="@drawable/btn_add_spinner"
-                        android:text="+"
-                        android:textSize="20sp"/>
 
                 </RelativeLayout>
             </LinearLayout>
