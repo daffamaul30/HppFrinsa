@@ -43,35 +43,35 @@ class SubProses: AppCompatActivity() {
             10.0,
             "Full-Wash",
             2000000.00,
-            "terakhir"
+            "Pulping"
         )
 
         val DPlist1 = ModelDaftarProduksi(
-            "27-04-2020",
-            "A",
-            "Arabica",
-            10.0,
+            "22-01-2020",
+            "B",
+            "Luwak White",
+            12.0,
             "Lact Fully Washed",
-            2000000.00,
-            "terakhir"
+            1000000.00,
+            "Hulling"
         )
         val DPlist2 = ModelDaftarProduksi(
-            "27-04-2020",
-            "A",
-            "Arabica",
-            10.0,
+            "22-02-2020",
+            "C",
+            "Grande",
+            20.0,
             "Wet Hulled",
-            2000000.00,
-            "terakhir"
+            2021000.00,
+            "Jemur"
         )
         val DPlist3 = ModelDaftarProduksi(
-            "27-04-2020",
-            "A",
-            "Arabica",
-            10.0,
+            "11-03-2020",
+            "D",
+            "Mocca",
+            15.0,
             "Natural",
-            2000000.00,
-            "terakhir"
+            2910000.00,
+            "Color Sorter"
         )
         spList.add(DPlist)
         spList.add(DPlist1)
@@ -107,6 +107,18 @@ class SubProses: AppCompatActivity() {
                         val search = newText.toLowerCase(Locale.getDefault())
                         spList.forEach(){
                             if (it.proses?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                                displayList.add(it)
+                            }
+                            if (it.tanggal?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                                displayList.add(it)
+                            }
+                            if (it.varietas?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                                displayList.add(it)
+                            }
+                            if (it.blok?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                                displayList.add(it)
+                            }
+                            if (it.tahap?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
                         }

@@ -8,16 +8,22 @@
     android:layout_height="match_parent"
     tools:context=".SubProses"
     android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_hasil_produksi"
-        android:layout_width="match_parent"
-        android:layout_height="547dp"
-        android:scrollbars="vertical"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_hasil_produksi"
+            android:layout_width="match_parent"
+            android:layout_height="595dp"
+            android:scrollbars="vertical"
 
-        tools:listitem="@layout/cardviewproses">
+            tools:listitem="@layout/cardviewproses">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btn_proses"
