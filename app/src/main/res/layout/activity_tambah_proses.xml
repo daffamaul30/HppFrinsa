@@ -39,9 +39,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="15dp"
-                        android:textSize="15sp"
                         android:text="@string/pilih_tahapan_proses"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <ImageButton
                         android:id="@+id/btn_help_proses_baru"
@@ -66,10 +66,11 @@
 
                         <Spinner
                             android:id="@+id/urut_petik"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -81,6 +82,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:text="@string/petik" />
 
                             <TextView
@@ -100,10 +102,11 @@
 
                         <Spinner
                             android:id="@+id/urut_fermentasi"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -133,10 +136,11 @@
 
                         <Spinner
                             android:id="@+id/urut_transportasi"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -148,6 +152,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:text="@string/transportasi" />
 
                             <TextView
@@ -167,10 +172,11 @@
 
                         <Spinner
                             android:id="@+id/urut_pulping1"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -200,10 +206,11 @@
 
                         <Spinner
                             android:id="@+id/urut_pulping2"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -233,10 +240,11 @@
 
                         <Spinner
                             android:id="@+id/urut_jemur_kadar_air"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -266,10 +274,11 @@
 
                         <Spinner
                             android:id="@+id/urut_jemur1"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -299,10 +308,11 @@
 
                         <Spinner
                             android:id="@+id/urut_jemur2"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -332,10 +342,11 @@
 
                         <Spinner
                             android:id="@+id/urut_hulling"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -347,6 +358,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:text="@string/hulling" />
 
                             <TextView
@@ -366,10 +378,11 @@
 
                         <Spinner
                             android:id="@+id/urut_suton_grader"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -381,6 +394,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:text="@string/suton_grader" />
 
                             <TextView
@@ -400,10 +414,11 @@
 
                         <Spinner
                             android:id="@+id/urut_size_grading"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -415,6 +430,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:text="@string/size_grading" />
 
                             <TextView
@@ -434,10 +450,11 @@
 
                         <Spinner
                             android:id="@+id/urut_color_sorter"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -449,6 +466,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:text="@string/color_sorter" />
 
                             <TextView
@@ -468,10 +486,11 @@
 
                         <Spinner
                             android:id="@+id/urut_hand_pick"
-                            android:layout_width="50dp"
+                            android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3" />
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -483,6 +502,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
+                                android:clickable="false"
                                 android:text="@string/hand_pick" />
 
                             <TextView

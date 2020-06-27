@@ -132,6 +132,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                     proses_baru.setOnClickListener {
                         val intent = Intent(this@Dashboard, TambahProses::class.java)
                         startActivity(intent)
+                        close()
                     }
                 }
             }
