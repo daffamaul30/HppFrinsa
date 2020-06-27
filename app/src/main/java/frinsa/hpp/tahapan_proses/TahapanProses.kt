@@ -30,12 +30,11 @@ class TahapanProses : AppCompatActivity() {
             "size grading" -> sizeGrading()
             "color sorter" -> colorSorter()
             "hand pick" -> handPick()
-            "pulping Ceri - Gabah Basah" -> pulping1()
-            "pulping Ceri Peram - Gabah Basah" -> pulping2()
-            "jemur Gabah Basah - Gabah Kering1" -> jemur1()
-            "jemur Ceri Param - Ceri Kering" -> jemur2()
-            "jemur Labu - Asalan" -> jemur2()
-            "jemur Gabah Basah - Gabah Kering2" -> jemur3()
+            "pulping Ceri-Gabah Basah" -> pulping1()
+            "pulping" -> pulping2()
+            "jemur Kadar Air" -> jemurKadarAir()
+            "jemurI" -> jemurI()
+            "jemurII" -> jemurII()
         }
     }
 
@@ -103,22 +102,22 @@ class TahapanProses : AppCompatActivity() {
         fragPul2.commit()
     }
 
-    fun jemur1() {
-        val jem1 = Jemur1_Fragment()
-        val fragJem1: FragmentTransaction = supportFragmentManager.beginTransaction()
-        fragJem1.replace(R.id.container_tahapan,jem1)
-        fragJem1.commit()
+    fun jemurKadarAir() {
+        val jemKA = jemurKadarAir_Fragment()
+        val fragJemKA: FragmentTransaction = supportFragmentManager.beginTransaction()
+        fragJemKA.replace(R.id.container_tahapan,jemKA)
+        fragJemKA.commit()
     }
 
-    fun jemur2() {
-        val jem2 = Jemur2_Fragment()
+    fun jemurI() {
+        val jem2 = JemurI_Fragment()
         val fragJem2: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragJem2.replace(R.id.container_tahapan,jem2)
         fragJem2.commit()
     }
 
-    fun jemur3() {
-        val jem3 = Jemur3_Fragment()
+    fun jemurII() {
+        val jem3 = JemurII_Fragment()
         val fragJem3: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragJem3.replace(R.id.container_tahapan,jem3)
         fragJem3.commit()

@@ -2,11 +2,13 @@ package frinsa.hpp.data
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.LocusId
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.content.ContextCompat.getSystemService
 import frinsa.hpp.R
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
+
 
 class Varietas {
     private val varietas: MutableList<String> = ArrayList()
@@ -28,6 +30,8 @@ class Varietas {
         val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_tmbh_varietas, null)
         val builder = AlertDialog.Builder(context).setView(dialog).setTitle("Tambah Varietas")
         val alertDialog =  builder.show()
+//        dialog.edt_dialog_tmbh_varietas.requestFocus()
+
 
         dialog.submit_tmbh_varietas.setOnClickListener{
             val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
@@ -41,6 +45,9 @@ class Varietas {
                 db.insertVarietas(vari)
                 alertDialog.dismiss()
             }
+        }
+        dialog.batal_tmbh_varietas.setOnClickListener{
+            alertDialog.dismiss()
         }
     }
 
