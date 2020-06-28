@@ -44,16 +44,18 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
     private val context = this
     private lateinit var db: DBPanen
     private lateinit var vari: Varietas
+    private lateinit var pros: Proses
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_beli)
 
         //CREATE DATABASE
-        db = DBPanen(context)//CREATE DATABASE
         db = DBPanen(context)
         //CREATE VARIETAS OBJECT
         vari = Varietas(context)
+        //CREATE PROSES OBJECT
+        pros = Proses(context)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -114,14 +116,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
     fun setSpinnerProses() {
         //Spinner Proses
         val spinnerProses: Spinner = findViewById(R.id.spinner_proses_beli)
-        val listP = db.readProses()
-        proses.clear()
-        proses.add(0, "Pilih Proses")
-        if (listP.size > 0) {
-            for (i in 0 until listP.size) {
-                proses.add(listP[i].name)
-            }
-        }
+
+        val proses = pros.getProses()
         //Style and populate the spinner
         val adapterProses = ArrayAdapter(this, android.R.layout.simple_spinner_item, proses)
         //Dropdown layout style

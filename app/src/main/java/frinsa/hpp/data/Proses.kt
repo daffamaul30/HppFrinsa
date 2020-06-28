@@ -3,7 +3,7 @@ package frinsa.hpp.data
 import android.content.Context
 
 class Proses {
-    private val blok: MutableList<String> = ArrayList()
+    private val proses: MutableList<String> = ArrayList()
     var id: Int = 0
     var name: String = ""
     var step: String = ""
@@ -25,5 +25,17 @@ class Proses {
     fun addProses(name: String, step: String) {
         val proses = Proses(name, step)
         db.insertProses(proses)
+    }
+
+    fun getProses(): MutableList<String> {
+        val listP = db.readProses()
+        proses.clear()
+        proses.add(0, "Pilih Proses")
+        if (listP.size > 0) {
+            for (i in 0 until listP.size) {
+                proses.add(listP[i].name)
+            }
+        }
+        return proses
     }
 }
