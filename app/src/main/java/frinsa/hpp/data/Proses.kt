@@ -4,6 +4,7 @@ import android.content.Context
 
 class Proses {
     private val proses: MutableList<String> = ArrayList()
+    private var daftarStep = mapOf<String, String>().toMutableMap()
     var id: Int = 0
     var name: String = ""
     var step: String = ""
@@ -37,5 +38,15 @@ class Proses {
             }
         }
         return proses
+    }
+
+    fun getStepProses(): MutableMap<String, String> {
+        val listP = db.readProses()
+        if (listP.size > 0) {
+            for (i in 0 until listP.size) {
+                daftarStep.put(listP[i].name, listP[i].step)
+            }
+        }
+        return daftarStep
     }
 }
