@@ -260,13 +260,13 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                 }
             }
             R.id.cb_isi_nanti_beli -> {
-                if (cb_isi_nanti.isChecked) {
+                if (cb_isi_nanti_beli.isChecked) {
                     isiNanti = true
-                    spinner_proses.isEnabled = false
+                    spinner_proses_beli.isEnabled = false
                     tv_proses.setTextColor(Color.parseColor("#c2a7a9"))
                 } else {
                     isiNanti = false
-                    spinner_proses.isEnabled = true
+                    spinner_proses_beli.isEnabled = true
                     tv_proses.setTextColor(Color.parseColor("#000000"))
                 }
             }
