@@ -7,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
-import frinsa.hpp.data.Varietas
 import kotlinx.android.synthetic.main.activity_tambah_proses.*
 import kotlinx.android.synthetic.main.dialog_help_proses_baru.view.*
-import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 
 class TambahProses : AppCompatActivity(), View.OnClickListener {
     private var context = this
@@ -96,6 +94,12 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.cek_fermentasi -> {
+
+            }
+            R.id.cek_pulping1 -> {
+                Toast.makeText(context,"MASOK",Toast.LENGTH_SHORT).show()
+            }
             R.id.btn_help_proses_baru -> {
                 val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_help_proses_baru, null)
                 val builder = AlertDialog.Builder(context).setView(dialog)
@@ -109,6 +113,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.submit_tmbh_proses -> {
+                Toast.makeText(context,edt_dialog_tmbh_proses2.text.toString(),Toast.LENGTH_SHORT).show()
                 val valid = validation()
                 if (valid) {
 

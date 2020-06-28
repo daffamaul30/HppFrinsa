@@ -19,7 +19,7 @@
         <activity android:name=".daftar_produksi.MainDaftarProduksi" />
         <activity
             android:name=".Dashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
