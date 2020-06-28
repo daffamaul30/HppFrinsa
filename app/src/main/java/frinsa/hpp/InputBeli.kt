@@ -72,7 +72,6 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
 
         //Dialog Box
         btn_tmbh_varietas_beli.setOnClickListener(this)
-        btn_tmbh_proses_beli.setOnClickListener(this)
         btn_kirim_beli.setOnClickListener(this)
 
         //RadioButton
@@ -253,30 +252,6 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                             Varietas(name = inputTambahVarietas)
                         db.insertVarietas(vari)
                         setSpinnerVarietas()
-                        alertDialog.dismiss()
-                    }
-                }
-                dialog.batal_tmbh_varietas.setOnClickListener{
-                    alertDialog.dismiss()
-                }
-            }
-            R.id.btn_tmbh_proses_beli -> {
-                val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
-                val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Proses")
-                dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Proses Baru"
-                val alertDialog =  builder.show()
-
-                dialog.submit_tmbh_varietas.setOnClickListener{
-                    val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
-                    val inputTambahProses = edtTambahVarietas.text.toString()
-
-                    if (inputTambahProses.isEmpty()) {
-                        edtTambahVarietas.error = "Field ini tidak boleh kosong"
-                    }else {
-                        val pros =
-                            Proses(name = inputTambahProses)
-                        db.insertProses(pros)
-                        setSpinnerProses()
                         alertDialog.dismiss()
                     }
                 }

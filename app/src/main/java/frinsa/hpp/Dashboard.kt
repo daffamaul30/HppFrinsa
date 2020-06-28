@@ -85,7 +85,9 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.card_mulai -> {
-                close()
+                if (isOpen) {
+                    close()
+                }
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_menu_mulai_produksi, null)
                 val builder = AlertDialog.Builder(this).setView(dialog)
                 val alertDialog =  builder.show()
@@ -102,12 +104,16 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.card_daftar -> {
-                close()
+                if (isOpen) {
+                    close()
+                }
                 val intent = Intent(this@Dashboard, MainDaftarProduksi::class.java)
                 startActivity(intent)
             }
             R.id.card_lanjut -> {
-                close()
+                if (isOpen) {
+                    close()
+                }
                 val intent = Intent(this@Dashboard, SubProses::class.java)
 //                val intent = Intent(this@Dashboard, TahapanProses::class.java)
                 startActivity(intent)
@@ -124,7 +130,9 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                         blk.addBlok()
                     }
                     proses_baru.setOnClickListener {
-                        //
+                        val intent = Intent(this@Dashboard, TambahProses::class.java)
+                        startActivity(intent)
+                        close()
                     }
                 }
             }
