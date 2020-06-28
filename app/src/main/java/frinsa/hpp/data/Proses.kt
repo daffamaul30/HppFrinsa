@@ -10,20 +10,20 @@ class Proses {
     lateinit var context: Context
     private lateinit var db: DBPanen
 
-    constructor(name: String, step: String) {
-        this.name = name
-        this.step = step
-    }
-
     constructor(context: Context) {
         this.context = context
         db = DBPanen(this.context)
     }
 
+    constructor(name: String, step: String) {
+        this.name = name
+        this.step = step
+    }
+
     constructor(){}
 
-    private fun addProses() {
-        val proses = Proses(this.name, this.step)
+    fun addProses(name: String, step: String) {
+        val proses = Proses(name, step)
         db.insertProses(proses)
     }
 }

@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import frinsa.hpp.data.Proses
 import frinsa.hpp.data.Varietas
 import kotlinx.android.synthetic.main.activity_tambah_proses.*
 import kotlinx.android.synthetic.main.activity_tambah_proses.view.*
 import kotlinx.android.synthetic.main.dialog_help_proses_baru.view.*
+import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.*
 import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.view.*
+import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.view.nama_proses
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.batal_tmbh_varietas
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.submit_tmbh_varietas
@@ -22,22 +25,9 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
     private val urut: MutableList<Any> = ArrayList()
     private var daftarStep = mapOf<String, String>().toMutableMap()
     val lis: MutableList<Any> = ArrayList()
+    private lateinit var pros: Proses
 
     private lateinit var spinUrutan: String
-
-    private lateinit var cbPetik: String
-    private lateinit var cbFermentasi: String
-    private lateinit var cbTransportasi: String
-    private lateinit var cbPulping1: String
-    private lateinit var cbPulping2: String
-    private lateinit var cbJemurKadarAir: String
-    private lateinit var cbJemur1: String
-    private lateinit var cbJemur2: String
-    private lateinit var cbHulling: String
-    private lateinit var cbSutonGrader: String
-    private lateinit var cbSizeGrading: String
-    private lateinit var cbColorSorter: String
-    private lateinit var cbHandPick: String
 
     private lateinit var spinPetik: String
     private lateinit var spinFermentasi: String
@@ -375,12 +365,12 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
                     val alertDialog =  builder.show()
 
                     dialog.submit_tmbh_varietas.setOnClickListener{
-                        val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
-                        val inputTambahVarietas = edtTambahVarietas.text.toString()
-
                         //Insert to DB
+                        pros = Proses(this)
+                        pros.addProses(edt_dialog_tmbh_proses2.text.toString(), step)
 
                         alertDialog.dismiss()
+                        finish()
                     }
                     dialog.batal_tmbh_varietas.setOnClickListener{
                         alertDialog.dismiss()

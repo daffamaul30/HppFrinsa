@@ -237,6 +237,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 var proses = Proses()
                 proses.id = result.getString(result.getColumnIndex(COL_ID)).toInt()
                 proses.name = result.getString(result.getColumnIndex(COL_NAME))
+                proses.step = result.getString(result.getColumnIndex(COL_STEP))
                 list.add(proses)
             }while (result.moveToNext())
         }
