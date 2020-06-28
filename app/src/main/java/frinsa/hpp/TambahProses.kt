@@ -7,14 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import frinsa.hpp.data.Varietas
 import kotlinx.android.synthetic.main.activity_tambah_proses.*
+import kotlinx.android.synthetic.main.activity_tambah_proses.view.*
 import kotlinx.android.synthetic.main.dialog_help_proses_baru.view.*
+import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.view.*
+import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
+import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.batal_tmbh_varietas
+import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.submit_tmbh_varietas
 
 class TambahProses : AppCompatActivity(), View.OnClickListener {
     private var context = this
     private var urutan = Array(11, { i -> i+1})
     private val urut: MutableList<Any> = ArrayList()
     private var daftarStep = mapOf<String, String>().toMutableMap()
+    val lis: MutableList<Any> = ArrayList()
 
     private lateinit var spinUrutan: String
 
@@ -306,7 +313,6 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
 
     private fun mapToString(step: MutableMap<String, String>): String {
         var stepString: String = ""
-        val lis: MutableList<Any> = ArrayList()
         if (step.size >= 7) {
             for (i in 1 until step.size+1) {
                 lis.add(step.getValue(i.toString()).toString())
@@ -353,7 +359,32 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
             R.id.submit_tmbh_proses -> {
                 val (step,valid) = getStep()
                 if (valid && step.isNotEmpty()) {
+                    var i = 1
+                    var stringBuilder = StringBuilder()
+                    lis.forEach {
+                        stringBuilder.append("$i " + it).append("\n")
+                        i += 1
+                    }
+                    lis.clear()
 
+                    val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit_tmbh_proses,null)
+                    val builder = AlertDialog.Builder(this).setView(dialog).setTitle("PERIKSA KEMBALI!")
+                    dialog.nama_proses.text = "Nama Proses : " + edt_dialog_tmbh_proses2.text.toString()
+                    dialog.daftarStep.text = stringBuilder.toString()
+
+                    val alertDialog =  builder.show()
+
+                    dialog.submit_tmbh_varietas.setOnClickListener{
+                        val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
+                        val inputTambahVarietas = edtTambahVarietas.text.toString()
+
+                        //Insert to DB
+
+                        alertDialog.dismiss()
+                    }
+                    dialog.batal_tmbh_varietas.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
                 }
 
             }
