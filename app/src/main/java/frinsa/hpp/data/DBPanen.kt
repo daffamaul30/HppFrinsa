@@ -15,7 +15,7 @@ val TABLE_PROSES="Proses"
 val COL_NAME = "name"
 val COL_ID = "id"
 val COL_STEP = "step"
-//Produksi
+//Produksi_lama
 val COL_ID_PANEN = "id_panen"
 val TABLE_PANEN = "Panen"
 val COL_TGL = "tanggal"
@@ -31,7 +31,27 @@ val COL_BERAT = "berat"
 val COL_ONGKOS_PETIK_ATAU_HARGA_CERI = "ongkos_atau_harga"
 val COL_OJEK = "ojek"
 val COL_ONGKOS_CUCI = "ongkos_cuci"
-
+//Produksi
+val TABLE_PRODUKSI = "Produksi"
+val COL_ID_PRODUKSI = "id_Produksi"
+val COL_TANGGAL = "Tanggal"
+val COL_SUMBER = "Sumber"
+val COL_BELI_DARI = "Beli_dari"
+val COL_BENTUK ="Bentuk"
+val COL_VARI = "Varietas"
+val COL_BLOKP = "Blok"
+val COL_BERAT_PRODUKSI = "Berat"
+val COL_PROSES_PRODUKSI = "Proses"
+val COL_STATUS_PRODUKSI = "status"
+//Petik
+val TABLE_PETIK = "Petik"
+val COL_ID_PETIK = "Id_petik"
+val COL_ID_PETIK_PANEN = "Id_panen"
+val COL_TGL_PETIK = "Tanggal"
+val COL_BERAT_PETIK = "Berat"
+val COL_BIAYA_PETIK = "Biaya_petik"
+val COL_BIAYA_OJEK = "Biaya_ojek"
+val COL_BIAYA_CUCI = "Biaya_cuci"
 
 class DBPanen(var context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME, null, 1) {
@@ -51,6 +71,25 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             COL_OJEK + " INTEGER, " +
             COL_ONGKOS_CUCI + " INTEGER, " +
             " FOREIGN KEY ("+ COL_ID2 +") REFERENCES "+ TABLE_PANEN +"("+ COL_ID_PANEN +"))"
+    val createTableProduksi = "CREATE TABLE" + TABLE_PRODUKSI + "(" +
+            COL_ID_PRODUKSI + "INTEGER PRIMARY KEY AUTOINCREMENT, "+
+            COL_TANGGAL + "DATE, "+
+            COL_SUMBER + "VARCHAR(30), "+
+            COL_BELI_DARI + "INTEGER, "+
+            COL_BENTUK + "VARCHAR(30), "+
+            COL_VARI + "VARCHAR(30)" +
+            COL_BLOKP + "VARCHAR(30), "+
+            COL_BERAT_PRODUKSI + "REAL, " +
+            COL_PROSES_PRODUKSI+ "VARCHAR(30), " +
+            COL_STATUS_PRODUKSI+ "VARCHAR(30) )"
+    val createTablePetik = "CREATE TABLE" + TABLE_PETIK + "("+
+            COL_ID_PETIK + "INTEGER PRIMARY KEY AUTOINCREMENT, "+
+            COL_ID_PETIK_PANEN + "INTEGER, "+
+            COL_TGL_PETIK + "DATE, "+
+            COL_BERAT_PETIK + "REAL, "+
+            COL_BIAYA_PETIK+"REAL, "+
+            COL_BIAYA_OJEK+"REAL, "+
+            COL_BIAYA_CUCI+"REAL )"
 
     fun createTableSpinner(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
             COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import frinsa.hpp.data.Proses
 import frinsa.hpp.data.Varietas
 import kotlinx.android.synthetic.main.activity_tambah_proses.*
 import kotlinx.android.synthetic.main.activity_tambah_proses.view.*
 import kotlinx.android.synthetic.main.dialog_help_proses_baru.view.*
+import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.*
 import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.batal_tmbh_varietas
@@ -358,6 +360,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
             }
             R.id.submit_tmbh_proses -> {
                 val (step,valid) = getStep()
+                print(step)
                 if (valid && step.isNotEmpty()) {
                     var i = 1
                     var stringBuilder = StringBuilder()
@@ -374,15 +377,16 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
 
                     val alertDialog =  builder.show()
 
-                    dialog.submit_tmbh_varietas.setOnClickListener{
-                        val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
-                        val inputTambahVarietas = edtTambahVarietas.text.toString()
+                    dialog.submit_tmbh_proses.setOnClickListener{
+//                        val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
+//                        val inputTambahVarietas = edtTambahVarietas.text.toString()
 
                         //Insert to DB
-
+                        val pros = Proses(context)
+                        pros.addProses(nama_proses.text.toString(), step)
                         alertDialog.dismiss()
                     }
-                    dialog.batal_tmbh_varietas.setOnClickListener{
+                    dialog.batal_tmbh_proses.setOnClickListener{
                         alertDialog.dismiss()
                     }
                 }
