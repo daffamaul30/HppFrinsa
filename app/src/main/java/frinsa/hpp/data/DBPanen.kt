@@ -15,22 +15,6 @@ val TABLE_PROSES="Proses"
 val COL_NAME = "name"
 val COL_ID = "id"
 val COL_STEP = "step"
-//Produksi_lama
-val COL_ID_PANEN = "id_panen"
-val TABLE_PANEN = "Panen"
-val COL_TGL = "tanggal"
-val COL_VARIETAS = "varietas"
-val COL_BLOK = "blok"
-val COL_KOLEKTIF = "kolektif_dari"
-val COL_PROSES = "tipe_proses"
-//Cherry
-val TABLE_CHERRY = "Cherry"
-val COL_ID_CHERRY = "Cherry"
-val COL_ID2 = "id_panen"
-val COL_BERAT = "berat"
-val COL_ONGKOS_PETIK_ATAU_HARGA_CERI = "ongkos_atau_harga"
-val COL_OJEK = "ojek"
-val COL_ONGKOS_CUCI = "ongkos_cuci"
 //Produksi
 val TABLE_PRODUKSI = "Produksi"
 val COL_ID_PRODUKSI = "id_Produksi"
@@ -55,41 +39,28 @@ val COL_BIAYA_CUCI = "Biaya_cuci"
 
 class DBPanen(var context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME, null, 1) {
-    val createTablePanen = "CREATE TABLE " + TABLE_PANEN + "(" +
-            COL_ID_PANEN + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COL_TGL + " DATE, " +
-            COL_VARIETAS + " VARCHAR(30), " +
-            COL_BLOK + " VARCHAR(30), " +
-            COL_PROSES + " VARCHAR(50), " +
-            COL_STATUS + " VARCHAR(20) NOT NULL DEFAULT 'cherry')"
 
-    val createTableCherry = "CREATE TABLE " + TABLE_CHERRY + "(" +
-            COL_ID_CHERRY + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COL_ID2 + " INTEGER, " +
-            COL_BERAT + " REAL, " +
-            COL_ONGKOS_PETIK_ATAU_HARGA_CERI + " INTEGER, " +
-            COL_OJEK + " INTEGER, " +
-            COL_ONGKOS_CUCI + " INTEGER, " +
-            " FOREIGN KEY ("+ COL_ID2 +") REFERENCES "+ TABLE_PANEN +"("+ COL_ID_PANEN +"))"
     val createTableProduksi = "CREATE TABLE" + TABLE_PRODUKSI + "(" +
-            COL_ID_PRODUKSI + "INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            COL_TANGGAL + "DATE, "+
-            COL_SUMBER + "VARCHAR(30), "+
-            COL_BELI_DARI + "INTEGER, "+
-            COL_BENTUK + "VARCHAR(30), "+
+            COL_ID_PRODUKSI + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_TANGGAL + "DATE, " +
+            COL_SUMBER + "VARCHAR(30), " +
+            COL_BELI_DARI + "INTEGER, " +
+            COL_BENTUK + "VARCHAR(30), " +
             COL_VARI + "VARCHAR(30)" +
-            COL_BLOKP + "VARCHAR(30), "+
+            COL_BLOKP + "VARCHAR(30), " +
             COL_BERAT_PRODUKSI + "REAL, " +
             COL_PROSES_PRODUKSI+ "VARCHAR(30), " +
             COL_STATUS_PRODUKSI+ "VARCHAR(30) )"
-    val createTablePetik = "CREATE TABLE" + TABLE_PETIK + "("+
-            COL_ID_PETIK + "INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            COL_ID_PETIK_PANEN + "INTEGER, "+
-            COL_TGL_PETIK + "DATE, "+
-            COL_BERAT_PETIK + "REAL, "+
-            COL_BIAYA_PETIK+"REAL, "+
-            COL_BIAYA_OJEK+"REAL, "+
-            COL_BIAYA_CUCI+"REAL )"
+
+    val createTablePetik = "CREATE TABLE" + TABLE_PETIK + "(" +
+            COL_ID_PETIK + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_ID_PETIK_PANEN + "INTEGER, " +
+            COL_TGL_PETIK + "DATE, " +
+            COL_BERAT_PETIK + "REAL, " +
+            COL_BIAYA_PETIK+"REAL, " +
+            COL_BIAYA_OJEK+"REAL, " +
+            COL_BIAYA_CUCI+"REAL, " +
+            " FOREIGN KEY ("+ COL_ID_PETIK_PANEN +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
 
     fun createTableSpinner(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
             COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -106,8 +77,8 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         db?.execSQL(createTableSpinner(TABLE_VARIETAS))
         db?.execSQL(createTableSpinner(TABLE_BLOK))
         db?.execSQL(createTableProses(TABLE_PROSES))
-        db?.execSQL(createTablePanen)
-        db?.execSQL(createTableCherry)
+        db?.execSQL(createTableProduksi)
+        db?.execSQL(createTablePetik)
 
     }
 
@@ -115,79 +86,81 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_VARIETAS)
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_BLOK)
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PROSES)
-        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PANEN)
-        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_CHERRY)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PRODUKSI)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PETIK)
         onCreate(db)
     }
 
-    fun insertPanen(p: Panen, c: Cherry) {
-        val db = this.writableDatabase
+//    fun insertPanen(p: Panen, c: Cherry) {
+//        val db = this.writableDatabase
+//
+//        //Tabel Panen
+//        var cvP = ContentValues()
+//
+//        cvP.put(COL_TGL, p.tanggal)
+//        cvP.put(COL_VARIETAS, p.varietas)
+//        cvP.put(COL_BLOK, p.blok)
+//        cvP.put(COL_PROSES, p.proses)
+//        var resultP = db.insert(TABLE_PANEN, null, cvP)
+//
+//        //Tabel Cherry
+//        val idPanen = getId(TABLE_PANEN)
+//        var cvC = ContentValues()
+//        cvC.put(COL_ID2, idPanen)
+//        cvC.put(COL_BERAT, c.berat)
+//        cvC.put(COL_ONGKOS_PETIK_ATAU_HARGA_CERI, c.ongkosPetik_atau_hargaCeri)
+//        cvC.put(COL_OJEK, c.ojek)
+//        cvC.put(COL_ONGKOS_CUCI, c.ongkosCuci)
+//        var resultC = db.insert(TABLE_CHERRY, null, cvC)
+//
+//        if ((resultP == -1.toLong()) || (resultC == -1.toLong())) {
+//            println(resultP)
+//            println(resultC)
+//            toastMessage("Gagal")
+//        }else {
+//            toastMessage("Berhasil")
+//        }
+//    }
 
-        //Tabel Panen
-        var cvP = ContentValues()
+//    fun getPanen(): Pair<MutableList<Panen>, MutableList<Cherry>> {
+//        var daftarPanen: MutableList<Panen> = ArrayList()
+//        var daftarCheri: MutableList<Cherry> = ArrayList()
+//        val db = this.readableDatabase
+//        val result = db.rawQuery("SELECT * FROM $TABLE_PANEN JOIN $TABLE_CHERRY ON " + TABLE_CHERRY + "." + COL_ID_CHERRY  +"="  + TABLE_PANEN + "." + COL_ID_PANEN, null)
+//        if (result.moveToFirst()) {
+//            do {
+//                var panen = Panen()
+//                panen.id = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
+//                panen.tanggal = result.getString(result.getColumnIndex(COL_TGL))
+//                panen.varietas = result.getString(result.getColumnIndex(COL_VARIETAS))
+//                panen.blok = result.getString(result.getColumnIndex(COL_BLOK))
+//                panen.proses = result.getString(result.getColumnIndex(COL_PROSES))
+//                panen.status = result.getString(result.getColumnIndex(COL_STATUS))
+//
+//                var cheri = Cherry()
+//                cheri.id = result.getString(result.getColumnIndex(COL_ID_CHERRY)).toInt()
+//                cheri.id2 = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
+//                cheri.berat = result.getString(result.getColumnIndex(COL_BERAT)).toDouble()
+//                cheri.ongkosPetik_atau_hargaCeri = result.getString(result.getColumnIndex(COL_ONGKOS_PETIK_ATAU_HARGA_CERI)).toInt()
+//                cheri.ojek = result.getString(result.getColumnIndex(COL_OJEK)).toInt()
+//                cheri.ongkosCuci = result.getString(result.getColumnIndex(COL_ONGKOS_CUCI)).toInt()
+//
+//                daftarPanen.add(panen)
+//                daftarCheri.add(cheri)
+//            }while (result.moveToNext())
+//        }
+//        result.close()
+//        db.close()
+//        return Pair(daftarPanen,daftarCheri)
+//    }
 
-        cvP.put(COL_TGL, p.tanggal)
-        cvP.put(COL_VARIETAS, p.varietas)
-        cvP.put(COL_BLOK, p.blok)
-        cvP.put(COL_PROSES, p.proses)
-        var resultP = db.insert(TABLE_PANEN, null, cvP)
 
-        //Tabel Cherry
-        val idPanen = getId(TABLE_PANEN)
-        var cvC = ContentValues()
-        cvC.put(COL_ID2, idPanen)
-        cvC.put(COL_BERAT, c.berat)
-        cvC.put(COL_ONGKOS_PETIK_ATAU_HARGA_CERI, c.ongkosPetik_atau_hargaCeri)
-        cvC.put(COL_OJEK, c.ojek)
-        cvC.put(COL_ONGKOS_CUCI, c.ongkosCuci)
-        var resultC = db.insert(TABLE_CHERRY, null, cvC)
 
-        if ((resultP == -1.toLong()) || (resultC == -1.toLong())) {
-            println(resultP)
-            println(resultC)
-            toastMessage("Gagal")
-        }else {
-            toastMessage("Berhasil")
-        }
-    }
-
-    fun getPanen(): Pair<MutableList<Panen>, MutableList<Cherry>> {
-        var daftarPanen: MutableList<Panen> = ArrayList()
-        var daftarCheri: MutableList<Cherry> = ArrayList()
-        val db = this.readableDatabase
-        val result = db.rawQuery("SELECT * FROM $TABLE_PANEN JOIN $TABLE_CHERRY ON " + TABLE_CHERRY + "." + COL_ID_CHERRY  +"="  + TABLE_PANEN + "." + COL_ID_PANEN, null)
-        if (result.moveToFirst()) {
-            do {
-                var panen = Panen()
-                panen.id = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
-                panen.tanggal = result.getString(result.getColumnIndex(COL_TGL))
-                panen.varietas = result.getString(result.getColumnIndex(COL_VARIETAS))
-                panen.blok = result.getString(result.getColumnIndex(COL_BLOK))
-                panen.proses = result.getString(result.getColumnIndex(COL_PROSES))
-                panen.status = result.getString(result.getColumnIndex(COL_STATUS))
-
-                var cheri = Cherry()
-                cheri.id = result.getString(result.getColumnIndex(COL_ID_CHERRY)).toInt()
-                cheri.id2 = result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
-                cheri.berat = result.getString(result.getColumnIndex(COL_BERAT)).toDouble()
-                cheri.ongkosPetik_atau_hargaCeri = result.getString(result.getColumnIndex(COL_ONGKOS_PETIK_ATAU_HARGA_CERI)).toInt()
-                cheri.ojek = result.getString(result.getColumnIndex(COL_OJEK)).toInt()
-                cheri.ongkosCuci = result.getString(result.getColumnIndex(COL_ONGKOS_CUCI)).toInt()
-
-                daftarPanen.add(panen)
-                daftarCheri.add(cheri)
-            }while (result.moveToNext())
-        }
-        result.close()
-        db.close()
-        return Pair(daftarPanen,daftarCheri)
-    }
-
-    fun getId(TABLE_NAME: String): Int {
+    fun getIdProduksi(TABLE_NAME: String): Int {
         val db = this.readableDatabase
         val result = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
         result.moveToLast()
-        return result.getString(result.getColumnIndex(COL_ID_PANEN)).toInt()
+        return result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
     }
 
     fun insertVarietas(v: Varietas) {
