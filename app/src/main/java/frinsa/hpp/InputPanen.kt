@@ -337,7 +337,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                             ojek = edtOjek.toInt(),
                             ongkosCuci = edtOngkosCuci.toInt()
                         )
-                        db.insertPanen(data,cheri)
+//                        db.insertPanen(data,cheri)
 
                         //test getData
 //                        val (panen,ceri) = db.getPanen()
