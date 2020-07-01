@@ -4,8 +4,8 @@ import android.content.Context
 import android.widget.Toast
 
 class Produk {
-//    private lateinit var petik : Petik
-//    private lateinit var produksi : Produksi
+    private lateinit var petik : Petik
+    private lateinit var produksi : Produksi
 
     lateinit var context: Context
     private lateinit var db: DBPanen
@@ -13,6 +13,11 @@ class Produk {
     constructor(context: Context){
         this.context = context
         db = DBPanen(this.context)
+    }
+
+    constructor(produksi: Produksi, petik: Petik) {
+        this.produksi = produksi
+        this.petik = petik
     }
 
     constructor(){}

@@ -349,7 +349,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         produk.insertPanen(produksi, petik)
 
                         //TEST GET DATA
-                        
+                        val panen = produk.readPanen()
+                        if (panen.size)
 
                         //test getData
 //                        val (panen,ceri) = db.getPanen()
