@@ -291,7 +291,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
                 isEmptySpin = true
             }
         }
-        println(daftarStep)
+//        println(daftarStep)
         if (!isEmptySpin && !isEmptyFields) {
             valid = true
             step = mapToString(daftarStep)
@@ -309,7 +309,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
             }
             stepString = lis.joinToString(separator= ",")
         }
-        println(stepString)
+//        println(stepString)
         return stepString
     }
 
@@ -348,7 +348,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
             }
             R.id.submit_tmbh_proses -> {
                 val (step,valid) = getStep()
-                print(step)
+//                print(step)
                 if (valid && step.isNotEmpty()) {
                     var i = 1
                     var stringBuilder = StringBuilder()
