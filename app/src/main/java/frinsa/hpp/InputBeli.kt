@@ -285,14 +285,14 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                         val biaya = edtHargaBeli.toInt() + ongkosCuci
                         var status : String =""
                         when(terpilih){
-                            "ceri" -> {
+                            "Ceri" -> {
                                 status= "petik"
                             }
-                            "gabah" -> {
+                            "Gabah" -> {
                                 status = ""
                             }
-                            "asalan" -> {
-                                status =""
+                            "Asalan" -> {
+                                status = ""
                             }
                         }
                         //INSERT TO DATABASE
@@ -304,13 +304,6 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                             blok = edtBlok,
                             proses = proses,
                             status = status
-//                            when(terpilih){
-//                                "ceri" -> "petik"
-//                                "asalan" -> "asalan"
-//                                "gabah" -> "gabah"
-//                                else ->""
-//                            }
-//                            status = "ceri" + "gabah" + "asalan"
                         )
                         val petik = Petik(
                             tgl_petik = tvTanggal,
