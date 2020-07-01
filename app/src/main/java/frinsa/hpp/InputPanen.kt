@@ -43,6 +43,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     private lateinit var vari: Varietas
     private lateinit var blk: Blok
     private lateinit var pros: Proses
+    private lateinit var produk: Produk
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         blk = Blok(context)
         //CREATE PROSES OBJECT
         pros = Proses(context)
+        //CREATE PRODUK OBJECT
+        produk = Produk(context)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -325,19 +328,28 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         val biaya = edtOngkosPetik.toInt() + edtOjek.toInt() + edtOngkosCuci.toInt()
 
                         //INSERT TO DATABASE
-                        val data = Panen(
-                            tanggal = tvTanggal,
+                        val produksi = Produksi(
+                            sumber = "Panen",
+                            beli_dari = "-",
+                            bentuk = "ceri",
                             varietas = spinVarietas,
                             blok = spinBlok,
-                            proses = proses
+                            proses = proses,
+                            status = "petik"
                         )
-                        val cheri = Cherry(
+                        val petik = Petik(
+                            tgl_petik = tvTanggal,
                             berat = edtBerat.toDouble(),
-                            ongkosPetik_atau_hargaCeri = edtOngkosPetik.toInt(),
-                            ojek = edtOjek.toInt(),
-                            ongkosCuci = edtOngkosCuci.toInt()
+                            biaya_petik = edtOngkosPetik.toInt(),
+                            biaya_ojek = edtOjek.toInt(),
+                            biaya_cuci = edtOngkosCuci.toInt()
                         )
-//                        db.insertPanen(data,cheri)
+
+                        //INSERT DATA TO DB
+                        produk.insertPanen(produksi, petik)
+
+                        //TEST GET DATA
+                        
 
                         //test getData
 //                        val (panen,ceri) = db.getPanen()

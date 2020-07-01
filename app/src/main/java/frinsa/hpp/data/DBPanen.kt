@@ -15,16 +15,16 @@ val TABLE_PROSES="Proses"
 val COL_NAME = "name"
 val COL_ID = "id"
 val COL_STEP = "step"
-//Produksi
-val TABLE_PRODUKSI = "Produksi"
+//Produk
+val TABLE_PRODUKSI = "Produk"
 val COL_ID_PRODUKSI = "id_Produksi"
-val COL_TANGGAL = "Tanggal"
+//val COL_TANGGAL = "Tanggal"
 val COL_SUMBER = "Sumber"
 val COL_BELI_DARI = "Beli_dari"
 val COL_BENTUK ="Bentuk"
 val COL_VARI = "Varietas"
 val COL_BLOKP = "Blok"
-val COL_BERAT_PRODUKSI = "Berat"
+//val COL_BERAT_PRODUKSI = "Berat"
 val COL_PROSES_PRODUKSI = "Proses"
 val COL_STATUS_PRODUKSI = "status"
 //Petik
@@ -42,13 +42,13 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
     val createTableProduksi = "CREATE TABLE" + TABLE_PRODUKSI + "(" +
             COL_ID_PRODUKSI + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COL_TANGGAL + "DATE, " +
+//            COL_TANGGAL + "DATE, " +
             COL_SUMBER + "VARCHAR(30), " +
             COL_BELI_DARI + "INTEGER, " +
             COL_BENTUK + "VARCHAR(30), " +
             COL_VARI + "VARCHAR(30)" +
             COL_BLOKP + "VARCHAR(30), " +
-            COL_BERAT_PRODUKSI + "REAL, " +
+//            COL_BERAT_PRODUKSI + "REAL, " +
             COL_PROSES_PRODUKSI+ "VARCHAR(30), " +
             COL_STATUS_PRODUKSI+ "VARCHAR(30) )"
 
@@ -89,6 +89,36 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PRODUKSI)
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PETIK)
         onCreate(db)
+    }
+
+    fun insertPanen(pr: Produksi, pe: Petik): Pair<Long, Long> {
+        val db = this.writableDatabase
+
+        //Tabel Panen
+        var cvP = ContentValues()
+
+//        cvP.put(COL_TANGGAL, pr.tgl_produksi)
+        cvP.put(COL_SUMBER, pr.sumber)
+        cvP.put(COL_BELI_DARI, pr.beli_dari)
+        cvP.put(COL_BENTUK, pr.bentuk)
+        cvP.put(COL_VARI, pr.varietas)
+        cvP.put(COL_BLOKP, pr.blok)
+        cvP.put(COL_PROSES_PRODUKSI, pr.proses)
+        cvP.put(COL_STATUS_PRODUKSI, pr.status)
+        var resultPR = db.insert(TABLE_PRODUKSI, null, cvP)
+
+        //Tabel Cherry
+        val idPanen = getIdProduksi(TABLE_PRODUKSI)
+        var cvC = ContentValues()
+        cvC.put(COL_ID_PETIK, idPanen)
+        cvC.put(COL_TGL_PETIK, pe.tgl_petik)
+        cvC.put(COL_BERAT_PETIK, pe.berat)
+        cvC.put(COL_BIAYA_PETIK, pe.biaya_petik)
+        cvC.put(COL_BIAYA_OJEK, pe.biaya_ojek)
+        cvC.put(COL_BIAYA_CUCI, pe.biaya_cuci)
+        var resultPE = db.insert(TABLE_PETIK, null, cvC)
+
+        return Pair(resultPR, resultPE)
     }
 
 //    fun insertPanen(p: Panen, c: Cherry) {
