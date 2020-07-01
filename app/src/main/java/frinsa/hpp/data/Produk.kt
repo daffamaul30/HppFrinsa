@@ -4,8 +4,8 @@ import android.content.Context
 import android.widget.Toast
 
 class Produk {
-    private lateinit var petik : Petik
-    private lateinit var produksi : Produksi
+    lateinit var petik : Petik
+    lateinit var produksi : Produksi
 
     lateinit var context: Context
     private lateinit var db: DBPanen
@@ -33,8 +33,9 @@ class Produk {
         }
     }
 
-    fun readPanen() {
-
+    fun readPanen(): MutableList<Produk> {
+        val panen = db.readPanen()
+        return panen
     }
 
     fun toastMessage(text: String) {

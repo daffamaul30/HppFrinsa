@@ -121,6 +121,43 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return Pair(resultPR, resultPE)
     }
 
+    fun readPanen():  MutableList<Produk> {
+//        var daftarproduk: MutableList<Produksi> = ArrayList()
+//        var daftarpetik: MutableList<Petik> = ArrayList()
+        var  list : MutableList<Produk> = ArrayList()
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI JOIN $TABLE_PETIK ON " + TABLE_PETIK + "." + COL_ID_PETIK_PRODUKSI  +"="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI, null)
+        if (result.moveToFirst()) {
+            do {
+                var produksi = Produksi()
+                produksi.id_produksi = result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
+                produksi.sumber = result.getString(result.getColumnIndex(COL_SUMBER))
+                produksi.beli_dari = result.getString(result.getColumnIndex(COL_BELI_DARI))
+                produksi.bentuk = result.getString(result.getColumnIndex(COL_BENTUK))
+                produksi.varietas = result.getString(result.getColumnIndex(COL_VARI))
+                produksi.blok = result.getString(result.getColumnIndex(COL_BLOKP))
+                produksi.proses = result.getString(result.getColumnIndex(COL_PROSES_PRODUKSI))
+                produksi.status = result.getString(result.getColumnIndex(COL_STATUS))
+
+                var petik = Petik()
+                petik.id_petik = result.getString(result.getColumnIndex(COL_ID_PETIK)).toInt()
+                petik.id_petik_produksi = result.getString(result.getColumnIndex(COL_ID_PETIK_PRODUKSI)).toInt()
+                petik.tgl_petik = result.getString(result.getColumnIndex(COL_TGL_PETIK))
+                petik.berat = result.getString(result.getColumnIndex(COL_BERAT_PETIK)).toDouble()
+                petik.biaya_petik = result.getString(result.getColumnIndex(COL_BIAYA_PETIK)).toInt()
+                petik.biaya_ojek = result.getString(result.getColumnIndex(COL_BIAYA_OJEK)).toInt()
+                petik.biaya_cuci = result.getString(result.getColumnIndex(COL_BIAYA_CUCI)).toInt()
+//                daftarproduk.add(produksi)
+//                daftarpetik.add(petik)
+                var produk = Produk(produksi,petik)
+                list.add(produk)
+            }while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return list
+    }
+
 //    fun insertPanen(p: Panen, c: Cherry) {
 //        val db = this.writableDatabase
 //
@@ -262,43 +299,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 blok.id = result.getString(result.getColumnIndex(COL_ID)).toInt()
                 blok.name = result.getString(result.getColumnIndex(COL_NAME))
                 list.add(blok)
-            }while (result.moveToNext())
-        }
-        result.close()
-        db.close()
-        return list
-    }
-
-    fun readPanen():  MutableList<Produk> {
-//        var daftarproduk: MutableList<Produksi> = ArrayList()
-//        var daftarpetik: MutableList<Petik> = ArrayList()
-        var  list : MutableList<Produk> = ArrayList()
-        val db = this.readableDatabase
-        val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI JOIN $TABLE_PETIK ON " + TABLE_PETIK + "." + COL_ID_PETIK_PRODUKSI  +"="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI, null)
-        if (result.moveToFirst()) {
-            do {
-                var produksi = Produksi()
-                produksi.id_produksi = result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
-                produksi.sumber = result.getString(result.getColumnIndex(COL_SUMBER))
-                produksi.beli_dari = result.getString(result.getColumnIndex(COL_BELI_DARI))
-                produksi.bentuk = result.getString(result.getColumnIndex(COL_BENTUK))
-                produksi.varietas = result.getString(result.getColumnIndex(COL_VARI))
-                produksi.blok = result.getString(result.getColumnIndex(COL_BLOKP))
-                produksi.proses = result.getString(result.getColumnIndex(COL_PROSES_PRODUKSI))
-                produksi.status = result.getString(result.getColumnIndex(COL_STATUS))
-
-                var petik = Petik()
-                petik.id_petik = result.getString(result.getColumnIndex(COL_ID_PETIK)).toInt()
-                petik.id_petik_produksi = result.getString(result.getColumnIndex(COL_ID_PETIK_PRODUKSI)).toInt()
-                petik.tgl_petik = result.getString(result.getColumnIndex(COL_TGL_PETIK))
-                petik.berat = result.getString(result.getColumnIndex(COL_BERAT_PETIK)).toDouble()
-                petik.biaya_petik = result.getString(result.getColumnIndex(COL_BIAYA_PETIK)).toInt()
-                petik.biaya_ojek = result.getString(result.getColumnIndex(COL_BIAYA_OJEK)).toInt()
-                petik.biaya_cuci = result.getString(result.getColumnIndex(COL_BIAYA_CUCI)).toInt()
-//                daftarproduk.add(produksi)
-//                daftarpetik.add(petik)
-                var listProduk = Produk(produksi,petik)
-                list.add(listProduk)
             }while (result.moveToNext())
         }
         result.close()

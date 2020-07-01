@@ -350,7 +350,33 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
                         //TEST GET DATA
                         val panen = produk.readPanen()
-                        if (panen.size)
+                        if (panen.size > 0) {
+                            for (i in 0..(panen.size-1)) {
+                                if (panen.get(i).produksi.id_produksi == panen.get(i).petik.id_petik_produksi) {
+                                    println1("""
+                                        DATA KE-$i
+                                        PRODUKSI
+                                        id Produksi = ${panen.get(i).produksi.id_produksi}
+                                        sumber = ${panen.get(i).produksi.sumber}
+                                        beli dari = ${panen.get(i).produksi.beli_dari}
+                                        bentuk = ${panen.get(i).produksi.bentuk}
+                                        varietas = ${panen.get(i).produksi.varietas}
+                                        blok = ${panen.get(i).produksi.blok}
+                                        proses = ${panen.get(i).produksi.proses}
+                                        status = ${panen.get(i).produksi.status}
+                                        
+                                        PETIK
+                                        id Petik = ${panen.get(i).petik.id_petik}
+                                        id Produksi = ${panen.get(i).petik.id_petik_produksi}
+                                        tanggal Petik = ${panen.get(i).petik.tgl_petik}
+                                        berat = ${panen.get(i).petik.berat}
+                                        biaya petik = ${panen.get(i).petik.biaya_petik}
+                                        biaya ojek = ${panen.get(i).petik.biaya_ojek}
+                                        biaya cuci = ${panen.get(i).petik.biaya_cuci}
+                                    """.trimIndent())
+                                }
+                            }
+                        }
 
                         //test getData
 //                        val (panen,ceri) = db.getPanen()
