@@ -354,7 +354,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                             for (i in 0..(panen.size-1)) {
                                 if (panen.get(i).produksi.id_produksi == panen.get(i).petik.id_petik_produksi) {
                                     println1("""
-                                        DATA KE-$i
+                                        DATA KE-${i+1}
                                         PRODUKSI
                                         id Produksi = ${panen.get(i).produksi.id_produksi}
                                         sumber = ${panen.get(i).produksi.sumber}
