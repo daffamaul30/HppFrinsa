@@ -303,12 +303,13 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                             varietas = spinVarietas,
                             blok = edtBlok,
                             proses = proses,
-                            status = when(terpilih){
-                                "ceri" -> "petik"
-                                "asalan" -> "asalan"
-                                "gabah" -> "gabah"
-                                else ->""
-                            }
+                            status = status
+//                            when(terpilih){
+//                                "ceri" -> "petik"
+//                                "asalan" -> "asalan"
+//                                "gabah" -> "gabah"
+//                                else ->""
+//                            }
 //                            status = "ceri" + "gabah" + "asalan"
                         )
                         val petik = Petik(
