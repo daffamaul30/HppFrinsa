@@ -40,26 +40,26 @@ val COL_BIAYA_CUCI = "Biaya_cuci"
 class DBPanen(var context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME, null, 1) {
 
-    val createTableProduksi = "CREATE TABLE" + TABLE_PRODUKSI + "(" +
-            COL_ID_PRODUKSI + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
+    val createTableProduksi = "CREATE TABLE " + TABLE_PRODUKSI + "(" +
+            COL_ID_PRODUKSI + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 //            COL_TANGGAL + "DATE, " +
-            COL_SUMBER + "VARCHAR(30), " +
-            COL_BELI_DARI + "INTEGER, " +
-            COL_BENTUK + "VARCHAR(30), " +
-            COL_VARI + "VARCHAR(30)" +
-            COL_BLOKP + "VARCHAR(30), " +
+            COL_SUMBER + " VARCHAR(30), " +
+            COL_BELI_DARI + " INTEGER, " +
+            COL_BENTUK + " VARCHAR(30), " +
+            COL_VARI + " VARCHAR(30), " +
+            COL_BLOKP + " VARCHAR(30), " +
 //            COL_BERAT_PRODUKSI + "REAL, " +
-            COL_PROSES_PRODUKSI+ "VARCHAR(30), " +
-            COL_STATUS_PRODUKSI+ "VARCHAR(30) )"
+            COL_PROSES_PRODUKSI+ " VARCHAR(30), " +
+            COL_STATUS_PRODUKSI+ " VARCHAR(30) )"
 
-    val createTablePetik = "CREATE TABLE" + TABLE_PETIK + "(" +
-            COL_ID_PETIK + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COL_ID_PETIK_PRODUKSI + "INTEGER, " +
-            COL_TGL_PETIK + "DATE, " +
-            COL_BERAT_PETIK + "REAL, " +
-            COL_BIAYA_PETIK+"REAL, " +
-            COL_BIAYA_OJEK+"REAL, " +
-            COL_BIAYA_CUCI+"REAL, " +
+    val createTablePetik = "CREATE TABLE " + TABLE_PETIK + "(" +
+            COL_ID_PETIK + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_ID_PETIK_PRODUKSI + " INTEGER, " +
+            COL_TGL_PETIK + " DATE, " +
+            COL_BERAT_PETIK + " REAL, " +
+            COL_BIAYA_PETIK + " REAL, " +
+            COL_BIAYA_OJEK + " REAL, " +
+            COL_BIAYA_CUCI + " REAL, " +
             " FOREIGN KEY ("+ COL_ID_PETIK_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
 
     fun createTableSpinner(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
