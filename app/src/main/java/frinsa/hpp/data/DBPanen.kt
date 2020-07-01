@@ -16,26 +16,26 @@ val COL_NAME = "name"
 val COL_ID = "id"
 val COL_STEP = "step"
 //Produk
-val TABLE_PRODUKSI = "Produk"
+val TABLE_PRODUKSI = "Produksi"
 val COL_ID_PRODUKSI = "id_Produksi"
 //val COL_TANGGAL = "Tanggal"
-val COL_SUMBER = "Sumber"
-val COL_BELI_DARI = "Beli_dari"
-val COL_BENTUK ="Bentuk"
-val COL_VARI = "Varietas"
-val COL_BLOKP = "Blok"
+val COL_SUMBER = "sumber"
+val COL_BELI_DARI = "beli_dari"
+val COL_BENTUK ="bentuk"
+val COL_VARI = "varietas"
+val COL_BLOKP = "blok"
 //val COL_BERAT_PRODUKSI = "Berat"
-val COL_PROSES_PRODUKSI = "Proses"
+val COL_PROSES_PRODUKSI = "proses"
 val COL_STATUS_PRODUKSI = "status"
 //Petik
 val TABLE_PETIK = "Petik"
-val COL_ID_PETIK = "Id_petik"
-val COL_ID_PETIK_PRODUKSI = "Id_panen"
-val COL_TGL_PETIK = "Tanggal"
-val COL_BERAT_PETIK = "Berat"
-val COL_BIAYA_PETIK = "Biaya_petik"
-val COL_BIAYA_OJEK = "Biaya_ojek"
-val COL_BIAYA_CUCI = "Biaya_cuci"
+val COL_ID_PETIK = "id_petik"
+val COL_ID_PETIK_PRODUKSI = "id_produksi"
+val COL_TGL_PETIK = "tanggal"
+val COL_BERAT_PETIK = "berat"
+val COL_BIAYA_PETIK = "biaya_petik"
+val COL_BIAYA_OJEK = "biaya_ojek"
+val COL_BIAYA_CUCI = "biaya_cuci"
 
 class DBPanen(var context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME, null, 1) {
@@ -60,7 +60,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             COL_BIAYA_PETIK + " REAL, " +
             COL_BIAYA_OJEK + " REAL, " +
             COL_BIAYA_CUCI + " REAL, " +
-            " FOREIGN KEY ("+ COL_ID_PETIK_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
+            "FOREIGN KEY ("+ COL_ID_PETIK_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
 
     fun createTableSpinner(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
             COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -108,9 +108,9 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         var resultPR = db.insert(TABLE_PRODUKSI, null, cvP)
 
         //Tabel Cherry
-        val idPanen = getIdProduksi(TABLE_PRODUKSI)
+        val idProduksi = getIdProduksi(TABLE_PRODUKSI)
         var cvC = ContentValues()
-        cvC.put(COL_ID_PETIK, idPanen)
+        cvC.put(COL_ID_PETIK_PRODUKSI, idProduksi)
         cvC.put(COL_TGL_PETIK, pe.tgl_petik)
         cvC.put(COL_BERAT_PETIK, pe.berat)
         cvC.put(COL_BIAYA_PETIK, pe.biaya_petik)
@@ -126,7 +126,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 //        var daftarpetik: MutableList<Petik> = ArrayList()
         var  list : MutableList<Produk> = ArrayList()
         val db = this.readableDatabase
-        val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI JOIN $TABLE_PETIK ON " + TABLE_PETIK + "." + COL_ID_PETIK_PRODUKSI  +"="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI, null)
+        val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI JOIN $TABLE_PETIK ON " + TABLE_PETIK + "." + COL_ID_PETIK_PRODUKSI + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI, null)
         if (result.moveToFirst()) {
             do {
                 var produksi = Produksi()
