@@ -52,7 +52,7 @@ class Produk {
                                         blok = ${panen.get(i).produksi.blok}
                                         proses = ${panen.get(i).produksi.proses}
                                         status = ${panen.get(i).produksi.status}
-                                        
+                                        \n
                                         PETIK
                                         id Petik = ${panen.get(i).petik.id_petik}
                                         id Produksi = ${panen.get(i).petik.id_petik_produksi}

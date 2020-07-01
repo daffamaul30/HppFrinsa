@@ -60,7 +60,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             COL_BIAYA_PETIK + " REAL, " +
             COL_BIAYA_OJEK + " REAL, " +
             COL_BIAYA_CUCI + " REAL, " +
-            " FOREIGN KEY ("+ COL_ID_PETIK_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
+            "FOREIGN KEY ("+ COL_ID_PETIK_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
 
     fun createTableSpinner(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
             COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -110,7 +110,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         //Tabel Cherry
         val idProduksi = getIdProduksi(TABLE_PRODUKSI)
         var cvC = ContentValues()
-        cvC.put(COL_ID_PETIK, idProduksi)
+        cvC.put(COL_ID_PETIK_PRODUKSI, idProduksi)
         cvC.put(COL_TGL_PETIK, pe.tgl_petik)
         cvC.put(COL_BERAT_PETIK, pe.berat)
         cvC.put(COL_BIAYA_PETIK, pe.biaya_petik)
@@ -118,11 +118,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cvC.put(COL_BIAYA_CUCI, pe.biaya_cuci)
         var resultPE = db.insert(TABLE_PETIK, null, cvC)
 
-        println("""
-            id produksi =
-            id petik produksi =
-            id petik =
-        """.trimIndent())
         return Pair(resultPR, resultPE)
     }
 
@@ -131,9 +126,8 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 //        var daftarpetik: MutableList<Petik> = ArrayList()
         var  list : MutableList<Produk> = ArrayList()
         val db = this.readableDatabase
-        val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI JOIN $TABLE_PETIK ON " + TABLE_PETIK + "." + COL_ID_PETIK_PRODUKSI  + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI, null)
+        val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI JOIN $TABLE_PETIK ON " + TABLE_PETIK + "." + COL_ID_PETIK_PRODUKSI + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI, null)
         if (result.moveToFirst()) {
-            print("MASOK")
             do {
                 var produksi = Produksi()
                 produksi.id_produksi = result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
@@ -161,7 +155,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         }
         result.close()
         db.close()
-        println(list)
         return list
     }
 
