@@ -45,6 +45,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
     private lateinit var db: DBPanen
     private lateinit var vari: Varietas
     private lateinit var pros: Proses
+    private lateinit var produk: Produk
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
         vari = Varietas(context)
         //CREATE PROSES OBJECT
         pros = Proses(context)
+        //CREATE PRODUK OBJECT
+        produk = Produk(context)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -280,9 +283,41 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                         val proses = if (isiNanti) "-" else spinProses
                         val ongkosCuci = if (edtOngkosCuci.isEmpty()) 0 else edtOngkosCuci.toInt()
                         val biaya = edtHargaBeli.toInt() + ongkosCuci
-
+                        var status : String =""
+                        when(terpilih){
+                            "ceri" -> {
+                                status= "petik"
+                            }
+                            "gabah" -> {
+                                status = ""
+                            }
+                            "asalan" -> {
+                                status =""
+                            }
+                        }
                         //INSERT TO DATABASE
-
+                        val produksi = Produksi(
+                            sumber = "Beli",
+                            beli_dari = edtKolektif,
+                            bentuk = terpilih,
+                            varietas = spinVarietas,
+                            blok = edtBlok,
+                            proses = proses,
+                            status = when(terpilih){
+                                "ceri" -> "petik"
+                                "asalan" -> "asalan"
+                                "gabah" -> "gabah"
+                                else ->""
+                            }
+//                            status = "ceri" + "gabah" + "asalan"
+                        )
+                        val petik = Petik(
+                            tgl_petik = tvTanggal,
+                            berat = edtBerat.toDouble(),
+                            biaya_petik = edtHargaBeli.toInt(),
+                            biaya_cuci = ongkosCuci
+                        )
+                        produk.insertPanen(produksi, petik)
                         //test getData
 
                         //Intent menggunakan putextra
