@@ -366,7 +366,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
                     val alertDialog =  builder.show()
 
                     dialog.submit_tmbh_proses_dialog.setOnClickListener{
-                        //Insert to DB
+                        //Insert to DB COK
                         pros = Proses(this)
                         pros.addProses(edt_dialog_tmbh_proses2.text.toString(), step)
 
