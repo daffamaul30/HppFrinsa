@@ -12,6 +12,7 @@ import frinsa.hpp.data.Varietas
 import kotlinx.android.synthetic.main.activity_tambah_proses.*
 import kotlinx.android.synthetic.main.activity_tambah_proses.view.*
 import kotlinx.android.synthetic.main.dialog_help_proses_baru.view.*
+import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.*
 import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.view.*
 import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.view.nama_proses
@@ -365,7 +366,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
 
                     val alertDialog =  builder.show()
 
-                    dialog.submit_tmbh_varietas.setOnClickListener{
+                    dialog.submit_tmbh_proses.setOnClickListener{
                         //Insert to DB
                         pros = Proses(this)
                         pros.addProses(edt_dialog_tmbh_proses2.text.toString(), step)
