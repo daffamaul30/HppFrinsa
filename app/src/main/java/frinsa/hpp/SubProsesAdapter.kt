@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
-import frinsa.hpp.data.Panen
 import kotlinx.android.synthetic.main.cardviewproses.view.*
 
 class SubProsesAdapter(val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<SubProsesAdapter.cardViewProses>(){
