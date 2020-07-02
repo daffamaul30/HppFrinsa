@@ -5,8 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
-import frinsa.hpp.data.tahap.Petik
-import frinsa.hpp.data.tahap.Standard
+import frinsa.hpp.data.tahap.*
 
 val DATABASE_NAME ="MyDB"
 val COL_STATUS = "status"
@@ -261,12 +260,61 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return list
     }
 
+    fun insertFermentasi(f: Fermentasi): Long {
+        val db = this.writableDatabase
+
+        var cv = ContentValues()
+
+        cv.put(COL_ID_PRODUKSI, f.id2)
+        cv.put(COL_TGL, f.tanggal)
+        cv.put(COL_BERAT, f.berat)
+        cv.put(COL_BIAYA_FERMENTASI, f.biaya_fermentasi)
+        cv.put(COL_BIAYA_MUAT, f.biaya_muat)
+        var result = db.insert(TABLE_FERMEN, null, cv)
+
+        return result
+    }
+
+    fun insertTransportasi(t: Transportasi): Long {
+        val db = this.writableDatabase
+
+        var cv = ContentValues()
+
+        cv.put(COL_ID_PRODUKSI, t.id2)
+        cv.put(COL_TGL, t.tanggal)
+        cv.put(COL_BERAT, t.berat)
+        cv.put(COL_BIAYA_TRANSPORT, t.biaya_transport)
+        cv.put(COL_BIAYA_KAWAL, t.biaya_kawal)
+        cv.put(COL_BIAYA_BONGKAR, t.biaya_bongkar)
+        var result = db.insert(TABLE_TRANSPORTASI, null, cv)
+
+        return result
+    }
+
+    fun insertPulping1(p: pulpingSatu): Long {
+        val db = this.writableDatabase
+
+        var cv = ContentValues()
+
+        cv.put(COL_ID_PRODUKSI, p.id2)
+        cv.put(COL_TGL, p.tanggal)
+        cv.put(COL_BERAT, p.berat)
+        cv.put(COL_BIAYA_PULPING, p.biaya_pulping)
+        cv.put(COL_BIAYA_FERMENTASI, p.biaya_fermentasi)
+        cv.put(COL_BIAYA_CUCI, p.biaya_cuci)
+        cv.put(COL_BIAYA_JEMUR, p.biaya_jemur)
+        cv.put(COL_BIAYA_MUAT, p.biaya_muat)
+        var result = db.insert(TABLE_PULPING1, null, cv)
+
+        return result
+    }
+
     fun <T: Standard> insertStandard(data: T, TABLE_NAME: String): Long {
         val db = this.writableDatabase
 
         var cv = ContentValues()
 
-        cv.put(COL_ID_PRODUKSI, data.id)
+        cv.put(COL_ID_PRODUKSI, data.id2)
         cv.put(COL_TGL, data.tanggal)
         cv.put(COL_BERAT, data.berat)
         cv.put(COL_BIAYA, data.biaya)
@@ -357,7 +405,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                     list.add(blok)
                 }while (result.moveToNext())
             }
-
         }
         result.close()
         db.close()
