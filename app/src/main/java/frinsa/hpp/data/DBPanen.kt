@@ -341,12 +341,23 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         val db = this.readableDatabase
         val result = db.rawQuery(selectAll(TABLE_NAME), null)
         if (result.moveToFirst()) {
-            do {
-                var varietas = Varietas()
-                varietas.id = result.getString(result.getColumnIndex(COL_ID)).toInt()
-                varietas.name = result.getString(result.getColumnIndex(COL_NAME))
-                list.add(varietas)
-            }while (result.moveToNext())
+            if (TABLE_NAME == TABLE_VARIETAS) {
+                do {
+                    var varietas = Varietas()
+                    varietas.id = result.getString(result.getColumnIndex(COL_ID)).toInt()
+                    varietas.name = result.getString(result.getColumnIndex(COL_NAME))
+                    list.add(varietas)
+                }while (result.moveToNext())
+            }
+            else if (TABLE_NAME == TABLE_BLOK) {
+                do {
+                    var blok = Blok()
+                    blok.id = result.getString(result.getColumnIndex(COL_ID)).toInt()
+                    blok.name = result.getString(result.getColumnIndex(COL_NAME))
+                    list.add(blok)
+                }while (result.moveToNext())
+            }
+
         }
         result.close()
         db.close()
