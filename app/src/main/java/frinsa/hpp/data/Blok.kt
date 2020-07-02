@@ -10,9 +10,6 @@ import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 
 class Blok: Varietas {
     private val blok: MutableList<String> = ArrayList()
-//    var id: Int = 0
-//    var name: String = ""
-//    lateinit var context: Context
     private lateinit var db: DBPanen
 
     constructor(name: String) {
