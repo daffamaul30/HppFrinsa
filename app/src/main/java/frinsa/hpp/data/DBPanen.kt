@@ -5,6 +5,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
+import frinsa.hpp.data.tahap.Petik
+import frinsa.hpp.data.tahap.Standard
 
 val DATABASE_NAME ="MyDB"
 val COL_STATUS = "status"

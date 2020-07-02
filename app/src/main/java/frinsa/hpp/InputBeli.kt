@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import frinsa.hpp.data.*
+import frinsa.hpp.data.tahap.Petik
 import kotlinx.android.synthetic.main.activity_input_beli.*
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.activity_input_panen.tv_proses

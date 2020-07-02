@@ -11,15 +11,14 @@ import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import frinsa.hpp.data.*
+import frinsa.hpp.data.tahap.Petik
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.edt_dialog_tmbh_varietas
-import java.sql.DriverManager.println
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.io.println as println1
 
 class InputPanen : AppCompatActivity(), View.OnClickListener {
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)

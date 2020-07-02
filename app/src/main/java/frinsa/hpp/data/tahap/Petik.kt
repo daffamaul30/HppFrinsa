@@ -1,4 +1,4 @@
-package frinsa.hpp.data
+package frinsa.hpp.data.tahap
 
 
 data class Petik (

@@ -2,6 +2,7 @@ package frinsa.hpp.data
 
 import android.content.Context
 import android.widget.Toast
+import frinsa.hpp.data.tahap.Petik
 
 class Produk {
     lateinit var petik : Petik
