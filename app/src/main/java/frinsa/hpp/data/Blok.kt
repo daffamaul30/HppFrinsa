@@ -49,7 +49,7 @@ class Blok: Varietas {
     }
 
     fun getBlok(): MutableList<String> {
-        val listB = db.readBlok()
+        val listB = db.readSpin(TABLE_BLOK)
         blok.clear()
         blok.add(0, "Pilih Blok")
         if (listB.size > 0) {

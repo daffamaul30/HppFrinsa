@@ -335,11 +335,11 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         }
     }
 
-    fun readVarietas(): MutableList<Varietas> {
+    fun readSpin(TABLE_NAME: String): MutableList<Varietas> {
         var list: MutableList<Varietas> = ArrayList()
 
         val db = this.readableDatabase
-        val result = db.rawQuery(selectAll(TABLE_VARIETAS), null)
+        val result = db.rawQuery(selectAll(TABLE_NAME), null)
         if (result.moveToFirst()) {
             do {
                 var varietas = Varietas()
@@ -353,23 +353,41 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return list
     }
 
-    fun readBlok(): MutableList<Blok> {
-        var list: MutableList<Blok> = ArrayList()
-
-        val db = this.readableDatabase
-        val result = db.rawQuery(selectAll(TABLE_BLOK), null)
-        if (result.moveToFirst()) {
-            do {
-                var blok = Blok()
-                blok.id = result.getString(result.getColumnIndex(COL_ID)).toInt()
-                blok.name = result.getString(result.getColumnIndex(COL_NAME))
-                list.add(blok)
-            }while (result.moveToNext())
-        }
-        result.close()
-        db.close()
-        return list
-    }
+//    fun readVarietas(): MutableList<Varietas> {
+//        var list: MutableList<Varietas> = ArrayList()
+//
+//        val db = this.readableDatabase
+//        val result = db.rawQuery(selectAll(TABLE_VARIETAS), null)
+//        if (result.moveToFirst()) {
+//            do {
+//                var varietas = Varietas()
+//                varietas.id = result.getString(result.getColumnIndex(COL_ID)).toInt()
+//                varietas.name = result.getString(result.getColumnIndex(COL_NAME))
+//                list.add(varietas)
+//            }while (result.moveToNext())
+//        }
+//        result.close()
+//        db.close()
+//        return list
+//    }
+//
+//    fun readBlok(): MutableList<Blok> {
+//        var list: MutableList<Blok> = ArrayList()
+//
+//        val db = this.readableDatabase
+//        val result = db.rawQuery(selectAll(TABLE_BLOK), null)
+//        if (result.moveToFirst()) {
+//            do {
+//                var blok = Blok()
+//                blok.id = result.getString(result.getColumnIndex(COL_ID)).toInt()
+//                blok.name = result.getString(result.getColumnIndex(COL_NAME))
+//                list.add(blok)
+//            }while (result.moveToNext())
+//        }
+//        result.close()
+//        db.close()
+//        return list
+//    }
 
     fun readProses(): MutableList<Proses> {
         var list: MutableList<Proses> = ArrayList()

@@ -53,7 +53,7 @@ open class Varietas {
     }
 
     fun getVarietas(): MutableList<String> {
-        val listV = db.readVarietas()
+        val listV = db.readSpin(TABLE_VARIETAS)
         varietas.clear()
         varietas.add(0, "Pilih Varietas")
         if (listV.size > 0) {
