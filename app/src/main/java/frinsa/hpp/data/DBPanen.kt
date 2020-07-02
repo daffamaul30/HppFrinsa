@@ -259,22 +259,18 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return list
     }
 
-    fun insertStandard(TABLE_NAME: String): Long {
+    fun <T: Standard> insertStandard(data: T, TABLE_NAME: String): Long {
         val db = this.writableDatabase
 
-        var cvP = ContentValues()
+        var cv = ContentValues()
 
-//        cvP.put(COL_TANGGAL, pr.tgl_produksi)
-        cvP.put(COL_SUMBER, pr.sumber)
-        cvP.put(COL_BELI_DARI, pr.beli_dari)
-        cvP.put(COL_BENTUK, pr.bentuk)
-        cvP.put(COL_VARI, pr.varietas)
-        cvP.put(COL_BLOKP, pr.blok)
-        cvP.put(COL_PROSES_PRODUKSI, pr.proses)
-        cvP.put(COL_STATUS_PRODUKSI, pr.status)
-        var resultPR = db.insert(TABLE_NAME, null, cvP)
+        cv.put(COL_ID_PRODUKSI, data.id)
+        cv.put(COL_TGL, data.tanggal)
+        cv.put(COL_BERAT, data.berat)
+        cv.put(COL_BIAYA, data.biaya)
+        var result = db.insert(TABLE_NAME, null, cv)
 
-        return resultPR
+        return result
     }
 
     fun getIdProduksi(TABLE_NAME: String): Int {
@@ -284,25 +280,38 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
     }
 
-    fun insertVarietas(v: Varietas) {
+//    fun insertVarietas(v: Varietas) {
+//        val db = this.writableDatabase
+//        var cv = ContentValues()
+//        cv.put(COL_NAME, v.name)
+//
+//        var result = db.insert(TABLE_VARIETAS, null, cv)
+//        if (result == -1.toLong()) {
+//            toastMessage("Gagal")
+//        } else {
+//            toastMessage("Berhasil")
+//        }
+//    }
+//
+//    fun insertBlok(b: Blok) {
+//        val db = this.writableDatabase
+//        var cv = ContentValues()
+//        cv.put(COL_NAME, b.name)
+//
+//        var result = db.insert(TABLE_BLOK, null, cv)
+//        if (result == -1.toLong()) {
+//            toastMessage("Gagal")
+//        } else {
+//            toastMessage("Berhasil")
+//        }
+//    }
+
+    fun <T: Varietas> insertSpin(data: T, TABLE_NAME: String) {
         val db = this.writableDatabase
         var cv = ContentValues()
-        cv.put(COL_NAME, v.name)
+        cv.put(COL_NAME, data.name)
 
-        var result = db.insert(TABLE_VARIETAS, null, cv)
-        if (result == -1.toLong()) {
-            toastMessage("Gagal")
-        } else {
-            toastMessage("Berhasil")
-        }
-    }
-
-    fun insertBlok(b: Blok) {
-        val db = this.writableDatabase
-        var cv = ContentValues()
-        cv.put(COL_NAME, b.name)
-
-        var result = db.insert(TABLE_BLOK, null, cv)
+        var result = db.insert(TABLE_NAME, null, cv)
         if (result == -1.toLong()) {
             toastMessage("Gagal")
         } else {

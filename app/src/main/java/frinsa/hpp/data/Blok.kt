@@ -8,11 +8,11 @@ import android.widget.EditText
 import frinsa.hpp.R
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 
-class Blok {
+class Blok: Varietas {
     private val blok: MutableList<String> = ArrayList()
-    var id: Int = 0
-    var name: String = ""
-    lateinit var context: Context
+//    var id: Int = 0
+//    var name: String = ""
+//    lateinit var context: Context
     private lateinit var db: DBPanen
 
     constructor(name: String) {
@@ -41,7 +41,8 @@ class Blok {
                 edtTambahVarietas.error = "Field ini tidak boleh kosong"
             }else {
                 val blk = Blok(name = inputTambahBlok)
-                db.insertBlok(blk)
+//                db.insertBlok(blk)
+                db.insertSpin<Blok>(blk, TABLE_BLOK)
                 alertDialog.dismiss()
             }
         }

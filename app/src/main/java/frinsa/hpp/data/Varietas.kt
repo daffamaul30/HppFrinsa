@@ -10,7 +10,7 @@ import frinsa.hpp.R
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 
 
-class Varietas {
+open class Varietas {
     private val varietas: MutableList<String> = ArrayList()
     var id: Int = 0
     var name: String = ""
@@ -42,7 +42,8 @@ class Varietas {
             }else {
                 val vari =
                     Varietas(name = inputTambahVarietas)
-                db.insertVarietas(vari)
+//                db.insertVarietas(vari)
+                db.insertSpin<Varietas>(vari, TABLE_VARIETAS)
                 alertDialog.dismiss()
             }
         }

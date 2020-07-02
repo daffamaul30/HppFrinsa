@@ -271,7 +271,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     }else {
                         val vari =
                             Varietas(name = inputTambahVarietas)
-                        db.insertVarietas(vari)
+//                        db.insertVarietas(vari)
+                        db.insertSpin<Varietas>(vari, TABLE_VARIETAS)
                         setSpinnerVarietas()
                         alertDialog.dismiss()
                     }
@@ -294,7 +295,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         edtTambahVarietas.error = "Field ini tidak boleh kosong"
                     }else {
                         val blk = Blok(name = inputTambahBlok)
-                        db.insertBlok(blk)
+//                        db.insertBlok(blk)
+                        db.insertSpin<Blok>(blk, TABLE_BLOK)
                         setSpinnerBlok()
                         alertDialog.dismiss()
                     }
