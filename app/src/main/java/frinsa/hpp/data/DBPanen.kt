@@ -15,6 +15,34 @@ val TABLE_PROSES="Proses"
 val COL_NAME = "name"
 val COL_ID = "id"
 val COL_STEP = "step"
+//Standard
+val COL_TGL = "tanggal"
+val COL_BERAT = "berat"
+val COL_BIAYA = "biaya"
+val TABLE_SUTON_GRADER = "Suton_Grader"
+val TABLE_SIZE_GRADING = "Size_Grading"
+val TABLE_COLOR_SORTER = "Color_Sorter"
+val TABLE_HAND_PICK = "Hand_Pick"
+val TABLE_JEMUR1 = "Jemur_Satu"
+val TABLE_JEMUR2 = "Jemur_Dua"
+val TABLE_PULPING2 = "Pulping_Dua"
+//Kadar Air
+val COL_KDR_AIR = "kadar-air"
+val TABLE_HULLING = "Hulling"
+val TABLE_JEMUR_KADAR_AIR = "Jemur_Kadar_Air"
+//Fermentasi
+val COL_BIAYA_FERMENTASI = "biaya_fermentasi"
+val COL_BIAYA_MUAT = "biaya_muat"
+val TABLE_FERMEN = "Fermentasi"
+//Transportasi
+val COL_BIAYA_TRANSPORT = "biaya_transport"
+val COL_BIAYA_KAWAL = "biaya_kawal"
+val COL_BIAYA_BONGKAR = "biaya_bongkar"
+val TABLE_TRANSPORTASI = "Transportasi"
+//Pulping1
+val COL_BIAYA_PULPING = "biaya_pulping"
+val COL_BIAYA_JEMUR = "biaya_jemur"
+val TABLE_PULPING1 = "pulping_satu"
 //Produk
 val TABLE_PRODUKSI = "Produksi"
 val COL_ID_PRODUKSI = "id_Produksi"
@@ -57,10 +85,41 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             COL_ID_PETIK_PRODUKSI + " INTEGER, " +
             COL_TGL_PETIK + " DATE, " +
             COL_BERAT_PETIK + " REAL, " +
-            COL_BIAYA_PETIK + " REAL, " +
-            COL_BIAYA_OJEK + " REAL, " +
-            COL_BIAYA_CUCI + " REAL, " +
+            COL_BIAYA_PETIK + " INTEGER, " +
+            COL_BIAYA_OJEK + " INTEGER, " +
+            COL_BIAYA_CUCI + " INTEGER, " +
             "FOREIGN KEY ("+ COL_ID_PETIK_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
+
+    val createTableFermentasi = "CREATE TABLE " + TABLE_FERMEN + "(" +
+            COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_ID_PRODUKSI + " INTEGER, " +
+            COL_TGL + " DATE, " +
+            COL_BERAT + " REAL, " +
+            COL_BIAYA_FERMENTASI + " INTEGER, " +
+            COL_BIAYA_MUAT + " INTEGER, " +
+            "FOREIGN KEY ("+ COL_ID_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
+
+    val createTableTransportasi = "CREATE TABLE " + TABLE_TRANSPORTASI + "(" +
+            COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_ID_PRODUKSI + " INTEGER, " +
+            COL_TGL + " DATE, " +
+            COL_BERAT + " REAL, " +
+            COL_BIAYA_TRANSPORT + " INTEGER, " +
+            COL_BIAYA_KAWAL + " INTEGER, " +
+            COL_BIAYA_BONGKAR + " INTEGER, " +
+            "FOREIGN KEY ("+ COL_ID_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
+
+    val createTablePulping1 = "CREATE TABLE " + TABLE_PULPING1 + "(" +
+            COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_ID_PRODUKSI + " INTEGER, " +
+            COL_TGL + " DATE, " +
+            COL_BERAT + " REAL, " +
+            COL_BIAYA_PULPING + " INTEGER, " +
+            COL_BIAYA_FERMENTASI + " INTEGER, " +
+            COL_BIAYA_CUCI + " INTEGER, " +
+            COL_BIAYA_JEMUR + " INTEGER, " +
+            COL_BIAYA_MUAT + " INTEGER, " +
+            "FOREIGN KEY ("+ COL_ID_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
 
     fun createTableSpinner(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
             COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -71,14 +130,44 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             COL_NAME + " VARCHAR(50), " +
             COL_STEP + " TEXT)"
 
+    fun createTableStandard(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
+            COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_ID_PRODUKSI + " INTEGER, " +
+            COL_TGL + " DATE, " +
+            COL_BERAT + " REAL, " +
+            COL_BIAYA + " INTEGER, " +
+            "FOREIGN KEY ("+ COL_ID_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
+
+    fun createTableKadarAir(TABLE_NAME : String) = "CREATE TABLE " + TABLE_NAME + "(" +
+            COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_ID_PRODUKSI + " INTEGER, " +
+            COL_TGL + " DATE, " +
+            COL_BERAT + " REAL, " +
+            COL_KDR_AIR + " REAL, " +
+            COL_BIAYA + " INTEGER, " +
+            "FOREIGN KEY ("+ COL_ID_PRODUKSI +") REFERENCES "+ TABLE_PRODUKSI +"("+ COL_ID_PRODUKSI +"))"
+
+
     fun selectAll(TABLE_NAME: String) = "Select * from " + TABLE_NAME
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(createTableSpinner(TABLE_VARIETAS))
         db?.execSQL(createTableSpinner(TABLE_BLOK))
         db?.execSQL(createTableProses(TABLE_PROSES))
+        db?.execSQL(createTableKadarAir(TABLE_JEMUR_KADAR_AIR))
+        db?.execSQL(createTableKadarAir(TABLE_HULLING))
+        db?.execSQL(createTableStandard(TABLE_PULPING2))
+        db?.execSQL(createTableStandard(TABLE_JEMUR1))
+        db?.execSQL(createTableStandard(TABLE_JEMUR2))
+        db?.execSQL(createTableStandard(TABLE_SUTON_GRADER))
+        db?.execSQL(createTableStandard(TABLE_SIZE_GRADING))
+        db?.execSQL(createTableStandard(TABLE_COLOR_SORTER))
+        db?.execSQL(createTableStandard(TABLE_HAND_PICK))
         db?.execSQL(createTableProduksi)
         db?.execSQL(createTablePetik)
+        db?.execSQL(createTableFermentasi)
+        db?.execSQL(createTableTransportasi)
+        db?.execSQL(createTablePulping1)
 
     }
 
@@ -88,6 +177,18 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PROSES)
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PRODUKSI)
         db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PETIK)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_HULLING)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_SUTON_GRADER)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_SIZE_GRADING)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_COLOR_SORTER)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_HAND_PICK)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PULPING2)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_JEMUR_KADAR_AIR)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_JEMUR1)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_JEMUR2)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_FERMEN)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_TRANSPORTASI)
+        db?.execSQL("DROP IF TABLE EXISTS " + TABLE_PULPING1)
         onCreate(db)
     }
 
