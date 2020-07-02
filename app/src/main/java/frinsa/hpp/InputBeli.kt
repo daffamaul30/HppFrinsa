@@ -249,7 +249,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                     }else {
                         val vari =
                             Varietas(name = inputTambahVarietas)
-                        db.insertVarietas(vari)
+//                        db.insertVarietas(vari)
+                        db.insertSpin<Varietas>(vari, TABLE_VARIETAS)
                         setSpinnerVarietas()
                         alertDialog.dismiss()
                     }
