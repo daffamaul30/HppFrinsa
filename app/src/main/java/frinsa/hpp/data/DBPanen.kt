@@ -28,7 +28,7 @@ val TABLE_JEMUR1 = "Jemur_Satu"
 val TABLE_JEMUR2 = "Jemur_Dua"
 val TABLE_PULPING2 = "Pulping_Dua"
 //Kadar Air
-val COL_KDR_AIR = "kadar-air"
+val COL_KDR_AIR = "kadar_air"
 val TABLE_HULLING = "Hulling"
 val TABLE_JEMUR_KADAR_AIR = "Jemur_Kadar_Air"
 //Fermentasi
