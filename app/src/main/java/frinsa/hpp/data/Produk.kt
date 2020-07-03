@@ -12,12 +12,20 @@ import frinsa.hpp.data.tahap.Standard
 
 
 class Produk {
-    lateinit var petik : Petik
-    lateinit var produksi : Produksi
-    lateinit var fermentasi : Fermentasi
+    lateinit var petik: Petik
+    lateinit var produksi: Produksi
+    lateinit var fermentasi: Fermentasi
     lateinit var transport: Transportasi
     lateinit var pulping1: pulpingSatu
-    lateinit var pulping2 : pulpingDua
+    lateinit var pulping2: pulpingDua
+    lateinit var jemurKadarAir: jemurKadarAir
+    lateinit var jemur1: jemurSatu
+    lateinit var jemur2: jemurDua
+    lateinit var hulling: Hulling
+    lateinit var sutonGrader: sutonGrader
+    lateinit var sizeGrading: sizeGrading
+    lateinit var colorSorter: colorSorter
+    lateinit var handPick: handPick
 
     lateinit var context: Context
     private lateinit var db: DBPanen
@@ -32,6 +40,36 @@ class Produk {
         this.petik = petik
     }
 
+    constructor(
+        produksi: Produksi,
+        petik: Petik,
+        fermentasi: Fermentasi,
+        transportasi: Transportasi,
+        pulping1: pulpingSatu,
+        pulping2: pulpingDua,
+        jemurKadarAir: jemurKadarAir,
+        jemur1: jemurSatu,
+        jemur2: jemurDua,
+        hulling: Hulling,
+        sutonGrader: sutonGrader,
+        sizeGrading: sizeGrading,
+        colorSorter: colorSorter,
+        handPick: handPick) {
+        this.produksi = produksi
+        this.petik = petik
+        this.fermentasi = fermentasi
+        this.transport = transportasi
+        this.pulping1 = pulping1
+        this.pulping2 = pulping2
+        this.jemurKadarAir = jemurKadarAir
+        this.jemur1 = jemur1
+        this.jemur2 = jemur2
+        this.hulling = hulling
+        this.sutonGrader = sutonGrader
+        this.sizeGrading = sizeGrading
+        this.colorSorter = colorSorter
+        this.handPick = handPick
+    }
 
     constructor(fermentasi: Fermentasi){
         this.fermentasi = fermentasi
