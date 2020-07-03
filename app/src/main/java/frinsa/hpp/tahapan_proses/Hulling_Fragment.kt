@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.TABLE_HULLING
+import frinsa.hpp.data.tahap.Hulling
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_hand_pick_.*
 import kotlinx.android.synthetic.main.fragment_hulling_.*
@@ -25,6 +28,7 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtBerat: String
     private lateinit var edtKadarAir: String
     private lateinit var edtOngkosHulling: String
+    private lateinit var db : DBPanen
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +58,14 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                    val hulling = Hulling(
+                        tanggal = tvTgl,
+                        biaya = edtBerat.toInt(),
+                        berat = edtOngkosHulling.toDouble(),
+                        kadarAir = edtKadarAir.toDouble()
+                    )
+                        db.insertKadarAir(hulling, TABLE_HULLING)
                         //test getData
-
                         alertDialog.dismiss()
                         activity?.finish()
                     }

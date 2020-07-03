@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.TABLE_SUTON_GRADER
+import frinsa.hpp.data.tahap.sutonGrader
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_suton_grader_.*
 import kotlinx.android.synthetic.main.fragment_suton_grader_.view.*
@@ -22,6 +25,7 @@ class SutonGrader_Fragment : Fragment(), View.OnClickListener {
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
     private lateinit var edtOngkosSutonGrading: String
+    private lateinit var db : DBPanen
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +52,13 @@ class SutonGrader_Fragment : Fragment(), View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                    val sutonGrader = sutonGrader(
+                        id2 = 0,
+                        tanggal = tvTgl,
+                        berat = edtBerat.toDouble(),
+                        biaya = edtOngkosSutonGrading.toInt()
+                    )
+                        db.insertStandard(sutonGrader, TABLE_SUTON_GRADER)
                         //test getData
 
                         alertDialog.dismiss()

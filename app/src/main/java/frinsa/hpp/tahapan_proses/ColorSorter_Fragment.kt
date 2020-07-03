@@ -9,8 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
+import frinsa.hpp.data.TABLE_COLOR_SORTER
+
 import frinsa.hpp.data.tahap.colorSorter
+
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_color_sorter_.*
 import kotlinx.android.synthetic.main.fragment_color_sorter_.view.*
@@ -25,7 +29,8 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
     private lateinit var edtOngkosSorter: String
-    private lateinit var produk: Produk
+    private lateinit var db : DBPanen
+
     private val context = this
 
     override fun onCreateView(
@@ -34,14 +39,14 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_color_sorter_, container, false)
-
         //set text varietas dan blok berdasarkan yang dipilih
 
         view.btn_kirim_color_sorter.setOnClickListener(this)
         view.btn_datepicker_color_sorter.setOnClickListener(this)
         return view
-        produk = Produk(context)
     }
+
+
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -57,14 +62,13 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                         val colorSorter = colorSorter(
-                            id2 = -,
+                            id2 = 0,
                             tanggal = tvTgl ,
                             berat = edtBerat.toDouble(),
                             biaya = edtOngkosSorter.toInt()
                         )
-                        produk.insertStandard(context,colorSorter)
                         //test getData
-
+                        db.insertStandard(colorSorter, TABLE_COLOR_SORTER)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

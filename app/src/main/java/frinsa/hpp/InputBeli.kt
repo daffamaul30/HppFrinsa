@@ -46,7 +46,6 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
     private lateinit var db: DBPanen
     private lateinit var vari: Varietas
     private lateinit var pros: Proses
-    private lateinit var produk: Produk
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +57,6 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
         vari = Varietas(context)
         //CREATE PROSES OBJECT
         pros = Proses(context)
-        //CREATE PRODUK OBJECT
-        produk = Produk(context)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -313,7 +310,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                             biaya_petik = edtHargaBeli.toInt(),
                             biaya_cuci = ongkosCuci
                         )
-                        produk.insertPanen(produksi, petik)
+                        db.insertPanen(produksi, petik)
                         //test getData
 
                         //Intent menggunakan putextra

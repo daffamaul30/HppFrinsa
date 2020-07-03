@@ -8,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.TABLE_JEMUR1
+import frinsa.hpp.data.tahap.jemurSatu
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_jemur2_.*
 import kotlinx.android.synthetic.main.fragment_jemur2_.view.*
@@ -20,6 +23,7 @@ class JemurI_Fragment : Fragment(),View.OnClickListener{
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
     private lateinit var edtOngkosJemur2: String
+    private lateinit var db : DBPanen
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +53,13 @@ class JemurI_Fragment : Fragment(),View.OnClickListener{
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                    val jemur1 = jemurSatu(
+                        id2 = 0,
+                        tanggal = tvTgl,
+                        berat = edtBerat.toDouble(),
+                        biaya = edtOngkosJemur2.toInt()
+                    )
+                        db.insertStandard(jemur1, TABLE_JEMUR1)
                         //test getData
 
                         alertDialog.dismiss()

@@ -43,7 +43,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
     private lateinit var vari: Varietas
     private lateinit var blk: Blok
     private lateinit var pros: Proses
-    private lateinit var produk: Produk
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +56,6 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
         blk = Blok(context)
         //CREATE PROSES OBJECT
         pros = Proses(context)
-        //CREATE PRODUK OBJECT
-        produk = Produk(context)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -348,7 +345,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         )
 
                         //INSERT DATA TO DB
-                        produk.insertPanen(produksi, petik)
+                        db.insertPanen(produksi, petik)
 
                         //TEST GET DATA
 

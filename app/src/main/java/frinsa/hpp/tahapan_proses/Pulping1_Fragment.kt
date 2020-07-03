@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.tahap.pulpingSatu
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_pulping1_.*
 import kotlinx.android.synthetic.main.fragment_pulping1_.view.*
@@ -26,6 +28,7 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtOngkosCuciPulping: String
     private lateinit var edtOngkosJemurPulping: String
     private lateinit var edtOngkosMuatPulping: String
+    private lateinit var db : DBPanen
 
 
     override fun onCreateView(
@@ -53,7 +56,18 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                    val pulping1 = pulpingSatu(
+                        id = 0,
+                        id2 = 0,
+                        tanggal = tvTgl,
+                        berat = edtBerat.toDouble(),
+                        biaya_muat = edtOngkosMuatPulping.toInt(),
+                        biaya_fermentasi = edtOngkosFermentasiPulping.toInt(),
+                        biaya_cuci = edtOngkosCuciPulping.toInt(),
+                        biaya_jemur = edtOngkosJemurPulping.toInt(),
+                        biaya_pulping = edtOngkospulping1.toInt()
+                    )
+                        db.insertPulping1(pulping1)
                         //test getData
 
                         alertDialog.dismiss()
