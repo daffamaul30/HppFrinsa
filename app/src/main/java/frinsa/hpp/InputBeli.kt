@@ -81,6 +81,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
         rg_bentuk_beli.setOnCheckedChangeListener(this)
     }
 
+    fun String.capitalizeWords(): String = split(" ").map { it.capitalize() }.joinToString(" ")
+
     fun setSpinnerVarietas() {
         //Spinner Varietas
         val spinnerVarietas: Spinner = findViewById(R.id.spinner_varietas_beli)
@@ -164,9 +166,9 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
     private fun validationKosong(): Boolean {
         var valid: Boolean = false
         tvTanggal = input_tgl_beli.text.toString()
-        edtBlok = et_blok_beli.text.toString()
+        edtBlok = et_blok_beli.text.toString().capitalizeWords()
         edtBerat = et_berat_beli.text.toString()
-        edtKolektif = et_kolektif_beli.text.toString()
+        edtKolektif = et_kolektif_beli.text.toString().capitalizeWords()
         edtHargaBeli = et_harga_beli.text.toString()
         edtOngkosCuci = et_ongkos_cuci_beli.text.toString()
 

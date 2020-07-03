@@ -328,6 +328,8 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
         return stepString
     }
 
+    fun String.capitalizeWords(): String = split(" ").map { it.capitalize() }.joinToString(" ")
+
     override fun onClick(v: View) {
         when (v.id) {
             R.id.cek_fermentasi -> {
@@ -375,7 +377,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
 
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit_tmbh_proses,null)
                     val builder = AlertDialog.Builder(this).setView(dialog).setTitle("PERIKSA KEMBALI!")
-                    dialog.nama_proses.text = "Nama Proses : " + edt_dialog_tmbh_proses2.text.toString()
+                    dialog.nama_proses.text = "Nama Proses : " + edt_dialog_tmbh_proses2.text.toString().capitalizeWords()
                     dialog.daftarStep.text = stringBuilder.toString()
 
                     val alertDialog =  builder.show()
@@ -383,7 +385,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
                     dialog.submit_tmbh_proses_dialog.setOnClickListener{
                         //Insert to DB COK
                         pros = Proses(this)
-                        pros.addProses(edt_dialog_tmbh_proses2.text.toString(), step)
+                        pros.addProses(edt_dialog_tmbh_proses2.text.toString().capitalizeWords(), step)
 
 
                         alertDialog.dismiss()

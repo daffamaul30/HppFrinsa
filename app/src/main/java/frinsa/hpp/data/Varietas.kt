@@ -35,7 +35,7 @@ open class Varietas {
 
         dialog.submit_tmbh_varietas.setOnClickListener{
             val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
-            val inputTambahVarietas = edtTambahVarietas.text.toString()
+            val inputTambahVarietas = edtTambahVarietas.text.toString().capitalizeWords()
 
             if (inputTambahVarietas.isEmpty()) {
                 edtTambahVarietas.error = "Field ini tidak boleh kosong"
@@ -63,4 +63,6 @@ open class Varietas {
         }
         return varietas
     }
+
+    fun String.capitalizeWords(): String = split(" ").map { it.capitalize() }.joinToString(" ")
 }

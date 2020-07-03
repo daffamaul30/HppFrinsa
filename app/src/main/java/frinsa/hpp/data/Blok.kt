@@ -32,7 +32,7 @@ class Blok: Varietas {
 
         dialog.submit_tmbh_varietas.setOnClickListener{
             val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
-            val inputTambahBlok = edtTambahVarietas.text.toString()
+            val inputTambahBlok = edtTambahVarietas.text.toString().capitalizeWords()
 
             if (inputTambahBlok.isEmpty()) {
                 edtTambahVarietas.error = "Field ini tidak boleh kosong"
