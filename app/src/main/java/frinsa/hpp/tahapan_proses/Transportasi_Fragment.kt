@@ -54,7 +54,6 @@ class Transportasi_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val transportasi = Transportasi(
-                        id = 0,
                         id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
@@ -63,8 +62,6 @@ class Transportasi_Fragment : Fragment(), View.OnClickListener {
                         biaya_transport = edtOngkosTransportasi.toInt()
                     )
                         db.insertTransportasi(transportasi)
-                        //test getData
-
                         alertDialog.dismiss()
                         activity?.finish()
                     }

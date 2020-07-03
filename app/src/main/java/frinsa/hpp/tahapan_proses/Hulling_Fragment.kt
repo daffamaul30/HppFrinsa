@@ -59,13 +59,13 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val hulling = Hulling(
+                        id2 = 0,
                         tanggal = tvTgl,
                         biaya = edtBerat.toInt(),
                         berat = edtOngkosHulling.toDouble(),
                         kadarAir = edtKadarAir.toDouble()
                     )
-                        db.insertKadarAir(hulling, TABLE_HULLING)
-                        //test getData
+                        db.insertKadarAir<Hulling>(hulling, TABLE_HULLING)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

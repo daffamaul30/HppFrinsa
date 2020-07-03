@@ -58,9 +58,7 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPulping2.toInt()
                     )
-                        db.insertStandard(pulping2, TABLE_PULPING2)
-                        //test getData
-
+                        db.insertStandard<pulpingDua>(pulping2, TABLE_PULPING2)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

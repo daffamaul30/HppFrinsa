@@ -22,7 +22,9 @@ import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.submit_tmbh_vari
 
 class TambahProses : AppCompatActivity(), View.OnClickListener {
     private var context = this
-    private var urutan = Array(11, { i -> i+1})
+    private var jml = 7
+    private lateinit var urutan: Array<Int>
+//    private var urutan = Array(11, { i -> i+1})
     private val urut: MutableList<Any> = ArrayList()
     private var daftarStep = mapOf<String, String>().toMutableMap()
     val lis: MutableList<Any> = ArrayList()
@@ -74,6 +76,17 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun cek2(checkBox: CheckBox, spinner: Spinner) {
+        if (checkBox.isChecked) {
+            spinner.isEnabled = true
+            jml+=1
+        } else {
+            spinner.isEnabled = false
+            jml-=1
+        }
+        setSpinner()
+    }
+
     private fun setVariabel(spinner: Spinner, text:String) {
         when (spinner) {
             urut_petik -> {
@@ -119,6 +132,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun spinner(spinner: Spinner, checkBox: CheckBox){
+        urutan = Array(jml, { i -> i+1})
         val listP = urutan
         urut.clear()
         urut.add(0, "-")
@@ -317,22 +331,22 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.cek_fermentasi -> {
-                cek(cek_fermentasi, urut_fermentasi)
+                cek2(cek_fermentasi, urut_fermentasi)
             }
             R.id.cek_pulping1 -> {
-                cek(cek_pulping1, urut_pulping1)
+                cek2(cek_pulping1, urut_pulping1)
             }
             R.id.cek_pulping2 -> {
-                cek(cek_pulping2, urut_pulping2)
+                cek2(cek_pulping2, urut_pulping2)
             }
             R.id.cek_jemur_kadar_air -> {
-                cek(cek_jemur_kadar_air, urut_jemur_kadar_air)
+                cek2(cek_jemur_kadar_air, urut_jemur_kadar_air)
             }
             R.id.cek_jemur1 -> {
-                cek(cek_jemur1, urut_jemur1)
+                cek2(cek_jemur1, urut_jemur1)
             }
             R.id.cek_jemur2 -> {
-                cek(cek_jemur2, urut_jemur2)
+                cek2(cek_jemur2, urut_jemur2)
             }
             R.id.btn_help_proses_baru -> {
                 val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_help_proses_baru, null)

@@ -66,7 +66,7 @@
 
                         <Spinner
                             android:id="@+id/urut_petik"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -102,7 +102,7 @@
 
                         <Spinner
                             android:id="@+id/urut_fermentasi"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -136,7 +136,7 @@
 
                         <Spinner
                             android:id="@+id/urut_transportasi"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -172,7 +172,7 @@
 
                         <Spinner
                             android:id="@+id/urut_pulping1"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -206,7 +206,7 @@
 
                         <Spinner
                             android:id="@+id/urut_pulping2"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -240,7 +240,7 @@
 
                         <Spinner
                             android:id="@+id/urut_jemur_kadar_air"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -274,7 +274,7 @@
 
                         <Spinner
                             android:id="@+id/urut_jemur1"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -308,7 +308,7 @@
 
                         <Spinner
                             android:id="@+id/urut_jemur2"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -342,7 +342,7 @@
 
                         <Spinner
                             android:id="@+id/urut_hulling"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -378,7 +378,7 @@
 
                         <Spinner
                             android:id="@+id/urut_suton_grader"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -414,7 +414,7 @@
 
                         <Spinner
                             android:id="@+id/urut_size_grading"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -450,7 +450,7 @@
 
                         <Spinner
                             android:id="@+id/urut_color_sorter"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"
@@ -486,7 +486,7 @@
 
                         <Spinner
                             android:id="@+id/urut_hand_pick"
-                            android:layout_width="30dp"
+                            android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:background="@drawable/btn_spinner3"

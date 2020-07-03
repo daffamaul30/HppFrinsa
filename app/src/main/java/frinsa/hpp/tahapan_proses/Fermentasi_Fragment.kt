@@ -59,7 +59,6 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val fermentasi = Fermentasi(
-                        id = 0,
                         id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
@@ -67,8 +66,6 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
                         biaya_muat = edtOngkosMuat.toInt()
                     )
                         db.insertFermentasi(fermentasi)
-                        //test getData
-
                         alertDialog.dismiss()
                         activity?.finish()
                     }
