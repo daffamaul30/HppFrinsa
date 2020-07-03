@@ -57,7 +57,6 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val pulping1 = pulpingSatu(
-                        id = 0,
                         id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),

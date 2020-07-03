@@ -12,6 +12,7 @@ import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
 import frinsa.hpp.data.TABLE_COLOR_SORTER
+import frinsa.hpp.data.tahap.Standard
 
 import frinsa.hpp.data.tahap.colorSorter
 
@@ -67,8 +68,7 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
                             berat = edtBerat.toDouble(),
                             biaya = edtOngkosSorter.toInt()
                         )
-                        //test getData
-                        db.insertStandard(colorSorter, TABLE_COLOR_SORTER)
+                        db.insertStandard<colorSorter>(colorSorter, TABLE_COLOR_SORTER)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

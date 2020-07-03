@@ -57,14 +57,13 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val jemurkadarAir = jemurKadarAir(
+                        id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         kadarAir = edtKadarAir.toDouble(),
                         biaya = edtOngkosJemur.toInt()
                     )
                         db.insertKadarAir(jemurkadarAir, TABLE_JEMUR_KADAR_AIR)
-                        //test getData
-
                         alertDialog.dismiss()
                         activity?.finish()
                     }

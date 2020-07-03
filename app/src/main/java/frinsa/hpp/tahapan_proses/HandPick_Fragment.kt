@@ -11,6 +11,7 @@ import android.widget.Toast
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.TABLE_HAND_PICK
+import frinsa.hpp.data.tahap.Standard
 import frinsa.hpp.data.tahap.handPick
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_hand_pick_.*
@@ -61,9 +62,7 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPick.toInt()
                     )
-                        db.insertStandard(HandPick, TABLE_HAND_PICK)
-                        //test getData
-
+                        db.insertStandard<handPick>(HandPick, TABLE_HAND_PICK)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

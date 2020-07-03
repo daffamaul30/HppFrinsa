@@ -59,9 +59,7 @@ class JemurI_Fragment : Fragment(),View.OnClickListener{
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosJemur2.toInt()
                     )
-                        db.insertStandard(jemur1, TABLE_JEMUR1)
-                        //test getData
-
+                        db.insertStandard<jemurSatu>(jemur1, TABLE_JEMUR1)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

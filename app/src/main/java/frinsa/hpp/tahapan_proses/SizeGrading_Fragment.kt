@@ -58,7 +58,7 @@ class SizeGrading_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosSizeGrading.toInt()
                     )
-                        db.insertStandard(sizeGrading, TABLE_SIZE_GRADING)
+                        db.insertStandard<sizeGrading>(sizeGrading, TABLE_SIZE_GRADING)
                         //test getData
 
                         alertDialog.dismiss()
