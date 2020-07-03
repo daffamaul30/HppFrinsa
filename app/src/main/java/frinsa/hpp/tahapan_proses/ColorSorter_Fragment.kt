@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.Produk
+import frinsa.hpp.data.tahap.colorSorter
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_color_sorter_.*
 import kotlinx.android.synthetic.main.fragment_color_sorter_.view.*
@@ -23,6 +25,8 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
     private lateinit var edtOngkosSorter: String
+    private lateinit var produk: Produk
+    private val context = this
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +39,8 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
 
         view.btn_kirim_color_sorter.setOnClickListener(this)
         view.btn_datepicker_color_sorter.setOnClickListener(this)
-
         return view
+        produk = Produk(context)
     }
 
     override fun onClick(v: View) {
@@ -52,7 +56,13 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                        val colorSorter = colorSorter(
+                            id2 = -,
+                            tanggal = tvTgl ,
+                            berat = edtBerat.toDouble(),
+                            biaya = edtOngkosSorter.toInt()
+                        )
+                        produk.insertStandard(context,colorSorter)
                         //test getData
 
                         alertDialog.dismiss()

@@ -2,11 +2,17 @@ package frinsa.hpp.data
 
 import android.content.Context
 import android.widget.Toast
-import frinsa.hpp.data.tahap.Petik
+import frinsa.hpp.data.tahap.*
+import frinsa.hpp.tahapan_proses.Pulping1_Fragment
+import frinsa.hpp.tahapan_proses.Pulping2_Fragment
 
 class Produk {
     lateinit var petik : Petik
     lateinit var produksi : Produksi
+    lateinit var fermentasi : Fermentasi
+    lateinit var transport: Transportasi
+    lateinit var pulping1: pulpingSatu
+    lateinit var pulping2 : pulpingDua
 
     lateinit var context: Context
     private lateinit var db: DBPanen
@@ -21,7 +27,9 @@ class Produk {
         this.petik = petik
     }
 
-    constructor(){}
+    constructor(fermentasi: Fermentasi){
+        this.fermentasi = fermentasi
+    }
 
     fun insertPanen(produksi: Produksi, petik: Petik) {
         val (resultPR, resultPE) = db.insertPanen(produksi, petik)
@@ -68,6 +76,42 @@ class Produk {
         }
     }
 
+    fun insertFermentasi(fer : Fermentasi){
+        val resultfer = db.insertFermentasi(fer)
+        if (resultfer == -1.toLong()) {
+            println(resultfer)
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
+    }
+    fun insertTransportasi(transport : Transportasi){
+        val resulttrans = db.insertTransportasi(transport)
+        if (resulttrans == -1.toLong()) {
+            println(resulttrans)
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
+    }
+    fun insertPulping1(pulping1 : pulpingSatu){
+        val resultPulping1 = db.insertPulping1(pulping1)
+        if (resultPulping1 == -1.toLong()) {
+            println(resultPulping1)
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
+    }
+    fun <T: Standard> insertStandard(data: T, TABLE_NAME: String) {
+        val result = db.insertStandard<T>(data, TABLE_NAME)
+        if (result == -1.toLong()) {
+            println(result)
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
+    }
     fun readPanen(): MutableList<Produk> {
         val panen = db.readPanen()
         return panen
