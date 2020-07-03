@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
-import frinsa.hpp.data.DBPanen
-import frinsa.hpp.data.TABLE_PULPING2
+import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.pulpingDua
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_pulping2_.*
@@ -58,7 +57,7 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPulping2.toInt()
                     )
-                        db.insertStandard<pulpingDua>(pulping2, TABLE_PULPING2)
+                        db.insertStandard<pulpingDua>(pulping2, TABLE_PULPING2, COL_ID_PULPING2, COL_TGL_PULPING2, COL_BERAT_PULPING2, COL_BIAYA_PULPING2)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

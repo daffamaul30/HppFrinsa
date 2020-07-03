@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
-import frinsa.hpp.data.DBPanen
-import frinsa.hpp.data.TABLE_SIZE_GRADING
+import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.sizeGrading
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_size_grading_.*
@@ -58,7 +57,7 @@ class SizeGrading_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosSizeGrading.toInt()
                     )
-                        db.insertStandard<sizeGrading>(sizeGrading, TABLE_SIZE_GRADING)
+                        db.insertStandard<sizeGrading>(sizeGrading, TABLE_SIZE_GRADING, COL_ID_SIZE_GRADING, COL_TGL_SIZE_GRADING, COL_BERAT_SIZE_GRADING, COL_BIAYA_SIZE_GRADING)
                         //test getData
 
                         alertDialog.dismiss()

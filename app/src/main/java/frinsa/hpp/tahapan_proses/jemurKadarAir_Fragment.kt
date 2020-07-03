@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
-import frinsa.hpp.data.DBPanen
-import frinsa.hpp.data.TABLE_JEMUR_KADAR_AIR
+import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.jemurKadarAir
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_jemur_kadar_air.*
@@ -63,7 +62,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
                         kadarAir = edtKadarAir.toDouble(),
                         biaya = edtOngkosJemur.toInt()
                     )
-                        db.insertKadarAir(jemurkadarAir, TABLE_JEMUR_KADAR_AIR)
+                        db.insertKadarAir(jemurkadarAir, TABLE_JEMUR_KADAR_AIR, COL_ID_KADAR_AIR, COL_TGL_KADAR_AIR, COL_BERAT_KADAR_AIR, COL_KDR_AIR_KADAR_AIR, COL_BIAYA_JEMUR_KADAR_AIR)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

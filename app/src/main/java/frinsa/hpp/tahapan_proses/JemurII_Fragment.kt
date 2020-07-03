@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
-import frinsa.hpp.data.DBPanen
-import frinsa.hpp.data.TABLE_JEMUR2
+import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.jemurDua
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_jemur3_.*
@@ -61,7 +60,7 @@ class JemurII_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosJemur.toInt()
                     )
-                        db.insertStandard<jemurDua>(jemur2, TABLE_JEMUR2)
+                        db.insertStandard<jemurDua>(jemur2, TABLE_JEMUR2, COL_ID_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

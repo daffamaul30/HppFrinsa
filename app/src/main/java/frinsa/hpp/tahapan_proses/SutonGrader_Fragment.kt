@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
-import frinsa.hpp.data.DBPanen
-import frinsa.hpp.data.TABLE_SUTON_GRADER
+import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.sutonGrader
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_suton_grader_.*
@@ -58,7 +57,7 @@ class SutonGrader_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosSutonGrading.toInt()
                     )
-                        db.insertStandard<sutonGrader>(sutonGrader, TABLE_SUTON_GRADER)
+                        db.insertStandard<sutonGrader>(sutonGrader, TABLE_SUTON_GRADER, COL_ID_SUTON_GRADER, COL_TGL_SUTON_GRADER, COL_BERAT_SUTON_GRADER, COL_BIAYA_SUTON_GRADER)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

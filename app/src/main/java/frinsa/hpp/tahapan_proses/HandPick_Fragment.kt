@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
-import frinsa.hpp.data.DBPanen
-import frinsa.hpp.data.TABLE_HAND_PICK
+import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.Standard
 import frinsa.hpp.data.tahap.handPick
 import kotlinx.android.synthetic.main.dialog_submit.view.*
@@ -62,7 +61,7 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPick.toInt()
                     )
-                        db.insertStandard<handPick>(HandPick, TABLE_HAND_PICK)
+                        db.insertStandard<handPick>(HandPick, TABLE_HAND_PICK, COL_ID_HAND_PICK, COL_TGL_HAND_PICK, COL_BERAT_HAND_PICK, COL_BIAYA_HAND_PICK)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

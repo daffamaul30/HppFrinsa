@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
-import frinsa.hpp.data.DBPanen
-import frinsa.hpp.data.TABLE_HULLING
+import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.Hulling
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_hand_pick_.*
@@ -65,7 +64,7 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
                         berat = edtOngkosHulling.toDouble(),
                         kadarAir = edtKadarAir.toDouble()
                     )
-                        db.insertKadarAir<Hulling>(hulling, TABLE_HULLING)
+                        db.insertKadarAir<Hulling>(hulling, TABLE_HULLING, COL_ID_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
                         alertDialog.dismiss()
                         activity?.finish()
                     }
