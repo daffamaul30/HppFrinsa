@@ -62,7 +62,14 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
                         kadarAir = edtKadarAir.toDouble(),
                         biaya = edtOngkosJemur.toInt()
                     )
-                        db.insertKadarAir(jemurkadarAir, TABLE_JEMUR_KADAR_AIR, COL_ID_KADAR_AIR, COL_TGL_KADAR_AIR, COL_BERAT_KADAR_AIR, COL_KDR_AIR_KADAR_AIR, COL_BIAYA_JEMUR_KADAR_AIR)
+                        db.insertKadarAir(
+                            jemurkadarAir,
+                            TABLE_JEMUR_KADAR_AIR,
+                            COL_ID_PRODUKSI_KADAR_AIR,
+                            COL_TGL_KADAR_AIR,
+                            COL_BERAT_KADAR_AIR,
+                            COL_KDR_AIR_KADAR_AIR,
+                            COL_BIAYA_JEMUR_KADAR_AIR)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

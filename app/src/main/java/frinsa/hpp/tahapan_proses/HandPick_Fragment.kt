@@ -61,7 +61,13 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPick.toInt()
                     )
-                        db.insertStandard<handPick>(HandPick, TABLE_HAND_PICK, COL_ID_HAND_PICK, COL_TGL_HAND_PICK, COL_BERAT_HAND_PICK, COL_BIAYA_HAND_PICK)
+                        db.insertStandard<handPick>(
+                            HandPick,
+                            TABLE_HAND_PICK,
+                            COL_ID_PRODUKSI_HAND_PICK,
+                            COL_TGL_HAND_PICK,
+                            COL_BERAT_HAND_PICK,
+                            COL_BIAYA_HAND_PICK)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

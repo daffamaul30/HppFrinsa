@@ -57,7 +57,13 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPulping2.toInt()
                     )
-                        db.insertStandard<pulpingDua>(pulping2, TABLE_PULPING2, COL_ID_PULPING2, COL_TGL_PULPING2, COL_BERAT_PULPING2, COL_BIAYA_PULPING2)
+                        db.insertStandard<pulpingDua>(
+                            pulping2,
+                            TABLE_PULPING2,
+                            COL_ID_PRODUKSI_PULPING2,
+                            COL_TGL_PULPING2,
+                            COL_BERAT_PULPING2,
+                            COL_BIAYA_PULPING2)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

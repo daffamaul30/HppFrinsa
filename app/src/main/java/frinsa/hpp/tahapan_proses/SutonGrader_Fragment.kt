@@ -57,7 +57,13 @@ class SutonGrader_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosSutonGrading.toInt()
                     )
-                        db.insertStandard<sutonGrader>(sutonGrader, TABLE_SUTON_GRADER, COL_ID_SUTON_GRADER, COL_TGL_SUTON_GRADER, COL_BERAT_SUTON_GRADER, COL_BIAYA_SUTON_GRADER)
+                        db.insertStandard<sutonGrader>(
+                            sutonGrader,
+                            TABLE_SUTON_GRADER,
+                            COL_ID_PRODUKSI_SUTON_GRADER,
+                            COL_TGL_SUTON_GRADER,
+                            COL_BERAT_SUTON_GRADER,
+                            COL_BIAYA_SUTON_GRADER)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

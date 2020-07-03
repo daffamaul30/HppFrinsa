@@ -66,7 +66,13 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
                             berat = edtBerat.toDouble(),
                             biaya = edtOngkosSorter.toInt()
                         )
-                        db.insertStandard<colorSorter>(colorSorter, TABLE_COLOR_SORTER, COL_ID_COLOR_SORTER, COL_TGL_COLOR_SORTER, COL_BERAT_COLOR_SORTER, COL_BIAYA_COLOR_SORTER)
+                        db.insertStandard<colorSorter>(
+                            colorSorter,
+                            TABLE_COLOR_SORTER,
+                            COL_ID_PRODUKSI_COLOR_SORTER,
+                            COL_TGL_COLOR_SORTER,
+                            COL_BERAT_COLOR_SORTER,
+                            COL_BIAYA_COLOR_SORTER)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

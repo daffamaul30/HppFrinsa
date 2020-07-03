@@ -64,7 +64,14 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
                         berat = edtOngkosHulling.toDouble(),
                         kadarAir = edtKadarAir.toDouble()
                     )
-                        db.insertKadarAir<Hulling>(hulling, TABLE_HULLING, COL_ID_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
+                        db.insertKadarAir<Hulling>(
+                            hulling,
+                            TABLE_HULLING,
+                            COL_ID_PRODUKSI_HULLING,
+                            COL_TGL_HULLING,
+                            COL_BERAT_HULLING,
+                            COL_KDR_AIR_HULLING,
+                            COL_BIAYA_HULLING)
                         alertDialog.dismiss()
                         activity?.finish()
                     }

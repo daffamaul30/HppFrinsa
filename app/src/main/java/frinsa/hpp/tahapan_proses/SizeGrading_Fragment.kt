@@ -57,9 +57,13 @@ class SizeGrading_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosSizeGrading.toInt()
                     )
-                        db.insertStandard<sizeGrading>(sizeGrading, TABLE_SIZE_GRADING, COL_ID_SIZE_GRADING, COL_TGL_SIZE_GRADING, COL_BERAT_SIZE_GRADING, COL_BIAYA_SIZE_GRADING)
-                        //test getData
-
+                        db.insertStandard<sizeGrading>(
+                            sizeGrading,
+                            TABLE_SIZE_GRADING,
+                            COL_ID_PRODUKSI_SIZE_GRADING,
+                            COL_TGL_SIZE_GRADING,
+                            COL_BERAT_SIZE_GRADING,
+                            COL_BIAYA_SIZE_GRADING)
                         alertDialog.dismiss()
                         activity?.finish()
                     }
