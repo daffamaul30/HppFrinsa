@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.Produk
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_color_sorter_.*
 import kotlinx.android.synthetic.main.fragment_color_sorter_.view.*
@@ -23,6 +24,7 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
     private lateinit var edtOngkosSorter: String
+    private lateinit var produk: Produk
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

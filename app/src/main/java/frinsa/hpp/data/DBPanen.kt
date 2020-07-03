@@ -193,7 +193,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         onCreate(db)
     }
 
-    fun insertPanen(pr: Produksi, pe: Petik): Pair<Long, Long> {
+    fun insertPanen(pr: Produksi, pe: Petik) {
         val db = this.writableDatabase
 
         //Tabel Produksi
@@ -220,7 +220,47 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cvC.put(COL_BIAYA_CUCI, pe.biaya_cuci)
         var resultPE = db.insert(TABLE_PETIK, null, cvC)
 
-        return Pair(resultPR, resultPE)
+        if ((resultPR == -1.toLong()) || (resultPE == -1.toLong())) {
+//            println(resultPR)
+//            println(resultPE)
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
+
+        //TEST GET DATA
+        val panen = readPanen()
+        println(panen.size)
+        if (panen.size > 0) {
+            for (i in 0..(panen.size-1)) {
+                print(panen.get(i).produksi.id_produksi)
+                println(panen.get(i).petik.id_petik_produksi)
+                if (panen.get(i).produksi.id_produksi == panen.get(i).petik.id_petik_produksi) {
+                    kotlin.io.println("MASOK")
+                    println("""
+                                        DATA KE-${i+1}
+                                        PRODUKSI
+                                        id Produksi = ${panen.get(i).produksi.id_produksi}
+                                        sumber = ${panen.get(i).produksi.sumber}
+                                        beli dari = ${panen.get(i).produksi.beli_dari}
+                                        bentuk = ${panen.get(i).produksi.bentuk}
+                                        varietas = ${panen.get(i).produksi.varietas}
+                                        blok = ${panen.get(i).produksi.blok}
+                                        proses = ${panen.get(i).produksi.proses}
+                                        status = ${panen.get(i).produksi.status}
+                                        \n
+                                        PETIK
+                                        id Petik = ${panen.get(i).petik.id_petik}
+                                        id Produksi = ${panen.get(i).petik.id_petik_produksi}
+                                        tanggal Petik = ${panen.get(i).petik.tgl_petik}
+                                        berat = ${panen.get(i).petik.berat}
+                                        biaya petik = ${panen.get(i).petik.biaya_petik}
+                                        biaya ojek = ${panen.get(i).petik.biaya_ojek}
+                                        biaya cuci = ${panen.get(i).petik.biaya_cuci}
+                                    """.trimIndent())
+                }
+            }
+        }
     }
 
     fun readPanen():  MutableList<Produk> {
@@ -260,7 +300,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return list
     }
 
-    fun insertFermentasi(f: Fermentasi): Long {
+    fun insertFermentasi(f: Fermentasi) {
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -272,10 +312,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cv.put(COL_BIAYA_MUAT, f.biaya_muat)
         var result = db.insert(TABLE_FERMEN, null, cv)
 
-        return result
+        if (result == -1.toLong()) {
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
     }
 
-    fun insertTransportasi(t: Transportasi): Long {
+    fun insertTransportasi(t: Transportasi) {
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -288,10 +332,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cv.put(COL_BIAYA_BONGKAR, t.biaya_bongkar)
         var result = db.insert(TABLE_TRANSPORTASI, null, cv)
 
-        return result
+        if (result == -1.toLong()) {
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
     }
 
-    fun insertPulping1(p: pulpingSatu): Long {
+    fun insertPulping1(p: pulpingSatu) {
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -306,10 +354,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cv.put(COL_BIAYA_MUAT, p.biaya_muat)
         var result = db.insert(TABLE_PULPING1, null, cv)
 
-        return result
+        if (result == -1.toLong()) {
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
     }
 
-    fun <T: Standard> insertStandard(data: T, TABLE_NAME: String): Long {
+    fun <T: Standard> insertStandard(data: T, TABLE_NAME: String) {
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -320,7 +372,11 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cv.put(COL_BIAYA, data.biaya)
         var result = db.insert(TABLE_NAME, null, cv)
 
-        return result
+        if (result == -1.toLong()) {
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
     }
 
     fun getIdProduksi(TABLE_NAME: String): Int {
