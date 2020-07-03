@@ -378,7 +378,25 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             toastMessage("Berhasil")
         }
     }
+    fun <A: jemurKadarAir> insertKadarAir(data : A, TABLE_NAME: String){
+        val db = this.writableDatabase
 
+        var cv = ContentValues()
+
+        cv.put(COL_ID_PRODUKSI, data.id2)
+        cv.put(COL_TGL, data.tanggal)
+        cv.put(COL_BERAT, data.berat)
+        cv.put(COL_KDR_AIR, data.kadarAir)
+        cv.put(COL_BIAYA, data.biaya)
+
+        var result = db.insert(TABLE_NAME, null, cv)
+
+        if (result == -1.toLong()) {
+            toastMessage("Gagal")
+        }else {
+            toastMessage("Berhasil")
+        }
+    }
     fun getIdProduksi(TABLE_NAME: String): Int {
         val db = this.readableDatabase
         val result = db.rawQuery("SELECT * FROM $TABLE_NAME", null)

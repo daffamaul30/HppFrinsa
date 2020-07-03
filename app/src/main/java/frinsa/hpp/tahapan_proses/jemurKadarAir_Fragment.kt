@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.TABLE_JEMUR_KADAR_AIR
+import frinsa.hpp.data.tahap.jemurKadarAir
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_jemur_kadar_air.*
 import kotlinx.android.synthetic.main.fragment_jemur_kadar_air.view.*
@@ -23,6 +26,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtBerat: String
     private lateinit var edtOngkosJemur: String
     private lateinit var edtKadarAir: String
+    private lateinit var db : DBPanen
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +56,13 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                    val jemurkadarAir = jemurKadarAir(
+                        tanggal = tvTgl,
+                        berat = edtBerat.toDouble(),
+                        kadarAir = edtKadarAir.toDouble(),
+                        biaya = edtOngkosJemur.toInt()
+                    )
+                        db.insertKadarAir(jemurkadarAir, TABLE_JEMUR_KADAR_AIR)
                         //test getData
 
                         alertDialog.dismiss()

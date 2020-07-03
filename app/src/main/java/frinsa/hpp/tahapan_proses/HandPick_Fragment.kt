@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.TABLE_HAND_PICK
+import frinsa.hpp.data.tahap.handPick
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_hand_pick_.*
 import kotlinx.android.synthetic.main.fragment_hand_pick_.view.*
@@ -23,7 +26,7 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
     private lateinit var edtOngkosPick: String
-
+    private lateinit var db : DBPanen
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +55,13 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                    val HandPick = handPick(
+                        id2 =0,
+                        tanggal = tvTgl,
+                        berat = edtBerat.toDouble(),
+                        biaya = edtOngkosPick.toInt()
+                    )
+                        db.insertStandard(HandPick, TABLE_HAND_PICK)
                         //test getData
 
                         alertDialog.dismiss()

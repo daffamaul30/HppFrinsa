@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.tahap.Transportasi
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_transportasi_.*
 import kotlinx.android.synthetic.main.fragment_transportasi_.view.*
@@ -24,6 +26,7 @@ class Transportasi_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtOngkosTransportasi: String
     private lateinit var edtOngkosPengawalan: String
     private lateinit var edtOngkosBongkar: String
+    private lateinit var db : DBPanen
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +53,16 @@ class Transportasi_Fragment : Fragment(), View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                    val transportasi = Transportasi(
+                        id = 0,
+                        id2 = 0,
+                        tanggal = tvTgl,
+                        berat = edtBerat.toDouble(),
+                        biaya_bongkar = edtOngkosBongkar.toInt(),
+                        biaya_kawal = edtOngkosPengawalan.toInt(),
+                        biaya_transport = edtOngkosTransportasi.toInt()
+                    )
+                        db.insertTransportasi(transportasi)
                         //test getData
 
                         alertDialog.dismiss()

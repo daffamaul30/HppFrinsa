@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
 import frinsa.hpp.ReviewHasilBeli
+import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.tahap.Fermentasi
 import kotlinx.android.synthetic.main.activity_input_beli.*
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
@@ -28,6 +30,7 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtBerat: String
     private lateinit var edtOngkosFermentasi: String
     private lateinit var edtOngkosMuat: String
+    private lateinit var db : DBPanen
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +43,6 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
 
         view.btn_kirim_fermentasi.setOnClickListener(this)
         view.btn_datepicker_fermentasi.setOnClickListener(this)
-
         return view
     }
 
@@ -56,7 +58,15 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-
+                    val fermentasi = Fermentasi(
+                        id = 0,
+                        id2 = 0,
+                        tanggal = tvTgl,
+                        berat = edtBerat.toDouble(),
+                        biaya_fermentasi = edtOngkosFermentasi.toInt(),
+                        biaya_muat = edtOngkosMuat.toInt()
+                    )
+                        db.insertFermentasi(fermentasi)
                         //test getData
 
                         alertDialog.dismiss()
