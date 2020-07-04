@@ -27,6 +27,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     private lateinit var produk : Produk
     val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
+ 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,6 +114,26 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         val cardViewHeroAdapter = SubProsesAdapter(this, list)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
     }
+//    private fun viewProses(){
+//        val displayproses : Pair<MutableList<Panen>, MutableList<Cherry>> = data.getPanen()
+//        val adapterproses = SubProsesAdapter (this, displayproses)
+//    }
+
+    private fun validation(): Boolean {
+        var valid = true
+        if (posisi.size > 1) {
+            for (i in 0 until posisi.size) {
+                if (i == posisi.size-1) {
+                    break
+                } else {
+                    if ((spList.get(posisi.get(i)).proses == spList.get(posisi.get(i+1)).proses) || (spList.get(posisi.get(i)).tahap == spList.get(posisi.get(i+1)).tahap)) {
+                        valid = false
+                    }
+                }
+            }
+        }
+        return valid
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -162,13 +183,18 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_proses -> {
-                var stringBuilder = StringBuilder()
-                posisi.forEach {
-                    stringBuilder.append(spList.get(it).proses).append(" ").append(spList.get(it).tahap).append("\n")
-                }
+                val valid = validation()
+                Toast.makeText(this, valid.toString(), Toast.LENGTH_SHORT).show()
+
+                if (valid) {
+                    var stringBuilder = StringBuilder()
+                    posisi.forEach {
+                        stringBuilder.append(spList.get(it).proses).append(" ").append(spList.get(it).tahap).append("\n")
+                    }
 //                println(posisi.size)
-                println(stringBuilder)
-                Toast.makeText(this, stringBuilder, Toast.LENGTH_SHORT).show()
+                    println(stringBuilder)
+                    Toast.makeText(this, stringBuilder, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

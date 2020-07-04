@@ -11,10 +11,9 @@ import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.Produksi
 import kotlinx.android.synthetic.main.cardviewproses.*
 import kotlinx.android.synthetic.main.cardviewproses.view.*
-
+val posisi: MutableList<Int> = ArrayList()
 class SubProsesAdapter(val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<SubProsesAdapter.cardViewProses>(){
 
-val posisi: MutableList<Int> = ArrayList()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
