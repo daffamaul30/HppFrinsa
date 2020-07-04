@@ -351,30 +351,30 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         println(panen.size)
         if (panen.size > 0) {
             for (i in 0..(panen.size-1)) {
-                print(panen.get(i).produksi.id_produksi)
-                println(panen.get(i).petik.id_petik_produksi)
-                if (panen.get(i).produksi.id_produksi == panen.get(i).petik.id_petik_produksi) {
+                print(panen.get(i).produksi?.id_produksi)
+                println(panen.get(i).petik?.id_petik_produksi)
+                if (panen.get(i).produksi?.id_produksi == panen.get(i).petik?.id_petik_produksi) {
                     kotlin.io.println("MASOK")
                     println("""
                                         DATA KE-${i+1}
                                         PRODUKSI
-                                        id Produksi = ${panen.get(i).produksi.id_produksi}
-                                        sumber = ${panen.get(i).produksi.sumber}
-                                        beli dari = ${panen.get(i).produksi.beli_dari}
-                                        bentuk = ${panen.get(i).produksi.bentuk}
-                                        varietas = ${panen.get(i).produksi.varietas}
-                                        blok = ${panen.get(i).produksi.blok}
-                                        proses = ${panen.get(i).produksi.proses}
-                                        status = ${panen.get(i).produksi.status}
+                                        id Produksi = ${panen.get(i).produksi?.id_produksi}
+                                        sumber = ${panen.get(i).produksi?.sumber}
+                                        beli dari = ${panen.get(i).produksi?.beli_dari}
+                                        bentuk = ${panen.get(i).produksi?.bentuk}
+                                        varietas = ${panen.get(i).produksi?.varietas}
+                                        blok = ${panen.get(i).produksi?.blok}
+                                        proses = ${panen.get(i).produksi?.proses}
+                                        status = ${panen.get(i).produksi?.status}
                                         \n
                                         PETIK
-                                        id Petik = ${panen.get(i).petik.id_petik}
-                                        id Produksi = ${panen.get(i).petik.id_petik_produksi}
-                                        tanggal Petik = ${panen.get(i).petik.tgl_petik}
-                                        berat = ${panen.get(i).petik.berat}
-                                        biaya petik = ${panen.get(i).petik.biaya_petik}
-                                        biaya ojek = ${panen.get(i).petik.biaya_ojek}
-                                        biaya cuci = ${panen.get(i).petik.biaya_cuci}
+                                        id Petik = ${panen.get(i).petik?.id_petik}
+                                        id Produksi = ${panen.get(i).petik?.id_petik_produksi}
+                                        tanggal Petik = ${panen.get(i).petik?.tgl_petik}
+                                        berat = ${panen.get(i).petik?.berat}
+                                        biaya petik = ${panen.get(i).petik?.biaya_petik}
+                                        biaya ojek = ${panen.get(i).petik?.biaya_ojek}
+                                        biaya cuci = ${panen.get(i).petik?.biaya_cuci}
                                     """.trimIndent())
                 }
             }
@@ -549,11 +549,28 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 transportasi.biaya_kawal = result.getString(result.getColumnIndex(COL_BIAYA_KAWAL_TRANSPORTASI)).toInt()
                 transportasi.biaya_transport = result.getString(result.getColumnIndex(COL_BIAYA_TRANSPORT)).toInt()
 
-                var produk = Produk(produksi,petik,fermentasi, transportasi, Pulping1, Pulping2, JemurKadarAir, Jemursatu, Jemurdua, hulling, SutonGrader, SizeGrading, ColorSorter, handPick )
+                var produk = Produk(
+                    produksi,
+                    petik,
+                    fermentasi,
+                    transportasi,
+                    Pulping1,
+                    Pulping2,
+                    JemurKadarAir,
+                    Jemursatu,
+                    Jemurdua,
+                    hulling,
+                    SutonGrader,
+                    SizeGrading,
+                    ColorSorter,
+                    handPick )
+
+                list.add(produk)
             }while (result.moveToNext())
         }
         result.close()
         db.close()
+        println(list.size)
         return list
     }
 
