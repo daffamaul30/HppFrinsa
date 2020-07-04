@@ -64,68 +64,11 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             )
         }
         displayList.addAll(spList)
-        showList(displayList)
-    }
-
-
-//        data.getPanen()
-//        var proses : ArrayList() = data.getPanen()
-
-//        val DPlist = ModelDaftarProduksi(
-//            "27-04-2020",
-//            "A",
-//            "Arabica",
-//            10.0,
-//            "Full-Wash",
-//            2000000.00,
-//            "Pulping"
-//        )
-//
-//        val DPlist1 = ModelDaftarProduksi(
-//            "22-01-2020",
-//            "B",
-//            "Luwak White",
-//            12.0,
-//            "Lact Fully Washed",
-//            1000000.00,
-//            "Hulling"
-//        )
-//        val DPlist2 = ModelDaftarProduksi(
-//            "22-02-2020",
-//            "C",
-//            "Grande",
-//            20.0,
-//            "Wet Hulled",
-//            2021000.00,
-//            "Jemur"
-//        )
-//        val DPlist3 = ModelDaftarProduksi(
-//            "11-03-2020",
-//            "D",
-//            "Mocca",
-//            15.0,
-//            "Natural",
-//            2910000.00,
-//            "Color Sorter"
-//        )
-//        spList.add(DPlist)
-//        spList.add(DPlist1)
-//        spList.add(DPlist2)
-//        spList.add(DPlist3)
-//        spList.add(DPlist)
-//        displayList.addAll(spList)
-
-
-    fun showList(list: MutableList<ModelDaftarProduksi>) {
 
         rv_hasil_produksi.layoutManager = LinearLayoutManager(this)
-        val cardViewHeroAdapter = SubProsesAdapter(this, list)
+        val cardViewHeroAdapter = SubProsesAdapter(this, displayList)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
     }
-//    private fun viewProses(){
-//        val displayproses : Pair<MutableList<Panen>, MutableList<Cherry>> = data.getPanen()
-//        val adapterproses = SubProsesAdapter (this, displayproses)
-//    }
 
     private fun validation(): Pair<Boolean, String?> {
         var valid = true
@@ -209,6 +152,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                 if (valid) {
                     val step = name.toString()?.let { db.getStepProses(it) }
                     val kode = getCode(step)
+                    Toast.makeText(this, kode, Toast.LENGTH_SHORT).show()
 //                    var stringBuilder = StringBuilder()
 //                    posisi.forEach {
 //                        stringBuilder.append(spList.get(it).proses).append(" ").append(spList.get(it).tahap).append("\n")
@@ -218,6 +162,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     val intent = Intent(this@SubProses, TahapanProses::class.java)
                     intent.putExtra(TahapanProses.KODE_FRAG, kode)
                     intent.putExtra(TahapanProses.TITLE, kode.capitalizeWords())
+                    startActivity(intent)
+                    finish()
                 }
             }
         }

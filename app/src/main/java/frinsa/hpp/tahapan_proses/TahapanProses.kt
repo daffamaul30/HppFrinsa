@@ -15,7 +15,6 @@ class TahapanProses : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tahapan_proses)
         val kode = intent.getStringExtra(KODE_FRAG)
-//        val kode = "pulping1"
         val judul = intent.getStringExtra(TITLE)
 
         //set action bar title
