@@ -1,6 +1,7 @@
 package frinsa.hpp.daftar_produksi
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -25,6 +26,12 @@ class MainDaftarProduksi : AppCompatActivity() {
             (supportActionBar as ActionBar).title = "Daftar Produksi"
         }
         setupViewPager(viewPagerDaftarProduksi)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+
+        return true
     }
 
 }
