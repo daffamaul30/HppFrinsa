@@ -1,8 +1,10 @@
 package frinsa.hpp
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
+import frinsa.hpp.data.Produksi
+import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.activity_sub_proses.*
+import kotlinx.android.synthetic.main.cardviewproses.*
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.tan
@@ -21,9 +26,6 @@ class SubProses: AppCompatActivity() {
     private lateinit var produk : Produk
     val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_proses)
@@ -48,8 +50,11 @@ class SubProses: AppCompatActivity() {
                     tahap = it.produksi?.status
                 )
             )
-            displayList.addAll(spList)
         }
+        displayList.addAll(spList)
+        showList(displayList)
+    }
+
 
 //        data.getPanen()
 //        var proses : ArrayList() = data.getPanen()
@@ -98,8 +103,10 @@ class SubProses: AppCompatActivity() {
 //        spList.add(DPlist)
 //        displayList.addAll(spList)
 
+
+    fun showList(list: MutableList<ModelDaftarProduksi>) {
         rv_hasil_produksi.layoutManager = LinearLayoutManager(this)
-        val cardViewHeroAdapter = SubProsesAdapter(this, displayList)
+        val cardViewHeroAdapter = SubProsesAdapter(this, list)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
     }
 
@@ -117,21 +124,22 @@ class SubProses: AppCompatActivity() {
 
                     if (newText!!.isNotEmpty()){
                         displayList.clear()
+                        showList(displayList)
                         val search = newText.toLowerCase(Locale.getDefault())
                         spList.forEach(){
                             if (it.proses?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
-                            if (it.tanggal?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.tanggal?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
-                            if (it.varietas?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.varietas?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
-                            if (it.blok?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.blok?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
-                            if (it.tahap?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.tahap?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
                         }
@@ -139,9 +147,10 @@ class SubProses: AppCompatActivity() {
                     }else{
                         displayList.clear()
                         displayList.addAll(spList)
+                        showList(displayList)
                         rv_hasil_produksi.adapter?.notifyDataSetChanged()
                     }
-
+//                    showList(displayList)
                     return true
                 }
             })
