@@ -23,56 +23,8 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:elevation="10dp">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_column="1"
-                    android:layout_height="match_parent"
-                    android:layout_width="325dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginBottom="2dp"
-                    app:cardCornerRadius="10dp">
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_column="2"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
-                    app:cardCornerRadius="10dp">
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="CARI" />
-                </androidx.cardview.widget.CardView>
-            </TableRow>
-
-        </TableLayout>
-
-    </androidx.cardview.widget.CardView>
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPagerDaftarProduksi"
-        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
