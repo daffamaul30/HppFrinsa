@@ -3,6 +3,8 @@ package frinsa.hpp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +17,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.tan
 
-class SubProses: AppCompatActivity() {
+class SubProses: AppCompatActivity(), View.OnClickListener {
 //    private val context = this
     private lateinit var db : DBPanen
     private lateinit var produk : Produk
@@ -32,10 +34,11 @@ class SubProses: AppCompatActivity() {
             (supportActionBar as ActionBar).title = "Lanjutkan Produksi"
         }
 
+        btn_proses.setOnClickListener(this)
+
         produk = Produk()
         db = DBPanen(this)
         val data = db.readPanen()
-        println(data.size)
         data.forEach() {
             spList.add(
                 ModelDaftarProduksi(
@@ -48,14 +51,10 @@ class SubProses: AppCompatActivity() {
                     tahap = it.produksi?.status
                 )
             )
-            displayList.addAll(spList)
         }
-        showList(displayList)
-    }
-
-    fun showList(list: MutableList<ModelDaftarProduksi>) {
+        displayList.addAll(spList)
         rv_hasil_produksi.layoutManager = LinearLayoutManager(this)
-        val cardViewHeroAdapter = SubProsesAdapter(this, list)
+        val cardViewHeroAdapter = SubProsesAdapter(this, displayList)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
     }
 //    private fun viewProses(){
@@ -76,7 +75,6 @@ class SubProses: AppCompatActivity() {
 
                     if (newText!!.isNotEmpty()){
                         displayList.clear()
-                        showList(displayList)
                         val search = newText.toLowerCase(Locale.getDefault())
                         spList.forEach(){
                             if (it.proses?.toLowerCase(Locale.getDefault())!!.contains(search)){
@@ -99,14 +97,26 @@ class SubProses: AppCompatActivity() {
                     }else{
                         displayList.clear()
                         displayList.addAll(spList)
-                        showList(displayList)
                         rv_hasil_produksi.adapter?.notifyDataSetChanged()
                     }
-//                    showList(displayList)
                     return true
                 }
             })
         }
         return true
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btn_proses -> {
+                var stringBuilder = StringBuilder()
+                posisi.forEach {
+                    stringBuilder.append(spList.get(it).proses).append(" ").append(spList.get(it).tahap).append("\n")
+                }
+//                println(posisi.size)
+                println(stringBuilder)
+                Toast.makeText(this, stringBuilder, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
