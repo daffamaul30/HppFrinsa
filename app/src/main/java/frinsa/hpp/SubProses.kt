@@ -76,22 +76,22 @@ class SubProses: AppCompatActivity() {
 
                     if (newText!!.isNotEmpty()){
                         displayList.clear()
-//                        showList(displayList)
+                        showList(displayList)
                         val search = newText.toLowerCase(Locale.getDefault())
                         spList.forEach(){
                             if (it.proses?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
-                            if (it.tanggal?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.tanggal?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
-                            if (it.varietas?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.varietas?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
-                            if (it.blok?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.blok?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
-                            if (it.tahap?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.tahap?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
                         }
@@ -99,7 +99,7 @@ class SubProses: AppCompatActivity() {
                     }else{
                         displayList.clear()
                         displayList.addAll(spList)
-//                        showList(displayList)
+                        showList(displayList)
                         rv_hasil_produksi.adapter?.notifyDataSetChanged()
                     }
 //                    showList(displayList)
