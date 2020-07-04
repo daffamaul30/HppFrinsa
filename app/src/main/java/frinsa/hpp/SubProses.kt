@@ -50,52 +50,12 @@ class SubProses: AppCompatActivity() {
             )
             displayList.addAll(spList)
         }
+        showList(displayList)
+    }
 
-//        val DPlist = ModelDaftarProduksi(
-//            "27-04-2020",
-//            "A",
-//            "Arabica",
-//            10.0,
-//            "Full-Wash",
-//            2000000.00,
-//            "Pulping"
-//        )
-//
-//        val DPlist1 = ModelDaftarProduksi(
-//            "22-01-2020",
-//            "B",
-//            "Luwak White",
-//            12.0,
-//            "Lact Fully Washed",
-//            1000000.00,
-//            "Hulling"
-//        )
-//        val DPlist2 = ModelDaftarProduksi(
-//            "22-02-2020",
-//            "C",
-//            "Grande",
-//            20.0,
-//            "Wet Hulled",
-//            2021000.00,
-//            "Jemur"
-//        )
-//        val DPlist3 = ModelDaftarProduksi(
-//            "11-03-2020",
-//            "D",
-//            "Mocca",
-//            15.0,
-//            "Natural",
-//            2910000.00,
-//            "Color Sorter"
-//        )
-//        spList.add(DPlist)
-//        spList.add(DPlist1)
-//        spList.add(DPlist2)
-//        spList.add(DPlist3)
-//        spList.add(DPlist)
-//        displayList.addAll(spList)
+    fun showList(list: MutableList<ModelDaftarProduksi>) {
         rv_hasil_produksi.layoutManager = LinearLayoutManager(this)
-        val cardViewHeroAdapter = SubProsesAdapter(this, displayList)
+        val cardViewHeroAdapter = SubProsesAdapter(this, list)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
     }
 //    private fun viewProses(){
@@ -116,6 +76,7 @@ class SubProses: AppCompatActivity() {
 
                     if (newText!!.isNotEmpty()){
                         displayList.clear()
+//                        showList(displayList)
                         val search = newText.toLowerCase(Locale.getDefault())
                         spList.forEach(){
                             if (it.proses?.toLowerCase(Locale.getDefault())!!.contains(search)){
@@ -138,9 +99,10 @@ class SubProses: AppCompatActivity() {
                     }else{
                         displayList.clear()
                         displayList.addAll(spList)
+//                        showList(displayList)
                         rv_hasil_produksi.adapter?.notifyDataSetChanged()
                     }
-
+//                    showList(displayList)
                     return true
                 }
             })

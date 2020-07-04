@@ -574,6 +574,13 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return list
     }
 
+    fun getStepProses(nama: String): String? {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_PROSES WHERE $COL_NAME = $nama", null)
+        result.moveToFirst()
+        return result.getString(result.getColumnIndex(COL_STEP))
+    }
+
     fun insertFermentasi(f: Fermentasi) {
         val db = this.writableDatabase
 
