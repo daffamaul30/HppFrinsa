@@ -31,7 +31,7 @@ class FragmentProses: Fragment() {
             "Arabica",
             10.0,
             "Full-Wash",
-            2000000.00,
+            2000000,
             "terakhir"
         )
         dpList.add(DPlist)

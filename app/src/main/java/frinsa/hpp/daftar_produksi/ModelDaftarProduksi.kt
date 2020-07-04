@@ -11,6 +11,6 @@ data class ModelDaftarProduksi (
     var varietas:String?,
     var berat:Double?,
     var proses:String?,
-    var biaya:Double?,
+    var biaya:Int?,
     var tahap:String?
 ): Parcelable

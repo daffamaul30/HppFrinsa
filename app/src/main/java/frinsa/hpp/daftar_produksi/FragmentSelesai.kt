@@ -31,7 +31,7 @@ class FragmentSelesai: Fragment() {
             "Arabica",
             10.0,
             "Full-Wash",
-            2000000.00,
+            2000000,
             "terakhir"
         )
         val dpList: MutableList<ModelDaftarProduksi> = ArrayList()
