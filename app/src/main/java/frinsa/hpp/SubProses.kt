@@ -27,6 +27,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     private lateinit var produk : Produk
     val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_proses)
