@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.Produk
 import kotlinx.android.synthetic.main.activity_sub_proses.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -80,16 +81,14 @@ class SubProses: AppCompatActivity() {
         spList.add(DPlist)
         displayList.addAll(spList)
         data = DBPanen(this)
+        
 //        data.getPanen()
 //        var proses : ArrayList() = data.getPanen()
         rv_hasil_produksi.layoutManager = LinearLayoutManager(this)
         val cardViewHeroAdapter = SubProsesAdapter(this, displayList)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
     }
-//    private fun viewProses(){
-//        val displayproses : Pair<MutableList<Panen>, MutableList<Cherry>> = data.getPanen()
-//        val adapterproses = SubProsesAdapter (this, displayproses)
-//    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         val searchItem = menu?.findItem(R.id.menu_search)
