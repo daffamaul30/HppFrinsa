@@ -26,6 +26,7 @@ class FragmentProses: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val DPlist = ModelDaftarProduksi(
+            0,
             "27-04-2020",
             "A",
             "Arabica",

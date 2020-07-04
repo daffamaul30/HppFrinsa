@@ -34,6 +34,7 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
             itemView.sp_proses.text = modelDaftarProses.proses
             itemView.sp_biaya.text = modelDaftarProses.biaya.toString()
             itemView.sp_tahap.text = modelDaftarProses.tahap
+            itemView.sp_id.text = modelDaftarProses.id.toString()
         }
     }
     override fun onBindViewHolder(holder: cardViewProses, position: Int) {
@@ -49,11 +50,11 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
                 posisi.remove(holder.position)
             }
 
-            var stringBuilder = StringBuilder()
-            posisi.forEach {
-                stringBuilder.append(it.toString()).append("\n")
-            }
-            Toast.makeText(context, stringBuilder, Toast.LENGTH_SHORT).show()
+//            var stringBuilder = StringBuilder()
+//            posisi.forEach {
+//                stringBuilder.append(it.toString()).append("\n")
+//            }
+//            Toast.makeText(context, stringBuilder, Toast.LENGTH_SHORT).show()
         }
 
     }

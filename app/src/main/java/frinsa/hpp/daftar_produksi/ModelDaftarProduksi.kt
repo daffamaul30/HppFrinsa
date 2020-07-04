@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 //1st Data bagian Recycler View
 @Parcelize
 data class ModelDaftarProduksi (
+    var id: Int?,
     var tanggal:String?,
     var blok:String?,
     var varietas:String?,

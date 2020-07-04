@@ -35,7 +35,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     private lateinit var produk : Produk
     val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
- 
+    val listID: MutableList<Int> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +54,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         data.forEach() {
             spList.add(
                 ModelDaftarProduksi(
+                    id = it.produksi?.id_produksi,
                     tanggal = it.petik?.tgl_petik,
                     blok = it.produksi?.blok,
                     varietas = it.produksi?.varietas,
@@ -74,6 +76,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         var valid = true
         if (posisi.size > 1) {
             for (i in 0 until posisi.size) {
+                spList.get(posisi.get(i)).id?.let { listID.add(it) }
                 if (i == posisi.size-1) {
                     break
                 } else {
@@ -133,12 +136,12 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         return true
     }
 
-    fun getCode(Code: String): String {
-        val list = Code.split(",")
-        var listIndex = list.indexOf(spList.get(0).tahap)
-        var Index = list.get(listIndex+1)
+    fun getCode(step: String): String {
+        val list = step.split(",")
+        var current = list.indexOf(spList.get(0).tahap)
+        var code = list.get(current+1)
 
-        return Index
+        return code
     }
 
     fun String.capitalizeWords(): String = split(" ").map { it.capitalize() }.joinToString(" ")
