@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Pulping2_Fragment : Fragment(), View.OnClickListener {
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -57,15 +58,21 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPulping2.toInt()
                     )
-                        db.insertStandard<pulpingDua>(
+                        val success = db.insertStandard<pulpingDua>(
                             pulping2,
                             TABLE_PULPING2,
                             COL_ID_PRODUKSI_PULPING2,
                             COL_TGL_PULPING2,
                             COL_BERAT_PULPING2,
                             COL_BIAYA_PULPING2)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        if (success) {
+                            val result = db.updateStatus(idData, "pulping")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

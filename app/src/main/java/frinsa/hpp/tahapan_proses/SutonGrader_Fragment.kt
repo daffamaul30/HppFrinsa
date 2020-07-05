@@ -17,7 +17,8 @@ import kotlinx.android.synthetic.main.fragment_suton_grader_.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SutonGrader_Fragment : Fragment(), View.OnClickListener {
+class SutonGrader_Fragment: Fragment(), View.OnClickListener {
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -57,15 +58,21 @@ class SutonGrader_Fragment : Fragment(), View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosSutonGrading.toInt()
                     )
-                        db.insertStandard<sutonGrader>(
+                        val success = db.insertStandard<sutonGrader>(
                             sutonGrader,
                             TABLE_SUTON_GRADER,
                             COL_ID_PRODUKSI_SUTON_GRADER,
                             COL_TGL_SUTON_GRADER,
                             COL_BERAT_SUTON_GRADER,
                             COL_BIAYA_SUTON_GRADER)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        if (success) {
+                            val result = db.updateStatus(idData, "suton grader")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

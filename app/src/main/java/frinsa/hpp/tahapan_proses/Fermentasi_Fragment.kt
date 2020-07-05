@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Fermentasi_Fragment : Fragment(), View.OnClickListener {
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -58,16 +59,22 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-                    val fermentasi = Fermentasi(
-                        id2 = 0,
-                        tanggal = tvTgl,
-                        berat = edtBerat.toDouble(),
-                        biaya_fermentasi = edtOngkosFermentasi.toInt(),
-                        biaya_muat = edtOngkosMuat.toInt()
-                    )
-                        db.insertFermentasi(fermentasi)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        val fermentasi = Fermentasi(
+                            id2 = 0,
+                            tanggal = tvTgl,
+                            berat = edtBerat.toDouble(),
+                            biaya_fermentasi = edtOngkosFermentasi.toInt(),
+                            biaya_muat = edtOngkosMuat.toInt()
+                        )
+                        val success = db.insertFermentasi(fermentasi)
+                        if (success) {
+                            val result = db.updateStatus(idData, "fermentasi")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

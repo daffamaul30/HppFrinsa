@@ -17,7 +17,8 @@ import kotlinx.android.synthetic.main.fragment_transportasi_.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Transportasi_Fragment : Fragment(), View.OnClickListener {
+class Transportasi_Fragment: Fragment(), View.OnClickListener {
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -61,9 +62,15 @@ class Transportasi_Fragment : Fragment(), View.OnClickListener {
                         biaya_kawal = edtOngkosPengawalan.toInt(),
                         biaya_transport = edtOngkosTransportasi.toInt()
                     )
-                        db.insertTransportasi(transportasi)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        val success = db.insertTransportasi(transportasi)
+                        if (success) {
+                            val result = db.updateStatus(idData, "transportasi")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

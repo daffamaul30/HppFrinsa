@@ -20,6 +20,7 @@ import java.util.*
 
 
 class Hulling_Fragment : Fragment(), View.OnClickListener {
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -57,14 +58,14 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
 
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
-                    val hulling = Hulling(
-                        id2 = 0,
-                        tanggal = tvTgl,
-                        biaya = edtBerat.toInt(),
-                        berat = edtOngkosHulling.toDouble(),
-                        kadarAir = edtKadarAir.toDouble()
-                    )
-                        db.insertKadarAir<Hulling>(
+                        val hulling = Hulling(
+                            id2 = 0,
+                            tanggal = tvTgl,
+                            biaya = edtBerat.toInt(),
+                            berat = edtOngkosHulling.toDouble(),
+                            kadarAir = edtKadarAir.toDouble()
+                        )
+                        val success = db.insertKadarAir<Hulling>(
                             hulling,
                             TABLE_HULLING,
                             COL_ID_PRODUKSI_HULLING,
@@ -72,8 +73,14 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
                             COL_BERAT_HULLING,
                             COL_KDR_AIR_HULLING,
                             COL_BIAYA_HULLING)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        if (success) {
+                            val result = db.updateStatus(idData, "hulling")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

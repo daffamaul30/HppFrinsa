@@ -20,6 +20,7 @@ import java.util.*
 
 
 class HandPick_Fragment : Fragment() , View.OnClickListener {
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -61,15 +62,21 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPick.toInt()
                     )
-                        db.insertStandard<handPick>(
+                        val success = db.insertStandard<handPick>(
                             HandPick,
                             TABLE_HAND_PICK,
                             COL_ID_PRODUKSI_HAND_PICK,
                             COL_TGL_HAND_PICK,
                             COL_BERAT_HAND_PICK,
                             COL_BIAYA_HAND_PICK)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        if (success) {
+                            val result = db.updateStatus(idData, "hand pick")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

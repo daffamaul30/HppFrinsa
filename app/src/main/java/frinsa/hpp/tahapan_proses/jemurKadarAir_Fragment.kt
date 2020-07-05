@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -62,7 +63,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
                         kadarAir = edtKadarAir.toDouble(),
                         biaya = edtOngkosJemur.toInt()
                     )
-                        db.insertKadarAir(
+                        val success = db.insertKadarAir(
                             jemurkadarAir,
                             TABLE_JEMUR_KADAR_AIR,
                             COL_ID_PRODUKSI_KADAR_AIR,
@@ -70,8 +71,14 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
                             COL_BERAT_KADAR_AIR,
                             COL_KDR_AIR_KADAR_AIR,
                             COL_BIAYA_JEMUR_KADAR_AIR)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        if (success) {
+                            val result = db.updateStatus(idData, "jemur Kadar Air")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

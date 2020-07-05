@@ -22,6 +22,7 @@ import java.util.*
 
 
 class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -66,15 +67,22 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
                             berat = edtBerat.toDouble(),
                             biaya = edtOngkosSorter.toInt()
                         )
-                        db.insertStandard<colorSorter>(
+                        val success = db.insertStandard<colorSorter>(
                             colorSorter,
                             TABLE_COLOR_SORTER,
                             COL_ID_PRODUKSI_COLOR_SORTER,
                             COL_TGL_COLOR_SORTER,
                             COL_BERAT_COLOR_SORTER,
                             COL_BIAYA_COLOR_SORTER)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        if (success) {
+                            val result = db.updateStatus(idData, "color sorter")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
+
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

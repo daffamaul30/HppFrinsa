@@ -36,6 +36,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
+    var id: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +75,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 
     private fun validation(): Pair<Boolean, String?> {
         var valid = true
+        id = spList.get(posisi.get(0)).id!!
         if (posisi.size > 1) {
             for (i in 0 until posisi.size) {
                 spList.get(posisi.get(i)).id?.let { listID.add(it) }
@@ -85,7 +87,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
-            //MERGE DATANYA DI DATABASE
+            //MERGE DATANYA DI DATABASE (UPDATE LAGI VAR ID NYA)
         }
 
         return Pair(valid,spList.get(posisi.get(0)).proses)
@@ -165,6 +167,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     val intent = Intent(this@SubProses, TahapanProses::class.java)
                     intent.putExtra(TahapanProses.KODE_FRAG, kode)
                     intent.putExtra(TahapanProses.TITLE, kode.capitalizeWords())
+                    intent.putExtra(TahapanProses.ID, id)
                     startActivity(intent)
                     finish()
                 }

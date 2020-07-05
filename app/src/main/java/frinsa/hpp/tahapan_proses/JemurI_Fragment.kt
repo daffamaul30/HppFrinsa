@@ -17,7 +17,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class JemurI_Fragment : Fragment(),View.OnClickListener{
+class JemurI_Fragment: Fragment(),View.OnClickListener{
+    var idData: Int = 0
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
@@ -58,15 +59,21 @@ class JemurI_Fragment : Fragment(),View.OnClickListener{
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosJemur2.toInt()
                     )
-                        db.insertStandard<jemurSatu>(
+                        val success = db.insertStandard<jemurSatu>(
                             jemur1,
                             TABLE_JEMUR1,
                             COL_ID_PRODUKSI_JEMUR1,
                             COL_TGL_JEMUR1,
                             COL_BERAT_JEMUR1,
                             COL_BIAYA_JEMUR1)
-                        alertDialog.dismiss()
-                        activity?.finish()
+                        if (success) {
+                            val result = db.updateStatus(idData, "jemurI")
+                            if (result) {
+                                alertDialog.dismiss()
+                                activity?.finish()
+                            }
+
+                        }
                     }
                     dialog.batal_submit.setOnClickListener{
                         alertDialog.dismiss()

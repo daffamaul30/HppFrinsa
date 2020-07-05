@@ -8,7 +8,6 @@ import android.widget.Toast
 import frinsa.hpp.data.tahap.*
 
 val DATABASE_NAME ="MyDB"
-val COL_STATUS = "status"
 //Spinner
 val TABLE_VARIETAS="Varietas"
 val TABLE_BLOK="Blok"
@@ -397,7 +396,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 produksi.varietas = result.getString(result.getColumnIndex(COL_VARI))
                 produksi.blok = result.getString(result.getColumnIndex(COL_BLOKP))
                 produksi.proses = result.getString(result.getColumnIndex(COL_PROSES_PRODUKSI))
-                produksi.status = result.getString(result.getColumnIndex(COL_STATUS))
+                produksi.status = result.getString(result.getColumnIndex(COL_STATUS_PRODUKSI))
 
                 var petik = Petik()
                 petik.id_petik = result.getString(result.getColumnIndex(COL_ID_PETIK)).toInt()
@@ -446,7 +445,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 produksi.varietas = result.getString(result.getColumnIndex(COL_VARI))
                 produksi.blok = result.getString(result.getColumnIndex(COL_BLOKP))
                 produksi.proses = result.getString(result.getColumnIndex(COL_PROSES_PRODUKSI))
-                produksi.status = result.getString(result.getColumnIndex(COL_STATUS))
+                produksi.status = result.getString(result.getColumnIndex(COL_STATUS_PRODUKSI))
 
                 var petik = Petik()
                 petik.id_petik = result.getString(result.getColumnIndex(COL_ID_PETIK)).toInt()
@@ -581,7 +580,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return result.getString(result.getColumnIndex(COL_STEP))
     }
 
-    fun insertFermentasi(f: Fermentasi) {
+    fun insertFermentasi(f: Fermentasi): Boolean {
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -595,12 +594,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
         if (result == -1.toLong()) {
             toastMessage("Gagal")
+            return false
         }else {
             toastMessage("Berhasil")
+            return true
         }
     }
 
-    fun insertTransportasi(t: Transportasi) {
+    fun insertTransportasi(t: Transportasi): Boolean {
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -615,12 +616,30 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
         if (result == -1.toLong()) {
             toastMessage("Gagal")
+            return false
         }else {
             toastMessage("Berhasil")
+            return true
         }
     }
 
-    fun insertPulping1(p: pulpingSatu) {
+    fun updateStatus(id: Int, status: String): Boolean {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_STATUS_PRODUKSI, status)
+        val result = db.update(TABLE_PRODUKSI, cv, COL_ID_PRODUKSI + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun insertPulping1(p: pulpingSatu): Boolean {
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -637,12 +656,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
         if (result == -1.toLong()) {
             toastMessage("Gagal")
+            return false
         }else {
             toastMessage("Berhasil")
+            return true
         }
     }
 
-    fun <T: Standard> insertStandard(data: T, TABLE_NAME: String, A: String, B: String, C: String, D:String) {
+    fun <T: Standard> insertStandard(data: T, TABLE_NAME: String, A: String, B: String, C: String, D:String): Boolean {
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -655,11 +676,13 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
         if (result == -1.toLong()) {
             toastMessage("Gagal")
+            return false
         }else {
             toastMessage("Berhasil")
+            return true
         }
     }
-    fun <A: jemurKadarAir> insertKadarAir(data : A, TABLE_NAME: String, V: String, W:String, X: String, Y: String, Z: String){
+    fun <A: jemurKadarAir> insertKadarAir(data : A, TABLE_NAME: String, V: String, W:String, X: String, Y: String, Z: String): Boolean{
         val db = this.writableDatabase
 
         var cv = ContentValues()
@@ -674,8 +697,10 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
         if (result == -1.toLong()) {
             toastMessage("Gagal")
+            return false
         }else {
             toastMessage("Berhasil")
+            return true
         }
     }
     fun getIdProduksi(TABLE_NAME: String): Int {
