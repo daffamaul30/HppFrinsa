@@ -10,6 +10,8 @@ import frinsa.hpp.tahapan_proses.Pulping2_Fragment
 
 import frinsa.hpp.data.tahap.Petik
 import frinsa.hpp.data.tahap.Standard
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 
 
 class Produk {
@@ -228,5 +230,17 @@ class Produk {
             }
         }
         return berat
+    }
+
+    fun formatRupiah(biaya: Double): String {
+        val dec: DecimalFormat = DecimalFormat()
+        DecimalFormat.getCurrencyInstance()
+        val formatRP: DecimalFormatSymbols = DecimalFormatSymbols()
+        formatRP.monetaryDecimalSeparator = ','
+        formatRP.groupingSeparator = '.'
+        dec.decimalFormatSymbols = formatRP
+
+//        Toast.makeText(context, dec.format(biaya), Toast.LENGTH_SHORT).show()
+        return "Rp. " + dec.format(biaya)
     }
 }

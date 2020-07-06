@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
+import frinsa.hpp.data.Produk
 import frinsa.hpp.data.Produksi
 import kotlinx.android.synthetic.main.cardviewproses.*
 import kotlinx.android.synthetic.main.cardviewproses.view.*
 val posisi: MutableList<Int> = ArrayList()
 class SubProsesAdapter(val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<SubProsesAdapter.cardViewProses>(){
 
+    val produk: Produk = Produk(context!!)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,9 +32,9 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
             itemView.sp_tgl.text = modelDaftarProses.tanggal
             itemView.sp_blok.text = modelDaftarProses.blok
             itemView.sp_varietas.text = modelDaftarProses.varietas
-            itemView.sp_berat.text = modelDaftarProses.berat.toString()
+            itemView.sp_berat.text = modelDaftarProses.berat.toString()  + " Kg"
             itemView.sp_proses.text = modelDaftarProses.proses
-            itemView.sp_biaya.text = modelDaftarProses.biaya.toString()
+            itemView.sp_biaya.text = produk.formatRupiah(modelDaftarProses.biaya!!.toDouble())
             itemView.sp_tahap.text = modelDaftarProses.tahap
             itemView.sp_id.text = modelDaftarProses.id.toString()
         }

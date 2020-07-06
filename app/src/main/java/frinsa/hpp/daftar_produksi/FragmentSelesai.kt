@@ -13,20 +13,21 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class FragmentSelesai: Fragment() {
+
     private lateinit var db : DBPanen
     private lateinit var produk : Produk
     val dpSList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displaySList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
-    //var id: Int = 0
+    private var Berat: Double = 0.0
 
     lateinit var v : View
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         v = inflater.inflate(R.layout.fragment_produksi,container,false)
         return v
     }
@@ -36,15 +37,16 @@ class FragmentSelesai: Fragment() {
         super.onActivityCreated(savedInstanceState)
         produk = Produk()
         db = DBPanen(requireContext())
-        val data = db.getAllData()
+        val data = db.getAllDataSelesai()
         data.forEach() {
+            Berat = produk.getLastWeight(it)
             dpSList.add(
                 ModelDaftarProduksi(
                     id = it.produksi?.id_produksi,
                     tanggal = it.petik?.tgl_petik,
                     blok = it.produksi?.blok,
                     varietas = it.produksi?.varietas,
-                    berat = 0.0,
+                    berat = Berat,
                     proses = it.produksi?.proses,
                     biaya = produk.getTotalBiaya(it),
                     tahap = it.produksi?.status

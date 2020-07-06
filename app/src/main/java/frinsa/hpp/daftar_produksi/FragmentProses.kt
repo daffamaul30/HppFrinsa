@@ -18,7 +18,7 @@ class FragmentProses: Fragment() {
     val dpPList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayPList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
-    //var id: Int = 0
+    private var Berat: Double = 0.0
 
     lateinit var v :View
     override fun onCreateView(
@@ -38,13 +38,14 @@ class FragmentProses: Fragment() {
         db = DBPanen(requireContext())
         val data = db.getAllData()
         data.forEach() {
+            Berat = produk.getLastWeight(it)
             dpPList.add(
                 ModelDaftarProduksi(
                     id = it.produksi?.id_produksi,
                     tanggal = it.petik?.tgl_petik,
                     blok = it.produksi?.blok,
                     varietas = it.produksi?.varietas,
-                    berat = 0.0,
+                    berat = Berat,
                     proses = it.produksi?.proses,
                     biaya = produk.getTotalBiaya(it),
                     tahap = it.produksi?.status
