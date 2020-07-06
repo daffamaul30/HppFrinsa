@@ -37,6 +37,9 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
     var id: Int = 0
+    var varietas: String = ""
+    var Block: String = ""
+    private var Berat: Double = 0.0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,13 +56,14 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         db = DBPanen(this)
         val data = db.getAllData()
         data.forEach() {
+            Berat = produk.getLastWeight(it)
             spList.add(
                 ModelDaftarProduksi(
                     id = it.produksi?.id_produksi,
                     tanggal = it.petik?.tgl_petik,
                     blok = it.produksi?.blok,
                     varietas = it.produksi?.varietas,
-                    berat = 0.0,
+                    berat = Berat,
                     proses = it.produksi?.proses,
                     biaya = produk.getTotalBiaya(it),
                     tahap = it.produksi?.status
@@ -76,6 +80,10 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     private fun validation(): Pair<Boolean, String?> {
         var valid = true
         id = spList.get(posisi.get(0)).id!!
+        Block = spList.get(posisi.get(0)).blok!!
+        varietas = spList.get(posisi.get(0)).varietas!!
+        print(Block)
+        print(varietas)
         if (posisi.size > 1) {
             for (i in 0 until posisi.size) {
                 spList.get(posisi.get(i)).id?.let { listID.add(it) }
@@ -168,6 +176,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     intent.putExtra(TahapanProses.KODE_FRAG, kode)
                     intent.putExtra(TahapanProses.TITLE, kode.capitalizeWords())
                     intent.putExtra(TahapanProses.ID, id)
+                    intent.putExtra(TahapanProses.VARIETAS, varietas)
+                    intent.putExtra(TahapanProses.BLOK, Block)
                     startActivity(intent)
                     finish()
                 }

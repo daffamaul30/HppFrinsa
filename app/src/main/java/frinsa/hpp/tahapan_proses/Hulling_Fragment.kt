@@ -21,6 +21,8 @@ import java.util.*
 
 class Hulling_Fragment : Fragment(), View.OnClickListener {
     var idData: Int = 0
+    var Varietas : String = ""
+    var Blok : String = ""
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -38,7 +40,8 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment_hulling_, container, false)
 
         //set text varietas dan blok berdasarkan yang dipilih
-
+        view.tv_varietas_hulling.text = Blok
+        view.tv_blok_hulling.text = Varietas
         view.btn_kirim_hulling.setOnClickListener(this)
         view.btn_datepicker_hulling.setOnClickListener(this)
         db = DBPanen(requireContext())

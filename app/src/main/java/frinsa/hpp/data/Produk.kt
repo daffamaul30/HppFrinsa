@@ -2,6 +2,7 @@ package frinsa.hpp.data
 
 import android.content.Context
 import android.widget.Toast
+import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 
 import frinsa.hpp.data.tahap.*
 import frinsa.hpp.tahapan_proses.Pulping1_Fragment
@@ -181,5 +182,51 @@ class Produk {
             COL_TGL_HAND_PICK,
             COL_BERAT_HAND_PICK,
             COL_BIAYA_HAND_PICK)
+    }
+
+    fun getLastWeight(data: Produk): Double {
+        var berat: Double = 0.0
+        when(data.produksi!!.status) {
+            "petik" -> {
+                berat = data.petik!!.berat
+            }
+            "fermentasi" -> {
+                berat = data.fermentasi!!.berat
+            }
+            "transportasi" -> {
+                berat = data.transport!!.berat
+            }
+            "pulping Ceri-Gabah Basah" -> {
+                berat = data.pulping1!!.berat
+            }
+            "pulping" -> {
+                berat = data.pulping2!!.berat
+            }
+            "jemur Kadar Air" -> {
+                berat = data.jemurKadarAir!!.berat
+            }
+            "jemurI" -> {
+                berat = data.jemur1!!.berat
+            }
+            "jemurII" -> {
+                berat = data.jemur2!!.berat
+            }
+            "hulling" -> {
+                berat = data.hulling!!.berat
+            }
+            "suton grader" -> {
+                berat = data.sutonGrader!!.berat
+            }
+            "size grading" -> {
+                berat = data.sizeGrading!!.berat
+            }
+            "color sorter" -> {
+                berat = data.colorSorter!!.berat
+            }
+            "Selesai" -> {
+                berat = data.handPick!!.berat
+            }
+        }
+        return berat
     }
 }
