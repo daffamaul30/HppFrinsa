@@ -13,20 +13,20 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class FragmentSelesai: Fragment() {
-
     private lateinit var db : DBPanen
     private lateinit var produk : Produk
     val dpSList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displaySList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
+    //var id: Int = 0
 
     lateinit var v : View
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         v = inflater.inflate(R.layout.fragment_produksi,container,false)
         return v
     }

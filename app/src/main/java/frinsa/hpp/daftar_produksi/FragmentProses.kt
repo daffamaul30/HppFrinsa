@@ -20,7 +20,6 @@ class FragmentProses: Fragment() {
     val listID: MutableList<Int> = ArrayList()
     //var id: Int = 0
 
-
     lateinit var v :View
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +31,7 @@ class FragmentProses: Fragment() {
         return v
     }
 
+    //Load Data CardView di RecyclerView pada Fragment
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         produk = Produk()
