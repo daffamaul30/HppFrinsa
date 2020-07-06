@@ -71,7 +71,7 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
                             COL_BERAT_HAND_PICK,
                             COL_BIAYA_HAND_PICK)
                         if (success) {
-                            val result = db.updateStatus(idData, "hand pick")
+                            val result = db.updateStatus(idData, "Selesai")
                             if (result) {
                                 alertDialog.dismiss()
                                 activity?.finish()
