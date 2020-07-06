@@ -24,8 +24,8 @@ import java.util.*
 
 class Fermentasi_Fragment : Fragment(), View.OnClickListener {
     var idData: Int = 0
-    var Varietas = String()
-    var Blok = String()
+    var Varietas : String = ""
+    var Blok : String = ""
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -43,8 +43,8 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment_fermentasi_, container, false)
 
         //set text varietas dan blok berdasarkan yang dipilih
-        tv_blok_fermentasi.text
-        tv_varietas_fermentasi.text
+        tv_blok_fermentasi.text = Blok
+        tv_varietas_fermentasi.text = Varietas
         view.btn_kirim_fermentasi.setOnClickListener(this)
         view.btn_datepicker_fermentasi.setOnClickListener(this)
         db = DBPanen(requireContext())

@@ -20,8 +20,8 @@ import java.util.*
 
 class Pulping1_Fragment : Fragment(), View.OnClickListener {
     var idData: Int = 0
-    var Varietas = String()
-    var Blok = String()
+    var Varietas : String = ""
+    var Blok : String = ""
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -41,8 +41,8 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pulping1_, container, false)
-        tv_varietas_pulping1.text
-        tv_blok_pulping1.text
+        tv_varietas_pulping1.text = Varietas
+        tv_blok_pulping1.text = Blok
         view.btn_kirim_pulping1.setOnClickListener(this)
         view.btn_datepicker_pulping1.setOnClickListener(this)
         db = DBPanen(requireContext())

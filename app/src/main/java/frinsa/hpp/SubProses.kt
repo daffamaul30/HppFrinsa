@@ -37,8 +37,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
     var id: Int = 0
-    var varietas = String()
-    var Block = String()
+    var varietas: String = ""
+    var Block: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +80,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         id = spList.get(posisi.get(0)).id!!
         Block = spList.get(posisi.get(0)).blok!!
         varietas = spList.get(posisi.get(0)).varietas!!
+        print(Block)
+        print(varietas)
         if (posisi.size > 1) {
             for (i in 0 until posisi.size) {
                 spList.get(posisi.get(i)).id?.let { listID.add(it) }

@@ -19,8 +19,8 @@ import java.util.*
 
 class JemurI_Fragment: Fragment(),View.OnClickListener{
     var idData: Int = 0
-    var Varietas = String()
-    var Blok = String()
+    var Varietas : String = ""
+    var Blok : String = ""
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
@@ -35,8 +35,8 @@ class JemurI_Fragment: Fragment(),View.OnClickListener{
         val view = inflater.inflate(R.layout.fragment_jemur2_, container, false)
 
         //set text varietas dan blok berdasarkan yang dipilih
-        tv_varietas_jemur2.text
-        tv_blok_jemur2.text
+        tv_varietas_jemur2.text = Varietas
+        tv_blok_jemur2.text = Varietas
         view.btn_kirim_jemur2.setOnClickListener(this)
         view.btn_datepicker_jemur2.setOnClickListener(this)
         db = DBPanen(requireContext())

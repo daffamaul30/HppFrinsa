@@ -20,8 +20,8 @@ import java.util.*
 
 class Transportasi_Fragment: Fragment(), View.OnClickListener {
     var idData: Int = 0
-    var Varietas = String()
-    var Blok = String()
+    var Varietas : String = ""
+    var Blok : String = ""
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -38,8 +38,9 @@ class Transportasi_Fragment: Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_transportasi_, container, false)
-        tv_varietas_transportasi.text
-        tv_blok_transportasi.text
+
+        tv_varietas_transportasi.text = Varietas
+        tv_blok_transportasi.text =  Blok
         view.btn_kirim_transportasi.setOnClickListener(this)
         view.btn_datepicker_transportasi.setOnClickListener(this)
         db = DBPanen(requireContext())
