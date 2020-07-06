@@ -19,6 +19,8 @@ import java.util.*
 
 class JemurII_Fragment : Fragment(), View.OnClickListener {
     var idData: Int = 0
+    var Varietas = String()
+    var Blok = String()
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -35,7 +37,8 @@ class JemurII_Fragment : Fragment(), View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment_jemur3_, container, false)
 
         //set text varietas dan blok berdasarkan yang dipilih
-
+        tv_varietas_jemur3.text
+        tv_blok_jemur3.text
         view.btn_kirim_jemur3.setOnClickListener(this)
         view.btn_datepicker_jemur3.setOnClickListener(this)
         db = DBPanen(requireContext())

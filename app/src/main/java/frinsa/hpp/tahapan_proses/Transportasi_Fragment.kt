@@ -12,6 +12,7 @@ import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.tahap.Transportasi
 import kotlinx.android.synthetic.main.dialog_submit.view.*
+import kotlinx.android.synthetic.main.fragment_suton_grader_.*
 import kotlinx.android.synthetic.main.fragment_transportasi_.*
 import kotlinx.android.synthetic.main.fragment_transportasi_.view.*
 import java.text.SimpleDateFormat
@@ -19,6 +20,8 @@ import java.util.*
 
 class Transportasi_Fragment: Fragment(), View.OnClickListener {
     var idData: Int = 0
+    var Varietas = String()
+    var Blok = String()
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -35,7 +38,8 @@ class Transportasi_Fragment: Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_transportasi_, container, false)
-
+        tv_varietas_transportasi.text
+        tv_blok_transportasi.text
         view.btn_kirim_transportasi.setOnClickListener(this)
         view.btn_datepicker_transportasi.setOnClickListener(this)
         db = DBPanen(requireContext())

@@ -19,6 +19,8 @@ import java.util.*
 
 class SizeGrading_Fragment : Fragment(), View.OnClickListener {
     var idData: Int = 0
+    var Varietas = String()
+    var Blok = String()
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -33,7 +35,8 @@ class SizeGrading_Fragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_size_grading_, container, false)
-
+        tv_varietas_size_grading.text
+        tv_blok_size_grading.text
         view.btn_kirim_size_grading.setOnClickListener(this)
         view.btn_datepicker_size_grading.setOnClickListener(this)
         db = DBPanen(requireContext())

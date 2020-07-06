@@ -37,6 +37,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
     var id: Int = 0
+    var varietas = String()
+    var Block = String()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +78,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     private fun validation(): Pair<Boolean, String?> {
         var valid = true
         id = spList.get(posisi.get(0)).id!!
+        Block = spList.get(posisi.get(0)).blok!!
+        varietas = spList.get(posisi.get(0)).varietas!!
         if (posisi.size > 1) {
             for (i in 0 until posisi.size) {
                 spList.get(posisi.get(i)).id?.let { listID.add(it) }
@@ -168,6 +172,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     intent.putExtra(TahapanProses.KODE_FRAG, kode)
                     intent.putExtra(TahapanProses.TITLE, kode.capitalizeWords())
                     intent.putExtra(TahapanProses.ID, id)
+                    intent.putExtra(TahapanProses.VARIETAS, varietas)
+                    intent.putExtra(TahapanProses.BLOK, Block)
                     startActivity(intent)
                     finish()
                 }

@@ -21,6 +21,8 @@ import java.util.*
 
 class HandPick_Fragment : Fragment() , View.OnClickListener {
     var idData: Int = 0
+    var Varietas = String()
+    var Blok = String()
     private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
@@ -36,7 +38,8 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment_hand_pick_, container, false)
 
         //set text varietas dan blok berdasarkan yang dipilih
-
+        tv_blok_hand_pick.text
+        tv_varietas_hand_pick.text
         view.btn_kirim_hand_pick.setOnClickListener(this)
         view.btn_datepicker_hand_pick.setOnClickListener(this)
         db = DBPanen(requireContext())
