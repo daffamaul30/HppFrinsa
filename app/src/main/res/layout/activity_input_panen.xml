@@ -10,21 +10,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
 
         <androidx.cardview.widget.CardView
-            style="@style/Card"
             android:id="@+id/card_panen"
+            style="@style/Card"
             app:cardElevation="6dp">
 
-            <LinearLayout
-                style="@style/InsideCard">
+            <LinearLayout style="@style/InsideCard">
 
                 <TextView
                     style="@style/Teks.TV"
-                    android:text="@string/tanggal"/>
+                    android:text="@string/tanggal" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -38,20 +36,21 @@
                         android:layout_width="95dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:textSize="15sp"
-                        android:text="@string/tgl_input"/>
+                        android:text="@string/tgl_input"
+                        android:textSize="15sp" />
+
                     <Button
                         android:id="@+id/btn_datepicker"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
-                        android:textSize="10sp"
                         android:background="@drawable/button_input"
-                        android:text="Pilih Tanggal"/>
+                        android:text="Pilih Tanggal"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <TextView
                     style="@style/Teks.TV"
-                    android:text="@string/varietas"/>
+                    android:text="@string/varietas" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -64,25 +63,25 @@
                         android:id="@+id/spinner_varietas"
                         android:layout_width="150dp"
                         android:layout_height="35dp"
-                        android:background="@drawable/btn_spinner"
                         android:layout_centerVertical="true"
-                        android:textAlignment="center"/>
+                        android:background="@drawable/btn_spinner"
+                        android:textAlignment="center" />
 
                     <Button
-                        style="@style/Teks.White"
                         android:id="@+id/btn_tmbh_varietas"
+                        style="@style/Teks.White"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_toEndOf="@+id/spinner_varietas"
                         android:background="@drawable/btn_add_spinner"
                         android:text="+"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
                 <TextView
                     style="@style/Teks.TV"
-                    android:text="@string/blok"/>
+                    android:text="@string/blok" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -95,34 +94,34 @@
                         android:id="@+id/spinner_blok"
                         android:layout_width="150dp"
                         android:layout_height="35dp"
-                        android:background="@drawable/btn_spinner"
                         android:layout_centerVertical="true"
-                        android:textAlignment="center"/>
+                        android:background="@drawable/btn_spinner"
+                        android:textAlignment="center" />
 
                     <Button
-                        style="@style/Teks.White"
                         android:id="@+id/btn_tmbh_blok"
+                        style="@style/Teks.White"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_toEndOf="@+id/spinner_blok"
                         android:background="@drawable/btn_add_spinner"
                         android:text="+"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
                 <TextView
                     style="@style/Teks.TV"
-                    android:text="@string/berat"/>
+                    android:text="@string/berat" />
 
                 <EditText
                     android:id="@+id/et_berat"
-                    android:inputType="numberDecimal"
-                    style="@style/ET"/>
+                    style="@style/ET"
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     style="@style/Teks.TV"
-                    android:text="@string/biaya"/>
+                    android:text="@string/biaya" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -134,40 +133,41 @@
                     <TextView
                         android:id="@+id/tv_petik"
                         style="@style/Teks.TV"
-                        android:text="@string/ongkos_petik"/>
+                        android:text="@string/ongkos_petik" />
 
                     <EditText
                         android:id="@+id/et_ongkos_petik"
-                        android:inputType="number"
-                        style="@style/ET"/>
+                        style="@style/ET.Biaya"
+                        android:inputType="number" />
 
                     <TextView
                         style="@style/Teks.TV"
-                        android:text="@string/ojek"/>
+                        android:text="@string/ojek" />
 
                     <EditText
                         android:id="@+id/et_ojek"
-                        android:inputType="number"
-                        style="@style/ET"/>
+                        style="@style/ET.Biaya"
+                        android:inputType="number" />
+
                     <TextView
                         style="@style/Teks.TV"
-                        android:text="@string/ongkos_cuci"/>
+                        android:text="@string/ongkos_cuci" />
 
                     <EditText
                         android:id="@+id/et_ongkos_cuci"
-                        android:inputType="number"
-                        style="@style/ET"/>
+                        style="@style/ET.Biaya"
+                        android:inputType="number" />
                 </LinearLayout>
-
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tv_proses"
                         style="@style/Teks.TV"
-                        android:text="@string/proses"/>
+                        android:text="@string/proses" />
 
                     <CheckBox
                         android:id="@+id/cb_isi_nanti"
@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:text="@string/isi_nanti"
-                        android:textAlignment="textEnd"/>
+                        android:textAlignment="textEnd" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -189,21 +189,21 @@
                         android:id="@+id/spinner_proses"
                         android:layout_width="150dp"
                         android:layout_height="35dp"
-                        android:background="@drawable/btn_spinner2"
                         android:layout_centerVertical="true"
-                        android:textAlignment="center"/>
+                        android:background="@drawable/btn_spinner2"
+                        android:textAlignment="center" />
 
                 </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <Button
-            style="@style/Button.Kirim"
             android:id="@+id/btn_kirim_panen"
-            android:text="@string/kirim"
+            style="@style/Button.Kirim"
             android:layout_below="@+id/card_panen"
+            android:background="@drawable/btn_kirim"
             android:elevation="10dp"
-            android:background="@drawable/btn_kirim"/>
+            android:text="@string/kirim" />
     </RelativeLayout>
 
 </ScrollView>

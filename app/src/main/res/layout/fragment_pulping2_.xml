@@ -97,7 +97,7 @@
                     <EditText
                         android:id="@+id/et_ongkos_pulping2"
                         android:inputType="number"
-                        style="@style/ET"/>
+                        style="@style/ET.Biaya"/>
                 </LinearLayout>
 
             </LinearLayout>

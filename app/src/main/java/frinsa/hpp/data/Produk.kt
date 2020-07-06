@@ -1,17 +1,11 @@
 package frinsa.hpp.data
 
 import android.content.Context
-import android.widget.Toast
-import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
-
 import frinsa.hpp.data.tahap.*
-import frinsa.hpp.tahapan_proses.Pulping1_Fragment
-import frinsa.hpp.tahapan_proses.Pulping2_Fragment
-
-import frinsa.hpp.data.tahap.Petik
-import frinsa.hpp.data.tahap.Standard
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.text.NumberFormat
+import java.util.*
 
 
 class Produk {
@@ -239,6 +233,10 @@ class Produk {
         formatRP.monetaryDecimalSeparator = ','
         formatRP.groupingSeparator = '.'
         dec.decimalFormatSymbols = formatRP
+
+//        val localeID = Locale("in", "ID")
+//        val formatRupiah: NumberFormat = NumberFormat.getCurrencyInstance(localeID)
+//        return formatRupiah.format(biaya)
 
 //        Toast.makeText(context, dec.format(biaya), Toast.LENGTH_SHORT).show()
         return "Rp. " + dec.format(biaya)

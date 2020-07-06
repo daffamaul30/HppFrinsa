@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".tahapan_proses.JemurII_Fragment">
 
     <RelativeLayout
@@ -15,35 +15,35 @@
             android:id="@+id/card_panen1"
             style="@style/Card">
 
-            <LinearLayout
-                style="@style/InsideCard">
+            <LinearLayout style="@style/InsideCard">
+
                 <TextView
                     style="@style/Teks.TV"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/varietas"/>
+                    android:text="@string/varietas" />
 
                 <TextView
                     android:id="@+id/tv_varietas_jemur3"
+                    style="@style/Teks.Value"
                     android:text="@string/value"
-                    android:textSize="15sp"
-                    style="@style/Teks.Value"/>
+                    android:textSize="15sp" />
 
                 <TextView
                     style="@style/Teks.TV"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/blok"/>
+                    android:text="@string/blok" />
 
                 <TextView
                     android:id="@+id/tv_blok_jemur3"
+                    style="@style/Teks.Value"
                     android:text="@string/value"
-                    android:textSize="15sp"
-                    style="@style/Teks.Value"/>
+                    android:textSize="15sp" />
 
                 <TextView
                     style="@style/Teks.TV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/tanggal"/>
+                    android:text="@string/tanggal" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -57,58 +57,59 @@
                         android:layout_width="95dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:textSize="15sp"
-                        android:text="@string/tgl_input"/>
+                        android:text="@string/tgl_input"
+                        android:textSize="15sp" />
+
                     <Button
                         android:id="@+id/btn_datepicker_jemur3"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
-                        android:textSize="10sp"
                         android:background="@drawable/button_input"
-                        android:text="Pilih Tanggal"/>
+                        android:text="Pilih Tanggal"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
 
                 <TextView
                     style="@style/Teks.TV"
-                    android:text="@string/berat"/>
+                    android:text="@string/berat" />
 
                 <EditText
                     android:id="@+id/et_berat_jemur3"
-                    android:inputType="number"
-                    style="@style/ET"/>
+                    style="@style/ET"
+                    android:inputType="number" />
 
                 <TextView
                     style="@style/Teks.TV"
-                    android:text="@string/biaya"/>
+                    android:text="@string/biaya" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
                     <TextView
                         style="@style/Teks.TV"
-                        android:text="@string/ongkos_jemur"/>
+                        android:text="@string/ongkos_jemur" />
 
                     <EditText
                         android:id="@+id/et_ongkos_jemur_jemur3"
-                        android:inputType="number"
-                        style="@style/ET"/>
+                        style="@style/ET.Biaya"
+                        android:inputType="number" />
                 </LinearLayout>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <Button
-            style="@style/Button.Kirim"
             android:id="@+id/btn_kirim_jemur3"
-            android:text="@string/kirim"
+            style="@style/Button.Kirim"
             android:layout_below="@+id/card_panen1"
+            android:background="@drawable/btn_kirim"
             android:elevation="10dp"
-            android:background="@drawable/btn_kirim"/>
+            android:text="@string/kirim" />
     </RelativeLayout>
 
 </FrameLayout>
