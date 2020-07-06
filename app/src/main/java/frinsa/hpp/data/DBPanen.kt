@@ -344,40 +344,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         }else {
             toastMessage("Berhasil")
         }
-
-        //TEST GET DATA
-//        val panen = readPanen()
-//        println(panen.size)
-//        if (panen.size > 0) {
-//            for (i in 0..(panen.size-1)) {
-//                print(panen.get(i).produksi?.id_produksi)
-//                println(panen.get(i).petik?.id_petik_produksi)
-//                if (panen.get(i).produksi?.id_produksi == panen.get(i).petik?.id_petik_produksi) {
-//                    kotlin.io.println("MASOK")
-//                    println("""
-//                                        DATA KE-${i+1}
-//                                        PRODUKSI
-//                                        id Produksi = ${panen.get(i).produksi?.id_produksi}
-//                                        sumber = ${panen.get(i).produksi?.sumber}
-//                                        beli dari = ${panen.get(i).produksi?.beli_dari}
-//                                        bentuk = ${panen.get(i).produksi?.bentuk}
-//                                        varietas = ${panen.get(i).produksi?.varietas}
-//                                        blok = ${panen.get(i).produksi?.blok}
-//                                        proses = ${panen.get(i).produksi?.proses}
-//                                        status = ${panen.get(i).produksi?.status}
-//                                        \n
-//                                        PETIK
-//                                        id Petik = ${panen.get(i).petik?.id_petik}
-//                                        id Produksi = ${panen.get(i).petik?.id_petik_produksi}
-//                                        tanggal Petik = ${panen.get(i).petik?.tgl_petik}
-//                                        berat = ${panen.get(i).petik?.berat}
-//                                        biaya petik = ${panen.get(i).petik?.biaya_petik}
-//                                        biaya ojek = ${panen.get(i).petik?.biaya_ojek}
-//                                        biaya cuci = ${panen.get(i).petik?.biaya_cuci}
-//                                    """.trimIndent())
-//                }
-//            }
-//        }
     }
 
     fun readPanen():  MutableList<Produk> {
@@ -582,10 +548,10 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
     fun insertFermentasi(f: Fermentasi): Boolean {
         val db = this.writableDatabase
-
+        val idProduksi = getIdProduksi(TABLE_PRODUKSI)
         var cv = ContentValues()
 
-        cv.put(COL_ID_PRODUKSI_FERMENTASI, f.id2)
+        cv.put(COL_ID_PRODUKSI_FERMENTASI, idProduksi)
         cv.put(COL_TGL_FERMENTASI, f.tanggal)
         cv.put(COL_BERAT_FERMENTASI, f.berat)
         cv.put(COL_BIAYA_FERMENTASI, f.biaya_fermentasi)
@@ -593,20 +559,39 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         var result = db.insert(TABLE_FERMEN, null, cv)
 
         if (result == -1.toLong()) {
-            toastMessage("Gagal")
+            toastMessage("Gagal Insert Fermentasi")
             return false
         }else {
-            toastMessage("Berhasil")
+            toastMessage("Berhasil Insert Fermentasi")
+            return true
+        }
+    }
+
+    fun updateFermentasi(id: Int, f: Fermentasi): Boolean {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_TGL_FERMENTASI, f.tanggal)
+        cv.put(COL_BERAT_FERMENTASI, f.berat)
+        cv.put(COL_BIAYA_FERMENTASI, f.biaya_fermentasi)
+        cv.put(COL_BIAYA_MUAT_FERMENTASI, f.biaya_muat)
+        val result = db.update(TABLE_FERMEN, cv, COL_ID_PRODUKSI_FERMENTASI + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Fermentasi")
+            return false
+        }else {
+            toastMessage("Berhasil Update Fermentasi")
             return true
         }
     }
 
     fun insertTransportasi(t: Transportasi): Boolean {
         val db = this.writableDatabase
-
+        val idProduksi = getIdProduksi(TABLE_PRODUKSI)
         var cv = ContentValues()
 
-        cv.put(COL_ID_PRODUKSI_TRANSPORTASI, t.id2)
+        cv.put(COL_ID_PRODUKSI_TRANSPORTASI, idProduksi)
         cv.put(COL_TGL_TRANSPORTASI, t.tanggal)
         cv.put(COL_BERAT_TRANSPORTASI, t.berat)
         cv.put(COL_BIAYA_TRANSPORT, t.biaya_transport)
@@ -615,10 +600,30 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         var result = db.insert(TABLE_TRANSPORTASI, null, cv)
 
         if (result == -1.toLong()) {
-            toastMessage("Gagal")
+            toastMessage("Gagal Insert Transportasi")
             return false
         }else {
-            toastMessage("Berhasil")
+            toastMessage("Berhasil Insert Transportasi")
+            return true
+        }
+    }
+
+    fun updateTransportasi(id: Int, t: Transportasi): Boolean {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_TGL_TRANSPORTASI, t.tanggal)
+        cv.put(COL_BERAT_TRANSPORTASI, t.berat)
+        cv.put(COL_BIAYA_TRANSPORT, t.biaya_transport)
+        cv.put(COL_BIAYA_KAWAL_TRANSPORTASI, t.biaya_kawal)
+        cv.put(COL_BIAYA_BONGKAR_TRANSPORTASI, t.biaya_bongkar)
+        val result = db.update(TABLE_TRANSPORTASI, cv, COL_ID_PRODUKSI_TRANSPORTASI + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Transportasi")
+            return false
+        }else {
+            toastMessage("Berhasil Update Transportasi")
             return true
         }
     }
@@ -641,10 +646,10 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
     fun insertPulping1(p: pulpingSatu): Boolean {
         val db = this.writableDatabase
-
+        val idProduksi = getIdProduksi(TABLE_PRODUKSI)
         var cv = ContentValues()
 
-        cv.put(COL_ID_PRODUKSI_PULPING1, p.id2)
+        cv.put(COL_ID_PRODUKSI_PULPING1, idProduksi)
         cv.put(COL_TGL_PULPING1, p.tanggal)
         cv.put(COL_BERAT_PULPING1, p.berat)
         cv.put(COL_BIAYA_PULPING1, p.biaya_pulping)
@@ -655,39 +660,80 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         var result = db.insert(TABLE_PULPING1, null, cv)
 
         if (result == -1.toLong()) {
-            toastMessage("Gagal")
+            toastMessage("Gagal Insert Pulping 1")
             return false
         }else {
-            toastMessage("Berhasil")
+            toastMessage("Berhasil Insert Pulping 1")
+            return true
+        }
+    }
+
+    fun updatePulping1(id: Int, p: pulpingSatu): Boolean {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_TGL_PULPING1, p.tanggal)
+        cv.put(COL_BERAT_PULPING1, p.berat)
+        cv.put(COL_BIAYA_PULPING1, p.biaya_pulping)
+        cv.put(COL_BIAYA_FERMENTASI_PULPING1, p.biaya_fermentasi)
+        cv.put(COL_BIAYA_CUCI_PULPING1, p.biaya_cuci)
+        cv.put(COL_BIAYA_JEMUR_PULPING1, p.biaya_jemur)
+        cv.put(COL_BIAYA_MUAT_PULPING1, p.biaya_muat)
+        val result = db.update(TABLE_PULPING1, cv, COL_ID_PRODUKSI_PULPING1 + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Pulping 1")
+            return false
+        }else {
+            toastMessage("Berhasil Update Pulping 1")
             return true
         }
     }
 
     fun <T: Standard> insertStandard(data: T, TABLE_NAME: String, A: String, B: String, C: String, D:String): Boolean {
         val db = this.writableDatabase
-
+        val idProduksi = getIdProduksi(TABLE_PRODUKSI)
         var cv = ContentValues()
 
-        cv.put(A, data.id2)
+        cv.put(A, idProduksi)
         cv.put(B, data.tanggal)
         cv.put(C, data.berat)
         cv.put(D, data.biaya)
         var result = db.insert(TABLE_NAME, null, cv)
 
         if (result == -1.toLong()) {
-            toastMessage("Gagal")
+            toastMessage("Gagal Insert $TABLE_NAME")
             return false
         }else {
-            toastMessage("Berhasil")
+            toastMessage("Berhasil Insert $TABLE_NAME")
             return true
         }
     }
-    fun <A: jemurKadarAir> insertKadarAir(data : A, TABLE_NAME: String, V: String, W:String, X: String, Y: String, Z: String): Boolean{
+
+    fun <T: Standard> updateStandard(id: Int, data: T, TABLE_NAME: String, A: String, B: String, C: String, D:String): Boolean {
         val db = this.writableDatabase
 
+        val cv = ContentValues()
+        cv.put(B, data.tanggal)
+        cv.put(C, data.berat)
+        cv.put(D, data.biaya)
+        val result = db.update(TABLE_NAME, cv, A + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Standard")
+            return false
+        }else {
+            toastMessage("Berhasil Update Standard")
+            return true
+        }
+    }
+
+    fun <A: jemurKadarAir> insertKadarAir(data : A, TABLE_NAME: String, V: String, W:String, X: String, Y: String, Z: String): Boolean{
+        val db = this.writableDatabase
+        val idProduksi = getIdProduksi(TABLE_PRODUKSI)
         var cv = ContentValues()
 
-        cv.put(V, data.id2)
+        cv.put(V, idProduksi)
         cv.put(W, data.tanggal)
         cv.put(X, data.berat)
         cv.put(Y, data.kadarAir)
@@ -696,45 +742,39 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         var result = db.insert(TABLE_NAME, null, cv)
 
         if (result == -1.toLong()) {
-            toastMessage("Gagal")
+            toastMessage("Gagal Insert $TABLE_NAME")
             return false
         }else {
-            toastMessage("Berhasil")
+            toastMessage("Berhasil Insert $TABLE_NAME")
             return true
         }
     }
+
+    fun <T: jemurKadarAir> updateKadarAir(id: Int, data: T, TABLE_NAME: String, V: String, W:String, X: String, Y: String, Z: String): Boolean {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(W, data.tanggal)
+        cv.put(X, data.berat)
+        cv.put(Y, data.kadarAir)
+        cv.put(Z, data.biaya)
+        val result = db.update(TABLE_NAME, cv, V + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Kadar Air")
+            return false
+        }else {
+            toastMessage("Berhasil Update Kadar Air")
+            return true
+        }
+    }
+
     fun getIdProduksi(TABLE_NAME: String): Int {
         val db = this.readableDatabase
         val result = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
         result.moveToLast()
         return result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
     }
-
-//    fun insertVarietas(v: Varietas) {
-//        val db = this.writableDatabase
-//        var cv = ContentValues()
-//        cv.put(COL_NAME, v.name)
-//
-//        var result = db.insert(TABLE_VARIETAS, null, cv)
-//        if (result == -1.toLong()) {
-//            toastMessage("Gagal")
-//        } else {
-//            toastMessage("Berhasil")
-//        }
-//    }
-//
-//    fun insertBlok(b: Blok) {
-//        val db = this.writableDatabase
-//        var cv = ContentValues()
-//        cv.put(COL_NAME, b.name)
-//
-//        var result = db.insert(TABLE_BLOK, null, cv)
-//        if (result == -1.toLong()) {
-//            toastMessage("Gagal")
-//        } else {
-//            toastMessage("Berhasil")
-//        }
-//    }
 
     fun <T: Varietas> insertSpin(data: T, TABLE_NAME: String) {
         val db = this.writableDatabase

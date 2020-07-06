@@ -38,6 +38,7 @@ class Transportasi_Fragment: Fragment(), View.OnClickListener {
 
         view.btn_kirim_transportasi.setOnClickListener(this)
         view.btn_datepicker_transportasi.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -55,14 +56,13 @@ class Transportasi_Fragment: Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val transportasi = Transportasi(
-                        id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         biaya_bongkar = edtOngkosBongkar.toInt(),
                         biaya_kawal = edtOngkosPengawalan.toInt(),
                         biaya_transport = edtOngkosTransportasi.toInt()
                     )
-                        val success = db.insertTransportasi(transportasi)
+                        val success = db.updateTransportasi(idData, transportasi)
                         if (success) {
                             val result = db.updateStatus(idData, "transportasi")
                             if (result) {

@@ -41,6 +41,7 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
 
         view.btn_kirim_pulping1.setOnClickListener(this)
         view.btn_datepicker_pulping1.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -58,7 +59,6 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val pulping1 = pulpingSatu(
-                        id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         biaya_muat = edtOngkosMuatPulping.toInt(),
@@ -67,7 +67,7 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
                         biaya_jemur = edtOngkosJemurPulping.toInt(),
                         biaya_pulping = edtOngkospulping1.toInt()
                     )
-                        val success = db.insertPulping1(pulping1)
+                        val success = db.updatePulping1(idData, pulping1)
                         if (success) {
                             val result = db.updateStatus(idData, "pulping Ceri-Gabah Basah")
                             if (result) {

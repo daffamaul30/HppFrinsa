@@ -51,7 +51,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 
         produk = Produk()
         db = DBPanen(this)
-        val data = db.readPanen()
+        val data = db.getAllData()
         data.forEach() {
             spList.add(
                 ModelDaftarProduksi(

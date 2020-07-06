@@ -11,7 +11,7 @@ import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import frinsa.hpp.data.*
-import frinsa.hpp.data.tahap.Petik
+import frinsa.hpp.data.tahap.*
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
@@ -269,6 +269,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                             Varietas(name = inputTambahVarietas)
 //                        db.insertVarietas(vari)
                         db.insertSpin<Varietas>(vari, TABLE_VARIETAS)
+
                         setSpinnerVarietas()
                         alertDialog.dismiss()
                     }
@@ -343,24 +344,81 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                             biaya_ojek = edtOjek.toInt(),
                             biaya_cuci = edtOngkosCuci.toInt()
                         )
+                        val produk = Produk(context = this)
+
+                        produk.insertFirst(produksi, petik)
 
                         //INSERT DATA TO DB
-                        db.insertPanen(produksi, petik)
 
-                        //TEST GET DATA
-
-
-                        //test getData
-//                        val (panen,ceri) = db.getPanen()
-//                        if (panen.size > 0 && ceri.size > 0) {
-//                            for (i in 0..(panen.size-1)) {
-//                                if (panen.get(i).id == ceri.get(i).id2) {
-//                                    val text = "Data $i," + panen[i].id + "," + panen[i].tanggal + "," + panen[i].varietas + "," + panen[i].blok + "," + panen[i].kolektif + "," + panen.get(i).proses + "," +
-//                                            panen[i].status + "," + ceri[i].id + "," + ceri[i].id2 + "," + ceri[i].berat + "," + ceri[i].ongkosPetik_atau_hargaCeri + "," + ceri[i].ojek + "," + ceri[i].ongkosCuci
-//                                    println1(text)
-//                                }
-//                            }
-//                        }
+//                        db.insertPanen(produksi, petik)
+//                        db.insertFermentasi(Fermentasi())
+//                        db.insertTransportasi(Transportasi())
+//                        db.insertPulping1(pulpingSatu())
+//                        db.insertStandard<pulpingDua>(
+//                            pulpingDua(),
+//                            TABLE_PULPING2,
+//                            COL_ID_PRODUKSI_PULPING2,
+//                            COL_TGL_PULPING2,
+//                            COL_BERAT_PULPING2,
+//                            COL_BIAYA_PULPING2)
+//                        db.insertKadarAir(
+//                            jemurKadarAir(),
+//                            TABLE_JEMUR_KADAR_AIR,
+//                            COL_ID_PRODUKSI_KADAR_AIR,
+//                            COL_TGL_KADAR_AIR,
+//                            COL_BERAT_KADAR_AIR,
+//                            COL_KDR_AIR_KADAR_AIR,
+//                            COL_BIAYA_JEMUR_KADAR_AIR)
+//                        db.insertStandard<jemurSatu>(
+//                            jemurSatu(),
+//                            TABLE_JEMUR1,
+//                            COL_ID_PRODUKSI_JEMUR1,
+//                            COL_TGL_JEMUR1,
+//                            COL_BERAT_JEMUR1,
+//                            COL_BIAYA_JEMUR1)
+//                        db.insertStandard<jemurDua>(
+//                            jemurDua(),
+//                            TABLE_JEMUR2,
+//                            COL_ID_PRODUKSI_JEMUR2,
+//                            COL_TGL_JEMUR2,
+//                            COL_BERAT_JEMUR2,
+//                            COL_BIAYA_JEMUR2)
+//                        db.insertKadarAir<Hulling>(
+//                            Hulling(),
+//                            TABLE_HULLING,
+//                            COL_ID_PRODUKSI_HULLING,
+//                            COL_TGL_HULLING,
+//                            COL_BERAT_HULLING,
+//                            COL_KDR_AIR_HULLING,
+//                            COL_BIAYA_HULLING)
+//                        db.insertStandard<sutonGrader>(
+//                            sutonGrader(),
+//                            TABLE_SUTON_GRADER,
+//                            COL_ID_PRODUKSI_SUTON_GRADER,
+//                            COL_TGL_SUTON_GRADER,
+//                            COL_BERAT_SUTON_GRADER,
+//                            COL_BIAYA_SUTON_GRADER)
+//                        db.insertStandard<sizeGrading>(
+//                            sizeGrading(),
+//                            TABLE_SIZE_GRADING,
+//                            COL_ID_PRODUKSI_SIZE_GRADING,
+//                            COL_TGL_SIZE_GRADING,
+//                            COL_BERAT_SIZE_GRADING,
+//                            COL_BIAYA_SIZE_GRADING)
+//                        db.insertStandard<colorSorter>(
+//                            colorSorter(),
+//                            TABLE_COLOR_SORTER,
+//                            COL_ID_PRODUKSI_COLOR_SORTER,
+//                            COL_TGL_COLOR_SORTER,
+//                            COL_BERAT_COLOR_SORTER,
+//                            COL_BIAYA_COLOR_SORTER)
+//                        db.insertStandard<handPick>(
+//                            handPick(),
+//                            TABLE_HAND_PICK,
+//                            COL_ID_PRODUKSI_HAND_PICK,
+//                            COL_TGL_HAND_PICK,
+//                            COL_BERAT_HAND_PICK,
+//                            COL_BIAYA_HAND_PICK)
 
                         //Intent menggunakan putextra
                         val intent = Intent(this@InputPanen, ReviewHasilPanen::class.java)

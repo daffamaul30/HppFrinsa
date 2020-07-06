@@ -44,6 +44,8 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
 
         view.btn_kirim_fermentasi.setOnClickListener(this)
         view.btn_datepicker_fermentasi.setOnClickListener(this)
+        db = DBPanen(requireContext())
+
         return view
     }
 
@@ -60,13 +62,12 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                         val fermentasi = Fermentasi(
-                            id2 = 0,
                             tanggal = tvTgl,
                             berat = edtBerat.toDouble(),
                             biaya_fermentasi = edtOngkosFermentasi.toInt(),
                             biaya_muat = edtOngkosMuat.toInt()
                         )
-                        val success = db.insertFermentasi(fermentasi)
+                        val success = db.updateFermentasi(idData, fermentasi)
                         if (success) {
                             val result = db.updateStatus(idData, "fermentasi")
                             if (result) {

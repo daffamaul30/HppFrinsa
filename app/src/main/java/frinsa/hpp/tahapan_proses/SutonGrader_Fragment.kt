@@ -36,6 +36,7 @@ class SutonGrader_Fragment: Fragment(), View.OnClickListener {
 
         view.btn_kirim_suton_grader.setOnClickListener(this)
         view.btn_datepicker_suton_grader.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -53,12 +54,12 @@ class SutonGrader_Fragment: Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val sutonGrader = sutonGrader(
-                        id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosSutonGrading.toInt()
                     )
-                        val success = db.insertStandard<sutonGrader>(
+                        val success = db.updateStandard<sutonGrader>(
+                            idData,
                             sutonGrader,
                             TABLE_SUTON_GRADER,
                             COL_ID_PRODUKSI_SUTON_GRADER,

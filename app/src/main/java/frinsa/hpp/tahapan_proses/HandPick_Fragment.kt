@@ -39,6 +39,7 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
 
         view.btn_kirim_hand_pick.setOnClickListener(this)
         view.btn_datepicker_hand_pick.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -57,12 +58,12 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val HandPick = handPick(
-                        id2 =0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPick.toInt()
                     )
-                        val success = db.insertStandard<handPick>(
+                        val success = db.updateStandard<handPick>(
+                            idData,
                             HandPick,
                             TABLE_HAND_PICK,
                             COL_ID_PRODUKSI_HAND_PICK,

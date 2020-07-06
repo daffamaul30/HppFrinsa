@@ -36,6 +36,7 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
 
         view.btn_kirim_pulping2.setOnClickListener(this)
         view.btn_datepicker_pulping2.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -53,12 +54,12 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val pulping2 = pulpingDua(
-                        id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosPulping2.toInt()
                     )
-                        val success = db.insertStandard<pulpingDua>(
+                        val success = db.updateStandard<pulpingDua>(
+                            idData,
                             pulping2,
                             TABLE_PULPING2,
                             COL_ID_PRODUKSI_PULPING2,

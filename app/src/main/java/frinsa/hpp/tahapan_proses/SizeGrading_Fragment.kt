@@ -36,6 +36,7 @@ class SizeGrading_Fragment : Fragment(), View.OnClickListener {
 
         view.btn_kirim_size_grading.setOnClickListener(this)
         view.btn_datepicker_size_grading.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -53,12 +54,12 @@ class SizeGrading_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val sizeGrading = sizeGrading(
-                        id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosSizeGrading.toInt()
                     )
-                        val success = db.insertStandard<sizeGrading>(
+                        val success = db.updateStandard<sizeGrading>(
+                            idData,
                             sizeGrading,
                             TABLE_SIZE_GRADING,
                             COL_ID_PRODUKSI_SIZE_GRADING,

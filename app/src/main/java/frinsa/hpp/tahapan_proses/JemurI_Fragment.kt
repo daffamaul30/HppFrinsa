@@ -36,6 +36,7 @@ class JemurI_Fragment: Fragment(),View.OnClickListener{
 
         view.btn_kirim_jemur2.setOnClickListener(this)
         view.btn_datepicker_jemur2.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -54,12 +55,12 @@ class JemurI_Fragment: Fragment(),View.OnClickListener{
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val jemur1 = jemurSatu(
-                        id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         biaya = edtOngkosJemur2.toInt()
                     )
-                        val success = db.insertStandard<jemurSatu>(
+                        val success = db.updateStandard<jemurSatu>(
+                            idData,
                             jemur1,
                             TABLE_JEMUR1,
                             COL_ID_PRODUKSI_JEMUR1,

@@ -39,6 +39,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
 
         view.btn_kirim_jemurKadarAir.setOnClickListener(this)
         view.btn_datepicker_jemurKadarAir.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -57,16 +58,16 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                     val jemurkadarAir = jemurKadarAir(
-                        id2 = 0,
                         tanggal = tvTgl,
                         berat = edtBerat.toDouble(),
                         kadarAir = edtKadarAir.toDouble(),
                         biaya = edtOngkosJemur.toInt()
                     )
-                        val success = db.insertKadarAir(
+                        val success = db.updateKadarAir(
+                            idData,
                             jemurkadarAir,
                             TABLE_JEMUR_KADAR_AIR,
-                            COL_ID_PRODUKSI_KADAR_AIR,
+                            COL_ID_PRODUKSI_TRANSPORTASI,
                             COL_TGL_KADAR_AIR,
                             COL_BERAT_KADAR_AIR,
                             COL_KDR_AIR_KADAR_AIR,

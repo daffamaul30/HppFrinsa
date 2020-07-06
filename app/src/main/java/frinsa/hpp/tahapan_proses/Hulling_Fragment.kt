@@ -41,6 +41,7 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
 
         view.btn_kirim_hulling.setOnClickListener(this)
         view.btn_datepicker_hulling.setOnClickListener(this)
+        db = DBPanen(requireContext())
 
         return view
     }
@@ -59,13 +60,13 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                         val hulling = Hulling(
-                            id2 = 0,
                             tanggal = tvTgl,
                             biaya = edtBerat.toInt(),
                             berat = edtOngkosHulling.toDouble(),
                             kadarAir = edtKadarAir.toDouble()
                         )
-                        val success = db.insertKadarAir<Hulling>(
+                        val success = db.updateKadarAir<Hulling>(
+                            idData,
                             hulling,
                             TABLE_HULLING,
                             COL_ID_PRODUKSI_HULLING,

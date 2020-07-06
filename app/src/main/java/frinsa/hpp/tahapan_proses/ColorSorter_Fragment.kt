@@ -43,6 +43,8 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
 
         view.btn_kirim_color_sorter.setOnClickListener(this)
         view.btn_datepicker_color_sorter.setOnClickListener(this)
+        db = DBPanen(requireContext())
+
         return view
     }
 
@@ -62,12 +64,12 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
                     dialog.submit_submit.setOnClickListener {
                         //INSERT TO DATABASE
                         val colorSorter = colorSorter(
-                            id2 = 0,
                             tanggal = tvTgl ,
                             berat = edtBerat.toDouble(),
                             biaya = edtOngkosSorter.toInt()
                         )
-                        val success = db.insertStandard<colorSorter>(
+                        val success = db.updateStandard<colorSorter>(
+                            idData,
                             colorSorter,
                             TABLE_COLOR_SORTER,
                             COL_ID_PRODUKSI_COLOR_SORTER,
