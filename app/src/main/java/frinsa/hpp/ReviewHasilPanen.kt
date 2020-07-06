@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBar
+import frinsa.hpp.data.Produk
 import kotlinx.android.synthetic.main.activity_review_hasil_panen.*
 
 class ReviewHasilPanen : AppCompatActivity(), View.OnClickListener {
+    val produk: Produk = Produk(this)
+
     companion object {
         const val EXTRA_TGL  = "extra_tgl"
         const val EXTRA_VARIETAS = "extra_varietas"
@@ -44,11 +47,11 @@ class ReviewHasilPanen : AppCompatActivity(), View.OnClickListener {
         value_tanggal.text = tgl
         value_varietas.text = varietas
         value_blok.text = blok
-        value_berat.text = berat
-        value_total_biaya.text = biaya
-        value_ongkos_petik.text = ongkosPetik
-        value_ojek.text = ojek
-        value_ongkos_cuci.text = ongkosCuci
+        value_berat.text = berat + " Kg"
+        value_total_biaya.text = produk.formatRupiah(biaya!!.toDouble())
+        value_ongkos_petik.text = produk.formatRupiah(ongkosPetik!!.toDouble())
+        value_ojek.text = produk.formatRupiah(ojek!!.toDouble())
+        value_ongkos_cuci.text = produk.formatRupiah(ongkosCuci!!.toDouble())
         value_proses.text = proses
 
         btn_kembali_dashboard.setOnClickListener(this)

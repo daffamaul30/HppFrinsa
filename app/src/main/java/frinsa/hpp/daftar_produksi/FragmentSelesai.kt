@@ -19,6 +19,7 @@ class FragmentSelesai: Fragment() {
     val dpSList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displaySList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
+    private var Berat: Double = 0.0
 
     lateinit var v : View
 
@@ -36,15 +37,16 @@ class FragmentSelesai: Fragment() {
         super.onActivityCreated(savedInstanceState)
         produk = Produk()
         db = DBPanen(requireContext())
-        val data = db.getAllData()
+        val data = db.getAllDataSelesai()
         data.forEach() {
+            Berat = produk.getLastWeight(it)
             dpSList.add(
                 ModelDaftarProduksi(
                     id = it.produksi?.id_produksi,
                     tanggal = it.petik?.tgl_petik,
                     blok = it.produksi?.blok,
                     varietas = it.produksi?.varietas,
-                    berat = 0.0,
+                    berat = Berat,
                     proses = it.produksi?.proses,
                     biaya = produk.getTotalBiaya(it),
                     tahap = it.produksi?.status

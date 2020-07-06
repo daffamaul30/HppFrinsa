@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import frinsa.hpp.R
+import frinsa.hpp.data.Produk
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
 
 //2nd Adapter bagian Recycler View
 class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<DaftarProduksiAdapter.cardViewHolder>(){
+    val produk: Produk = Produk(context!!)
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -28,9 +31,9 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
             itemView.dp_tv_tgl.text = modelDaftarProduksi.tanggal
             itemView.dp_tv_blok.text = modelDaftarProduksi.blok
             itemView.dp_tv_varietas.text = modelDaftarProduksi.varietas
-            itemView.dp_tv_berat.text = modelDaftarProduksi.berat.toString()
+            itemView.dp_tv_berat.text = modelDaftarProduksi.berat.toString() + " Kg"
             itemView.dp_tv_proses.text = modelDaftarProduksi.proses
-            itemView.dp_tv_biaya.text = modelDaftarProduksi.biaya.toString()
+            itemView.dp_tv_biaya.text = produk.formatRupiah(modelDaftarProduksi.biaya!!.toDouble())
             itemView.dp_tv_tahap.text = modelDaftarProduksi.tahap
         }
     }
