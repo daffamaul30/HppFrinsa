@@ -39,6 +39,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     var id: Int = 0
     var varietas: String = ""
     var Block: String = ""
+    private var Berat: Double = 0.0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,13 +56,14 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         db = DBPanen(this)
         val data = db.getAllData()
         data.forEach() {
+            Berat = produk.getLastWeight(it)
             spList.add(
                 ModelDaftarProduksi(
                     id = it.produksi?.id_produksi,
                     tanggal = it.petik?.tgl_petik,
                     blok = it.produksi?.blok,
                     varietas = it.produksi?.varietas,
-                    berat = 0.0,
+                    berat = Berat,
                     proses = it.produksi?.proses,
                     biaya = produk.getTotalBiaya(it),
                     tahap = it.produksi?.status
