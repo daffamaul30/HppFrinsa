@@ -87,7 +87,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
-            //MERGE DATANYA DI DATABASE (UPDATE LAGI VAR ID NYA)
+            //MERGE DATANYA DI DATABASE (UPDATE LAGI VAR ID NYA, VAR VARIETAS NYA, VAR BLOK NYA)
         }
 
         return Pair(valid,spList.get(posisi.get(0)).proses)
