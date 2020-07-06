@@ -539,6 +539,164 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return list
     }
 
+    fun getAllDataSelesai(): MutableList<Produk> {
+        var  list : MutableList<Produk> = ArrayList()
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI" +
+                " JOIN $TABLE_PETIK ON " + TABLE_PETIK + "." + COL_ID_PRODUKSI_PETIK + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_FERMEN ON " + TABLE_FERMEN + "." + COL_ID_PRODUKSI_FERMENTASI + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_TRANSPORTASI ON " + TABLE_TRANSPORTASI + "." + COL_ID_PRODUKSI_TRANSPORTASI + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_PULPING1 ON " + TABLE_PULPING1 + "." + COL_ID_PRODUKSI_PULPING1 + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_PULPING2 ON " + TABLE_PULPING2 + "." + COL_ID_PRODUKSI_PULPING2 + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_JEMUR_KADAR_AIR ON " + TABLE_JEMUR_KADAR_AIR + "." + COL_ID_PRODUKSI_KADAR_AIR + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_JEMUR1 ON " + TABLE_JEMUR1 + "." + COL_ID_PRODUKSI_JEMUR1 + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_JEMUR2 ON " + TABLE_JEMUR2 + "." + COL_ID_PRODUKSI_JEMUR2 + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_HULLING ON " + TABLE_HULLING + "." + COL_ID_PRODUKSI_HULLING + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_SUTON_GRADER ON " + TABLE_SUTON_GRADER + "." + COL_ID_PRODUKSI_SUTON_GRADER + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_SIZE_GRADING ON " + TABLE_SIZE_GRADING + "." + COL_ID_PRODUKSI_SIZE_GRADING + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_COLOR_SORTER ON " + TABLE_COLOR_SORTER + "." + COL_ID_PRODUKSI_COLOR_SORTER + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " JOIN $TABLE_HAND_PICK ON " + TABLE_HAND_PICK + "." + COL_ID_PRODUKSI_HAND_PICK + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
+                " WHERE " + TABLE_PRODUKSI + "." + COL_STATUS_PRODUKSI + "= Selesai"
+            , null)
+
+        if (result.moveToFirst()) {
+            do {
+                var produksi = Produksi()
+                produksi.id_produksi = result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
+                produksi.sumber = result.getString(result.getColumnIndex(COL_SUMBER))
+                produksi.beli_dari = result.getString(result.getColumnIndex(COL_BELI_DARI))
+                produksi.bentuk = result.getString(result.getColumnIndex(COL_BENTUK))
+                produksi.varietas = result.getString(result.getColumnIndex(COL_VARI))
+                produksi.blok = result.getString(result.getColumnIndex(COL_BLOKP))
+                produksi.proses = result.getString(result.getColumnIndex(COL_PROSES_PRODUKSI))
+                produksi.status = result.getString(result.getColumnIndex(COL_STATUS_PRODUKSI))
+
+                var petik = Petik()
+                petik.id_petik = result.getString(result.getColumnIndex(COL_ID_PETIK)).toInt()
+                petik.id_petik_produksi = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_PETIK)).toInt()
+                petik.tgl_petik = result.getString(result.getColumnIndex(COL_TGL_PETIK))
+                petik.berat = result.getString(result.getColumnIndex(COL_BERAT_PETIK)).toDouble()
+                petik.biaya_petik = result.getString(result.getColumnIndex(COL_BIAYA_PETIK)).toInt()
+                petik.biaya_ojek = result.getString(result.getColumnIndex(COL_BIAYA_OJEK)).toInt()
+                petik.biaya_cuci = result.getString(result.getColumnIndex(COL_BIAYA_CUCI_PETIK)).toInt()
+
+                var ColorSorter = colorSorter()
+                ColorSorter.id = result.getString(result.getColumnIndex(COL_ID_COLOR_SORTER)).toInt()
+                ColorSorter.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_COLOR_SORTER)).toInt()
+                ColorSorter.tanggal = result.getString(result.getColumnIndex(COL_TGL_COLOR_SORTER))
+                ColorSorter.berat = result.getString(result.getColumnIndex(COL_BERAT_COLOR_SORTER)).toDouble()
+                ColorSorter.biaya = result.getString(result.getColumnIndex(COL_BIAYA_COLOR_SORTER)).toInt()
+
+                var fermentasi = Fermentasi()
+                fermentasi.id = result.getString(result.getColumnIndex(COL_ID_FERMENTASI)).toInt()
+                fermentasi.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_FERMENTASI)).toInt()
+                fermentasi.tanggal = result.getString(result.getColumnIndex(COL_TGL_FERMENTASI))
+                fermentasi.berat = result.getString(result.getColumnIndex(COL_BERAT_FERMENTASI)).toDouble()
+                fermentasi.biaya_fermentasi= result.getString(result.getColumnIndex(COL_BIAYA_FERMENTASI)).toInt()
+                fermentasi.biaya_muat = result.getString(result.getColumnIndex(COL_BIAYA_MUAT_FERMENTASI)).toInt()
+
+                var handPick = handPick()
+                handPick.id = result.getString(result.getColumnIndex(COL_ID_HAND_PICK)).toInt()
+                handPick.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_HAND_PICK)).toInt()
+                handPick.tanggal = result.getString(result.getColumnIndex(COL_TGL_HAND_PICK))
+                handPick.berat = result.getString(result.getColumnIndex(COL_BERAT_HAND_PICK)).toDouble()
+                handPick.biaya = result.getString(result.getColumnIndex(COL_BIAYA_HAND_PICK)).toInt()
+
+                var hulling = Hulling()
+                hulling.id = result.getString(result.getColumnIndex(COL_ID_HULLING)).toInt()
+                hulling.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_HULLING)).toInt()
+                hulling.tanggal = result.getString(result.getColumnIndex(COL_TGL_HULLING))
+                hulling.berat = result.getString(result.getColumnIndex(COL_BERAT_HULLING)).toDouble()
+                hulling.kadarAir = result.getString(result.getColumnIndex(COL_KDR_AIR_HULLING)).toDouble()
+                hulling.biaya = result.getString(result.getColumnIndex(COL_BIAYA_HULLING)).toInt()
+
+                var Jemursatu = jemurSatu()
+                Jemursatu.id = result.getString(result.getColumnIndex(COL_ID_JEMUR1)).toInt()
+                Jemursatu.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_JEMUR1)).toInt()
+                Jemursatu.tanggal = result.getString(result.getColumnIndex(COL_TGL_JEMUR1))
+                Jemursatu.berat = result.getString(result.getColumnIndex(COL_BERAT_JEMUR1)).toDouble()
+                Jemursatu.biaya = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR1)).toInt()
+
+                var Jemurdua = jemurDua()
+                Jemurdua.id = result.getString(result.getColumnIndex(COL_ID_JEMUR2)).toInt()
+                Jemurdua.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_JEMUR2)).toInt()
+                Jemurdua.tanggal = result.getString(result.getColumnIndex(COL_TGL_JEMUR2))
+                Jemurdua.berat = result.getString(result.getColumnIndex(COL_BERAT_JEMUR2)).toDouble()
+                Jemurdua.biaya = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR2)).toInt()
+
+                var JemurKadarAir = jemurKadarAir()
+                JemurKadarAir.id = result.getString(result.getColumnIndex(COL_ID_KADAR_AIR)).toInt()
+                JemurKadarAir.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_KADAR_AIR)).toInt()
+                JemurKadarAir.tanggal = result.getString(result.getColumnIndex(COL_TGL_KADAR_AIR))
+                JemurKadarAir.berat = result.getString(result.getColumnIndex(COL_BERAT_KADAR_AIR)).toDouble()
+                JemurKadarAir.biaya = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR_KADAR_AIR)).toInt()
+
+                var Pulping1 = pulpingSatu()
+                Pulping1.id = result.getString(result.getColumnIndex(COL_ID_PULPING1)).toInt()
+                Pulping1.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_PULPING1)).toInt()
+                Pulping1.tanggal = result.getString(result.getColumnIndex(COL_TGL_PULPING1))
+                Pulping1.berat = result.getString(result.getColumnIndex(COL_BERAT_PULPING1)).toDouble()
+                Pulping1.biaya_cuci = result.getString(result.getColumnIndex(COL_BIAYA_CUCI_PULPING1)).toInt()
+                Pulping1.biaya_fermentasi = result.getString(result.getColumnIndex(COL_BIAYA_FERMENTASI_PULPING1)).toInt()
+                Pulping1.biaya_muat = result.getString(result.getColumnIndex(COL_BIAYA_MUAT_PULPING1)).toInt()
+                Pulping1.biaya_jemur = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR_PULPING1)).toInt()
+                Pulping1.biaya_pulping = result.getString(result.getColumnIndex(COL_BIAYA_PULPING1)).toInt()
+
+                var Pulping2 = pulpingDua()
+                Pulping2.id = result.getString(result.getColumnIndex(COL_ID_PULPING2)).toInt()
+                Pulping2.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_PULPING2)).toInt()
+                Pulping2.tanggal = result.getString(result.getColumnIndex(COL_TGL_PULPING2))
+                Pulping2.berat = result.getString(result.getColumnIndex(COL_BERAT_PULPING2)).toDouble()
+                Pulping2.biaya = result.getString(result.getColumnIndex(COL_BIAYA_PULPING2)).toInt()
+
+                var SizeGrading = sizeGrading()
+                SizeGrading.id = result.getString(result.getColumnIndex(COL_ID_SIZE_GRADING)).toInt()
+                SizeGrading.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_SIZE_GRADING)).toInt()
+                SizeGrading.tanggal = result.getString(result.getColumnIndex(COL_TGL_SIZE_GRADING))
+                SizeGrading.berat = result.getString(result.getColumnIndex(COL_BERAT_SIZE_GRADING)).toDouble()
+                SizeGrading.biaya = result.getString(result.getColumnIndex(COL_BIAYA_SIZE_GRADING)).toInt()
+
+                var SutonGrader = sutonGrader()
+                SutonGrader.id = result.getString(result.getColumnIndex(COL_ID_SUTON_GRADER)).toInt()
+                SutonGrader.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_SUTON_GRADER)).toInt()
+                SutonGrader.tanggal = result.getString(result.getColumnIndex(COL_TGL_SUTON_GRADER))
+                SutonGrader.berat = result.getString(result.getColumnIndex(COL_BERAT_SUTON_GRADER)).toDouble()
+                SutonGrader.biaya = result.getString(result.getColumnIndex(COL_BIAYA_SUTON_GRADER)).toInt()
+
+                var transportasi = Transportasi()
+                transportasi.id = result.getString(result.getColumnIndex(COL_ID_TRANSPORTASI)).toInt()
+                transportasi.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_TRANSPORTASI)).toInt()
+                transportasi.tanggal = result.getString(result.getColumnIndex(COL_TGL_TRANSPORTASI))
+                transportasi.berat = result.getString(result.getColumnIndex(COL_BERAT_TRANSPORTASI)).toDouble()
+                transportasi.biaya_bongkar = result.getString(result.getColumnIndex(COL_BIAYA_BONGKAR_TRANSPORTASI)).toInt()
+                transportasi.biaya_kawal = result.getString(result.getColumnIndex(COL_BIAYA_KAWAL_TRANSPORTASI)).toInt()
+                transportasi.biaya_transport = result.getString(result.getColumnIndex(COL_BIAYA_TRANSPORT)).toInt()
+
+                var produk = Produk(
+                    produksi,
+                    petik,
+                    fermentasi,
+                    transportasi,
+                    Pulping1,
+                    Pulping2,
+                    JemurKadarAir,
+                    Jemursatu,
+                    Jemurdua,
+                    hulling,
+                    SutonGrader,
+                    SizeGrading,
+                    ColorSorter,
+                    handPick )
+
+                list.add(produk)
+            }while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        println(list.size)
+        return list
+    }
+
     fun getStepProses(nama: String): String {
         val db = this.readableDatabase
         val result = db.rawQuery("SELECT * FROM $TABLE_PROSES WHERE $COL_NAME=\"$nama\"", null)
