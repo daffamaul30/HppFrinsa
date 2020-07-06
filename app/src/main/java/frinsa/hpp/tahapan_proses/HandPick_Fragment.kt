@@ -38,8 +38,8 @@ class HandPick_Fragment : Fragment() , View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment_hand_pick_, container, false)
 
         //set text varietas dan blok berdasarkan yang dipilih
-        tv_blok_hand_pick.text = Blok
-        tv_varietas_hand_pick.text = Varietas
+        view.tv_blok_hand_pick.text = Blok
+        view.tv_varietas_hand_pick.text = Varietas
         view.btn_kirim_hand_pick.setOnClickListener(this)
         view.btn_datepicker_hand_pick.setOnClickListener(this)
         db = DBPanen(requireContext())

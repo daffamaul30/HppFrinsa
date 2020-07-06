@@ -10,8 +10,8 @@ import frinsa.hpp.R
 
 class TahapanProses : AppCompatActivity() {
     var id: Int = 0
-    var blok = String()
-    var varietas = String()
+    lateinit var blok: String
+    lateinit var varietas: String
     companion object{
         const val KODE_FRAG = "kode"
         const val TITLE = "title"
@@ -25,8 +25,8 @@ class TahapanProses : AppCompatActivity() {
         val kode = intent.getStringExtra(KODE_FRAG)
         val judul = intent.getStringExtra(TITLE)
         id = intent.getIntExtra(ID,-1)
-        blok = intent.getStringExtra(VARIETAS)
-        varietas = intent.getStringExtra(BLOK)
+        blok = intent.getStringExtra(BLOK)
+        varietas = intent.getStringExtra(VARIETAS)
 
         //set action bar title
         if (supportActionBar != null) {

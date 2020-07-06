@@ -41,8 +41,8 @@ class ColorSorter_Fragment : Fragment(), View.OnClickListener  {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_color_sorter_, container, false)
         //set text varietas dan blok berdasarkan yang dipilih
-        tv_blok_color_sorter.text = Blok
-        tv_varietas_color_sorter.text = Varietas
+        view.tv_blok_color_sorter.text = Blok
+        view.tv_varietas_color_sorter.text = Varietas
         view.btn_kirim_color_sorter.setOnClickListener(this)
         view.btn_datepicker_color_sorter.setOnClickListener(this)
         db = DBPanen(requireContext())

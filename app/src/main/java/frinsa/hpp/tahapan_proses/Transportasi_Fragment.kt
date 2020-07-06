@@ -39,8 +39,8 @@ class Transportasi_Fragment: Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_transportasi_, container, false)
 
-        tv_varietas_transportasi.text = Varietas
-        tv_blok_transportasi.text =  Blok
+        view.tv_varietas_transportasi.text = Varietas
+        view.tv_blok_transportasi.text =  Blok
         view.btn_kirim_transportasi.setOnClickListener(this)
         view.btn_datepicker_transportasi.setOnClickListener(this)
         db = DBPanen(requireContext())

@@ -37,8 +37,8 @@ class JemurII_Fragment : Fragment(), View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment_jemur3_, container, false)
 
         //set text varietas dan blok berdasarkan yang dipilih
-        tv_varietas_jemur3.text = Varietas
-        tv_blok_jemur3.text = Blok
+        view.tv_varietas_jemur3.text = Varietas
+        view.tv_blok_jemur3.text = Blok
         view.btn_kirim_jemur3.setOnClickListener(this)
         view.btn_datepicker_jemur3.setOnClickListener(this)
         db = DBPanen(requireContext())

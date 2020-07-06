@@ -36,8 +36,8 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pulping2_, container, false)
-        tv_varietas_pulping2.text = Varietas
-        tv_blok_pulping2.text = Blok
+        view.tv_varietas_pulping2.text = Varietas
+        view.tv_blok_pulping2.text = Blok
         view.btn_kirim_pulping2.setOnClickListener(this)
         view.btn_datepicker_pulping2.setOnClickListener(this)
         db = DBPanen(requireContext())

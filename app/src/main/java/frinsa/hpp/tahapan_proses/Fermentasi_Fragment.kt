@@ -43,8 +43,8 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment_fermentasi_, container, false)
 
         //set text varietas dan blok berdasarkan yang dipilih
-        tv_blok_fermentasi.text = Blok
-        tv_varietas_fermentasi.text = Varietas
+        view.tv_blok_fermentasi.text = Blok
+        view.tv_varietas_fermentasi.text = Varietas
         view.btn_kirim_fermentasi.setOnClickListener(this)
         view.btn_datepicker_fermentasi.setOnClickListener(this)
         db = DBPanen(requireContext())

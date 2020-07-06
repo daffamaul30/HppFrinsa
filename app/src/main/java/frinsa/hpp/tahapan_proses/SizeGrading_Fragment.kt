@@ -35,8 +35,8 @@ class SizeGrading_Fragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_size_grading_, container, false)
-        tv_varietas_size_grading.text = Varietas
-        tv_blok_size_grading.text = Blok
+        view.tv_varietas_size_grading.text = Varietas
+        view.tv_blok_size_grading.text = Blok
         view.btn_kirim_size_grading.setOnClickListener(this)
         view.btn_datepicker_size_grading.setOnClickListener(this)
         db = DBPanen(requireContext())

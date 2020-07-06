@@ -35,8 +35,8 @@ class SutonGrader_Fragment: Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_suton_grader_, container, false)
-        tv_varietas_suton_grader.text = Varietas
-        tv_blok_suton_grader.text = Blok
+        view.tv_varietas_suton_grader.text = Varietas
+        view.tv_blok_suton_grader.text = Blok
         view.btn_kirim_suton_grader.setOnClickListener(this)
         view.btn_datepicker_suton_grader.setOnClickListener(this)
         db = DBPanen(requireContext())
