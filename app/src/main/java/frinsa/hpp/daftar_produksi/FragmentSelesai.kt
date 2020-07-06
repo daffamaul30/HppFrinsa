@@ -22,12 +22,12 @@ class FragmentSelesai: Fragment() {
     private var Berat: Double = 0.0
 
     lateinit var v : View
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         v = inflater.inflate(R.layout.fragment_produksi,container,false)
         return v
     }
