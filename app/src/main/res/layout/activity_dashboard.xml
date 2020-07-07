@@ -194,6 +194,7 @@
         android:clickable="true"
         android:elevation="10dp"
         android:focusable="true"
+        android:src="@drawable/ic_coffee_beans"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/floating_container"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -208,6 +209,7 @@
         android:clickable="true"
         android:elevation="10dp"
         android:focusable="true"
+        android:src="@drawable/ic_untitled"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/varietas_baru"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -222,6 +224,7 @@
         android:clickable="true"
         android:elevation="10dp"
         android:focusable="true"
+        android:src="@drawable/ic_coffee_grinder"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/blok_baru"
         app:layout_constraintEnd_toEndOf="parent" />
