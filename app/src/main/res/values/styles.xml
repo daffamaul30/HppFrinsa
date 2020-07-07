@@ -30,6 +30,16 @@
     <style name="Teks.Value">
         <item name="android:textColor">#6e6e6e</item>
     </style>
+    <style name="Teks.detail">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FFFF</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="Teks.button">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFF</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
     <style name="Input">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
