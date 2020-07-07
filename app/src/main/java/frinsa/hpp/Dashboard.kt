@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import frinsa.hpp.data.Blok
 import frinsa.hpp.data.Varietas
+import frinsa.hpp.lanjut_produksi.SubProses
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.dialog_menu_mulai_produksi.view.*
 

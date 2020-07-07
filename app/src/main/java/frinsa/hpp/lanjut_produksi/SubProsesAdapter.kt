@@ -1,16 +1,13 @@
-package frinsa.hpp
+package frinsa.hpp.lanjut_produksi
 
 import android.content.Context
-import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import frinsa.hpp.R
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.Produk
-import frinsa.hpp.data.Produksi
-import kotlinx.android.synthetic.main.cardviewproses.*
 import kotlinx.android.synthetic.main.cardviewproses.view.*
 val posisi: MutableList<Int> = ArrayList()
 class SubProsesAdapter(val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<SubProsesAdapter.cardViewProses>(){

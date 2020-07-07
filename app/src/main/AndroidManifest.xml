@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".TambahProses"></activity>
-        <activity android:name=".SubProses" />
+        <activity android:name=".lanjut_produksi.SubProses" />
         <activity android:name=".ReviewHasilBeli" />
         <activity android:name=".InputBeli" />
         <activity android:name=".tahapan_proses.TahapanProses" />

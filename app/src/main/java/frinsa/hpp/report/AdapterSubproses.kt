@@ -1,4 +1,4 @@
-package frinsa.hpp
+package frinsa.hpp.report
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import frinsa.hpp.R
 import frinsa.hpp.data.RincianSubproses
 import frinsa.hpp.data.Subproses
 

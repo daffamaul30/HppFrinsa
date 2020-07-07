@@ -1,4 +1,4 @@
-package frinsa.hpp
+package frinsa.hpp.report
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,7 @@ import com.jjoe64.graphview.GridLabelRenderer
 import com.jjoe64.graphview.helper.StaticLabelsFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
+import frinsa.hpp.R
 import kotlinx.android.synthetic.main.report_view.*
 import kotlin.random.Random
 

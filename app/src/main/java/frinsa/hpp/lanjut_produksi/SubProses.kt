@@ -1,7 +1,5 @@
-package frinsa.hpp
+package frinsa.hpp.lanjut_produksi
 
-
-import android.graphics.Color
 
 import android.content.Intent
 
@@ -13,21 +11,17 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import frinsa.hpp.R
 
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
 
-import frinsa.hpp.data.Produksi
-import kotlinx.android.synthetic.main.activity_input_panen.*
-
 import frinsa.hpp.tahapan_proses.TahapanProses
 
 import kotlinx.android.synthetic.main.activity_sub_proses.*
-import kotlinx.android.synthetic.main.cardviewproses.*
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.tan
 
 class SubProses: AppCompatActivity(), View.OnClickListener {
 //    private val context = this
@@ -73,7 +67,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         displayList.addAll(spList)
 
         rv_hasil_produksi.layoutManager = LinearLayoutManager(this)
-        val cardViewHeroAdapter = SubProsesAdapter(this, displayList)
+        val cardViewHeroAdapter =
+            SubProsesAdapter(this, displayList)
         rv_hasil_produksi.adapter = cardViewHeroAdapter
     }
 
@@ -93,7 +88,10 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                 if (i == posisi.size-1) {
                     break
                 } else {
-                    if ((spList.get(posisi.get(i)).proses != spList.get(posisi.get(i+1)).proses) || (spList.get(posisi.get(i)).tahap != spList.get(posisi.get(i+1)).tahap)) {
+                    if ((spList.get(posisi.get(i)).proses != spList.get(
+                            posisi.get(i+1)).proses) || (spList.get(
+                            posisi.get(i)).tahap != spList.get(
+                            posisi.get(i+1)).tahap)) {
                         valid = false
                         Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
                     }

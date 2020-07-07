@@ -1,4 +1,4 @@
-package frinsa.hpp
+package frinsa.hpp.report
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import frinsa.hpp.Dashboard
+import frinsa.hpp.R
 import frinsa.hpp.data.Subproses
 import kotlinx.android.synthetic.main.detail_biaya.*
 
@@ -28,7 +30,8 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
         addData()
 
         recyclerView = findViewById(R.id.rv_Subproses)
-        adapter = AdapterSubproses(subprosesArraylist) // parameternya ntar ditambah nama sub proses
+        adapter =
+            AdapterSubproses(subprosesArraylist) // parameternya ntar ditambah nama sub proses
         recyclerView?.layoutManager = LinearLayoutManager(this@DetailBiaya)
         recyclerView?.adapter = adapter
     }
