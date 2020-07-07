@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.database.SQLException
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -240,6 +241,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Varietas")
                 val alertDialog =  builder.show()
+                alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 dialog.submit_tmbh_varietas.setOnClickListener{
                     val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
@@ -280,6 +282,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
                     val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
                     val alertDialog =  builder.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.submit_submit.setOnClickListener {
                         val proses = if (isiNanti) "-" else spinProses

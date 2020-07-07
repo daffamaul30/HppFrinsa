@@ -46,15 +46,15 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         card_mulai.setOnClickListener(this)
         card_lanjut.setOnClickListener(this)
         floatingActionButton.setOnClickListener(this)
-
-
-//        card_mulai.setOnTouchListener(this)
     }
 
     private fun close() {
-        varietas_baru.animation = mClose
-        blok_baru.animation = mClose
-        proses_baru.animation = mClose
+        varietas_baru.startAnimation(mClose)
+        blok_baru.startAnimation(mClose)
+        proses_baru.startAnimation(mClose)
+        tv_varietas_baru.startAnimation(mClose)
+        tv_blok_baru.startAnimation(mClose)
+        tv_proses_baru.startAnimation(mClose)
 //                    floatingActionButton.animation = mNormal
         floatingActionButton.setImageResource(R.drawable.ic_baseline_add_24)
 
@@ -70,9 +70,12 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun open() {
-        varietas_baru.animation = mOpen
-        blok_baru.animation = mOpen
-        proses_baru.animation = mOpen
+        varietas_baru.startAnimation(mOpen)
+        blok_baru.startAnimation(mOpen)
+        proses_baru.startAnimation(mOpen)
+        tv_varietas_baru.startAnimation(mOpen)
+        tv_blok_baru.startAnimation(mOpen)
+        tv_proses_baru.startAnimation(mOpen)
 //                    floatingActionButton.animation = mCross
         floatingActionButton.setImageResource(R.drawable.ic_baseline_close_24)
 

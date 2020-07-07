@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -257,6 +258,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Varietas")
                 val alertDialog =  builder.show()
+                alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 dialog.submit_tmbh_varietas.setOnClickListener{
                     val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
@@ -283,6 +285,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Blok")
                 dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Blok Baru"
                 val alertDialog =  builder.show()
+                alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 dialog.submit_tmbh_varietas.setOnClickListener{
                     val edtTambahVarietas: EditText = dialog.edt_dialog_tmbh_varietas
@@ -322,6 +325,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
                     val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
                     val alertDialog =  builder.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.submit_submit.setOnClickListener {
                         val proses = if (isiNanti) "-" else spinProses

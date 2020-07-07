@@ -2,6 +2,8 @@ package frinsa.hpp.data
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -28,6 +30,7 @@ class Blok: Varietas {
         val builder = AlertDialog.Builder(context).setView(dialog).setTitle("Tambah Blok")
         dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Blok Baru"
         val alertDialog =  builder.show()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 //        dialog.edt_dialog_tmbh_varietas.requestFocus()
 
         dialog.submit_tmbh_varietas.setOnClickListener{

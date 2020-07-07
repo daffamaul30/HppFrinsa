@@ -2,6 +2,8 @@ package frinsa.hpp.data
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -30,6 +32,7 @@ open class Varietas {
         val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_tmbh_varietas, null)
         val builder = AlertDialog.Builder(context).setView(dialog).setTitle("Tambah Varietas")
         val alertDialog =  builder.show()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 //        dialog.edt_dialog_tmbh_varietas.requestFocus()
 
 

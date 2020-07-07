@@ -1,6 +1,8 @@
 package frinsa.hpp
 
 import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -354,6 +356,7 @@ class TambahProses : AppCompatActivity(), View.OnClickListener {
                 val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_help_proses_baru, null)
                 val builder = AlertDialog.Builder(context).setView(dialog)
                 val alertDialog =  builder.show()
+                alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 dialog.ok_help_proses_baru.setOnClickListener{
                     alertDialog.dismiss()

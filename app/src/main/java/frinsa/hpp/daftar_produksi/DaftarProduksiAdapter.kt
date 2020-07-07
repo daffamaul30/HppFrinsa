@@ -2,6 +2,8 @@ package frinsa.hpp.daftar_produksi
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +46,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
             dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
             dialog.edt_dp_tahap.text = dpList[position].tahap
             val alertDialog = builder.show()
+            alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
             dialog.btn_dp_edit.setOnClickListener{
                 alertDialog.dismiss()
