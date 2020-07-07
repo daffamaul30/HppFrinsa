@@ -12,7 +12,9 @@ import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
 import frinsa.hpp.data.TABLE_PRODUKSI
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
+import kotlinx.android.synthetic.main.card_daftar_produksi.view.btn_dp_edit
 import kotlinx.android.synthetic.main.cardviewproses.view.*
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 
 //2nd Adapter bagian Recycler View
@@ -30,6 +32,24 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
     override fun onBindViewHolder(holder: cardViewHolder, position: Int) {
         holder.bind(dpList[position])
+
+        holder.itemView.btn_dp_edit.setOnClickListener{
+            val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_dp,null)
+            val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+            dialog.edt_dp_tgl.text = dpList[position].tanggal
+            dialog.edt_dp_varietas.text = dpList[position].varietas
+            dialog.edt_dp_blok.text = dpList[position].blok
+            dialog.edt_dp_berat.text = dpList[position].berat.toString()
+            dialog.edt_dp_proses.text = dpList[position].proses
+            dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+            dialog.edt_dp_tahap.text = dpList[position].tahap
+            val alertDialog = builder.show()
+
+            dialog.btn_dp_edit.setOnClickListener{
+                alertDialog.dismiss()
+            }
+
+        }
 
         holder.itemView.btn_dp_delete.setOnClickListener{
             val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_submit, null)
