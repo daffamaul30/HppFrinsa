@@ -28,6 +28,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
     override fun onBindViewHolder(holder: cardViewHolder, position: Int) {
         holder.bind(dpList[position])
+
         holder.itemView.btn_dp_delete.setOnClickListener{
             produk.deleteProduksiById(dpList.get(holder.position).id!!.toInt())
             dpList.removeAt(position)
