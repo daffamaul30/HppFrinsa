@@ -95,6 +95,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                 } else {
                     if ((spList.get(posisi.get(i)).proses != spList.get(posisi.get(i+1)).proses) || (spList.get(posisi.get(i)).tahap != spList.get(posisi.get(i+1)).tahap)) {
                         valid = false
+                        Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
                     }
                 }
             }

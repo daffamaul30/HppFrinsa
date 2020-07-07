@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
+import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
 import kotlinx.android.synthetic.main.fragment_produksi.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FragmentProses: Fragment() {
+class FragmentProses: Fragment(), View.OnClickListener {
     private lateinit var db : DBPanen
     private lateinit var produk : Produk
     val dpPList: MutableList<ModelDaftarProduksi> = ArrayList()
@@ -28,6 +29,9 @@ class FragmentProses: Fragment() {
     ): View? {
         setHasOptionsMenu(true)
         v = inflater.inflate(R.layout.fragment_produksi,container,false)
+
+//        v.btn_dp_delete.setOnClickListener(this)
+
         return v
     }
 
@@ -106,6 +110,14 @@ class FragmentProses: Fragment() {
                 return true
             }
         })
+    }
+
+    override fun onClick(v: View) {
+        when(v.id) {
+            R.id.btn_dp_delete -> {
+
+            }
+        }
     }
 
 }

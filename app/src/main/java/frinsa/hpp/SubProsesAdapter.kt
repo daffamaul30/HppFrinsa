@@ -40,8 +40,6 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
         }
     }
     override fun onBindViewHolder(holder: cardViewProses, position: Int) {
-
-//        val spanen : ModelDaftarProduksi = dpList[position]
         holder.bind(dpList[position])
         posisi.clear()
 

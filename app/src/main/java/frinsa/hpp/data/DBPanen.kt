@@ -716,13 +716,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cv.put(COL_BIAYA_MUAT_FERMENTASI, f.biaya_muat)
         var result = db.insert(TABLE_FERMEN, null, cv)
 
-        if (result == -1.toLong()) {
-            toastMessage("Gagal Insert Fermentasi")
-            return false
-        }else {
-            toastMessage("Berhasil Insert Fermentasi")
-            return true
-        }
+//        if (result == -1.toLong()) {
+//            toastMessage("Gagal Insert Fermentasi")
+//            return false
+//        }else {
+//            toastMessage("Berhasil Insert Fermentasi")
+//            return true
+//        }
+        return true
     }
 
     fun updateFermentasi(id: Int, f: Fermentasi): Boolean {
@@ -757,13 +758,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cv.put(COL_BIAYA_BONGKAR_TRANSPORTASI, t.biaya_bongkar)
         var result = db.insert(TABLE_TRANSPORTASI, null, cv)
 
-        if (result == -1.toLong()) {
-            toastMessage("Gagal Insert Transportasi")
-            return false
-        }else {
-            toastMessage("Berhasil Insert Transportasi")
-            return true
-        }
+//        if (result == -1.toLong()) {
+//            toastMessage("Gagal Insert Transportasi")
+//            return false
+//        }else {
+//            toastMessage("Berhasil Insert Transportasi")
+//            return true
+//        }
+        return true
     }
 
     fun updateTransportasi(id: Int, t: Transportasi): Boolean {
@@ -817,13 +819,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cv.put(COL_BIAYA_MUAT_PULPING1, p.biaya_muat)
         var result = db.insert(TABLE_PULPING1, null, cv)
 
-        if (result == -1.toLong()) {
-            toastMessage("Gagal Insert Pulping 1")
-            return false
-        }else {
-            toastMessage("Berhasil Insert Pulping 1")
-            return true
-        }
+//        if (result == -1.toLong()) {
+//            toastMessage("Gagal Insert Pulping 1")
+//            return false
+//        }else {
+//            toastMessage("Berhasil Insert Pulping 1")
+//            return true
+//        }
+        return true
     }
 
     fun updatePulping1(id: Int, p: pulpingSatu): Boolean {
@@ -859,13 +862,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         cv.put(D, data.biaya)
         var result = db.insert(TABLE_NAME, null, cv)
 
-        if (result == -1.toLong()) {
-            toastMessage("Gagal Insert $TABLE_NAME")
-            return false
-        }else {
-            toastMessage("Berhasil Insert $TABLE_NAME")
-            return true
-        }
+//        if (result == -1.toLong()) {
+//            toastMessage("Gagal Insert $TABLE_NAME")
+//            return false
+//        }else {
+//            toastMessage("Berhasil Insert $TABLE_NAME")
+//            return true
+//        }
+        return true
     }
 
     fun <T: Standard> updateStandard(id: Int, data: T, TABLE_NAME: String, A: String, B: String, C: String, D:String): Boolean {
@@ -899,13 +903,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
         var result = db.insert(TABLE_NAME, null, cv)
 
-        if (result == -1.toLong()) {
-            toastMessage("Gagal Insert $TABLE_NAME")
-            return false
-        }else {
-            toastMessage("Berhasil Insert $TABLE_NAME")
-            return true
-        }
+//        if (result == -1.toLong()) {
+//            toastMessage("Gagal Insert $TABLE_NAME")
+//            return false
+//        }else {
+//            toastMessage("Berhasil Insert $TABLE_NAME")
+//            return true
+//        }
+        return true
     }
 
     fun <T: jemurKadarAir> updateKadarAir(id: Int, data: T, TABLE_NAME: String, V: String, W:String, X: String, Y: String, Z: String): Boolean {
@@ -925,6 +930,21 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             toastMessage("Berhasil Update Kadar Air")
             return true
         }
+    }
+
+    fun deleteConditional(TABLE_NAME: String, A: String, B: Any): Int {
+        val db = this.writableDatabase
+
+        val result = db.delete(TABLE_NAME, A + "=" + B, null)
+
+//        if (result == -1) {
+//            toastMessage("Gagal Menghapus Item")
+//            return false
+//        }else {
+//            toastMessage("Berhasil Menghapus Item")
+//            return true
+//        }
+        return result
     }
 
     fun getIdProduksi(TABLE_NAME: String): Int {

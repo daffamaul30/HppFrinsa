@@ -241,4 +241,21 @@ class Produk {
 //        Toast.makeText(context, dec.format(biaya), Toast.LENGTH_SHORT).show()
         return "Rp. " + dec.format(biaya)
     }
+
+    fun deleteProduksiById(B: Int) {
+        db.deleteConditional(TABLE_PRODUKSI, COL_ID_PRODUKSI, B)
+        db.deleteConditional(TABLE_PETIK, COL_ID_PRODUKSI_PETIK, B)
+        db.deleteConditional(TABLE_FERMEN, COL_ID_PRODUKSI_FERMENTASI, B)
+        db.deleteConditional(TABLE_TRANSPORTASI, COL_ID_PRODUKSI_TRANSPORTASI, B)
+        db.deleteConditional(TABLE_PULPING1, COL_ID_PRODUKSI_PULPING1, B)
+        db.deleteConditional(TABLE_PULPING2, COL_ID_PRODUKSI_PULPING2, B)
+        db.deleteConditional(TABLE_JEMUR_KADAR_AIR, COL_ID_PRODUKSI_KADAR_AIR, B)
+        db.deleteConditional(TABLE_JEMUR1, COL_ID_PRODUKSI_JEMUR1, B)
+        db.deleteConditional(TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, B)
+        db.deleteConditional(TABLE_HULLING, COL_ID_PRODUKSI_HULLING, B)
+        db.deleteConditional(TABLE_SUTON_GRADER, COL_ID_PRODUKSI_SUTON_GRADER, B)
+        db.deleteConditional(TABLE_SIZE_GRADING, COL_ID_PRODUKSI_SIZE_GRADING, B)
+        db.deleteConditional(TABLE_COLOR_SORTER, COL_ID_PRODUKSI_COLOR_SORTER, B)
+        db.deleteConditional(TABLE_HAND_PICK, COL_ID_PRODUKSI_HAND_PICK, B)
+    }
 }

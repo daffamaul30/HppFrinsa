@@ -4,10 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import frinsa.hpp.R
+import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
+import frinsa.hpp.data.TABLE_PRODUKSI
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
+import kotlinx.android.synthetic.main.cardviewproses.view.*
 
 //2nd Adapter bagian Recycler View
 class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<DaftarProduksiAdapter.cardViewHolder>(){
@@ -24,6 +28,10 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
     override fun onBindViewHolder(holder: cardViewHolder, position: Int) {
         holder.bind(dpList[position])
+
+        holder.itemView.btn_dp_delete.setOnClickListener{
+            produk.deleteProduksiById(dpList.get(holder.position).id!!.toInt())
+        }
     }
 
     inner class cardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,6 +43,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
             itemView.dp_tv_proses.text = modelDaftarProduksi.proses
             itemView.dp_tv_biaya.text = produk.formatRupiah(modelDaftarProduksi.biaya!!.toDouble())
             itemView.dp_tv_tahap.text = modelDaftarProduksi.tahap
+            itemView.dp_id.text = modelDaftarProduksi.id.toString()
         }
     }
 }
