@@ -1,14 +1,14 @@
-package frinsa.hpp
+package frinsa.hpp.mulai_produksi
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBar
+import frinsa.hpp.Dashboard
+import frinsa.hpp.R
 import frinsa.hpp.data.Produk
 import kotlinx.android.synthetic.main.activity_review_hasil_beli.*
-import kotlinx.android.synthetic.main.activity_review_hasil_panen.*
-import kotlinx.android.synthetic.main.activity_review_hasil_panen.btn_kembali_dashboard
 
 class ReviewHasilBeli : AppCompatActivity(), View.OnClickListener {
     val produk: Produk = Produk(this)

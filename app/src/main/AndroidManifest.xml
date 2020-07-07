@@ -11,11 +11,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".TambahProses"></activity>
         <activity android:name=".lanjut_produksi.SubProses" />
-        <activity android:name=".ReviewHasilBeli" />
-        <activity android:name=".InputBeli" />
+        <activity android:name=".mulai_produksi.ReviewHasilBeli" />
+        <activity android:name=".mulai_produksi.InputBeli" />
         <activity android:name=".tahapan_proses.TahapanProses" />
-        <activity android:name=".ReviewHasilPanen" />
-        <activity android:name=".InputPanen" /> <!-- <activity -->
+        <activity android:name=".mulai_produksi.ReviewHasilPanen" />
+        <activity android:name=".mulai_produksi.InputPanen" /> <!-- <activity -->
         <activity android:name=".daftar_produksi.MainDaftarProduksi" />
         <activity
             android:name=".Dashboard"

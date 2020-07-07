@@ -1,9 +1,8 @@
-package frinsa.hpp
+package frinsa.hpp.mulai_produksi
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.database.SQLException
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import frinsa.hpp.R
 import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.*
 import kotlinx.android.synthetic.main.activity_input_beli.*
@@ -241,7 +241,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Varietas")
                 val alertDialog =  builder.create()
-                alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+                alertDialog.window?.attributes?.windowAnimations =
+                    R.style.DialogAnim_Up_Down
                 alertDialog.show()
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -284,7 +285,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
                     val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
                     val alertDialog =  builder.create()
-                    alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Fade
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Fade
                     alertDialog.show()
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

@@ -2,7 +2,6 @@ package frinsa.hpp.tahapan_proses
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,15 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
-import frinsa.hpp.ReviewHasilBeli
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.tahap.Fermentasi
-import kotlinx.android.synthetic.main.activity_input_beli.*
-import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_fermentasi_.*
 import kotlinx.android.synthetic.main.fragment_fermentasi_.view.*
-import kotlinx.android.synthetic.main.fragment_fermentasi_.view.input_tgl_fermentasi
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,4 +1,4 @@
-package frinsa.hpp
+package frinsa.hpp.mulai_produksi
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import frinsa.hpp.R
 import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.*
 import kotlinx.android.synthetic.main.activity_input_panen.*
@@ -258,7 +259,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Varietas")
                 val alertDialog =  builder.create()
-                alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+                alertDialog.window?.attributes?.windowAnimations =
+                    R.style.DialogAnim_Up_Down
                 alertDialog.show()
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -287,7 +289,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Blok")
                 dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Blok Baru"
                 val alertDialog =  builder.create()
-                alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+                alertDialog.window?.attributes?.windowAnimations =
+                    R.style.DialogAnim_Up_Down
                 alertDialog.show()
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -329,7 +332,8 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
                     val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
                     val alertDialog =  builder.create()
-                    alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Fade
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Fade
                     alertDialog.show()
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

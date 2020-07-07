@@ -14,6 +14,8 @@ import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import frinsa.hpp.data.Blok
 import frinsa.hpp.data.Varietas
 import frinsa.hpp.lanjut_produksi.SubProses
+import frinsa.hpp.mulai_produksi.InputBeli
+import frinsa.hpp.mulai_produksi.InputPanen
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.dialog_menu_mulai_produksi.view.*
 
@@ -21,8 +23,8 @@ import kotlinx.android.synthetic.main.dialog_menu_mulai_produksi.view.*
 class Dashboard : AppCompatActivity(), View.OnClickListener {
     private lateinit var mOpen: Animation
     private lateinit var mClose: Animation
-    private lateinit var mCross: Animation
-    private lateinit var mNormal: Animation
+    private lateinit var mRotate1: Animation
+    private lateinit var mRotate2: Animation
 
     private var isOpen: Boolean = false
 
@@ -39,8 +41,8 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
 
         mOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         mClose = AnimationUtils.loadAnimation(this, R.anim.fab_close)
-        mCross = AnimationUtils.loadAnimation(this, R.anim.cross)
-        mNormal = AnimationUtils.loadAnimation(this, R.anim.normal)
+        mRotate1 = AnimationUtils.loadAnimation(this, R.anim.rotate1)
+        mRotate2 = AnimationUtils.loadAnimation(this, R.anim.rotate2)
 
         card_daftar.setOnClickListener(this)
         card_mulai.setOnClickListener(this)
@@ -55,8 +57,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         tv_varietas_baru.startAnimation(mClose)
         tv_blok_baru.startAnimation(mClose)
         tv_proses_baru.startAnimation(mClose)
-//                    floatingActionButton.animation = mNormal
-        floatingActionButton.setImageResource(R.drawable.ic_baseline_add_24)
+        floatingActionButton.startAnimation(mRotate2)
 
         varietas_baru.isClickable = false
         blok_baru.isClickable = false
@@ -76,8 +77,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         tv_varietas_baru.startAnimation(mOpen)
         tv_blok_baru.startAnimation(mOpen)
         tv_proses_baru.startAnimation(mOpen)
-//                    floatingActionButton.animation = mCross
-        floatingActionButton.setImageResource(R.drawable.ic_baseline_close_24)
+        floatingActionButton.startAnimation(mRotate1)
 
         tv_varietas_baru.visibility = View.VISIBLE
         tv_blok_baru.visibility = View.VISIBLE
