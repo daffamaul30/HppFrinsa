@@ -94,7 +94,9 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                 }
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_menu_mulai_produksi, null)
                 val builder = AlertDialog.Builder(this).setView(dialog)
-                val alertDialog =  builder.show()
+                val alertDialog =  builder.create()
+                alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim
+                alertDialog.show()
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.card_panen_sendiri.setOnClickListener{
                     val intent = Intent(this@Dashboard, InputPanen::class.java)
