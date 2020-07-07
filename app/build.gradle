@@ -41,6 +41,7 @@ dependencies {
     //noinspection GradleCompatible
     //floating button
     implementation 'com.google.android.material:material:1.1.0-alpha10'
+    implementation 'com.jjoe64:graphview:4.2.1'
 
     compile 'com.aldoapps:autoformatedittext:0.9.3'
 
