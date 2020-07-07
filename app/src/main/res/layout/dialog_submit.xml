@@ -8,6 +8,7 @@
 
     <TextView
         style="@style/Teks"
+        android:id="@+id/tv_submit"
         android:text="Apakah anda yakin?"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"

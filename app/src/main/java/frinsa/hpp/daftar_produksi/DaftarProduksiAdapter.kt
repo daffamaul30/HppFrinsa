@@ -1,5 +1,6 @@
 package frinsa.hpp.daftar_produksi
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import frinsa.hpp.data.Produk
 import frinsa.hpp.data.TABLE_PRODUKSI
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
 import kotlinx.android.synthetic.main.cardviewproses.view.*
+import kotlinx.android.synthetic.main.dialog_submit.view.*
 
 //2nd Adapter bagian Recycler View
 class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<DaftarProduksiAdapter.cardViewHolder>(){
@@ -30,9 +32,20 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
         holder.bind(dpList[position])
 
         holder.itemView.btn_dp_delete.setOnClickListener{
-            produk.deleteProduksiById(dpList.get(holder.position).id!!.toInt())
-            dpList.removeAt(position)
-            notifyItemRemoved(position)
+            val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_submit, null)
+            val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+            dialog.tv_submit.text = "Apakah anda yakin ingin menghapus item?"
+            val alertDialog =  builder.show()
+
+            dialog.submit_submit.setOnClickListener {
+                produk.deleteProduksiById(dpList.get(holder.position).id!!.toInt())
+                dpList.removeAt(position)
+                notifyItemRemoved(position)
+                alertDialog.dismiss()
+            }
+            dialog.batal_submit.setOnClickListener{
+                alertDialog.dismiss()
+            }
         }
     }
 

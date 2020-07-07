@@ -89,9 +89,6 @@
         <item name="android:layout_marginBottom">10dp</item>
     </style>
     <style name="ET.Biaya">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:drawablePadding">5dp</item>
         <item name="android:drawableLeft">@drawable/ic_indonesia_rupiah_currency_symbol</item>
     </style>
