@@ -257,7 +257,9 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             R.id.btn_tmbh_varietas -> {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Varietas")
-                val alertDialog =  builder.show()
+                val alertDialog =  builder.create()
+                alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+                alertDialog.show()
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 dialog.submit_tmbh_varietas.setOnClickListener{
@@ -284,7 +286,9 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Blok")
                 dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Blok Baru"
-                val alertDialog =  builder.show()
+                val alertDialog =  builder.create()
+                alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+                alertDialog.show()
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 dialog.submit_tmbh_varietas.setOnClickListener{
@@ -324,7 +328,9 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                 if (valid) {
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
                     val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
-                    val alertDialog =  builder.show()
+                    val alertDialog =  builder.create()
+                    alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Fade
+                    alertDialog.show()
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.submit_submit.setOnClickListener {

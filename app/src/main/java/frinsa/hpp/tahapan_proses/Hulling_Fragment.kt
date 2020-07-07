@@ -60,7 +60,9 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
                 if (valid) {
                     val dialog = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_submit, null)
                     val builder = AlertDialog.Builder(requireContext()).setView(dialog).setTitle("")
-                    val alertDialog =  builder.show()
+                    val alertDialog =  builder.create()
+                    alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Fade
+                    alertDialog.show()
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.submit_submit.setOnClickListener {

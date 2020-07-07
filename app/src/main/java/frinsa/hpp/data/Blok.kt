@@ -29,7 +29,9 @@ class Blok: Varietas {
         val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_tmbh_varietas, null)
         val builder = AlertDialog.Builder(context).setView(dialog).setTitle("Tambah Blok")
         dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Blok Baru"
-        val alertDialog =  builder.show()
+        val alertDialog =  builder.create()
+        alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+        alertDialog.show()
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 //        dialog.edt_dialog_tmbh_varietas.requestFocus()
 

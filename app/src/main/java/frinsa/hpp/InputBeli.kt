@@ -240,7 +240,9 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
             R.id.btn_tmbh_varietas_beli -> {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
                 val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Varietas")
-                val alertDialog =  builder.show()
+                val alertDialog =  builder.create()
+                alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+                alertDialog.show()
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 dialog.submit_tmbh_varietas.setOnClickListener{
@@ -281,7 +283,9 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                 if (valid) {
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
                     val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
-                    val alertDialog =  builder.show()
+                    val alertDialog =  builder.create()
+                    alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Fade
+                    alertDialog.show()
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.submit_submit.setOnClickListener {
