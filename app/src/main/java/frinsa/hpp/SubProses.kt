@@ -78,13 +78,16 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun validation(): Pair<Boolean, String?> {
+        var proses = ""
         var valid = true
-        id = spList.get(posisi.get(0)).id!!
-        Block = spList.get(posisi.get(0)).blok!!
-        varietas = spList.get(posisi.get(0)).varietas!!
-        print(Block)
-        print(varietas)
-        if (posisi.size > 1) {
+        if (posisi.size == 1) {
+            proses = spList.get(posisi.get(0)).proses.toString()
+            id = spList.get(posisi.get(0)).id!!
+            Block = spList.get(posisi.get(0)).blok!!
+            varietas = spList.get(posisi.get(0)).varietas!!
+        }
+        else if (posisi.size > 1) {
+            proses = spList.get(posisi.get(0)).proses.toString()
             for (i in 0 until posisi.size) {
                 spList.get(posisi.get(i)).id?.let { listID.add(it) }
                 if (i == posisi.size-1) {
@@ -97,8 +100,13 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             }
             //MERGE DATANYA DI DATABASE (UPDATE LAGI VAR ID NYA, VAR VARIETAS NYA, VAR BLOK NYA)
         }
+        else {
+            valid = false
+            proses = ""
+        }
 
-        return Pair(valid,spList.get(posisi.get(0)).proses)
+//        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
+        return Pair(valid, proses)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -148,7 +156,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 
     fun getCode(step: String): String {
         val list = step.split(",")
-        var current = list.indexOf(spList.get(0).tahap)
+        var current = list.indexOf(spList.get(posisi.get(0)).tahap)
+//        Toast.makeText(this, list.get(current), Toast.LENGTH_SHORT).show()
         var code = list.get(current+1)
 
         return code
@@ -160,12 +169,13 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.btn_proses -> {
                 val (valid,name) = validation()
-                Toast.makeText(this, valid.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, valid.toString(), Toast.LENGTH_SHORT).show()
 
                 if (valid) {
                     val step = name.toString()?.let { db.getStepProses(it) }
+//                    Toast.makeText(this, step, Toast.LENGTH_SHORT).show()
                     val kode = getCode(step)
-                    Toast.makeText(this, kode, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, kode, Toast.LENGTH_SHORT).show()
 //                    var stringBuilder = StringBuilder()
 //                    posisi.forEach {
 //                        stringBuilder.append(spList.get(it).proses).append(" ").append(spList.get(it).tahap).append("\n")

@@ -129,20 +129,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="right">
-                <Button
+
+                <ImageButton
                     android:id="@+id/btn_dp_delete"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:elevation="6dp"
                     android:layout_marginEnd="5dp"
-                    android:background="@drawable/btn_edit"/>
-                <Button
+                    android:background="@drawable/btn_edit"
+                    android:elevation="6dp"
+                    android:src="@drawable/ic_baseline_edit_24" />
+
+                <ImageButton
                     android:id="@+id/btn_dp_klik"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="5dp"
+                    android:background="@drawable/btn_batal"
                     android:elevation="6dp"
-                    android:background="@drawable/btn_batal"/>
+                    android:src="@drawable/ic_baseline_delete_forever_24" />
             </LinearLayout>
         </TableLayout>
 

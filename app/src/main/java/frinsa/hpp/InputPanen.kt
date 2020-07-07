@@ -331,7 +331,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
                         val produksi = Produksi(
                             sumber = "Panen",
                             beli_dari = "-",
-                            bentuk = "ceri",
+                            bentuk = "Ceri",
                             varietas = spinVarietas,
                             blok = spinBlok,
                             proses = proses,

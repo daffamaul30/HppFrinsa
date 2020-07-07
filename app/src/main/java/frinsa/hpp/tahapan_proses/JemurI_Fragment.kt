@@ -36,7 +36,7 @@ class JemurI_Fragment: Fragment(),View.OnClickListener{
 
         //set text varietas dan blok berdasarkan yang dipilih
         view.tv_varietas_jemur2.text = Varietas
-        view.tv_blok_jemur2.text = Varietas
+        view.tv_blok_jemur2.text = Blok
         view.btn_kirim_jemur2.setOnClickListener(this)
         view.btn_datepicker_jemur2.setOnClickListener(this)
         db = DBPanen(requireContext())

@@ -51,7 +51,7 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
             } else {
                 posisi.remove(holder.position)
             }
-
+//
 //            var stringBuilder = StringBuilder()
 //            posisi.forEach {
 //                stringBuilder.append(it.toString()).append("\n")
