@@ -5,151 +5,169 @@
     android:layout_margin="5dp"
     android:elevation="6dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Teks.TV"
+            android:layout_width="wrap_content"
+            android:text="Tanggal" />
+
+        <TextView
+            style="@style/Teks.TV"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Varietas" />
+
+        <TextView
+            style="@style/Teks.TV"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Blok" />
+
+        <TextView
+            style="@style/Teks.TV"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Berat" />
+
+        <TextView
+            style="@style/Teks.TV"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Proses" />
+
+        <TextView
+            style="@style/Teks.TV"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Tahap" />
+
+        <TextView
+            style="@style/Teks.TV"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Biaya" />
+
+        <TextView
+            style="@style/Teks.TV"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Ubah Nominal Biaya" />
+
+        <EditText
+            android:id="@+id/edt_dp_et_biaya"
+            style="@style/Teks.TV"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:inputType="numberDecimal"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/btn_dp_batal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/btn_dp_submit"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/btn_batal"
+                android:text="BATAL"
+                />
+
+            <Button
+                android:id="@+id/btn_dp_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Button.Kirim"
+                android:layout_marginEnd="0dp"
+                android:padding="5dp"
+                android:background="@drawable/btn_kirim"
+                android:text="UPDATE"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
         <TextView
-            android:id="@+id/edt_dp_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"/>
-        <LinearLayout
-            style="@style/InsideCard"
-            android:layout_margin="10dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:id="@+id/edt_dp_tgl"
+            style="@style/Teks.TV"
+            android:layout_width="match_parent"
+            android:gravity="end"
+            android:text="Value" />
 
-            <TableLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:stretchColumns="1"
-                android:layout_marginEnd="5dp">
+        <TextView
+            android:id="@+id/edt_dp_varietas"
+            style="@style/Teks.TV"
+            android:layout_width="match_parent"
+            android:layout_below="@id/edt_dp_tgl"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:text="Value" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp">
-                    <TextView
-                        style="@style/Teks"
-                        android:layout_column="1"
-                        android:text="Tanggal"/>
-                    <TextView
-                        style="@style/Teks.Value"
-                        android:id="@+id/edt_dp_tgl"
-                        android:gravity="right"
-                        android:text="Value"/>
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp">
-                    <TextView
-                        style="@style/Teks"
-                        android:layout_column="1"
-                        android:text="Varietas"/>
-                    <TextView
-                        style="@style/Teks.Value"
-                        android:id="@+id/edt_dp_varietas"
-                        android:gravity="right"
-                        android:text="Value"/>
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp">
-                    <TextView
-                        style="@style/Teks"
-                        android:layout_column="1"
-                        android:text="Blok"/>
-                    <TextView
-                        style="@style/Teks.Value"
-                        android:id="@+id/edt_dp_blok"
-                        android:gravity="right"
-                        android:text="Value"/>
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp">
-                    <TextView
-                        style="@style/Teks"
-                        android:layout_column="1"
-                        android:text="Berat"/>
-                    <TextView
-                        style="@style/Teks.Value"
-                        android:id="@+id/edt_dp_berat"
-                        android:gravity="right"
-                        android:text="Value"/>
-                </TableRow>
-            </TableLayout>
-            <TableLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:stretchColumns="1"
-                android:layout_marginStart="5dp">
+        <TextView
+            android:id="@+id/edt_dp_blok"
+            style="@style/Teks.TV"
+            android:layout_width="match_parent"
+            android:layout_below="@id/edt_dp_varietas"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:text="Value" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp">
-                    <TextView
-                        style="@style/Teks"
-                        android:layout_column="1"
-                        android:text="Proses"/>
-                    <TextView
-                        style="@style/Teks.Value"
-                        android:id="@+id/edt_dp_proses"
-                        android:gravity="right"
-                        android:text="Value"/>
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp">
-                    <TextView
-                        style="@style/Teks"
-                        android:layout_column="1"
-                        android:text="Biaya"/>
-                    <TextView
-                        style="@style/Teks.Value"
-                        android:id="@+id/edt_dp_biaya"
-                        android:gravity="right"
-                        android:text="Value"/>
-                </TableRow>
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp">
-                    <TextView
-                        style="@style/Teks"
-                        android:layout_column="1"
-                        android:text="Tahap"/>
-                    <TextView
-                        style="@style/Teks.Value"
-                        android:id="@+id/edt_dp_tahap"
-                        android:gravity="right"
-                        android:text="Value"/>
-                </TableRow>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="right">
+        <TextView
+            android:id="@+id/edt_dp_berat"
+            style="@style/Teks.TV"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/edt_dp_blok"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:text="Value" />
 
-                    <ImageButton
-                        android:id="@+id/btn_dp_edit"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginEnd="5dp"
-                        android:background="@drawable/btn_edit"
-                        android:elevation="6dp"
-                        android:src="@drawable/ic_baseline_edit_24" />
-                </LinearLayout>
-            </TableLayout>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/edt_dp_proses"
+            style="@style/Teks.TV"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/edt_dp_berat"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:text="Value" />
+
+        <TextView
+            android:id="@+id/edt_dp_tahap"
+            style="@style/Teks.TV"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/edt_dp_proses"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:text="Value" />
+
+        <TextView
+            android:id="@+id/edt_dp_biaya"
+            style="@style/Teks.TV"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/edt_dp_tahap"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:text="Value" />
+
     </RelativeLayout>
+
 
 </androidx.cardview.widget.CardView>
 
