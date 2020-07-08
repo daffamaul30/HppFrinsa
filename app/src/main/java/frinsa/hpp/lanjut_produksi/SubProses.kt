@@ -53,14 +53,14 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             Berat = produk.getLastWeight(it)
             spList.add(
                 ModelDaftarProduksi(
-                    id = it.produksi?.id_produksi,
-                    tanggal = it.petik?.tgl_petik,
-                    blok = it.produksi?.blok,
-                    varietas = it.produksi?.varietas,
+                    id = it.produksi.id_produksi,
+                    tanggal = it.petik.tgl_petik,
+                    blok = it.produksi.blok,
+                    varietas = it.produksi.varietas,
                     berat = Berat,
-                    proses = it.produksi?.proses,
+                    proses = it.produksi.proses,
                     biaya = produk.getTotalBiaya(it),
-                    tahap = it.produksi?.status
+                    tahap = it.produksi.status
                 )
             )
         }
