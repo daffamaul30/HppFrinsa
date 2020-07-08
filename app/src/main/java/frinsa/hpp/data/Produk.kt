@@ -1,33 +1,33 @@
 package frinsa.hpp.data
 
 import android.content.Context
+import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.tahap.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import java.text.NumberFormat
-import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Produk {
-    var petik: Petik? = null
-    var produksi: Produksi? = null
-    var fermentasi: Fermentasi? = null
-    var transport: Transportasi? = null
-    var pulping1: pulpingSatu? = null
-    var pulping2: pulpingDua? = null
-    var jemurKadarAir: jemurKadarAir? = null
-    var jemur1: jemurSatu? = null
-    var jemur2: jemurDua? = null
-    var hulling: Hulling? = null
-    var sutonGrader: sutonGrader? = null
-    var sizeGrading: sizeGrading? = null
-    var colorSorter: colorSorter? = null
-    var handPick: handPick? = null
+    var petik: Petik = Petik()
+    var produksi: Produksi = Produksi()
+    var fermentasi: Fermentasi = Fermentasi()
+    var transport: Transportasi = Transportasi()
+    var pulping1: pulpingSatu = pulpingSatu()
+    var pulping2: pulpingDua = pulpingDua()
+    var jemurKadarAir: jemurKadarAir = jemurKadarAir()
+    var jemur1: jemurSatu = jemurSatu()
+    var jemur2: jemurDua = jemurDua()
+    var hulling: Hulling = Hulling()
+    var sutonGrader: sutonGrader = sutonGrader()
+    var sizeGrading: sizeGrading = sizeGrading()
+    var colorSorter: colorSorter = colorSorter()
+    var handPick: handPick = handPick()
 
     lateinit var context: Context
     private lateinit var db: DBPanen
 
-    constructor(context: Context){
+    constructor(context: Context) {
         this.context = context
         db = DBPanen(this.context)
     }
@@ -51,7 +51,8 @@ class Produk {
         sutonGrader: sutonGrader,
         sizeGrading: sizeGrading,
         colorSorter: colorSorter,
-        handPick: handPick) {
+        handPick: handPick
+    ) {
         this.produksi = produksi
         this.petik = petik
         this.fermentasi = fermentasi
@@ -68,26 +69,43 @@ class Produk {
         this.handPick = handPick
     }
 
-    constructor(fermentasi: Fermentasi){
+    constructor(fermentasi: Fermentasi) {
         this.fermentasi = fermentasi
     }
 
-    constructor(){}
+    constructor() {}
 
     fun getTotalBiaya(data: Produk): Int {
-        val totalPetik = intArrayOf(data.petik?.biaya_petik ?: 0,data.petik?.biaya_ojek ?: 0,data.petik?.biaya_cuci ?: 0).sum()
-        val totalFermentasi = intArrayOf(data.fermentasi?.biaya_fermentasi ?: 0, data.fermentasi?.biaya_muat ?: 0).sum()
-        val totalTransportasi = intArrayOf(data.transport?.biaya_transport ?: 0, data.transport?.biaya_kawal ?: 0, data.transport?.biaya_bongkar ?: 0).sum()
-        val totalPulping1 = intArrayOf(data.pulping1?.biaya_pulping ?: 0, data.pulping1?.biaya_fermentasi ?: 0, data.pulping1?.biaya_cuci ?: 0, data.pulping1?.biaya_jemur ?: 0, data.pulping1?.biaya_muat ?: 0).sum()
-        val totalPulping2 = data.pulping2?.biaya ?: 0
-        val totaljemurKadarAir = data.jemurKadarAir?.biaya ?: 0
-        val totaljemur1 = data.jemur1?.biaya ?: 0
-        val totaljemur2 = data.jemur2?.biaya ?: 0
-        val totalHulling = data.hulling?.biaya ?: 0
-        val totalSutonGrader = data.sutonGrader?.biaya ?: 0
-        val totalSizeGrading = data.sizeGrading?.biaya ?: 0
-        val totalColorSorter = data.colorSorter?.biaya ?: 0
-        val totalHandPick = data.handPick?.biaya ?: 0
+        val totalPetik = intArrayOf(
+            data.petik.biaya_petik ?: 0,
+            data.petik.biaya_ojek ?: 0,
+            data.petik.biaya_cuci ?: 0
+        ).sum()
+        val totalFermentasi = intArrayOf(
+            data.fermentasi.biaya_fermentasi ?: 0,
+            data.fermentasi.biaya_muat ?: 0
+        ).sum()
+        val totalTransportasi = intArrayOf(
+            data.transport.biaya_transport ?: 0,
+            data.transport.biaya_kawal ?: 0,
+            data.transport.biaya_bongkar ?: 0
+        ).sum()
+        val totalPulping1 = intArrayOf(
+            data.pulping1.biaya_pulping ?: 0,
+            data.pulping1.biaya_fermentasi ?: 0,
+            data.pulping1.biaya_cuci ?: 0,
+            data.pulping1.biaya_jemur ?: 0,
+            data.pulping1.biaya_muat ?: 0
+        ).sum()
+        val totalPulping2 = data.pulping2.biaya ?: 0
+        val totaljemurKadarAir = data.jemurKadarAir.biaya ?: 0
+        val totaljemur1 = data.jemur1.biaya ?: 0
+        val totaljemur2 = data.jemur2.biaya ?: 0
+        val totalHulling = data.hulling.biaya ?: 0
+        val totalSutonGrader = data.sutonGrader.biaya ?: 0
+        val totalSizeGrading = data.sizeGrading.biaya ?: 0
+        val totalColorSorter = data.colorSorter.biaya ?: 0
+        val totalHandPick = data.handPick.biaya ?: 0
 
         val totalBiaya = intArrayOf(
             totalPetik,
@@ -103,7 +121,8 @@ class Produk {
             totalSizeGrading,
             totalSizeGrading,
             totalColorSorter,
-            totalHandPick).sum()
+            totalHandPick
+        ).sum()
 
         return totalBiaya
     }
@@ -119,7 +138,8 @@ class Produk {
             COL_ID_PRODUKSI_PULPING2,
             COL_TGL_PULPING2,
             COL_BERAT_PULPING2,
-            COL_BIAYA_PULPING2)
+            COL_BIAYA_PULPING2
+        )
         db.insertKadarAir(
             jemurKadarAir(),
             TABLE_JEMUR_KADAR_AIR,
@@ -127,21 +147,24 @@ class Produk {
             COL_TGL_KADAR_AIR,
             COL_BERAT_KADAR_AIR,
             COL_KDR_AIR_KADAR_AIR,
-            COL_BIAYA_JEMUR_KADAR_AIR)
+            COL_BIAYA_JEMUR_KADAR_AIR
+        )
         db.insertStandard<jemurSatu>(
             jemurSatu(),
             TABLE_JEMUR1,
             COL_ID_PRODUKSI_JEMUR1,
             COL_TGL_JEMUR1,
             COL_BERAT_JEMUR1,
-            COL_BIAYA_JEMUR1)
+            COL_BIAYA_JEMUR1
+        )
         db.insertStandard<jemurDua>(
             jemurDua(),
             TABLE_JEMUR2,
             COL_ID_PRODUKSI_JEMUR2,
             COL_TGL_JEMUR2,
             COL_BERAT_JEMUR2,
-            COL_BIAYA_JEMUR2)
+            COL_BIAYA_JEMUR2
+        )
         db.insertKadarAir<Hulling>(
             Hulling(),
             TABLE_HULLING,
@@ -149,78 +172,83 @@ class Produk {
             COL_TGL_HULLING,
             COL_BERAT_HULLING,
             COL_KDR_AIR_HULLING,
-            COL_BIAYA_HULLING)
+            COL_BIAYA_HULLING
+        )
         db.insertStandard<sutonGrader>(
             sutonGrader(),
             TABLE_SUTON_GRADER,
             COL_ID_PRODUKSI_SUTON_GRADER,
             COL_TGL_SUTON_GRADER,
             COL_BERAT_SUTON_GRADER,
-            COL_BIAYA_SUTON_GRADER)
+            COL_BIAYA_SUTON_GRADER
+        )
         db.insertStandard<sizeGrading>(
             sizeGrading(),
             TABLE_SIZE_GRADING,
             COL_ID_PRODUKSI_SIZE_GRADING,
             COL_TGL_SIZE_GRADING,
             COL_BERAT_SIZE_GRADING,
-            COL_BIAYA_SIZE_GRADING)
+            COL_BIAYA_SIZE_GRADING
+        )
         db.insertStandard<colorSorter>(
             colorSorter(),
             TABLE_COLOR_SORTER,
             COL_ID_PRODUKSI_COLOR_SORTER,
             COL_TGL_COLOR_SORTER,
             COL_BERAT_COLOR_SORTER,
-            COL_BIAYA_COLOR_SORTER)
+            COL_BIAYA_COLOR_SORTER
+        )
         db.insertStandard<handPick>(
             handPick(),
             TABLE_HAND_PICK,
             COL_ID_PRODUKSI_HAND_PICK,
             COL_TGL_HAND_PICK,
             COL_BERAT_HAND_PICK,
-            COL_BIAYA_HAND_PICK)
+            COL_BIAYA_HAND_PICK
+        )
     }
 
     fun getLastWeight(data: Produk): Double {
         var berat: Double = 0.0
-        when(data.produksi!!.status) {
+        when (data.produksi.status) {
             "petik" -> {
-                berat = data.petik!!.berat
+                berat = data.petik.berat
             }
             "fermentasi" -> {
-                berat = data.fermentasi!!.berat
+                berat = data.fermentasi.berat
             }
             "transportasi" -> {
-                berat = data.transport!!.berat
+                berat = data.transport.berat
             }
             "pulping Ceri-Gabah Basah" -> {
-                berat = data.pulping1!!.berat
+                berat = data.pulping1.berat
             }
             "pulping" -> {
-                berat = data.pulping2!!.berat
+                berat = data.pulping2.berat
             }
             "jemur Kadar Air" -> {
-                berat = data.jemurKadarAir!!.berat
+                berat = data.jemurKadarAir.berat
             }
             "jemurI" -> {
-                berat = data.jemur1!!.berat
+                berat = data.jemur1.berat
             }
             "jemurII" -> {
-                berat = data.jemur2!!.berat
+                berat = data.jemur2.berat
             }
             "hulling" -> {
-                berat = data.hulling!!.berat
+                berat = data.hulling.berat
             }
             "suton grader" -> {
-                berat = data.sutonGrader!!.berat
+                berat = data.sutonGrader.berat
             }
             "size grading" -> {
-                berat = data.sizeGrading!!.berat
+                berat = data.sizeGrading.berat
             }
             "color sorter" -> {
-                berat = data.colorSorter!!.berat
+                berat = data.colorSorter.berat
             }
             "Selesai" -> {
-                berat = data.handPick!!.berat
+                berat = data.handPick.berat
             }
         }
         return berat
@@ -257,5 +285,330 @@ class Produk {
         db.deleteConditional(TABLE_SIZE_GRADING, COL_ID_PRODUKSI_SIZE_GRADING, B)
         db.deleteConditional(TABLE_COLOR_SORTER, COL_ID_PRODUKSI_COLOR_SORTER, B)
         db.deleteConditional(TABLE_HAND_PICK, COL_ID_PRODUKSI_HAND_PICK, B)
+    }
+
+    fun insertMerge(produk: Produk) {
+        db.insertPanen(produk.produksi, produk.petik)
+        db.insertFermentasi(produk.fermentasi)
+        db.insertTransportasi(produk.transport)
+        db.insertPulping1(produk.pulping1)
+        db.insertStandard<pulpingDua>(
+            produk.pulping2,
+            TABLE_PULPING2,
+            COL_ID_PRODUKSI_PULPING2,
+            COL_TGL_PULPING2,
+            COL_BERAT_PULPING2,
+            COL_BIAYA_PULPING2
+        )
+        db.insertKadarAir(
+            produk.jemurKadarAir,
+            TABLE_JEMUR_KADAR_AIR,
+            COL_ID_PRODUKSI_KADAR_AIR,
+            COL_TGL_KADAR_AIR,
+            COL_BERAT_KADAR_AIR,
+            COL_KDR_AIR_KADAR_AIR,
+            COL_BIAYA_JEMUR_KADAR_AIR
+        )
+        db.insertStandard<jemurSatu>(
+            produk.jemur1,
+            TABLE_JEMUR1,
+            COL_ID_PRODUKSI_JEMUR1,
+            COL_TGL_JEMUR1,
+            COL_BERAT_JEMUR1,
+            COL_BIAYA_JEMUR1
+        )
+        db.insertStandard<jemurDua>(
+            produk.jemur2,
+            TABLE_JEMUR2,
+            COL_ID_PRODUKSI_JEMUR2,
+            COL_TGL_JEMUR2,
+            COL_BERAT_JEMUR2,
+            COL_BIAYA_JEMUR2
+        )
+        db.insertKadarAir<Hulling>(
+            produk.hulling,
+            TABLE_HULLING,
+            COL_ID_PRODUKSI_HULLING,
+            COL_TGL_HULLING,
+            COL_BERAT_HULLING,
+            COL_KDR_AIR_HULLING,
+            COL_BIAYA_HULLING
+        )
+        db.insertStandard<sutonGrader>(
+            produk.sutonGrader,
+            TABLE_SUTON_GRADER,
+            COL_ID_PRODUKSI_SUTON_GRADER,
+            COL_TGL_SUTON_GRADER,
+            COL_BERAT_SUTON_GRADER,
+            COL_BIAYA_SUTON_GRADER
+        )
+        db.insertStandard<sizeGrading>(
+            produk.sizeGrading,
+            TABLE_SIZE_GRADING,
+            COL_ID_PRODUKSI_SIZE_GRADING,
+            COL_TGL_SIZE_GRADING,
+            COL_BERAT_SIZE_GRADING,
+            COL_BIAYA_SIZE_GRADING
+        )
+        db.insertStandard<colorSorter>(
+            produk.colorSorter,
+            TABLE_COLOR_SORTER,
+            COL_ID_PRODUKSI_COLOR_SORTER,
+            COL_TGL_COLOR_SORTER,
+            COL_BERAT_COLOR_SORTER,
+            COL_BIAYA_COLOR_SORTER
+        )
+        db.insertStandard<handPick>(
+            produk.handPick,
+            TABLE_HAND_PICK,
+            COL_ID_PRODUKSI_HAND_PICK,
+            COL_TGL_HAND_PICK,
+            COL_BERAT_HAND_PICK,
+            COL_BIAYA_HAND_PICK
+        )
+    }
+
+    fun mergeData(posisi: MutableList<Int>, list: MutableList<ModelDaftarProduksi>): Produk {
+        var daftar: MutableList<Produk> = ArrayList()
+        var produk: Produk = Produk()
+
+        posisi.forEach {
+            val id: Int? = list.get(it).id
+            val produk = id?.let { it1 -> db.getAllDataConditional(it1) }
+            if (produk != null) {
+                daftar.add(produk)
+            }
+        }
+        produk.produksi = mergeProduksi(daftar)
+        produk.petik = mergePetik(daftar)
+        produk.fermentasi = mergeFermentasi(daftar)
+        produk.transport = mergeTransportasi(daftar)
+        produk.pulping1 = mergePulping1(daftar)
+        produk.pulping2 = mergePulping2(daftar)
+        produk.jemur1 = mergeJemur1(daftar)
+        produk.jemur2 = mergeJemur2(daftar)
+        produk.sutonGrader = mergeSutonGrader(daftar)
+        produk.sizeGrading = mergeSizeGrading(daftar)
+        produk.colorSorter = mergeColorSorter(daftar)
+        produk.handPick = mergeHandPick(daftar)
+        produk.jemurKadarAir = mergeKadarAir(daftar)
+        produk.hulling = mergeHulling(daftar)
+
+        insertMerge(produk)
+
+        val merge = db.getAllDataConditional(db.getIdProduksi(TABLE_PRODUKSI))
+        return merge
+    }
+
+    fun mergeProduksi(daftar: MutableList<Produk>): Produksi {
+        var data: Produksi = Produksi()
+        var sumber: MutableList<String> = ArrayList()
+        var beli_dari: MutableList<String> = ArrayList()
+        var bentuk: MutableList<String> = ArrayList()
+        var varietas: MutableList<String> = ArrayList()
+        var blok: MutableList<String> = ArrayList()
+        var proses: String = ""
+        var status: String = ""
+        daftar.forEach {
+            sumber.add(it.produksi.sumber)
+            beli_dari.add(it.produksi.beli_dari)
+            bentuk.add(it.produksi.bentuk)
+            varietas.add(it.produksi.varietas)
+            blok.add(it.produksi.blok)
+            status = it.produksi.status
+            if (it.produksi.proses != "-") {
+                proses = it.produksi.proses
+            }
+//            deleteProduksiById(it.produksi.id_produksi)
+        }
+        data.sumber = sumber.joinToString(separator= ",")
+        data.beli_dari = beli_dari.joinToString(separator= ",")
+        data.bentuk = bentuk.joinToString(separator= ",")
+        data.varietas = varietas.joinToString(separator= ",")
+        data.blok = blok.joinToString(separator= ",")
+        data.proses = proses
+        data.status = status
+
+        return data
+    }
+
+    fun mergePetik(daftar: MutableList<Produk>): Petik {
+        var data: Petik = Petik()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.petik.tgl_petik)
+            data.berat = data.berat + it.petik.berat
+            data.biaya_petik = data.biaya_petik + it.petik.biaya_petik
+            data.biaya_ojek = data.biaya_ojek + it.petik.biaya_ojek
+            data.biaya_cuci = data.biaya_cuci + it.petik.biaya_cuci
+        }
+        data.tgl_petik = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeFermentasi(daftar: MutableList<Produk>): Fermentasi {
+        var data: Fermentasi = Fermentasi()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.fermentasi.tanggal)
+            data.berat = data.berat + it.fermentasi.berat
+            data.biaya_fermentasi = data.biaya_fermentasi + it.fermentasi.biaya_fermentasi
+            data.biaya_muat = data.biaya_muat + it.fermentasi.biaya_muat
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeTransportasi(daftar: MutableList<Produk>): Transportasi {
+        var data: Transportasi = Transportasi()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.transport.tanggal)
+            data.berat = data.berat + it.transport.berat
+            data.biaya_transport = data.biaya_transport + it.transport.biaya_transport
+            data.biaya_kawal = data.biaya_kawal + it.transport.biaya_kawal
+            data.biaya_bongkar = data.biaya_bongkar + it.transport.biaya_bongkar
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergePulping1(daftar: MutableList<Produk>): pulpingSatu {
+        var data: pulpingSatu = pulpingSatu()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.pulping1.tanggal)
+            data.berat = data.berat + it.pulping1.berat
+            data.biaya_pulping = data.biaya_pulping + it.pulping1.biaya_pulping
+            data.biaya_fermentasi = data.biaya_fermentasi + it.pulping1.biaya_fermentasi
+            data.biaya_cuci = data.biaya_cuci + it.pulping1.biaya_cuci
+            data.biaya_jemur = data.biaya_jemur + it.pulping1.biaya_jemur
+            data.biaya_muat = data.biaya_muat + it.pulping1.biaya_muat
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergePulping2(daftar: MutableList<Produk>): pulpingDua {
+        var data: pulpingDua = pulpingDua()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.pulping2.tanggal)
+            data.berat = data.berat + it.pulping2.berat
+            data.biaya = data.biaya + it.pulping2.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeJemur1(daftar: MutableList<Produk>): jemurSatu {
+        var data: jemurSatu = jemurSatu()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.jemur1.tanggal)
+            data.berat = data.berat + it.jemur1.berat
+            data.biaya = data.biaya + it.jemur1.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeJemur2(daftar: MutableList<Produk>): jemurDua {
+        var data: jemurDua = jemurDua()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.jemur2.tanggal)
+            data.berat = data.berat + it.jemur2.berat
+            data.biaya = data.biaya + it.jemur2.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeSutonGrader(daftar: MutableList<Produk>): sutonGrader {
+        var data: sutonGrader = sutonGrader()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.sutonGrader.tanggal)
+            data.berat = data.berat + it.sutonGrader.berat
+            data.biaya = data.biaya + it.sutonGrader.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeSizeGrading(daftar: MutableList<Produk>): sizeGrading {
+        var data: sizeGrading = sizeGrading()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.sizeGrading.tanggal)
+            data.berat = data.berat + it.sizeGrading.berat
+            data.biaya = data.biaya + it.sizeGrading.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeColorSorter(daftar: MutableList<Produk>): colorSorter {
+        var data: colorSorter = colorSorter()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.colorSorter.tanggal)
+            data.berat = data.berat + it.colorSorter.berat
+            data.biaya = data.biaya + it.colorSorter.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeHandPick(daftar: MutableList<Produk>): handPick {
+        var data: handPick = handPick()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.handPick.tanggal)
+            data.berat = data.berat + it.handPick.berat
+            data.biaya = data.biaya + it.handPick.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeKadarAir(daftar: MutableList<Produk>): jemurKadarAir {
+        var data: jemurKadarAir = jemurKadarAir()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.jemurKadarAir.tanggal)
+            data.berat = data.berat + it.jemurKadarAir.berat
+            data.kadarAir = data.kadarAir + it.jemurKadarAir.kadarAir
+            data.biaya = data.biaya + it.jemurKadarAir.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
+    }
+
+    fun mergeHulling(daftar: MutableList<Produk>): Hulling {
+        var data: Hulling = Hulling()
+        var tgl: MutableList<String> = ArrayList()
+        daftar.forEach {
+            tgl.add(it.hulling.tanggal)
+            data.berat = data.berat + it.hulling.berat
+            data.kadarAir = data.kadarAir + it.hulling.kadarAir
+            data.biaya = data.biaya + it.hulling.biaya
+        }
+        data.tanggal = tgl.joinToString(separator= ",")
+
+        return data
     }
 }

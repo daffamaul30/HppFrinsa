@@ -97,11 +97,22 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
-            //MERGE DATANYA DI DATABASE (UPDATE LAGI VAR ID NYA, VAR VARIETAS NYA, VAR BLOK NYA)
         }
         else {
             valid = false
             proses = ""
+        }
+        if (posisi.size > 1 && valid) {
+            //MERGE DATANYA DI DATABASE (UPDATE LAGI VAR ID NYA, VAR VARIETAS NYA, VAR BLOK NYA)
+            val merge = produk.mergeData(posisi, spList)
+            id = merge.produksi.id_produksi
+            Block = merge.produksi.blok
+            varietas = merge.produksi.varietas
+            proses = merge.produksi.proses
+            //IF PROSESNYA "-"???
+            if (proses == "-") {
+                //PANGGIL DIALOG BUAT NGISI
+            }
         }
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
