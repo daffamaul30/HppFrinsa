@@ -41,14 +41,17 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
             dialog.edt_dp_tgl.text = dpList[position].tanggal
             dialog.edt_dp_varietas.text = dpList[position].varietas
             dialog.edt_dp_blok.text = dpList[position].blok
-            dialog.edt_dp_berat.text = dpList[position].berat.toString()
+            dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
             dialog.edt_dp_proses.text = dpList[position].proses
             dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
             dialog.edt_dp_tahap.text = dpList[position].tahap
             val alertDialog = builder.show()
             alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-            dialog.btn_dp_edit.setOnClickListener{
+            dialog.btn_dp_batal.setOnClickListener{
+                alertDialog.dismiss()
+            }
+            dialog.btn_dp_submit.setOnClickListener {
                 alertDialog.dismiss()
             }
 
