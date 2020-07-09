@@ -121,9 +121,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             id = merge.produksi.id_produksi
             Block = merge.produksi.blok
             varietas = merge.produksi.varietas
-            proses = merge.produksi.proses
+            proses = if (merge.produksi.proses == "") "-" else merge.produksi.proses
         }
-        //IF PROSESNYA "-"???
         println("1" + proses)
         println(id)
 
