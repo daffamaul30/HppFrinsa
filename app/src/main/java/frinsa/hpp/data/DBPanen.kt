@@ -695,8 +695,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return list
     }
 
-    fun getAllDataConditional(id: Int): Produk {
-        var  list : MutableList<Produk> = ArrayList()
+    fun getAllDataConditional(idData: Int): Produk {
         val db = this.readableDatabase
         val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI" +
                 " JOIN $TABLE_PETIK ON " + TABLE_PETIK + "." + COL_ID_PRODUKSI_PETIK + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
@@ -712,10 +711,10 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 " JOIN $TABLE_SIZE_GRADING ON " + TABLE_SIZE_GRADING + "." + COL_ID_PRODUKSI_SIZE_GRADING + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
                 " JOIN $TABLE_COLOR_SORTER ON " + TABLE_COLOR_SORTER + "." + COL_ID_PRODUKSI_COLOR_SORTER + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
                 " JOIN $TABLE_HAND_PICK ON " + TABLE_HAND_PICK + "." + COL_ID_PRODUKSI_HAND_PICK + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
-                " WHERE " + COL_STATUS_PRODUKSI + "=" + id
+                " WHERE " + COL_STATUS_PRODUKSI + "=" + idData.toString()
             , null)
-
         result.moveToFirst()
+        println(result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt())
         var produksi = Produksi()
         produksi.id_produksi = result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
         produksi.sumber = result.getString(result.getColumnIndex(COL_SUMBER))
