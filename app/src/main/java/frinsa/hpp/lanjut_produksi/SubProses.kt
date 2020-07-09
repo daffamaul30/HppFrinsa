@@ -46,7 +46,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 
         btn_proses.setOnClickListener(this)
 
-        produk = Produk()
+        produk = Produk(this)
         db = DBPanen(this)
         val data = db.getAllData()
         data.forEach() {
