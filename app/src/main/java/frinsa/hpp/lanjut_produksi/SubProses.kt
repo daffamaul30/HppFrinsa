@@ -79,7 +79,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         rv_hasil_produksi.adapter = cardViewHeroAdapter
     }
 
-    private fun validation(): Pair<Boolean, String?> {
+    private fun validation(): Pair<Boolean, String> {
         var proses = ""
         var valid = true
         if (posisi.size == 1) {
@@ -122,10 +122,12 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             proses = merge.produksi.proses
         }
         //IF PROSESNYA "-"???
+        println(proses)
         if (proses == "-") {
             //PANGGIL DIALOG BUAT NGISI
             proses = pros.addProsesIsiNanti(id)
         }
+        println(proses)
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
         return Pair(valid, proses)
@@ -194,7 +196,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 //                Toast.makeText(this, valid.toString(), Toast.LENGTH_SHORT).show()
 
                 if (valid) {
-                    val step = name.toString()?.let { db.getStepProses(it) }
+                    val step = db.getStepProses(name)
 //                    Toast.makeText(this, step, Toast.LENGTH_SHORT).show()
                     val kode = getCode(step)
 //                    Toast.makeText(this, kode, Toast.LENGTH_SHORT).show()
