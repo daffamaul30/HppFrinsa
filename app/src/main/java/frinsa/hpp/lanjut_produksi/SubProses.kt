@@ -101,7 +101,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                 if (i == posisi.size-1) {
                     break
                 } else {
-                    if ((spList.get(posisi.get(i)).proses != spList.get(
+                    if ((spList.get(posisi.get(i)).proses != "-") && (spList.get(posisi.get(i+1)).proses != "-") && (spList.get(posisi.get(i)).proses != spList.get(
                             posisi.get(i+1)).proses) || (spList.get(
                             posisi.get(i)).tahap != spList.get(
                             posisi.get(i+1)).tahap)) {
