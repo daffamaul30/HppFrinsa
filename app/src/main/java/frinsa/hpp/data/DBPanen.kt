@@ -538,7 +538,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return list
     }
 
-    fun getAllDataSelesai(): MutableList<Produk> {
+    fun getAllData2(key: String): MutableList<Produk> {
         var  list : MutableList<Produk> = ArrayList()
         val db = this.readableDatabase
         val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI" +
@@ -555,7 +555,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 " JOIN $TABLE_SIZE_GRADING ON " + TABLE_SIZE_GRADING + "." + COL_ID_PRODUKSI_SIZE_GRADING + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
                 " JOIN $TABLE_COLOR_SORTER ON " + TABLE_COLOR_SORTER + "." + COL_ID_PRODUKSI_COLOR_SORTER + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
                 " JOIN $TABLE_HAND_PICK ON " + TABLE_HAND_PICK + "." + COL_ID_PRODUKSI_HAND_PICK + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
-                " WHERE " + COL_STATUS_PRODUKSI + "=\"Selesai\""
+                " WHERE " + COL_STATUS_PRODUKSI + key + "Selesai"
             , null)
 
         if (result.moveToFirst()) {

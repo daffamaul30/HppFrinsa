@@ -40,7 +40,7 @@ class FragmentProses: Fragment(), View.OnClickListener {
         super.onActivityCreated(savedInstanceState)
         produk = Produk()
         db = DBPanen(requireContext())
-        val data = db.getAllData()
+        val data = db.getAllData2("<>")
         data.forEach() {
             Berat = produk.getLastWeight(it)
             dpPList.add(

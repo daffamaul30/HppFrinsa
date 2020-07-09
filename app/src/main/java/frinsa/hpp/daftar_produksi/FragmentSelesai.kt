@@ -37,7 +37,7 @@ class FragmentSelesai: Fragment() {
         super.onActivityCreated(savedInstanceState)
         produk = Produk()
         db = DBPanen(requireContext())
-        val data = db.getAllDataSelesai()
+        val data = db.getAllData2("=")
         data.forEach() {
             Berat = produk.getLastWeight(it)
             dpSList.add(

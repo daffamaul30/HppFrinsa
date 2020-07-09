@@ -48,7 +48,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 
         produk = Produk(this)
         db = DBPanen(this)
-        val data = db.getAllData()
+        val data = db.getAllData2("<>")
         data.forEach() {
             Berat = produk.getLastWeight(it)
             spList.add(
