@@ -374,7 +374,7 @@ class Produk {
 
         posisi?.forEach {
             val idData: Int = list.get(it).id!!
-            println(id)
+            println(idData)
             val data = db.getAllDataConditional(idData)
             daftar.add(data)
         }
