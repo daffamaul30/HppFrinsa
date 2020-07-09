@@ -421,11 +421,11 @@ class Produk {
             }
 //            deleteProduksiById(it.produksi.id_produksi)
         }
-        data.sumber = sumber.joinToString(separator= ",")
-        data.beli_dari = beli_dari.joinToString(separator= ",")
-        data.bentuk = bentuk.joinToString(separator= ",")
-        data.varietas = varietas.joinToString(separator= ",")
-        data.blok = blok.joinToString(separator= ",")
+        data.sumber = sumber.joinToString(separator= ", ")
+        data.beli_dari = beli_dari.joinToString(separator= ", ")
+        data.bentuk = bentuk.joinToString(separator= ", ")
+        data.varietas = varietas.joinToString(separator= ", ")
+        data.blok = blok.joinToString(separator= ", ")
         data.proses = proses
         data.status = status
 
@@ -442,7 +442,7 @@ class Produk {
             data.biaya_ojek = data.biaya_ojek + it.petik.biaya_ojek
             data.biaya_cuci = data.biaya_cuci + it.petik.biaya_cuci
         }
-        data.tgl_petik = tgl.joinToString(separator= ",")
+        data.tgl_petik = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -456,7 +456,7 @@ class Produk {
             data.biaya_fermentasi = data.biaya_fermentasi + it.fermentasi.biaya_fermentasi
             data.biaya_muat = data.biaya_muat + it.fermentasi.biaya_muat
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -471,7 +471,7 @@ class Produk {
             data.biaya_kawal = data.biaya_kawal + it.transport.biaya_kawal
             data.biaya_bongkar = data.biaya_bongkar + it.transport.biaya_bongkar
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -488,7 +488,7 @@ class Produk {
             data.biaya_jemur = data.biaya_jemur + it.pulping1.biaya_jemur
             data.biaya_muat = data.biaya_muat + it.pulping1.biaya_muat
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -501,7 +501,7 @@ class Produk {
             data.berat = data.berat + it.pulping2.berat
             data.biaya = data.biaya + it.pulping2.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -514,7 +514,7 @@ class Produk {
             data.berat = data.berat + it.jemur1.berat
             data.biaya = data.biaya + it.jemur1.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -527,7 +527,7 @@ class Produk {
             data.berat = data.berat + it.jemur2.berat
             data.biaya = data.biaya + it.jemur2.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -540,7 +540,7 @@ class Produk {
             data.berat = data.berat + it.sutonGrader.berat
             data.biaya = data.biaya + it.sutonGrader.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -553,7 +553,7 @@ class Produk {
             data.berat = data.berat + it.sizeGrading.berat
             data.biaya = data.biaya + it.sizeGrading.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -566,7 +566,7 @@ class Produk {
             data.berat = data.berat + it.colorSorter.berat
             data.biaya = data.biaya + it.colorSorter.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -579,7 +579,7 @@ class Produk {
             data.berat = data.berat + it.handPick.berat
             data.biaya = data.biaya + it.handPick.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -593,7 +593,7 @@ class Produk {
             data.kadarAir = data.kadarAir + it.jemurKadarAir.kadarAir
             data.biaya = data.biaya + it.jemurKadarAir.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
@@ -607,7 +607,7 @@ class Produk {
             data.kadarAir = data.kadarAir + it.hulling.kadarAir
             data.biaya = data.biaya + it.hulling.biaya
         }
-        data.tanggal = tgl.joinToString(separator= ",")
+        data.tanggal = tgl.joinToString(separator= ", ")
 
         return data
     }
