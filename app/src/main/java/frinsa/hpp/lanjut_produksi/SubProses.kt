@@ -77,14 +77,14 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         var valid = true
         if (posisi.size == 1) {
             proses = spList.get(posisi.get(0)).proses.toString()
-            id = spList.get(posisi.get(0)).id!!
-            Block = spList.get(posisi.get(0)).blok!!
-            varietas = spList.get(posisi.get(0)).varietas!!
+            id = spList.get(posisi.get(0)).id
+            Block = spList.get(posisi.get(0)).blok
+            varietas = spList.get(posisi.get(0)).varietas
         }
         else if (posisi.size > 1) {
             proses = spList.get(posisi.get(0)).proses.toString()
             for (i in 0 until posisi.size) {
-                spList.get(posisi.get(i)).id?.let { listID.add(it) }
+                spList.get(posisi.get(i)).id.let { listID.add(it) }
                 if (i == posisi.size-1) {
                     break
                 } else {
@@ -135,19 +135,19 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                         displayList.clear()
                         val search = newText.toLowerCase(Locale.getDefault())
                         spList.forEach(){
-                            if (it.proses?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            if (it.proses.toLowerCase(Locale.getDefault()).contains(search)){
                                 displayList.add(it)
                             }
-                            else if (it.tanggal?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.tanggal.toLowerCase(Locale.getDefault()).contains(search)){
                                 displayList.add(it)
                             }
-                            else if (it.varietas?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.varietas.toLowerCase(Locale.getDefault()).contains(search)){
                                 displayList.add(it)
                             }
-                            else if (it.blok?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.blok.toLowerCase(Locale.getDefault()).contains(search)){
                                 displayList.add(it)
                             }
-                            else if (it.tahap?.toLowerCase(Locale.getDefault())!!.contains(search)){
+                            else if (it.tahap.toLowerCase(Locale.getDefault()).contains(search)){
                                 displayList.add(it)
                             }
                         }

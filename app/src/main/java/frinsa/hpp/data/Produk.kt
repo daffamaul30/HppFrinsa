@@ -373,8 +373,8 @@ class Produk {
         var produk: Produk = Produk()
 
         posisi.forEach {
-            val id: Int? = list.get(it).id
-            val produk = id?.let { it1 -> db.getAllDataConditional(it1) }
+            val id: Int = list.get(it).id
+            val produk = db.getAllDataConditional(id)
             if (produk != null) {
                 daftar.add(produk)
             }
