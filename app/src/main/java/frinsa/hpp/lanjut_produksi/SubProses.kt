@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
@@ -16,6 +19,7 @@ import frinsa.hpp.R
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
+import frinsa.hpp.data.Proses
 
 import frinsa.hpp.tahapan_proses.TahapanProses
 
@@ -27,6 +31,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 //    private val context = this
     private lateinit var db : DBPanen
     private lateinit var produk : Produk
+    private lateinit var pros : Proses
     val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
@@ -34,6 +39,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     var varietas: String = ""
     var Block: String = ""
     private var Berat: Double = 0.0
+    private lateinit var spinProses: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +53,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         btn_proses.setOnClickListener(this)
 
         produk = Produk(this)
+        pros = Proses(this)
         db = DBPanen(this)
         val data = db.getAllData2("<>")
         data.forEach() {
@@ -113,10 +120,11 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             Block = merge.produksi.blok
             varietas = merge.produksi.varietas
             proses = merge.produksi.proses
-            //IF PROSESNYA "-"???
-            if (proses == "-") {
-                //PANGGIL DIALOG BUAT NGISI
-            }
+        }
+        //IF PROSESNYA "-"???
+        if (proses == "-") {
+            //PANGGIL DIALOG BUAT NGISI
+            proses = pros.addProsesIsiNanti(id)
         }
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()

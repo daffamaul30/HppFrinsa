@@ -328,14 +328,14 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
 
         //Tabel Petik
         val idProduksi = getIdProduksi(TABLE_PRODUKSI)
-        var cvC = ContentValues()
+        val cvC = ContentValues()
         cvC.put(COL_ID_PRODUKSI_PETIK, idProduksi)
         cvC.put(COL_TGL_PETIK, pe.tgl_petik)
         cvC.put(COL_BERAT_PETIK, pe.berat)
         cvC.put(COL_BIAYA_PETIK, pe.biaya_petik)
         cvC.put(COL_BIAYA_OJEK, pe.biaya_ojek)
         cvC.put(COL_BIAYA_CUCI_PETIK, pe.biaya_cuci)
-        var resultPE = db.insert(TABLE_PETIK, null, cvC)
+        val resultPE = db.insert(TABLE_PETIK, null, cvC)
 
         if ((resultPR == -1.toLong()) || (resultPE == -1.toLong())) {
 //            println(resultPR)
@@ -343,6 +343,22 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             toastMessage("Gagal")
         }else {
             toastMessage("Berhasil")
+        }
+    }
+
+    fun updateProses(id: Int, proses: String): Boolean {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_PROSES_PRODUKSI, proses)
+        val result = db.update(TABLE_PRODUKSI, cv, COL_ID_PRODUKSI + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Proses")
+            return false
+        }else {
+            toastMessage("Berhasil Update Proses")
+            return true
         }
     }
 
@@ -555,7 +571,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 " JOIN $TABLE_SIZE_GRADING ON " + TABLE_SIZE_GRADING + "." + COL_ID_PRODUKSI_SIZE_GRADING + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
                 " JOIN $TABLE_COLOR_SORTER ON " + TABLE_COLOR_SORTER + "." + COL_ID_PRODUKSI_COLOR_SORTER + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
                 " JOIN $TABLE_HAND_PICK ON " + TABLE_HAND_PICK + "." + COL_ID_PRODUKSI_HAND_PICK + "="  + TABLE_PRODUKSI + "." + COL_ID_PRODUKSI +
-                " WHERE " + COL_STATUS_PRODUKSI + key + "Selesai"
+                " WHERE " + COL_STATUS_PRODUKSI + key + "\"Selesai\""
             , null)
 
         if (result.moveToFirst()) {

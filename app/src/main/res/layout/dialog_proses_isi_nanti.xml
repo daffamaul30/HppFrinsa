@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/dialog">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginBottom="10dp"
+        android:text="Proses Belum Dipilih. Silahkan Pilih Proses!"
+        style="@style/Teks"/>
+
+    <Spinner
+        android:id="@+id/spinner_proses_isi_nanti"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_spinner2"
+        android:textAlignment="center" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/batal_proses_isi_nanti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/submit_proses_isi_nanti"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/btn_batal"
+            android:text="@string/batal"
+            />
+
+        <Button
+            android:id="@+id/submit_proses_isi_nanti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Button.Kirim.Proses"
+            android:padding="5dp"
+            android:background="@drawable/btn_kirim"
+            android:text="@string/tambahkan"
+            />
+    </RelativeLayout>
+</LinearLayout>
