@@ -372,14 +372,17 @@ class Produk {
         val daftar: MutableList<Produk> = ArrayList()
         val produk: Produk = Produk()
 
-        posisi.forEach {
-            val id: Int? = list.get(it).id
-            println(id)
-            val produk = id?.let { it1 -> db.getAllDataConditional(it1) }
-            if (produk != null) {
-                daftar.add(produk)
+        if (posisi != null) {
+            posisi.forEach {
+                val id: Int = list.get(it).id!!
+                println(id)
+                val produk =
+                    if (produk != null) {
+                        daftar.add(produk)
+                    }
             }
         }
+
         produk.produksi = mergeProduksi(daftar)
         produk.petik = mergePetik(daftar)
         produk.fermentasi = mergeFermentasi(daftar)
