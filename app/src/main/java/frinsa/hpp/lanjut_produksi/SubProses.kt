@@ -11,24 +11,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import frinsa.hpp.R
 
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
-import frinsa.hpp.data.DBPanen
-import frinsa.hpp.data.Produk
-import frinsa.hpp.data.Proses
+import frinsa.hpp.data.*
 
 import frinsa.hpp.tahapan_proses.TahapanProses
 
 import kotlinx.android.synthetic.main.activity_sub_proses.*
 import kotlinx.android.synthetic.main.dialog_proses_isi_nanti.view.*
+import kotlinx.android.synthetic.main.dialog_submit.view.*
+import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -129,32 +126,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         //IF PROSESNYA "-"???
         println("1" + proses)
         println(id)
-        if (proses == "-") {
-            //PANGGIL DIALOG BUAT NGISI
-//            proses = pros.addProsesIsiNanti(id)
-            val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_proses_isi_nanti, null)
-            val builder = AlertDialog.Builder(this).setView(dialog)
-            val alertDialog =  builder.create()
-            alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
-            alertDialog.show()
-            alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-//            val spinProses = setSpinnerProses(dialog.spinner_proses_isi_nanti)
-
-            dialog.submit_proses_isi_nanti.setOnClickListener{
-
-                if (spinProses == "Pilih Proses") {
-                    Toast.makeText(this, "Proses harus dipilih", Toast.LENGTH_SHORT).show()
-                }else {
-                    db.updateProses(id, spinProses)
-                    alertDialog.dismiss()
-                }
-            }
-            dialog.batal_proses_isi_nanti.setOnClickListener{
-                alertDialog.dismiss()
-            }
-        }
-        println("2" + proses)
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
         return Pair(valid, proses)
@@ -219,13 +191,46 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_proses -> {
-                val (valid,name) = validation()
+                var (valid,name) = validation()
 //                Toast.makeText(this, valid.toString(), Toast.LENGTH_SHORT).show()
 
-                if (valid) {
-                    val step = db.getStepProses(name)
+                if (valid && name == "-") {
+//                        pros.addProsesIsiNanti(id)
+                    val dialog =
+                        LayoutInflater.from(this).inflate(R.layout.dialog_proses_isi_nanti, null)
+                    val builder = AlertDialog.Builder(this).setView(dialog)
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    setSpinnerProses(dialog.spinner_proses_isi_nanti)
+
+                    dialog.submit_proses_isi_nanti.setOnClickListener {
+
+                        if (spinProses == "Pilih Proses") {
+                            Toast.makeText(this, "Proses harus dipilih", Toast.LENGTH_SHORT).show()
+                        } else {
+                            db.updateProses(id, spinProses)
+                            pindah(spinProses)
+                            alertDialog.dismiss()
+                        }
+                    }
+                    dialog.batal_proses_isi_nanti.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                else if (valid && name != "-") {
+                    pindah(name)
+                }
+            }
+        }
+    }
+
+    fun pindah(name: String) {
+        val step = db.getStepProses(name)
 //                    Toast.makeText(this, step, Toast.LENGTH_SHORT).show()
-                    val kode = getCode(step)
+        val kode = getCode(step)
 //                    Toast.makeText(this, kode, Toast.LENGTH_SHORT).show()
 //                    var stringBuilder = StringBuilder()
 //                    posisi.forEach {
@@ -233,15 +238,44 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 //                    }
 //                    println(stringBuilder)
 //                    Toast.makeText(this, stringBuilder, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@SubProses, TahapanProses::class.java)
-                    intent.putExtra(TahapanProses.KODE_FRAG, kode)
-                    intent.putExtra(TahapanProses.TITLE, kode.capitalizeWords())
-                    intent.putExtra(TahapanProses.ID, id)
-                    intent.putExtra(TahapanProses.VARIETAS, varietas)
-                    intent.putExtra(TahapanProses.BLOK, Block)
-                    startActivity(intent)
-                    finish()
+        val intent = Intent(this@SubProses, TahapanProses::class.java)
+        intent.putExtra(TahapanProses.KODE_FRAG, kode)
+        intent.putExtra(TahapanProses.TITLE, kode.capitalizeWords())
+        intent.putExtra(TahapanProses.ID, id)
+        intent.putExtra(TahapanProses.VARIETAS, varietas)
+        intent.putExtra(TahapanProses.BLOK, Block)
+        startActivity(intent)
+        finish()
+    }
+
+    fun setSpinnerProses(A: Spinner) {
+//        val spinnerProses: Spinner = findViewById(R.id.spinner_proses_isi_nanti)
+
+        val proses = pros.getProses()
+        //Style and populate the spinner
+        val adapterProses = ArrayAdapter(this, android.R.layout.simple_spinner_item, proses)
+        //Dropdown layout style
+        adapterProses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        //Attaching the data to spinner
+        A.adapter = adapterProses
+
+        A.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                spinProses = parent.getItemAtPosition(position).toString()
+                if (parent.getItemAtPosition(position) === "Pilih Proses" ) {
+                    //
+                } else {
+                    Toast.makeText(parent.context, spinProses, Toast.LENGTH_SHORT).show()
                 }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                TODO("Not yet implemented")
             }
         }
     }

@@ -45,7 +45,10 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
             dialog.edt_dp_proses.text = dpList[position].proses
             dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
             dialog.edt_dp_tahap.text = dpList[position].tahap
-            val alertDialog = builder.show()
+            val alertDialog = builder.create()
+            alertDialog.window?.attributes?.windowAnimations =
+                R.style.DialogAnim_Up_Down
+            alertDialog.show()
             alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
             dialog.btn_dp_batal.setOnClickListener{
@@ -61,7 +64,11 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
             val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_submit, null)
             val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
             dialog.tv_submit.text = "Apakah anda yakin ingin menghapus item?"
-            val alertDialog =  builder.show()
+            val alertDialog =  builder.create()
+            alertDialog.window?.attributes?.windowAnimations =
+                R.style.DialogAnim_Fade
+            alertDialog.show()
+            alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
             dialog.submit_submit.setOnClickListener {
                 produk.deleteProduksiById(dpList.get(holder.position).id!!.toInt())
