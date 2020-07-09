@@ -61,8 +61,6 @@ class ReviewHasilPanen : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         if (v.id == R.id.btn_kembali_dashboard) {
-            val intent = Intent(this@ReviewHasilPanen, Dashboard::class.java)
-            startActivity(intent)
             finish()
         }
     }
