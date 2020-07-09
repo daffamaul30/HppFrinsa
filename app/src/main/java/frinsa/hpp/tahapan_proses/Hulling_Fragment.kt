@@ -120,7 +120,8 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
         //ambil value dari form
         tvTgl = input_tgl_hulling.text.toString()
         edtBerat = et_berat_hulling.text.toString()
-        edtOngkosHulling = et_ongkos_hand_pick.text.toString()
+        edtKadarAir = et_kadar_air_hulling.text.toString()
+        edtOngkosHulling = et_ongkos_hulling.text.toString()
 
         var isEmptyFields = false
 
