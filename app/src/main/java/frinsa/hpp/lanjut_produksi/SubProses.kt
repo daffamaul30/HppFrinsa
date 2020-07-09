@@ -1,10 +1,14 @@
 package frinsa.hpp.lanjut_produksi
 
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.widget.AdapterView
@@ -24,6 +28,7 @@ import frinsa.hpp.data.Proses
 import frinsa.hpp.tahapan_proses.TahapanProses
 
 import kotlinx.android.synthetic.main.activity_sub_proses.*
+import kotlinx.android.synthetic.main.dialog_proses_isi_nanti.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -126,7 +131,28 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         println(id)
         if (proses == "-") {
             //PANGGIL DIALOG BUAT NGISI
-            proses = pros.addProsesIsiNanti(id)
+//            proses = pros.addProsesIsiNanti(id)
+            val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_proses_isi_nanti, null)
+            val builder = AlertDialog.Builder(this).setView(dialog)
+            val alertDialog =  builder.create()
+            alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
+            alertDialog.show()
+            alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+//            val spinProses = setSpinnerProses(dialog.spinner_proses_isi_nanti)
+
+            dialog.submit_proses_isi_nanti.setOnClickListener{
+
+                if (spinProses == "Pilih Proses") {
+                    Toast.makeText(this, "Proses harus dipilih", Toast.LENGTH_SHORT).show()
+                }else {
+                    db.updateProses(id, spinProses)
+                    alertDialog.dismiss()
+                }
+            }
+            dialog.batal_proses_isi_nanti.setOnClickListener{
+                alertDialog.dismiss()
+            }
         }
         println("2" + proses)
 
