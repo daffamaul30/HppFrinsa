@@ -122,12 +122,12 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             proses = merge.produksi.proses
         }
         //IF PROSESNYA "-"???
-        println(proses)
+        println(1 + proses)
         if (proses == "-") {
             //PANGGIL DIALOG BUAT NGISI
             proses = pros.addProsesIsiNanti(id)
         }
-        println(proses)
+        println(2 + proses)
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
         return Pair(valid, proses)

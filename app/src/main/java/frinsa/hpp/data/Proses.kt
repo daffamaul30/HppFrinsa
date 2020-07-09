@@ -84,7 +84,7 @@ class Proses {
         return spinProses
     }
     fun setSpinnerProses(A: Spinner): String {
-        var spinProses: String = "Pilih Proses"
+        var spinProses: String = ""
 //        val spinnerProses: Spinner = findViewById(R.id.spinner_proses_isi_nanti)
 
         val proses = getProses()
