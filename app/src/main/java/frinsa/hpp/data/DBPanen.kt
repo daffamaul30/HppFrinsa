@@ -730,7 +730,6 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 " WHERE " + COL_ID_PRODUKSI + "=" + idData.toString()
             , null)
         result.moveToFirst()
-        println(result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt())
         var produksi = Produksi()
         produksi.id_produksi = result.getString(result.getColumnIndex(COL_ID_PRODUKSI)).toInt()
         produksi.sumber = result.getString(result.getColumnIndex(COL_SUMBER))

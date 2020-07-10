@@ -12,7 +12,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.Produk
 import frinsa.hpp.data.tahap.pulpingSatu
+import frinsa.hpp.lanjut_produksi.posisi
+import frinsa.hpp.lanjut_produksi.spList
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_jemur_kadar_air.*
 import kotlinx.android.synthetic.main.fragment_pulping1_.*
@@ -35,6 +38,7 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtOngkosJemurPulping: String
     private lateinit var edtOngkosMuatPulping: String
     private lateinit var db : DBPanen
+    private lateinit var produk : Produk
 
 
     override fun onCreateView(
@@ -48,6 +52,7 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
         view.btn_kirim_pulping1.setOnClickListener(this)
         view.btn_datepicker_pulping1.setOnClickListener(this)
         db = DBPanen(requireContext())
+        produk = Produk(requireContext())
 
         return view
     }
@@ -82,6 +87,11 @@ class Pulping1_Fragment : Fragment(), View.OnClickListener {
                             if (result) {
                                 alertDialog.dismiss()
                                 activity?.finish()
+                            }
+                            if (posisi.size > 1) {
+                                posisi.forEach {
+                                    produk.deleteProduksiById(spList.get(it).id!!)
+                                }
                             }
 
                         }

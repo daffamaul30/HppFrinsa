@@ -257,7 +257,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_tmbh_varietas -> {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
-                val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Varietas")
+                val builder = AlertDialog.Builder(this).setView(dialog)
                 val alertDialog =  builder.create()
                 alertDialog.window?.attributes?.windowAnimations =
                     R.style.DialogAnim_Up_Down
@@ -286,7 +286,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_tmbh_blok -> {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
-                val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Blok")
+                val builder = AlertDialog.Builder(this).setView(dialog)
                 dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Blok Baru"
                 val alertDialog =  builder.create()
                 alertDialog.window?.attributes?.windowAnimations =
@@ -330,7 +330,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
 
                 if (valid) {
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
-                    val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
+                    val builder = AlertDialog.Builder(this).setView(dialog)
                     val alertDialog =  builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
                         R.style.DialogAnim_Fade

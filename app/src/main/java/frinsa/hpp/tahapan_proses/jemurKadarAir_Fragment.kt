@@ -13,6 +13,8 @@ import android.widget.Toast
 import frinsa.hpp.R
 import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.jemurKadarAir
+import frinsa.hpp.lanjut_produksi.posisi
+import frinsa.hpp.lanjut_produksi.spList
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_jemur_kadar_air.*
 import kotlinx.android.synthetic.main.fragment_jemur_kadar_air.view.*
@@ -31,6 +33,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtOngkosJemur: String
     private lateinit var edtKadarAir: String
     private lateinit var db : DBPanen
+    private lateinit var produk : Produk
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +48,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
         view.btn_kirim_jemurKadarAir.setOnClickListener(this)
         view.btn_datepicker_jemurKadarAir.setOnClickListener(this)
         db = DBPanen(requireContext())
+        produk = Produk(requireContext())
 
         return view
     }
@@ -75,7 +79,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
                             idData,
                             jemurkadarAir,
                             TABLE_JEMUR_KADAR_AIR,
-                            COL_ID_PRODUKSI_TRANSPORTASI,
+                            COL_ID_PRODUKSI_KADAR_AIR,
                             COL_TGL_KADAR_AIR,
                             COL_BERAT_KADAR_AIR,
                             COL_KDR_AIR_KADAR_AIR,
@@ -85,6 +89,11 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
                             if (result) {
                                 alertDialog.dismiss()
                                 activity?.finish()
+                            }
+                            if (posisi.size > 1) {
+                                posisi.forEach {
+                                    produk.deleteProduksiById(spList.get(it).id!!)
+                                }
                             }
 
                         }

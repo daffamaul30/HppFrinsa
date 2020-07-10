@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/dialog">
+
+    <TextView
+        style="@style/Teks"
+        android:id="@+id/tv_submit"
+        android:text="Apakah anda yakin ingin keluar?"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="20sp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/batal_submit_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/submit_submit_exit"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/btn_batal"
+            android:text="@string/tidak"
+            />
+
+        <Button
+            android:id="@+id/submit_submit_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Button.Kirim"
+            android:layout_marginEnd="0dp"
+            android:padding="5dp"
+            android:background="@drawable/btn_kirim"
+            android:text="@string/ya"
+            />
+    </RelativeLayout>
+</LinearLayout>

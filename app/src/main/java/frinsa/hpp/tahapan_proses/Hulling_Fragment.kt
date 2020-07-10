@@ -13,6 +13,8 @@ import android.widget.Toast
 import frinsa.hpp.R
 import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.Hulling
+import frinsa.hpp.lanjut_produksi.posisi
+import frinsa.hpp.lanjut_produksi.spList
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_hand_pick_.*
 import kotlinx.android.synthetic.main.fragment_hulling_.*
@@ -33,6 +35,7 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtKadarAir: String
     private lateinit var edtOngkosHulling: String
     private lateinit var db : DBPanen
+    private lateinit var produk : Produk
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +50,7 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
         view.btn_kirim_hulling.setOnClickListener(this)
         view.btn_datepicker_hulling.setOnClickListener(this)
         db = DBPanen(requireContext())
+        produk = Produk(requireContext())
 
         return view
     }
@@ -87,6 +91,11 @@ class Hulling_Fragment : Fragment(), View.OnClickListener {
                             if (result) {
                                 alertDialog.dismiss()
                                 activity?.finish()
+                            }
+                            if (posisi.size > 1) {
+                                posisi.forEach {
+                                    produk.deleteProduksiById(spList.get(it).id!!)
+                                }
                             }
 
                         }

@@ -48,7 +48,7 @@
             style="@style/Button.Kirim.Proses"
             android:padding="5dp"
             android:background="@drawable/btn_kirim"
-            android:text="@string/tambahkan"
+            android:text="@string/pilih"
             />
     </RelativeLayout>
 </LinearLayout>

@@ -12,7 +12,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.Produk
 import frinsa.hpp.data.tahap.Transportasi
+import frinsa.hpp.lanjut_produksi.posisi
+import frinsa.hpp.lanjut_produksi.spList
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_suton_grader_.*
 import kotlinx.android.synthetic.main.fragment_transportasi_.*
@@ -33,6 +36,7 @@ class Transportasi_Fragment: Fragment(), View.OnClickListener {
     private lateinit var edtOngkosPengawalan: String
     private lateinit var edtOngkosBongkar: String
     private lateinit var db : DBPanen
+    private lateinit var produk : Produk
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +50,7 @@ class Transportasi_Fragment: Fragment(), View.OnClickListener {
         view.btn_kirim_transportasi.setOnClickListener(this)
         view.btn_datepicker_transportasi.setOnClickListener(this)
         db = DBPanen(requireContext())
+        produk = Produk(requireContext())
 
         return view
     }
@@ -78,6 +83,11 @@ class Transportasi_Fragment: Fragment(), View.OnClickListener {
                             if (result) {
                                 alertDialog.dismiss()
                                 activity?.finish()
+                            }
+                            if (posisi.size > 1) {
+                                posisi.forEach {
+                                    produk.deleteProduksiById(spList.get(it).id!!)
+                                }
                             }
 
                         }

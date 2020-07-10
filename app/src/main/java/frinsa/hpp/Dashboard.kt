@@ -18,6 +18,7 @@ import frinsa.hpp.mulai_produksi.InputBeli
 import frinsa.hpp.mulai_produksi.InputPanen
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.dialog_menu_mulai_produksi.view.*
+import kotlinx.android.synthetic.main.dialog_submit_exit.view.*
 
 
 class Dashboard : AppCompatActivity(), View.OnClickListener {
@@ -142,6 +143,24 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
+        }
+    }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit_exit, null)
+        val builder = AlertDialog.Builder(this).setView(dialog)
+        val alertDialog =  builder.create()
+        alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Fade
+        alertDialog.show()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.setCancelable(false)
+        dialog.submit_submit_exit.setOnClickListener{
+            finish()
+            alertDialog.dismiss()
+        }
+        dialog.batal_submit_exit.setOnClickListener{
+            alertDialog.dismiss()
         }
     }
 

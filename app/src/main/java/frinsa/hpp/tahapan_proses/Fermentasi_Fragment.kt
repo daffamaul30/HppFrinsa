@@ -12,7 +12,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
+import frinsa.hpp.data.Produk
 import frinsa.hpp.data.tahap.Fermentasi
+import frinsa.hpp.lanjut_produksi.posisi
+import frinsa.hpp.lanjut_produksi.spList
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_fermentasi_.*
 import kotlinx.android.synthetic.main.fragment_fermentasi_.view.*
@@ -31,6 +34,7 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtOngkosFermentasi: String
     private lateinit var edtOngkosMuat: String
     private lateinit var db : DBPanen
+    private lateinit var produk : Produk
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +49,7 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
         view.btn_kirim_fermentasi.setOnClickListener(this)
         view.btn_datepicker_fermentasi.setOnClickListener(this)
         db = DBPanen(requireContext())
+        produk = Produk(requireContext())
 
         return view
     }
@@ -76,6 +81,11 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
                             if (result) {
                                 alertDialog.dismiss()
                                 activity?.finish()
+                            }
+                            if (posisi.size > 1) {
+                                posisi.forEach {
+                                    produk.deleteProduksiById(spList.get(it).id!!)
+                                }
                             }
 
                         }

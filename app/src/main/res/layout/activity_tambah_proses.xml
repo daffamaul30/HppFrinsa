@@ -101,6 +101,40 @@
                         android:orientation="horizontal">
 
                         <Spinner
+                            android:id="@+id/urut_pulping1"
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <CheckBox
+                                android:id="@+id/cek_pulping1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/pulping_ceri_gabah_basah" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:layout_marginTop="-10dp"
+                                android:text="Ongkos Pulping, Fermentasi, Cuci, Jemur, Muat"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Spinner
                             android:id="@+id/urut_fermentasi"
                             android:layout_width="35dp"
                             android:layout_height="30dp"
@@ -161,40 +195,6 @@
                                 android:layout_marginStart="30dp"
                                 android:layout_marginTop="-10dp"
                                 android:text="Ongkos Transportasi, Pengawalan, Bongkar"
-                                android:textSize="10sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/urut_pulping1"
-                            android:layout_width="35dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3"
-                            android:textAlignment="center" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <CheckBox
-                                android:id="@+id/cek_pulping1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/pulping_ceri_gabah_basah" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginTop="-10dp"
-                                android:text="Ongkos Pulping, Fermentasi, Cuci, Jemur, Muat"
                                 android:textSize="10sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -307,40 +307,6 @@
                         android:orientation="horizontal">
 
                         <Spinner
-                            android:id="@+id/urut_jemur2"
-                            android:layout_width="35dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="@drawable/btn_spinner3"
-                            android:textAlignment="center" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <CheckBox
-                                android:id="@+id/cek_jemur2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/jemur_ii" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginTop="-10dp"
-                                android:text="Ongkos Jemur"
-                                android:textSize="10sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <Spinner
                             android:id="@+id/urut_hulling"
                             android:layout_width="35dp"
                             android:layout_height="30dp"
@@ -367,6 +333,40 @@
                                 android:layout_marginStart="30dp"
                                 android:layout_marginTop="-10dp"
                                 android:text="Kadar Air, Ongkos Hulling"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/urut_jemur2"
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/btn_spinner3"
+                            android:textAlignment="center" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <CheckBox
+                                android:id="@+id/cek_jemur2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/jemur_ii" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:layout_marginTop="-10dp"
+                                android:text="Ongkos Jemur"
                                 android:textSize="10sp" />
                         </LinearLayout>
                     </LinearLayout>

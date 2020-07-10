@@ -2,16 +2,19 @@ package frinsa.hpp.tahapan_proses
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.FragmentTransaction
 import frinsa.hpp.R
-
+import frinsa.hpp.data.Produk
+import kotlinx.android.synthetic.main.detail_biaya.*
 
 
 class TahapanProses : AppCompatActivity() {
     var id: Int = 0
     lateinit var blok: String
     lateinit var varietas: String
+    private lateinit var produk: Produk
     companion object{
         const val KODE_FRAG = "kode"
         const val TITLE = "title"
@@ -27,6 +30,7 @@ class TahapanProses : AppCompatActivity() {
         id = intent.getIntExtra(ID,-1)
         blok = intent.getStringExtra(BLOK)
         varietas = intent.getStringExtra(VARIETAS)
+        produk = Produk(this)
 
         //set action bar title
         if (supportActionBar != null) {
@@ -167,6 +171,12 @@ class TahapanProses : AppCompatActivity() {
         val fragJem3: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragJem3.replace(R.id.container_tahapan,jem3)
         fragJem3.commit()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        produk.deleteProduksiById(id)
+        finish()
     }
 
 }

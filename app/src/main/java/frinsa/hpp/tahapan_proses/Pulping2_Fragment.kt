@@ -13,6 +13,8 @@ import android.widget.Toast
 import frinsa.hpp.R
 import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.pulpingDua
+import frinsa.hpp.lanjut_produksi.posisi
+import frinsa.hpp.lanjut_produksi.spList
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.fragment_pulping1_.*
 import kotlinx.android.synthetic.main.fragment_pulping2_.*
@@ -31,6 +33,7 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
     private lateinit var edtBerat: String
     private lateinit var edtOngkosPulping2: String
     private lateinit var db : DBPanen
+    private lateinit var produk : Produk
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +46,7 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
         view.btn_kirim_pulping2.setOnClickListener(this)
         view.btn_datepicker_pulping2.setOnClickListener(this)
         db = DBPanen(requireContext())
+        produk = Produk(requireContext())
 
         return view
     }
@@ -80,6 +84,11 @@ class Pulping2_Fragment : Fragment(), View.OnClickListener {
                             if (result) {
                                 alertDialog.dismiss()
                                 activity?.finish()
+                            }
+                            if (posisi.size > 1) {
+                                posisi.forEach {
+                                    produk.deleteProduksiById(spList.get(it).id!!)
+                                }
                             }
 
                         }

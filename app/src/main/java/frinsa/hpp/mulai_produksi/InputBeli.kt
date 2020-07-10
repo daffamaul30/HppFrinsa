@@ -14,6 +14,7 @@ import androidx.appcompat.app.ActionBar
 import frinsa.hpp.R
 import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.*
+import frinsa.hpp.lanjut_produksi.posisi
 import kotlinx.android.synthetic.main.activity_input_beli.*
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.activity_input_panen.tv_proses
@@ -239,7 +240,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
             }
             R.id.btn_tmbh_varietas_beli -> {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
-                val builder = AlertDialog.Builder(this).setView(dialog).setTitle("Tambah Varietas")
+                val builder = AlertDialog.Builder(this).setView(dialog)
                 val alertDialog =  builder.create()
                 alertDialog.window?.attributes?.windowAnimations =
                     R.style.DialogAnim_Up_Down
@@ -283,7 +284,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
 
                 if (valid) {
                     val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
-                    val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
+                    val builder = AlertDialog.Builder(this).setView(dialog)
                     val alertDialog =  builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
                         R.style.DialogAnim_Fade
@@ -300,13 +301,34 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                                 status= "petik"
                             }
                             "Gabah" -> {
-                                status = ""
+                                if (proses != "-") {
+                                    val step = db.getStepProses(proses)
+                                    val list = step.split(",")
+                                    var current = list.indexOf("")
+                                    var code = list.get(current+1)
+                                    status = ""
+                                }
+                                else {
+                                    status = "-"
+                                }
                             }
                             "Asalan" -> {
-                                status = ""
+                                if (proses != "-") {
+                                    val step = db.getStepProses(proses)
+                                    val list = step.split(",")
+                                    var current = list.indexOf("suton grader")
+                                    var code = list.get(current-1)
+                                    status = code
+                                }
+                                else {
+                                    status = "-"
+                                }
                             }
+
                         }
+                        println(status)
                         //INSERT TO DATABASE
+                        val produk = Produk(context = this)
                         val produksi = Produksi(
                             sumber = "Beli",
                             beli_dari = edtKolektif,
@@ -322,9 +344,32 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                             biaya_petik = edtHargaBeli.toInt(),
                             biaya_cuci = ongkosCuci
                         )
-                        val produk = Produk(context = this)
-
                         produk.insertFirst(produksi, petik)
+                        if (terpilih == "Asalan") {
+                            if (status == "hulling") {
+                                val hul = Hulling(
+                                    tanggal = tvTanggal,
+                                    berat = edtBerat.toDouble(),
+                                    kadarAir = 0.0,
+                                    biaya = 0
+                                )
+                                val id = db.getIdProduksi(TABLE_PRODUKSI)
+                                db.updateKadarAir(id, hul, TABLE_HULLING, COL_ID_PRODUKSI_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
+                            }
+                            else if (status == "jemurII") {
+                                val jem = jemurDua(
+                                    tanggal = tvTanggal,
+                                    berat = edtBerat.toDouble(),
+                                    biaya = 0
+                                )
+                                val id = db.getIdProduksi(TABLE_PRODUKSI)
+                                db.updateStandard(id, jem, TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
+                            }
+                        }
+                        else {
+                            //
+                        }
+
                         //Intent menggunakan putextra
                         val intent = Intent(this@InputBeli, ReviewHasilBeli::class.java)
                         intent.putExtra(ReviewHasilBeli.EXTRA_TITLE, terpilih)

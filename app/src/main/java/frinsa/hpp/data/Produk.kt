@@ -418,7 +418,7 @@ class Produk {
             if (it.produksi.proses != "-") {
                 proses = it.produksi.proses
             }
-            deleteProduksiById(it.produksi.id_produksi)
+//            deleteProduksiById(it.produksi.id_produksi)
         }
         data.sumber = sumber.distinct().joinToString(separator= ", ")
         data.beli_dari = beli_dari.distinct().joinToString(separator= ", ")

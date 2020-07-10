@@ -19,6 +19,8 @@ import frinsa.hpp.R
 
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.*
+import frinsa.hpp.data.tahap.Hulling
+import frinsa.hpp.data.tahap.jemurDua
 
 import frinsa.hpp.tahapan_proses.TahapanProses
 
@@ -29,12 +31,12 @@ import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
+val spList: MutableList<ModelDaftarProduksi> = ArrayList()
 class SubProses: AppCompatActivity(), View.OnClickListener {
 //    private val context = this
     private lateinit var db : DBPanen
     private lateinit var produk : Produk
     private lateinit var pros : Proses
-    val spList: MutableList<ModelDaftarProduksi> = ArrayList()
     val displayList: MutableList<ModelDaftarProduksi> = ArrayList()
     val listID: MutableList<Int> = ArrayList()
     var id: Int = 0
@@ -57,6 +59,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         produk = Produk(this)
         pros = Proses(this)
         db = DBPanen(this)
+        spList.clear()
         val data = db.getAllData2("<>")
         data.forEach() {
             Berat = produk.getLastWeight(it)
@@ -66,7 +69,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     tanggal = it.petik.tgl_petik,
                     blok = it.produksi.blok,
                     varietas = it.produksi.varietas,
-                    berat = Berat,
+                    berat = if (it.produksi.proses == "-") it.petik.berat else Berat,
                     proses = it.produksi.proses,
                     biaya = produk.getTotalBiaya(it),
                     tahap = it.produksi.status
@@ -128,9 +131,6 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             varietas = merge.produksi.varietas
             proses = if (merge.produksi.proses == "") "-" else merge.produksi.proses
         }
-        println("1" + proses)
-        println(id)
-
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
         return Pair(valid, proses)
@@ -183,7 +183,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 
     fun getCode(step: String): String {
         val list = step.split(",")
-        var current = list.indexOf(spList.get(posisi.get(0)).tahap)
+        val key = if (spList.get(posisi.get(0)).tahap != "-") spList.get(posisi.get(0)).tahap else db.getAllDataConditional(id).produksi.status
+        var current = list.indexOf(key)
 //        Toast.makeText(this, list.get(current), Toast.LENGTH_SHORT).show()
         var code = list.get(current+1)
 
@@ -207,20 +208,21 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
                     alertDialog.show()
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    alertDialog.setCancelable(false)
 
                     setSpinnerProses(dialog.spinner_proses_isi_nanti)
 
                     dialog.submit_proses_isi_nanti.setOnClickListener {
-
                         if (spinProses == "Pilih Proses") {
                             Toast.makeText(this, "Proses harus dipilih", Toast.LENGTH_SHORT).show()
                         } else {
-                            db.updateProses(id, spinProses)
-                            pindah(spinProses)
+                            pindah(spinProses, 1)
+
                             alertDialog.dismiss()
                         }
                     }
                     dialog.batal_proses_isi_nanti.setOnClickListener {
+                        produk.deleteProduksiById(id)
                         alertDialog.dismiss()
                     }
                 }
@@ -231,25 +233,70 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun pindah(name: String) {
-        val step = db.getStepProses(name)
+    fun pindah(name: String, key: Int = 0) {
+        val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
+        val builder = AlertDialog.Builder(this).setView(dialog).setTitle("")
+        val alertDialog =  builder.create()
+        alertDialog.window?.attributes?.windowAnimations =
+            R.style.DialogAnim_Fade
+        alertDialog.show()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.setCancelable(false)
+
+        dialog.submit_submit.setOnClickListener {
+            if (key == 1) {
+                db.updateProses(id, name)
+                val temp = db.getAllDataConditional(id)
+                if (temp.produksi.status == "-") {
+                    if (temp.produksi.bentuk == "Asalan") {
+                        val step = db.getStepProses(name)
+                        val list = step.split(",")
+                        var current = list.indexOf("suton grader")
+                        var code = list.get(current - 1)
+                        db.updateStatus(id, code)
+                        if (code == "hulling") {
+                            val hul = Hulling(
+                                tanggal = temp.petik.tgl_petik,
+                                berat = temp.petik.berat.toDouble(),
+                                kadarAir = 0.0,
+                                biaya = 0
+                            )
+                            db.updateKadarAir(temp.produksi.id_produksi, hul, TABLE_HULLING, COL_ID_PRODUKSI_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
+                        }
+                        else if (code == "jemurII") {
+                            val jem = jemurDua(
+                                tanggal = temp.petik.tgl_petik,
+                                berat = temp.petik.berat.toDouble(),
+                                biaya = 0
+                            )
+                            db.updateStandard(id, jem, TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
+                        }
+                    }
+                    else if (temp.produksi.bentuk == "Gabah") {
+                        //
+                    }
+                }
+            }
+            val step = db.getStepProses(name)
 //                    Toast.makeText(this, step, Toast.LENGTH_SHORT).show()
-        val kode = getCode(step)
-//                    Toast.makeText(this, kode, Toast.LENGTH_SHORT).show()
-//                    var stringBuilder = StringBuilder()
-//                    posisi.forEach {
-//                        stringBuilder.append(spList.get(it).proses).append(" ").append(spList.get(it).tahap).append("\n")
-//                    }
-//                    println(stringBuilder)
-//                    Toast.makeText(this, stringBuilder, Toast.LENGTH_SHORT).show()
-        val intent = Intent(this@SubProses, TahapanProses::class.java)
-        intent.putExtra(TahapanProses.KODE_FRAG, kode)
-        intent.putExtra(TahapanProses.TITLE, kode.capitalizeWords())
-        intent.putExtra(TahapanProses.ID, id)
-        intent.putExtra(TahapanProses.VARIETAS, varietas)
-        intent.putExtra(TahapanProses.BLOK, Block)
-        startActivity(intent)
-        finish()
+            val kode = getCode(step)
+
+            val intent = Intent(this@SubProses, TahapanProses::class.java)
+            intent.putExtra(TahapanProses.KODE_FRAG, kode)
+            println("Kode : " + kode)
+            intent.putExtra(TahapanProses.TITLE, kode.capitalizeWords())
+            intent.putExtra(TahapanProses.ID, id)
+            intent.putExtra(TahapanProses.VARIETAS, varietas)
+            intent.putExtra(TahapanProses.BLOK, Block)
+            startActivity(intent)
+            finish()
+
+            alertDialog.dismiss()
+        }
+        dialog.batal_submit.setOnClickListener{
+            alertDialog.dismiss()
+        }
+
     }
 
     fun setSpinnerProses(A: Spinner) {

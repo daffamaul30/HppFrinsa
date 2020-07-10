@@ -49,7 +49,7 @@ class FragmentProses: Fragment(), View.OnClickListener {
                     tanggal = it.petik?.tgl_petik,
                     blok = it.produksi?.blok,
                     varietas = it.produksi?.varietas,
-                    berat = Berat,
+                    berat = if (it.produksi.proses == "-") it.petik.berat else Berat,
                     proses = it.produksi?.proses,
                     biaya = produk.getTotalBiaya(it),
                     tahap = it.produksi?.status
