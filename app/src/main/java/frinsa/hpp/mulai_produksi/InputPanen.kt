@@ -11,11 +11,13 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import frinsa.hpp.R
 import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.*
 import kotlinx.android.synthetic.main.activity_input_panen.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
+import kotlinx.android.synthetic.main.dialog_submit_tmbh_proses.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.edt_dialog_tmbh_varietas
 import java.text.SimpleDateFormat
@@ -286,6 +288,7 @@ class InputPanen : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_tmbh_blok -> {
                 val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_tmbh_varietas, null)
+                dialog.icon_dialog.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_untitled))
                 val builder = AlertDialog.Builder(this).setView(dialog)
                 dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Blok Baru"
                 val alertDialog =  builder.create()

@@ -20,6 +20,13 @@
 
             <LinearLayout style="@style/InsideCard">
 
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_coffee_grinder"
+                    android:layout_marginBottom="5dp"/>
+
                 <EditText
                     android:id="@+id/edt_dialog_tmbh_proses2"
                     android:layout_width="match_parent"

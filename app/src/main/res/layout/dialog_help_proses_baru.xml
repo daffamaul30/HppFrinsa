@@ -6,6 +6,13 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:src="@drawable/frinsa"
+        android:layout_marginBottom="20dp"/>
+
     <TextView
         style="@style/Teks.Value"
         android:layout_marginStart="10dp"

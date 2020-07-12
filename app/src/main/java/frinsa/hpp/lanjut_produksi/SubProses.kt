@@ -294,6 +294,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             alertDialog.dismiss()
         }
         dialog.batal_submit.setOnClickListener{
+            produk.deleteProduksiById(id)
             alertDialog.dismiss()
         }
 

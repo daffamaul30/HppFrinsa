@@ -5,6 +5,14 @@
     android:padding="10dp"
     android:background="@drawable/dialog">
 
+    <ImageView
+        android:id="@+id/icon_dialog"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_coffee_beans"
+        android:layout_marginBottom="10dp"/>
+
     <EditText
         android:id="@+id/edt_dialog_tmbh_varietas"
         android:hint="@string/tmbh_varietas"

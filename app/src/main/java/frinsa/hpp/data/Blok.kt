@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.content.ContextCompat
 import frinsa.hpp.R
 import kotlinx.android.synthetic.main.dialog_tmbh_varietas.view.*
 
@@ -27,6 +28,7 @@ class Blok: Varietas {
 
     fun addBlok(){
         val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_tmbh_varietas, null)
+        dialog.icon_dialog.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_untitled))
         val builder = AlertDialog.Builder(context).setView(dialog).setTitle("Tambah Blok")
         dialog.edt_dialog_tmbh_varietas.hint = "Masukkan Blok Baru"
         val alertDialog =  builder.create()

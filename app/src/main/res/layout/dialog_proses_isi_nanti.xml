@@ -5,6 +5,13 @@
     android:padding="10dp"
     android:background="@drawable/dialog">
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_coffee_grinder"
+        android:layout_marginBottom="20dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
