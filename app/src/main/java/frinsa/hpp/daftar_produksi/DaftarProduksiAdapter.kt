@@ -8,20 +8,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
 import frinsa.hpp.data.TABLE_PRODUKSI
+import frinsa.hpp.data.tahap.Petik
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.btn_dp_edit
 import kotlinx.android.synthetic.main.cardviewproses.view.*
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.*
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.btn_dp_batal
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.btn_dp_submit
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_berat
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_blok
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_proses
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_tahap
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_tgl
+import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_varietas
+import kotlinx.android.synthetic.main.dialog_edit_petik.view.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
 
 //2nd Adapter bagian Recycler View
 class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<DaftarProduksiAdapter.cardViewHolder>(){
     val produk: Produk = Produk(context!!)
+    private var db = DBPanen(context!!)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -58,9 +70,29 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biayaPetik = dialog.et_petik_biaya_beli.text.toString()
+                        val biayaOjek = dialog.et_petik_biaya_ojek.text.toString()
+                        val biayaCuci = dialog.et_petik_biaya_cuci.text.toString()
+                        if (biayaPetik.isEmpty() or biayaOjek.isEmpty() or biayaCuci.isEmpty()){
+                            //Pesan klo ada yg kosong blm kepikiran
+                        }else{
+                            //Auto Refresh Data belum bisa
+                            val petik = Petik()
+                            petik.biaya_petik = biayaPetik.toInt()
+                            petik.biaya_ojek = biayaOjek.toInt()
+                            petik.biaya_cuci = biayaCuci.toInt()
+                            db.updateBiayaPetik(dpList.get(holder.position).id!!.toInt(),petik)
+                            val biayaUpdate:Int = petik.biaya_petik + petik.biaya_ojek + petik.biaya_cuci
+                            val biayaAsal:Int = db.getBiayaPetik(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            dpList[position].biaya = biayaDPList + biayaUpdate - biayaAsal
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
+                //proses lain ngikut petik klo dah jadi
                 "fermentasi" -> {
                     val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_fermentasi,null)
                     val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")

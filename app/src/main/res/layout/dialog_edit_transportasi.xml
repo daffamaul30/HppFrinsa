@@ -136,47 +136,47 @@
             android:layout_marginRight="8dp">
 
             <TextView
-                android:id="@+id/tv_petik_biaya_transport"
+                android:id="@+id/tv_transport_biaya_transport"
                 style="@style/Teks.TV"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Ongkos Transportasi" />
 
             <EditText
-                android:id="@+id/et_petik_biaya_transport"
-                android:layout_below="@id/tv_petik_biaya_transport"
+                android:id="@+id/et_transport_biaya_transport"
+                android:layout_below="@id/tv_transport_biaya_transport"
                 style="@style/ET.Biaya"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/tv_petik_biaya_kawal"
-                android:layout_below="@id/et_petik_biaya_transport"
+                android:id="@+id/tv_transport_biaya_kawal"
+                android:layout_below="@id/et_transport_biaya_transport"
                 style="@style/Teks.TV"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Ongkos Pengawalan" />
 
             <EditText
-                android:id="@+id/et_petik_biaya_kawal"
-                android:layout_below="@id/tv_petik_biaya_kawal"
+                android:id="@+id/et_transport_biaya_kawal"
+                android:layout_below="@id/tv_transport_biaya_kawal"
                 style="@style/ET.Biaya"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/tv_petik_biaya_bongkar"
-                android:layout_below="@id/et_petik_biaya_kawal"
+                android:id="@+id/tv_transport_biaya_bongkar"
+                android:layout_below="@id/et_transport_biaya_kawal"
                 style="@style/Teks.TV"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Ongkos Bongkar" />
 
             <EditText
-                android:id="@+id/et_petik_biaya_bongkar"
-                android:layout_below="@id/tv_petik_biaya_bongkar"
+                android:id="@+id/et_transport_biaya_bongkar"
+                android:layout_below="@id/tv_transport_biaya_bongkar"
                 style="@style/ET.Biaya"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -184,7 +184,7 @@
 
             <Button
                 android:id="@+id/btn_dp_submit"
-                android:layout_below="@id/et_petik_biaya_bongkar"
+                android:layout_below="@id/et_transport_biaya_bongkar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Button.Kirim"
@@ -196,7 +196,7 @@
 
             <Button
                 android:id="@+id/btn_dp_batal"
-                android:layout_below="@id/et_petik_biaya_bongkar"
+                android:layout_below="@id/et_transport_biaya_bongkar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/btn_dp_submit"

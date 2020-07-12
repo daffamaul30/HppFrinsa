@@ -1197,4 +1197,38 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         Toast.makeText(context,text,Toast.LENGTH_SHORT).show()
     }
 
+    //Updatae Biaya Petik di List Daftar Produksi
+    fun updateBiayaPetik(id: Int, p: Petik):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_PETIK, p.biaya_petik)
+        cv.put(COL_BIAYA_OJEK, p.biaya_ojek)
+        cv.put(COL_BIAYA_CUCI_PETIK, p.biaya_cuci)
+        val result = db.update(TABLE_PETIK, cv, COL_ID_PRODUKSI_PETIK + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+    // buat auto refreseh masih blm fix
+    fun getBiayaPetik(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_PETIK WHERE $COL_ID_PRODUKSI_PETIK = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+
+        var petik = Petik()
+        petik.biaya_petik = result.getString(result.getColumnIndex(COL_BIAYA_PETIK)).toInt()
+        petik.biaya_ojek = result.getString(result.getColumnIndex(COL_BIAYA_OJEK)).toInt()
+        petik.biaya_cuci = result.getString(result.getColumnIndex(COL_BIAYA_CUCI_PETIK)).toInt()
+        total = petik.biaya_petik+petik.biaya_ojek+petik.biaya_cuci
+        return total
+    }
+
 }
