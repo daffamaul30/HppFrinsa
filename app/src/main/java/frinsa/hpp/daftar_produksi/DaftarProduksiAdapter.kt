@@ -34,29 +34,311 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
     override fun onBindViewHolder(holder: cardViewHolder, position: Int) {
         holder.bind(dpList[position])
+        val tahap = dpList[position].tahap
 
         holder.itemView.btn_dp_edit.setOnClickListener{
-            val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_dp,null)
-            val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
-            dialog.edt_dp_tgl.text = dpList[position].tanggal
-            dialog.edt_dp_varietas.text = dpList[position].varietas
-            dialog.edt_dp_blok.text = dpList[position].blok
-            dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
-            dialog.edt_dp_proses.text = dpList[position].proses
-            dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
-            dialog.edt_dp_tahap.text = dpList[position].tahap
-            val alertDialog = builder.create()
-            alertDialog.window?.attributes?.windowAnimations =
-                R.style.DialogAnim_Up_Down
-            alertDialog.show()
-            alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            when (tahap){
+                "petik" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_petik,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-            dialog.btn_dp_batal.setOnClickListener{
-                alertDialog.dismiss()
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "fermentasi" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_fermentasi,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "transportasi" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_transportasi,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "pulping Ceri-Gabah Basah" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_pulping1,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "pulping" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_pulping2,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "jemur Kadar Air" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_jemur_kadar_air,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "jemurI" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_jemur2,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "jemurII" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_jemur3,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "hulling" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_hulling,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "suton grader" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_suton_grader,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "size grading" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_size_grading,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "color sorter" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_color_sorter,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+                "Selesai" -> {
+                    val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_hand_pick,null)
+                    val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
+                    dialog.edt_dp_tgl.text = dpList[position].tanggal
+                    dialog.edt_dp_varietas.text = dpList[position].varietas
+                    dialog.edt_dp_blok.text = dpList[position].blok
+                    dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
+                    dialog.edt_dp_proses.text = dpList[position].proses
+                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                    dialog.edt_dp_tahap.text = dpList[position].tahap
+                    val alertDialog = builder.create()
+                    alertDialog.window?.attributes?.windowAnimations =
+                        R.style.DialogAnim_Up_Down
+                    alertDialog.show()
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    dialog.btn_dp_batal.setOnClickListener{
+                        alertDialog.dismiss()
+                    }
+                    dialog.btn_dp_submit.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
             }
-            dialog.btn_dp_submit.setOnClickListener {
-                alertDialog.dismiss()
-            }
+
 
         }
 

@@ -12,8 +12,7 @@ import kotlinx.android.synthetic.main.fragment_produksi.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FragmentSelesai: Fragment() {
-
+class FragmentSelesai: Fragment(), View.OnClickListener {
     private lateinit var db : DBPanen
     private lateinit var produk : Produk
     val dpSList: MutableList<ModelDaftarProduksi> = ArrayList()
@@ -106,5 +105,13 @@ class FragmentSelesai: Fragment() {
                 return true
             }
         })
+    }
+
+    override fun onClick(v: View) {
+        when(v.id) {
+            R.id.btn_dp_delete -> {
+
+            }
+        }
     }
 }

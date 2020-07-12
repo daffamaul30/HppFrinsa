@@ -29,9 +29,6 @@ class FragmentProses: Fragment(), View.OnClickListener {
     ): View? {
         setHasOptionsMenu(true)
         v = inflater.inflate(R.layout.fragment_produksi,container,false)
-
-//        v.btn_dp_delete.setOnClickListener(this)
-
         return v
     }
 
