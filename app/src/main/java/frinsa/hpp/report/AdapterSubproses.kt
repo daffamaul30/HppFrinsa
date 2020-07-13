@@ -17,6 +17,7 @@ class AdapterSubproses(dataList: ArrayList<Subproses>?) :
 
     private val dataList: ArrayList<Subproses>? = dataList
     private var rinciansubArraylist: ArrayList<RincianSubproses>? = null
+    private var rinciansubArraylist2: ArrayList<RincianSubproses>? = null
     private var adapterRin: AdapterRincianSub? = null
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -47,11 +48,30 @@ class AdapterSubproses(dataList: ArrayList<Subproses>?) :
 
     fun addData() { // load database
         rinciansubArraylist = ArrayList()
-        rinciansubArraylist!!.add(RincianSubproses("Dimas Maulana",10000))
-        rinciansubArraylist!!.add(RincianSubproses("Fadly Yonk",10000))
-        rinciansubArraylist!!.add(RincianSubproses("Ariyandi Nugraha",10000))
-        rinciansubArraylist!!.add(RincianSubproses("Aham Siswana",10000))
-
+        rinciansubArraylist2 = ArrayList()
+        for (i in 0 .. 12) {
+//            rinciansubArraylist!!.add(RincianSubproses(i.toString(),10000))
+            if (dataList!!.get(i).nama_sub == "Petik") {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Petik", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Ojek", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Petik", 10000))
+            } else if (dataList!!.get(i).nama_sub == "Fermentasi") {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Fermentasi", 10000))
+            } else if (dataList!!.get(i).nama_sub == "Pulping I") {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Pulping I", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi Pulping I", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Pulping I", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Jemur Pulping I", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Pulping I", 10000))
+            } else if (dataList!!.get(i).nama_sub == "Transportasi") {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Transportasi", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Kawal Trasnportasi", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Bongkar Transportasi", 10000))
+            } else {
+                rinciansubArraylist2!!.add(RincianSubproses("Biaya " + dataList.get(i).nama_sub, 10000))
+            }
+        }
     }
 
     override fun getItemCount(): Int {

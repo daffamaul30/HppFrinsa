@@ -17,6 +17,8 @@
         <activity android:name=".mulai_produksi.ReviewHasilPanen" />
         <activity android:name=".mulai_produksi.InputPanen" /> <!-- <activity -->
         <activity android:name=".daftar_produksi.MainDaftarProduksi" />
+        <activity android:name=".report.ReportView" />
+        <activity android:name=".report.DetailBiaya" />
         <activity
             android:name=".Dashboard"
             android:theme="@style/AppTheme.NoActionBar"/>

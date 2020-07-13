@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.GridLabelRenderer
@@ -25,9 +27,15 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report_view)
 
+        if (supportActionBar != null) {
+            (supportActionBar as ActionBar).title = "Report Hasil Panen"
+        }
+
         btn_detail.setOnClickListener(this)
 
+        // data dari halaman sebelumnya
         makeGraph()
+
         val tanggal: TextView = findViewById(R.id.report_tanggal)
         val biaya: TextView = findViewById(R.id.report_biaya)
         val varietas: TextView = findViewById(R.id.report_varietas)
@@ -36,7 +44,8 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         val kadar: TextView = findViewById(R.id.report_kadarair)
         val proses: TextView = findViewById(R.id.report_proses)
 
-
+        //=====================================
+        // ngambil value dari halaman sebelum
         var kg = " Kg"
         var massa = 100
         var rp = "Rp. "
@@ -49,6 +58,7 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         kadar.text = "100"
         proses.text = "Jemur"
         biaya.text = rp+harga
+        //=====================================
     }
 
     fun makeGraph() {
@@ -63,6 +73,12 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         // isi graph
         series = LineGraphSeries()
         series!!.appendData(DataPoint(0.0, 0.0), true, 100)
+        series!!.isDrawDataPoints = true
+        series!!.setOnDataPointTapListener { series, dataPointInterface ->
+            val msg = "Berat : " + dataPointInterface.y +" Kg" +
+                    "\nProses : " + getSubproses(dataPointInterface.x)
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
 
         // loopingnya berdasarkan panjang subproses yang diperluin?
         for (i in 0..addSubproses()!!.size-1) {
@@ -92,13 +108,34 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         graph.gridLabelRenderer.labelFormatter = staticLabelsFormatter
     }
 
+    fun getSubproses(x : Double) : String {
+        when (x) {
+            1.0 -> { return "Petik" }
+            2.0 -> { return "Fermentasi" }
+            3.0 -> { return "Transportasi" }
+            4.0 -> { return "Pulping I" }
+            5.0 -> { return "Pulping II" }
+            6.0 -> { return "Jemur Kadar Air" }
+            7.0 -> { return "Jemur I" }
+            8.0 -> { return "Jemur II" }
+            9.0 -> { return "Hulling" }
+            10.0 -> { return "Suton Grader" }
+            11.0 -> { return "Size Grading" }
+            12.0 -> { return "Color Sorter" }
+            13.0 -> { return "Hand Pick" }
+            else -> { return "Tidak ada proses" }
+        }
+    }
+
     fun addSubproses(): ArrayList<String>? {
         subproses = ArrayList()
         subproses!!.add("")
+        subproses!!.add("Pet")
         subproses!!.add("Fer")
         subproses!!.add("Tran")
         subproses!!.add("Pu1")
         subproses!!.add("Pu2")
+        subproses!!.add("JKA")
         subproses!!.add("Je1")
         subproses!!.add("Je2")
         subproses!!.add("Hul")
@@ -110,8 +147,10 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         return subproses
     }
 
-    fun addData(){ // add param bwt load dari database
+    fun addData(){ // load dari page sebelumnya
         valueSub = ArrayList()
+        valueSub!!.add(Random.nextInt(0,400).toDouble())
+        valueSub!!.add(Random.nextInt(0,400).toDouble())
         valueSub!!.add(Random.nextInt(0,400).toDouble())
         valueSub!!.add(Random.nextInt(0,400).toDouble())
         valueSub!!.add(Random.nextInt(0,400).toDouble())
