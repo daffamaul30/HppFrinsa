@@ -46,31 +46,30 @@ class AdapterSubproses(dataList: ArrayList<Subproses>?) :
     }
 
 
-    fun addData() { // load database
+    fun addData() {
         rinciansubArraylist = ArrayList()
         rinciansubArraylist2 = ArrayList()
         for (i in 0 .. 12) {
-//            rinciansubArraylist!!.add(RincianSubproses(i.toString(),10000))
-            if (dataList!!.get(i).nama_sub == "Petik") {
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Petik", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Ojek", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Petik", 10000))
-            } else if (dataList!!.get(i).nama_sub == "Fermentasi") {
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Fermentasi", 10000))
-            } else if (dataList!!.get(i).nama_sub == "Pulping I") {
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Pulping I", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi Pulping I", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Pulping I", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Jemur Pulping I", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Pulping I", 10000))
-            } else if (dataList!!.get(i).nama_sub == "Transportasi") {
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Transportasi", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Kawal Trasnportasi", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Bongkar Transportasi", 10000))
-            } else {
-                rinciansubArraylist2!!.add(RincianSubproses("Biaya " + dataList.get(i).nama_sub, 10000))
-            }
+//            if (dataList!!.get(i).nama_sub == "Petik") {
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Petik", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Ojek", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Petik", 10000))
+//            } else if (dataList!!.get(i).nama_sub == "Fermentasi") {
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Fermentasi", 10000))
+//            } else if (dataList!!.get(i).nama_sub == "Pulping I") {
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Pulping I", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi Pulping I", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Pulping I", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Jemur Pulping I", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Pulping I", 10000))
+//            } else if (dataList!!.get(i).nama_sub == "Transportasi") {
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Transportasi", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Kawal Trasnportasi", 10000))
+//                rinciansubArraylist!!.add(RincianSubproses("Biaya Bongkar Transportasi", 10000))
+//            } else {
+            rinciansubArraylist!!.add(RincianSubproses("Biaya " + dataList!!.get(i).nama_sub, 10000))
+//            }
         }
     }
 
