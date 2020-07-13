@@ -14,10 +14,11 @@ import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
 import frinsa.hpp.data.TABLE_PRODUKSI
-import frinsa.hpp.data.tahap.Petik
+import frinsa.hpp.data.tahap.*
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.btn_dp_edit
 import kotlinx.android.synthetic.main.cardviewproses.view.*
+import kotlinx.android.synthetic.main.dialog_edit_color_sorter.view.*
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.*
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.btn_dp_batal
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.btn_dp_submit
@@ -27,8 +28,19 @@ import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_proses
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_tahap
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_tgl
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_varietas
+import kotlinx.android.synthetic.main.dialog_edit_fermentasi.view.*
+import kotlinx.android.synthetic.main.dialog_edit_hand_pick.view.*
+import kotlinx.android.synthetic.main.dialog_edit_hulling.view.*
+import kotlinx.android.synthetic.main.dialog_edit_jemur2.view.*
+import kotlinx.android.synthetic.main.dialog_edit_jemur_kadar_air.view.*
 import kotlinx.android.synthetic.main.dialog_edit_petik.view.*
+import kotlinx.android.synthetic.main.dialog_edit_pulping1.view.*
+import kotlinx.android.synthetic.main.dialog_edit_pulping2.view.*
+import kotlinx.android.synthetic.main.dialog_edit_size_grading.view.*
+import kotlinx.android.synthetic.main.dialog_edit_suton_grader.view.*
+import kotlinx.android.synthetic.main.dialog_edit_transportasi.view.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
+import kotlin.math.roundToInt
 
 //2nd Adapter bagian Recycler View
 class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<DaftarProduksiAdapter.cardViewHolder>(){
@@ -74,18 +86,20 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biayaOjek = dialog.et_petik_biaya_ojek.text.toString()
                         val biayaCuci = dialog.et_petik_biaya_cuci.text.toString()
                         if (biayaPetik.isEmpty() or biayaOjek.isEmpty() or biayaCuci.isEmpty()){
-                            //Pesan klo ada yg kosong blm kepikiran
+                            //Pesan klo ada yg kosong, blm kepikiran
                         }else{
-                            //Auto Refresh Data belum bisa
+
                             val petik = Petik()
                             petik.biaya_petik = biayaPetik.toInt()
                             petik.biaya_ojek = biayaOjek.toInt()
                             petik.biaya_cuci = biayaCuci.toInt()
                             db.updateBiayaPetik(dpList.get(holder.position).id!!.toInt(),petik)
+                            //Auto Refresh Data belum bisa
                             val biayaUpdate:Int = petik.biaya_petik + petik.biaya_ojek + petik.biaya_cuci
                             val biayaAsal:Int = db.getBiayaPetik(dpList.get(holder.position).id!!.toInt())
                             val biayaDPList:Int = dpList[position].biaya!!.toInt()
                             dpList[position].biaya = biayaDPList + biayaUpdate - biayaAsal
+
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -113,7 +127,21 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biayaFermentasi = dialog.et_fermentasi_biaya_fermentasi.text.toString()
+                        val biayaMuat = dialog.et_fermentasi_biaya_muat.text.toString()
+                        if (biayaFermentasi.isEmpty() or biayaMuat.isEmpty()){
+
+                        }else{
+                            val fermentasi = Fermentasi()
+                            fermentasi.biaya_fermentasi = biayaFermentasi.toInt()
+                            fermentasi.biaya_muat = biayaMuat.toInt()
+                            db.updateBiayaFermentasi(dpList.get(holder.position).id!!.toInt(),fermentasi)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
+
                     }
                 }
                 "transportasi" -> {
@@ -136,7 +164,22 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biayaTransport = dialog.et_transport_biaya_transport.text.toString()
+                        val biayaKawal = dialog.et_transport_biaya_kawal.text.toString()
+                        val biayaBongkar = dialog.et_transport_biaya_bongkar.text.toString()
+                        if (biayaBongkar.isEmpty() or biayaKawal.isEmpty() or biayaBongkar.isEmpty()){
+
+                        }else{
+                            val transport = Transportasi()
+                            transport.biaya_bongkar = biayaBongkar.toInt()
+                            transport.biaya_kawal = biayaKawal.toInt()
+                            transport.biaya_transport = biayaTransport.toInt()
+                            db.updateBiayaTransport(dpList.get(holder.position).id!!.toInt(),transport)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "pulping Ceri-Gabah Basah" -> {
@@ -159,7 +202,26 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biayaPulping = dialog.et_pulp1_biaya_pulping.text.toString()
+                        val biayaFermentasi = dialog.et_pulp1_biaya_fermentasi.text.toString()
+                        val biayaCuci = dialog.et_pulp1_biaya_cuci.text.toString()
+                        val biayaJemur = dialog.et_pulp1_biaya_jemur.text.toString()
+                        val biayaMuat = dialog.et_pulp1_biaya_muat.text.toString()
+                        if (biayaPulping.isEmpty() or biayaFermentasi.isEmpty() or biayaCuci.isEmpty() or biayaJemur.isEmpty() or biayaMuat.isEmpty()){
+
+                        }else{
+                            val proses = pulpingSatu()
+                            proses.biaya_pulping = biayaPulping.toInt()
+                            proses.biaya_fermentasi = biayaFermentasi.toInt()
+                            proses.biaya_cuci = biayaCuci.toInt()
+                            proses.biaya_jemur = biayaJemur.toInt()
+                            proses.biaya_muat = biayaMuat.toInt()
+                            db.updateBiayaPulpSatu(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "pulping" -> {
@@ -182,7 +244,18 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_pulp2_biaya_pulping.text.toString()
+                        if (biaya.isEmpty()){
+
+                        }else{
+                            val proses = pulpingDua()
+                            proses.biaya = biaya.toInt()
+                            db.updateBiayaPulpDua(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "jemur Kadar Air" -> {
@@ -205,7 +278,20 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_jemur_kadar_air_biaya_jemur.text.toString()
+                        val kadarAir = dialog.et_jemur_kadar_air.text.toString()
+                        if (biaya.isEmpty() or kadarAir.isEmpty()){
+
+                        }else{
+                            val proses = jemurKadarAir()
+                            proses.biaya = biaya.toInt()
+                            proses.kadarAir = kadarAir.toDouble()
+                            db.updateBiayaJemurKadarAir(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "jemurI" -> {
@@ -228,7 +314,18 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_jemur2_biaya_jemur.text.toString()
+                        if (biaya.isEmpty()){
+
+                        }else{
+                            val proses = jemurSatu()
+                            proses.biaya = biaya.toInt()
+                            db.updateBiayaJemurSatu(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "jemurII" -> {
@@ -251,7 +348,18 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_jemur2_biaya_jemur.text.toString()
+                        if (biaya.isEmpty()){
+
+                        }else{
+                            val proses = jemurDua()
+                            proses.biaya = biaya.toInt()
+                            db.updateBiayaJemurDua(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "hulling" -> {
@@ -274,7 +382,20 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_hulling_biaya.text.toString()
+                        val kadarAir = dialog.et_hulling_kadar_air.text.toString()
+                        if (biaya.isEmpty() or kadarAir.isEmpty()){
+
+                        }else{
+                            val proses = Hulling()
+                            proses.biaya = biaya.toInt()
+                            proses.kadarAir = kadarAir.toDouble()
+                            db.updateBiayaHulling(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "suton grader" -> {
@@ -297,7 +418,20 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_suton_grader_biaya.text.toString()
+                        if (biaya.isEmpty() or biaya.isEmpty() or biaya.isEmpty()){
+
+                        }else{
+                            val proses = sutonGrader()
+                            proses.biaya = biaya.toInt()
+                            proses.biaya = biaya.toInt()
+                            proses.biaya = biaya.toInt()
+                            db.updateBiayaSutonGrader(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "size grading" -> {
@@ -320,7 +454,18 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_size_grading_biaya.text.toString()
+                        if (biaya.isEmpty()){
+
+                        }else{
+                            val proses = sizeGrading()
+                            proses.biaya = biaya.toInt()
+                            db.updateBiayaSizeGradeing(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "color sorter" -> {
@@ -343,7 +488,18 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_color_sorter_biaya.text.toString()
+                        if (biaya.isEmpty()){
+
+                        }else{
+                            val proses = colorSorter()
+                            proses.biaya = biaya.toInt()
+                            db.updateBiayaColorSorter(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
                 "Selesai" -> {
@@ -366,12 +522,21 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
-                        alertDialog.dismiss()
+                        val biaya = dialog.et_hand_pick_biaya.text.toString()
+                        if (biaya.isEmpty()){
+
+                        }else{
+                            val proses = handPick()
+                            proses.biaya = biaya.toInt()
+                            db.updateBiayaHandPick(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
+                        }
                     }
                 }
             }
-
-
         }
 
         holder.itemView.btn_dp_delete.setOnClickListener{
@@ -388,6 +553,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                 produk.deleteProduksiById(dpList.get(holder.position).id!!.toInt())
                 dpList.removeAt(position)
                 notifyItemRemoved(position)
+                notifyDataSetChanged()
                 alertDialog.dismiss()
             }
             dialog.batal_submit.setOnClickListener{

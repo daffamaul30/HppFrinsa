@@ -1222,13 +1222,213 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         var total:Int
 
         result.moveToFirst()
-
         var petik = Petik()
         petik.biaya_petik = result.getString(result.getColumnIndex(COL_BIAYA_PETIK)).toInt()
         petik.biaya_ojek = result.getString(result.getColumnIndex(COL_BIAYA_OJEK)).toInt()
         petik.biaya_cuci = result.getString(result.getColumnIndex(COL_BIAYA_CUCI_PETIK)).toInt()
         total = petik.biaya_petik+petik.biaya_ojek+petik.biaya_cuci
         return total
+    }
+
+    fun updateBiayaPulpSatu(id: Int, p: pulpingSatu ):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_PULPING1, p.biaya_pulping)
+        cv.put(COL_BIAYA_FERMENTASI_PULPING1, p.biaya_fermentasi)
+        cv.put(COL_BIAYA_CUCI_PULPING1, p.biaya_cuci)
+        cv.put(COL_BIAYA_JEMUR_PULPING1, p.biaya_jemur)
+        cv.put(COL_BIAYA_MUAT_PULPING1, p.biaya_muat)
+        val result = db.update(TABLE_PULPING1, cv, COL_ID_PRODUKSI_PULPING1 + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaPulpDua(id: Int, p: pulpingDua):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_PULPING2, p.biaya)
+        val result = db.update(TABLE_PULPING2, cv, COL_ID_PRODUKSI_PULPING2 + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaFermentasi(id: Int, f: Fermentasi):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_FERMENTASI, f.biaya_fermentasi)
+        cv.put(COL_BIAYA_MUAT_FERMENTASI, f.biaya_muat)
+        val result = db.update(TABLE_FERMEN, cv, COL_ID_PRODUKSI_FERMENTASI + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaTransport(id: Int, t: Transportasi):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_TRANSPORT, t.biaya_transport)
+        cv.put(COL_BIAYA_KAWAL_TRANSPORTASI, t.biaya_kawal)
+        cv.put(COL_BIAYA_BONGKAR_TRANSPORTASI, t.biaya_bongkar)
+        val result = db.update(TABLE_TRANSPORTASI, cv, COL_ID_PRODUKSI_TRANSPORTASI + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaJemurKadarAir(id: Int, j: jemurKadarAir):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_KDR_AIR_KADAR_AIR, j.kadarAir)
+        cv.put(COL_BIAYA_JEMUR_KADAR_AIR, j.biaya)
+        val result = db.update(TABLE_JEMUR_KADAR_AIR, cv, COL_ID_PRODUKSI_KADAR_AIR + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaJemurSatu(id: Int, j: jemurSatu):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_JEMUR1, j.biaya)
+        val result = db.update(TABLE_JEMUR1, cv, COL_ID_PRODUKSI_JEMUR1 + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaJemurDua(id: Int, j: jemurDua):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_JEMUR2, j.biaya)
+        val result = db.update(TABLE_JEMUR2, cv, COL_ID_PRODUKSI_JEMUR2 + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaHulling(id: Int, h: Hulling):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_KDR_AIR_HULLING, h.kadarAir)
+        cv.put(COL_BIAYA_HULLING, h.biaya)
+        val result = db.update(TABLE_HULLING, cv, COL_ID_PRODUKSI_HULLING + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaSutonGrader(id: Int, s: sutonGrader):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_SUTON_GRADER, s.biaya)
+        val result = db.update(TABLE_SUTON_GRADER, cv, COL_ID_PRODUKSI_SUTON_GRADER + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaSizeGradeing(id: Int, s: sizeGrading ):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_SIZE_GRADING, s.biaya)
+        val result = db.update(TABLE_SIZE_GRADING, cv, COL_ID_PRODUKSI_SIZE_GRADING + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaColorSorter(id: Int, c: colorSorter):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_COLOR_SORTER, c.biaya)
+        val result = db.update(TABLE_COLOR_SORTER, cv, COL_ID_PRODUKSI_COLOR_SORTER + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
+    }
+
+    fun updateBiayaHandPick(id: Int, h: handPick ):Boolean{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_BIAYA_HAND_PICK, h.biaya)
+        val result = db.update(TABLE_HAND_PICK, cv, COL_ID_PRODUKSI_HAND_PICK + "=" + id, null)
+
+        if (result == -1) {
+            toastMessage("Gagal Update Status")
+            return false
+        }else {
+            toastMessage("Berhasil Update Status")
+            return true
+        }
     }
 
 }
