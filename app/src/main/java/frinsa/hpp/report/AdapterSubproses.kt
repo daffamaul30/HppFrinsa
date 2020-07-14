@@ -17,7 +17,6 @@ class AdapterSubproses(dataList: ArrayList<Subproses>?) :
 
     private val dataList: ArrayList<Subproses>? = dataList
     private var rinciansubArraylist: ArrayList<RincianSubproses>? = null
-    private var rinciansubArraylist2: ArrayList<RincianSubproses>? = null
     private var adapterRin: AdapterRincianSub? = null
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -38,7 +37,7 @@ class AdapterSubproses(dataList: ArrayList<Subproses>?) :
         holder.totalPerSub.setText(dataList!![position].total_biaya_sub.toString())
 
         //add rincian
-        addData()
+        addData(dataList.get(position).nama_sub!!)
 
         adapterRin = AdapterRincianSub(rinciansubArraylist)
         holder.rvRincian.layoutManager = LinearLayoutManager(holder.itemView.context, LinearLayout.VERTICAL, false)
@@ -46,30 +45,33 @@ class AdapterSubproses(dataList: ArrayList<Subproses>?) :
     }
 
 
-    fun addData() {
+    fun addData(param : String) {
         rinciansubArraylist = ArrayList()
-        rinciansubArraylist2 = ArrayList()
-        for (i in 0 .. 12) {
-//            if (dataList!!.get(i).nama_sub == "Petik") {
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Petik", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Ojek", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Petik", 10000))
-//            } else if (dataList!!.get(i).nama_sub == "Fermentasi") {
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Fermentasi", 10000))
-//            } else if (dataList!!.get(i).nama_sub == "Pulping I") {
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Pulping I", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi Pulping I", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Pulping I", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Jemur Pulping I", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Pulping I", 10000))
-//            } else if (dataList!!.get(i).nama_sub == "Transportasi") {
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Transportasi", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Kawal Trasnportasi", 10000))
-//                rinciansubArraylist!!.add(RincianSubproses("Biaya Bongkar Transportasi", 10000))
-//            } else {
-            rinciansubArraylist!!.add(RincianSubproses("Biaya " + dataList!!.get(i).nama_sub, 10000))
-//            }
+        when (param) {
+            "Petik" -> {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Petik", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Ojek", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Petik", 10000))
+            }
+            "Fermentasi" -> {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Fermentasi", 10000))
+            }
+            "Pulping I" -> {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Pulping I", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi Pulping I", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Pulping I", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Jemur Pulping I", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Pulping I", 10000))
+            }
+            "Transportasi" -> {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Transportasi", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Kawal Trasnportasi", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Bongkar Transportasi", 10000))
+            }
+            else -> {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya " + param, 10000))
+            }
         }
     }
 
