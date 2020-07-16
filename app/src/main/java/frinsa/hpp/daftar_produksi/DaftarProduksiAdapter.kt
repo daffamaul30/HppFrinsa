@@ -559,18 +559,21 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
         }
 
         holder.itemView.btn_dp_detail.setOnClickListener(View.OnClickListener {
-            var intent = Intent()
-            intent = Intent(context, ReportView::class.java)
-            intent.putExtra("id", dpList[holder.position].id!!.toString())
-            intent.putExtra("tanggal",dpList[position].tanggal)
-            intent.putExtra("varietas",dpList[position].varietas)
-            intent.putExtra("blok",dpList[position].blok)
-            intent.putExtra("berat",dpList[position].berat.toString()+ " Kg")
-            intent.putExtra("proses",dpList[position].proses)
-            val biaya = produk.formatRupiah(dpList[position].biaya!!.toDouble())
-            intent.putExtra("biaya",biaya)
-
-            context!!.startActivity(intent)
+            if (dpList[position].proses != "-") {
+                var intent = Intent()
+                intent = Intent(context, ReportView::class.java)
+                intent.putExtra("id", dpList[holder.position].id!!.toString())
+                intent.putExtra("tanggal", dpList[position].tanggal)
+                intent.putExtra("varietas", dpList[position].varietas)
+                intent.putExtra("blok", dpList[position].blok)
+                intent.putExtra("berat", dpList[position].berat.toString() + " Kg")
+                intent.putExtra("proses", dpList[position].proses)
+                val biaya = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+                intent.putExtra("biaya", biaya)
+                context!!.startActivity(intent)
+            } else {
+                Toast.makeText(context,"Pilih Proses Terlebih Dahulu",Toast.LENGTH_SHORT).show()
+            }
         })
 
     }
