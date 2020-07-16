@@ -13,6 +13,7 @@ import com.jjoe64.graphview.helper.StaticLabelsFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import frinsa.hpp.R
+import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import kotlinx.android.synthetic.main.report_view.*
 import kotlin.random.Random
 
@@ -23,6 +24,14 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
     private var subproses: ArrayList<String>? = null
     private var valueSub: ArrayList<Double>? = ArrayList()
 
+    private var tanggal_toExtra = ""
+    private var varietas_toExtra  = ""
+    private var blok_toExtra  = ""
+    private var berat_toExtra  = ""
+//    private var kadar_air_toExtra  = ""
+    private var proses_toExtra  = ""
+    private var biaya_toExtra  = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report_view)
@@ -31,11 +40,6 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
             (supportActionBar as ActionBar).title = "Report Hasil Panen"
         }
 
-        btn_detail.setOnClickListener(this)
-
-        // data dari halaman sebelumnya
-        makeGraph()
-
         val tanggal: TextView = findViewById(R.id.report_tanggal)
         val biaya: TextView = findViewById(R.id.report_biaya)
         val varietas: TextView = findViewById(R.id.report_varietas)
@@ -43,25 +47,44 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         val berat: TextView = findViewById(R.id.report_berat)
         val kadar: TextView = findViewById(R.id.report_kadarair)
         val proses: TextView = findViewById(R.id.report_proses)
+        btn_detail_reportview.setOnClickListener(this)
+        btn_kembali_reportview.setOnClickListener(this)
+
+
+        // Grafik
+        createGraph()
+
 
         //=====================================
         // ngambil value dari halaman sebelum
-        var kg = " Kg"
-        var massa = 100
-        var rp = "Rp. "
-        var harga = 100000
+        val tanggal_extra = intent.getStringExtra("tanggal")
+        val varietas_extra = intent.getStringExtra("varietas")
+        val blok_extra = intent.getStringExtra("blok")
+        val berat_extra = intent.getStringExtra("berat")
+//        val kadar_air_extra = ""
+        val proses_extra = intent.getStringExtra("proses")
+        val biaya_extra = intent.getStringExtra("biaya")
 
-        tanggal.text = "14/06/2020"
-        varietas.text = "Robus"
-        blok.text = "A"
-        berat.text = massa.toString()+kg
+
+        tanggal_toExtra = tanggal_extra
+        varietas_toExtra = varietas_extra
+        blok_toExtra = blok_extra
+        berat_toExtra = berat_extra
+        proses_toExtra = proses_extra
+        biaya_toExtra = biaya_extra
+
+
+        tanggal.text = tanggal_extra
+        varietas.text = varietas_extra
+        blok.text = blok_extra
+        berat.text = berat_extra
         kadar.text = "100"
-        proses.text = "Jemur"
-        biaya.text = rp+harga
+        proses.text = proses_extra
+        biaya.text = biaya_extra
         //=====================================
     }
 
-    fun makeGraph() {
+    fun createGraph() {
         var y: Double
         var x: Double
         x = 0.0
@@ -147,6 +170,10 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         return subproses
     }
 
+    fun convertSubprosesnName(): String {
+        return ""
+    }
+
     fun addData(){ // load dari page sebelumnya
         valueSub = ArrayList()
         valueSub!!.add(Random.nextInt(0,400).toDouble())
@@ -166,12 +193,20 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.btn_detail -> {
+            R.id.btn_detail_reportview -> {
                 val intent = Intent(this@ReportView, DetailBiaya::class.java)
+                intent.putExtra("tanggal", tanggal_toExtra)
+                intent.putExtra("varietas", varietas_toExtra)
+                intent.putExtra("blok", blok_toExtra)
+                intent.putExtra("berat", berat_toExtra)
+//            intent.putExtra("kadar air",)
+                intent.putExtra("proses", proses_toExtra)
+                intent.putExtra("biaya", biaya_toExtra)
                 startActivity(intent)
             }
-            R.id.btn_kembali_report -> {
-
+            R.id.btn_kembali_reportview -> {
+                val intent = Intent(this@ReportView, MainDaftarProduksi::class.java)
+                startActivity(intent)
             }
         }
     }

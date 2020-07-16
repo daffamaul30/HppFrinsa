@@ -2,24 +2,20 @@ package frinsa.hpp.daftar_produksi
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
-import frinsa.hpp.data.TABLE_PRODUKSI
 import frinsa.hpp.data.tahap.*
+import frinsa.hpp.report.ReportView
 import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
-import kotlinx.android.synthetic.main.card_daftar_produksi.view.btn_dp_edit
-import kotlinx.android.synthetic.main.cardviewproses.view.*
 import kotlinx.android.synthetic.main.dialog_edit_color_sorter.view.*
-import kotlinx.android.synthetic.main.dialog_edit_dp.view.*
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.btn_dp_batal
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.btn_dp_submit
 import kotlinx.android.synthetic.main.dialog_edit_dp.view.edt_dp_berat
@@ -40,7 +36,7 @@ import kotlinx.android.synthetic.main.dialog_edit_size_grading.view.*
 import kotlinx.android.synthetic.main.dialog_edit_suton_grader.view.*
 import kotlinx.android.synthetic.main.dialog_edit_transportasi.view.*
 import kotlinx.android.synthetic.main.dialog_submit.view.*
-import kotlin.math.roundToInt
+
 
 //2nd Adapter bagian Recycler View
 class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<DaftarProduksiAdapter.cardViewHolder>(){
@@ -560,6 +556,21 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                 alertDialog.dismiss()
             }
         }
+
+        holder.itemView.btn_dp_detail.setOnClickListener(View.OnClickListener {
+            var intent = Intent()
+            intent = Intent(context, ReportView::class.java)
+            intent.putExtra("tanggal",dpList[position].tanggal)
+            intent.putExtra("varietas",dpList[position].varietas)
+            intent.putExtra("blok",dpList[position].blok)
+            intent.putExtra("berat",dpList[position].berat.toString()+ " Kg")
+//            intent.putExtra("kadar air",dpList[position].proses)
+            intent.putExtra("proses",dpList[position].proses)
+            val biaya = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+            intent.putExtra("biaya",biaya)
+            context!!.startActivity(intent)
+        })
+
     }
 
     inner class cardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
