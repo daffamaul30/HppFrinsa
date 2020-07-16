@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import frinsa.hpp.Dashboard
 import frinsa.hpp.R
+import frinsa.hpp.data.Produk
+import frinsa.hpp.data.Produksi
 import frinsa.hpp.data.Subproses
+import frinsa.hpp.data.tahap.*
 import kotlinx.android.synthetic.main.detail_biaya.*
 
 class DetailBiaya : AppCompatActivity(), View.OnClickListener {
@@ -19,13 +22,15 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
     private var adapter: AdapterSubproses? = null
     private var subprosesArraylist: ArrayList<Subproses>? = null
 
+    private var id_Produksi = ""
     private var tanggal_toExtra = ""
     private var varietas_toExtra  = ""
     private var blok_toExtra  = ""
     private var berat_toExtra  = ""
-//    private var kadar_air_toExtra  = ""
     private var proses_toExtra  = ""
     private var biaya_toExtra  = ""
+
+    private var produk = Produk()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,28 +45,163 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
         berat_toExtra = intent.getStringExtra("berat")
         proses_toExtra = intent.getStringExtra("proses")
         biaya_toExtra = intent.getStringExtra("biaya")
+        id_Produksi = intent.getStringExtra("id")
 
         btn_selesai_detailbiaya.setOnClickListener(this)
         btn_dashboard_detailbiaya.setOnClickListener(this)
 
         var total_all : TextView = findViewById(R.id.total_allSub)
-        total_all.text = "10000"
+        total_all.text = produk.formatRupiah((intent.getStringExtra("total_biaya_petik").toInt()
+                + intent.getStringExtra("total_biaya_ferm").toInt()
+                + intent.getStringExtra("total_biaya_trans").toInt()
+                + intent.getStringExtra("total_biaya_pu1").toInt()
+                + intent.getStringExtra("biaya_pulping2").toInt()
+                + intent.getStringExtra("biaya_jemurKadarAir").toInt()
+                + intent.getStringExtra("biaya_jemur1").toInt()
+                + intent.getStringExtra("biaya_jemur2").toInt()
+                + intent.getStringExtra("biaya_hulling").toInt()
+                + intent.getStringExtra("biaya_sutonGrader").toInt()
+                + intent.getStringExtra("biaya_sizeGrading").toInt()
+                + intent.getStringExtra("biaya_colorSorter").toInt()
+                + intent.getStringExtra("biaya_handPick").toInt()).toDouble())
 
         //add subproses
-        addData(intent.getStringExtra("step"))
+        addDataSubProses(intent.getStringExtra("step"))
+        addDataRincian()
 
         recyclerView = findViewById(R.id.rv_Subproses)
-        adapter = AdapterSubproses(subprosesArraylist)
+        adapter = AdapterSubproses(subprosesArraylist, produk)
         recyclerView?.layoutManager = LinearLayoutManager(this@DetailBiaya)
         recyclerView?.adapter = adapter
     }
 
-    fun addData(step: String?) { // ngambil data dari report view
+    fun addDataSubProses(step: String?) { // ngambil data dari report view
         subprosesArraylist = ArrayList()
         var perStep = step?.split(",")
         for (i in 0..perStep!!.size-1) {
-            subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),10000))
+            when (perStep!!.get(i)) {
+                "petik" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("total_biaya_petik").toDouble())))
+                }
+                "fermentasi" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("total_biaya_ferm").toDouble())))
+                }
+                "transportasi" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("total_biaya_trans").toDouble())))
+                }
+                "pulping Ceri-Gabah Basah" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("total_biaya_pu1").toDouble())))
+                }
+                "pulping" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_pulping2").toDouble())))
+                }
+                "jemur Kadar Air" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_jemurKadarAir").toDouble())))
+                }
+                "jemurI" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_jemur1").toDouble())))
+                }
+                "jemurII" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_jemur2").toDouble())))
+                }
+                "hulling" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_hulling").toDouble())))
+                }
+                "suton grader" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_sutonGrader").toDouble())))
+                }
+                "size grading" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_sizeGrading").toDouble())))
+                }
+                "color sorter" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_colorSorter").toDouble())))
+                }
+                "hand pick" -> {
+                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                        produk.formatRupiah(intent.getStringExtra("biaya_handPick").toDouble())))
+                }
+                else -> {}
+            }
         }
+    }
+
+    fun addDataRincian() {
+        var produksi = Produksi()
+        var petik = Petik()
+        petik.biaya_petik = intent.getStringExtra("biaya_petik_pet").toInt()
+        petik.biaya_ojek = intent.getStringExtra("biaya_ojek_pet").toInt()
+        petik.biaya_cuci = intent.getStringExtra("biaya_cuci_pet").toInt()
+
+        var fermentasi = Fermentasi()
+        fermentasi.biaya_fermentasi = intent.getStringExtra("biaya_fermentasi_ferm").toInt()
+        fermentasi.biaya_muat = intent.getStringExtra("biaya_muat_ferm").toInt()
+
+        var transport = Transportasi()
+        transport.biaya_transport = intent.getStringExtra("biaya_transportasi_trans").toInt()
+        transport.biaya_kawal = intent.getStringExtra("biaya_kawal_trans").toInt()
+        transport.biaya_bongkar = intent.getStringExtra("biaya_bongkar_trans").toInt()
+
+        var pulping1 = pulpingSatu()
+        pulping1.biaya_pulping = intent.getStringExtra("biaya_pulping_pu1").toInt()
+        pulping1.biaya_fermentasi = intent.getStringExtra("biaya_fermentasi_pu1").toInt()
+        pulping1.biaya_cuci = intent.getStringExtra("biaya_cuci_pu1").toInt()
+        pulping1.biaya_jemur = intent.getStringExtra("biaya_jemur_pu1").toInt()
+        pulping1.biaya_muat = intent.getStringExtra("biaya_muat_pu1").toInt()
+
+        var pulping2 = pulpingDua()
+        pulping2.biaya = intent.getStringExtra("biaya_pulping2").toInt()
+
+        var jemurKA = jemurKadarAir()
+        jemurKA.biaya = intent.getStringExtra("biaya_jemurKadarAir").toInt()
+
+        var jemur1 = jemurSatu()
+        jemur1.biaya = intent.getStringExtra("biaya_jemur1").toInt()
+
+        var jemur2 = jemurDua()
+        jemur2.biaya = intent.getStringExtra("biaya_jemur2").toInt()
+
+        var hulling = Hulling()
+        hulling.biaya = intent.getStringExtra("biaya_hulling").toInt()
+
+        var sutongrader = sutonGrader()
+        sutongrader.biaya = intent.getStringExtra("biaya_sutonGrader").toInt()
+
+        var sizegrading = sizeGrading()
+        sizegrading.biaya = intent.getStringExtra("biaya_sizeGrading").toInt()
+
+        var colorsorter = colorSorter()
+        colorsorter.biaya = intent.getStringExtra("biaya_colorSorter").toInt()
+
+        var handpick = handPick()
+        handpick.biaya = intent.getStringExtra("biaya_handPick").toInt()
+
+        produk = Produk(
+            produksi,
+            petik,
+            fermentasi,
+            transport,
+            pulping1,
+            pulping2,
+            jemurKA,
+            jemur1,
+            jemur2,
+            hulling,
+            sutongrader,
+            sizegrading,
+            colorsorter,
+            handpick )
     }
 
     fun convertSubprosesnName(param : String): String {
@@ -87,11 +227,11 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.btn_selesai_detailbiaya -> {
                 val intent = Intent(this@DetailBiaya, ReportView::class.java)
+                intent.putExtra("last_id", id_Produksi)
                 intent.putExtra("tanggal", tanggal_toExtra)
                 intent.putExtra("varietas", varietas_toExtra)
                 intent.putExtra("blok", blok_toExtra)
                 intent.putExtra("berat", berat_toExtra)
-//            intent.putExtra("kadar air",)
                 intent.putExtra("proses", proses_toExtra)
                 intent.putExtra("biaya", biaya_toExtra)
                 startActivity(intent)

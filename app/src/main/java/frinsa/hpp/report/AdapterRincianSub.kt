@@ -27,7 +27,7 @@ class AdapterRincianSub(dataList: ArrayList<RincianSubproses>?) :
         position: Int
     ) {
         holder.namaRincian.setText(dataList!![position].nama_rincian)
-        holder.biayaRincian.setText(dataList!![position].biaya_rincian.toString())
+        holder.biayaRincian.setText(dataList!![position].biaya_rincian)
     }
 
     override fun getItemCount(): Int {

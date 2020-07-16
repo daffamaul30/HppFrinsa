@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
@@ -560,14 +561,15 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
         holder.itemView.btn_dp_detail.setOnClickListener(View.OnClickListener {
             var intent = Intent()
             intent = Intent(context, ReportView::class.java)
+            intent.putExtra("id", dpList[holder.position].id!!.toString())
             intent.putExtra("tanggal",dpList[position].tanggal)
             intent.putExtra("varietas",dpList[position].varietas)
             intent.putExtra("blok",dpList[position].blok)
             intent.putExtra("berat",dpList[position].berat.toString()+ " Kg")
-//            intent.putExtra("kadar air",dpList[position].proses)
             intent.putExtra("proses",dpList[position].proses)
             val biaya = produk.formatRupiah(dpList[position].biaya!!.toDouble())
             intent.putExtra("biaya",biaya)
+
             context!!.startActivity(intent)
         })
 
