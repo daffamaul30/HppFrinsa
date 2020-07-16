@@ -57,16 +57,16 @@ class AdapterSubproses(dataList: ArrayList<Subproses>?) :
                 rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi", 10000))
                 rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Fermentasi", 10000))
             }
-            "Pulping I" -> {
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Pulping I", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi Pulping I", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci Pulping I", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Jemur Pulping I", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat Pulping I", 10000))
+            "Pulping Ceri-Gabah Basah" -> {
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Pulping", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Fermentasi", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Cuci", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Jemur", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Muat", 10000))
             }
             "Transportasi" -> {
                 rinciansubArraylist!!.add(RincianSubproses("Biaya Transportasi", 10000))
-                rinciansubArraylist!!.add(RincianSubproses("Biaya Kawal Trasnportasi", 10000))
+                rinciansubArraylist!!.add(RincianSubproses("Biaya Pengawalan Trasnportasi", 10000))
                 rinciansubArraylist!!.add(RincianSubproses("Biaya Bongkar Transportasi", 10000))
             }
             else -> {

@@ -34,20 +34,12 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
             (supportActionBar as ActionBar).title = "Detail Biaya"
         }
 
-        val tanggal_extra = intent.getStringExtra("tanggal")
-        val varietas_extra = intent.getStringExtra("varietas")
-        val blok_extra = intent.getStringExtra("blok")
-        val berat_extra = intent.getStringExtra("berat")
-//        val kadar_air_extra = ""
-        val proses_extra = intent.getStringExtra("proses")
-        val biaya_extra = intent.getStringExtra("biaya")
-
-        tanggal_toExtra = tanggal_extra
-        varietas_toExtra = varietas_extra
-        blok_toExtra = blok_extra
-        berat_toExtra = berat_extra
-        proses_toExtra = proses_extra
-        biaya_toExtra = biaya_extra
+        tanggal_toExtra = intent.getStringExtra("tanggal")
+        varietas_toExtra = intent.getStringExtra("varietas")
+        blok_toExtra = intent.getStringExtra("blok")
+        berat_toExtra = intent.getStringExtra("berat")
+        proses_toExtra = intent.getStringExtra("proses")
+        biaya_toExtra = intent.getStringExtra("biaya")
 
         btn_selesai_detailbiaya.setOnClickListener(this)
         btn_dashboard_detailbiaya.setOnClickListener(this)
@@ -56,7 +48,7 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
         total_all.text = "10000"
 
         //add subproses
-        addData()
+        addData(intent.getStringExtra("step"))
 
         recyclerView = findViewById(R.id.rv_Subproses)
         adapter = AdapterSubproses(subprosesArraylist)
@@ -64,21 +56,31 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
         recyclerView?.adapter = adapter
     }
 
-    fun addData() { // ngambil data dari report view
+    fun addData(step: String?) { // ngambil data dari report view
         subprosesArraylist = ArrayList()
-        subprosesArraylist!!.add(Subproses("Petik",10000))
-        subprosesArraylist!!.add(Subproses("Fermentasi",10000))
-        subprosesArraylist!!.add(Subproses("Transportasi",10000))
-        subprosesArraylist!!.add(Subproses("Pulping I",10000))
-        subprosesArraylist!!.add(Subproses("Pulping II",10000))
-        subprosesArraylist!!.add(Subproses("Jemur Kadar Air",10000))
-        subprosesArraylist!!.add(Subproses("Jemur I",10000))
-        subprosesArraylist!!.add(Subproses("Jemur II",10000))
-        subprosesArraylist!!.add(Subproses("Hulling",10000))
-        subprosesArraylist!!.add(Subproses("Suton Grader",10000))
-        subprosesArraylist!!.add(Subproses("Size Grading",10000))
-        subprosesArraylist!!.add(Subproses("Color Sorter",10000))
-        subprosesArraylist!!.add(Subproses("Hand Pick",10000))
+        var perStep = step?.split(",")
+        for (i in 0..perStep!!.size-1) {
+            subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),10000))
+        }
+    }
+
+    fun convertSubprosesnName(param : String): String {
+        return when (param) {
+            "petik" -> return "Petik"
+            "fermentasi" -> return "Fermentasi"
+            "transportasi" -> return "Transportasi"
+            "pulping Ceri-Gabah Basah" -> return "Pulping Ceri-Gabah Basah"
+            "pulping" -> return "Pulping"
+            "jemur Kadar Air" -> return "Jemur Kadar Air"
+            "jemurI" -> return "Jemur I"
+            "jemurII" -> return "Jemur II"
+            "hulling" -> return "Hulling"
+            "suton grader" -> return "Suton Grader"
+            "size grading" -> return "Size Grading"
+            "color sorter" -> return "Color Sorter"
+            "hand pick" -> return "Hand Pick"
+            else -> return ""
+        }
     }
 
     override fun onClick(v: View) {
