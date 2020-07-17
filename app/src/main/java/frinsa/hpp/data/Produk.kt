@@ -119,7 +119,7 @@ class Produk {
             totalHulling,
             totalSutonGrader,
             totalSizeGrading,
-            totalSizeGrading,
+            //totalSizeGrading,
             totalColorSorter,
             totalHandPick
         ).sum()
