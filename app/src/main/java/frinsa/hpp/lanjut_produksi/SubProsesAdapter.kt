@@ -10,6 +10,7 @@ import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.Produk
 import kotlinx.android.synthetic.main.cardviewproses.view.*
 val posisi: MutableList<Int> = ArrayList()
+
 class SubProsesAdapter(val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<SubProsesAdapter.cardViewProses>(){
 
     val produk: Produk = Produk(context!!)
@@ -22,7 +23,13 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
     }
 
     override fun getItemCount(): Int = dpList.size
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
     inner class cardViewProses(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(modelDaftarProses: ModelDaftarProduksi){
@@ -34,17 +41,29 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
             itemView.sp_biaya.text = produk.formatRupiah(modelDaftarProses.biaya!!.toDouble())
             itemView.sp_tahap.text = modelDaftarProses.tahap
             itemView.sp_id.text = modelDaftarProses.id.toString()
+
+//            if(itemView.ceklis.isChecked){
+//                itemView.ceklis!!.isChecked=true
+//            }else{
+//                itemView.ceklis!!.isChecked=false
+//            }
+
         }
     }
     override fun onBindViewHolder(holder: cardViewProses, position: Int) {
         holder.bind(dpList[position])
         posisi.clear()
+        holder.itemView.ceklis.setOnCheckedChangeListener(null)
 
         holder.itemView.ceklis.setOnClickListener {
             if (it.ceklis.isChecked) {
                 posisi.add(holder.position)
+                //holder.itemView.ceklis.setChecked(true)
+
+
             } else {
                 posisi.remove(holder.position)
+                //holder.itemView.ceklis.setChecked(false)
             }
 //
 //            var stringBuilder = StringBuilder()
