@@ -184,12 +184,12 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
 
         if (tvTanggal == "DD/MM/YYYY") {
             isEmptyFields = true
-            input_tgl.setError("Pilih tanggal")
+            input_tgl_beli.setError("Pilih tanggal")
         }
 
         if (spinVarietas == "Pilih Varietas") {
             isEmptyFields = true
-            toastMessage("Var[ietas tidak boleh kosong")
+            toastMessage("Varietas tidak boleh kosong")
         }
 
         if (spinProses == "Pilih Proses" && isiNanti == false) {
@@ -199,22 +199,22 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
 
         if (edtBlok.isEmpty()) {
             isEmptyFields = true
-            et_berat.error = "Field ini tidak boleh kosong"
+            et_blok_beli.error = "Field ini tidak boleh kosong"
         }
 
         if (edtBerat.isEmpty()) {
             isEmptyFields = true
-            et_berat.error = "Field ini tidak boleh kosong"
+            et_berat_beli.error = "Field ini tidak boleh kosong"
         }
 
         if (edtHargaBeli.isEmpty()) {
             isEmptyFields = true
-            et_ongkos_petik.error = "Field ini tidak boleh kosong"
+            et_harga_beli.error = "Field ini tidak boleh kosong"
         }
 
         if (edtOngkosCuci.isEmpty() && !cek) {
             isEmptyFields = true
-            et_ojek.error = "Field ini tidak boleh kosong"
+            et_ongkos_cuci_beli.error = "Field ini tidak boleh kosong"
         }
 
         if (!isEmptyFields) {
