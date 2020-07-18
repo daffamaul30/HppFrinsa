@@ -197,7 +197,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.btn_proses -> {
                 var (valid,name) = validation()
-//                Toast.makeText(this, valid.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, valid.toString(), Toast.LENGTH_SHORT).show()
 
                 if (valid && name == "-") {
 //                        pros.addProsesIsiNanti(id)
@@ -222,7 +222,9 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                         }
                     }
                     dialog.batal_proses_isi_nanti.setOnClickListener {
-                        produk.deleteProduksiById(id)
+                        if (posisi.size > 1) {
+                            produk.deleteProduksiById(id)
+                        }
                         alertDialog.dismiss()
                     }
                 }
