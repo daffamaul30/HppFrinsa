@@ -1215,7 +1215,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             return true
         }
     }
-    // buat auto refreseh masih blm fix
+    // buat auto refreseh
     fun getBiayaPetik(id:Int):Int {
         val db = this.readableDatabase
         val result = db.rawQuery("SELECT * FROM $TABLE_PETIK WHERE $COL_ID_PRODUKSI_PETIK = $id", null)
@@ -1383,7 +1383,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         }
     }
 
-    fun updateBiayaSizeGradeing(id: Int, s: sizeGrading ):Boolean{
+    fun updateBiayaSizeGrading(id: Int, s: sizeGrading ):Boolean{
         val db = this.writableDatabase
 
         val cv = ContentValues()
@@ -1429,6 +1429,181 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
             toastMessage("Berhasil Update Status")
             return true
         }
+    }
+
+    fun getBiayaPulpSatu(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_PULPING1 WHERE $COL_ID_PRODUKSI_PULPING1 = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = pulpingSatu()
+        proses.biaya_pulping = result.getString(result.getColumnIndex(COL_BIAYA_PULPING1)).toInt()
+        proses.biaya_fermentasi = result.getString(result.getColumnIndex(COL_BIAYA_FERMENTASI_PULPING1)).toInt()
+        proses.biaya_cuci = result.getString(result.getColumnIndex(COL_BIAYA_CUCI_PULPING1)).toInt()
+        proses.biaya_jemur = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR_PULPING1)).toInt()
+        proses.biaya_muat = result.getString(result.getColumnIndex(COL_BIAYA_MUAT_PULPING1)).toInt()
+        total = proses.biaya_pulping+proses.biaya_fermentasi+proses.biaya_cuci+proses.biaya_jemur+proses.biaya_muat
+        return total
+    }
+
+    fun getBiayaPulpDua(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_PULPING2 WHERE $COL_ID_PRODUKSI_PULPING2 = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = pulpingDua()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_PULPING2)).toInt()
+        total = proses.biaya
+        return total
+    }
+
+    fun getBiayaFermentasi(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_FERMEN WHERE $COL_ID_PRODUKSI_FERMENTASI = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = Fermentasi()
+        proses.biaya_fermentasi = result.getString(result.getColumnIndex(COL_BIAYA_FERMENTASI)).toInt()
+        proses.biaya_muat = result.getString(result.getColumnIndex(COL_BIAYA_MUAT_FERMENTASI)).toInt()
+        total = proses.biaya_fermentasi+proses.biaya_muat
+        return total
+    }
+
+    fun getBiayaTransport(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_TRANSPORTASI WHERE $COL_ID_PRODUKSI_TRANSPORTASI = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = Transportasi()
+        proses.biaya_transport = result.getString(result.getColumnIndex(COL_BIAYA_TRANSPORT)).toInt()
+        proses.biaya_kawal = result.getString(result.getColumnIndex(COL_BIAYA_KAWAL_TRANSPORTASI)).toInt()
+        proses.biaya_bongkar = result.getString(result.getColumnIndex(COL_BIAYA_BONGKAR_TRANSPORTASI)).toInt()
+        total = proses.biaya_transport+proses.biaya_kawal+proses.biaya_bongkar
+        return total
+    }
+
+    fun getBiayaJemurKadarAir(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_JEMUR_KADAR_AIR WHERE $COL_ID_PRODUKSI_KADAR_AIR = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = jemurKadarAir()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR_KADAR_AIR)).toInt()
+        total = proses.biaya
+        return total
+    }
+
+    fun getKadarAirJemurKadarAir(id:Int):Double {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_JEMUR_KADAR_AIR WHERE $COL_ID_PRODUKSI_KADAR_AIR = $id", null)
+        var total:Double
+
+        result.moveToFirst()
+        var proses = jemurKadarAir()
+        proses.kadarAir = result.getString(result.getColumnIndex(COL_KDR_AIR_KADAR_AIR)).toDouble()
+        total = proses.kadarAir
+        return total
+    }
+
+    fun getBiayaJemurSatu(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_JEMUR1 WHERE $COL_ID_PRODUKSI_JEMUR1 = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = jemurSatu()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR1)).toInt()
+        total = proses.biaya
+        return total
+    }
+
+    fun getBiayaJemurDua(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_JEMUR2 WHERE $COL_ID_PRODUKSI_JEMUR2 = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = jemurDua()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR2)).toInt()
+        total = proses.biaya
+        return total
+    }
+
+    fun getBiayaHulling(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_HULLING WHERE $COL_ID_PRODUKSI_HULLING = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = Hulling()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_HULLING)).toInt()
+        total = proses.biaya
+        return total
+    }
+
+    fun getKadarAirHulling(id:Int):Double {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_HULLING WHERE $COL_ID_PRODUKSI_HULLING = $id", null)
+        var total:Double
+
+        result.moveToFirst()
+        var proses = Hulling()
+        proses.kadarAir = result.getString(result.getColumnIndex(COL_KDR_AIR_HULLING)).toDouble()
+        total = proses.kadarAir
+        return total
+    }
+
+    fun getBiayaSutonGrader(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_SUTON_GRADER WHERE $COL_ID_PRODUKSI_SUTON_GRADER = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = sutonGrader()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_SUTON_GRADER)).toInt()
+        total = proses.biaya
+        return total
+    }
+
+    fun getBiayaSizeGrading(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_SIZE_GRADING WHERE $COL_ID_PRODUKSI_SIZE_GRADING = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = sizeGrading()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_SIZE_GRADING)).toInt()
+        total = proses.biaya
+        return total
+    }
+
+    fun getBiayaColorSorter(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_COLOR_SORTER WHERE $COL_ID_PRODUKSI_COLOR_SORTER = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = colorSorter()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_COLOR_SORTER)).toInt()
+        total = proses.biaya
+        return total
+    }
+
+    fun getBiayaHandPick(id:Int):Int {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_HAND_PICK WHERE $COL_ID_PRODUKSI_HAND_PICK = $id", null)
+        var total:Int
+
+        result.moveToFirst()
+        var proses = handPick()
+        proses.biaya = result.getString(result.getColumnIndex(COL_BIAYA_HAND_PICK)).toInt()
+        total = proses.biaya
+        return total
     }
 
 }

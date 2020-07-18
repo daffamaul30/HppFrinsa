@@ -83,6 +83,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biayaOjek = dialog.et_petik_biaya_ojek.text.toString()
                         val biayaCuci = dialog.et_petik_biaya_cuci.text.toString()
                         if (biayaPetik.isEmpty() or biayaOjek.isEmpty() or biayaCuci.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
                             //Pesan klo ada yg kosong, blm kepikiran
                         }else{
 
@@ -90,13 +91,26 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                             petik.biaya_petik = biayaPetik.toInt()
                             petik.biaya_ojek = biayaOjek.toInt()
                             petik.biaya_cuci = biayaCuci.toInt()
-                            db.updateBiayaPetik(dpList.get(holder.position).id!!.toInt(),petik)
-                            //Auto Refresh Data belum bisa
+
+                            //Auto Refresh Data
                             val biayaUpdate:Int = petik.biaya_petik + petik.biaya_ojek + petik.biaya_cuci
                             val biayaAsal:Int = db.getBiayaPetik(dpList.get(holder.position).id!!.toInt())
                             val biayaDPList:Int = dpList[position].biaya!!.toInt()
-                            dpList[position].biaya = biayaDPList + biayaUpdate - biayaAsal
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
 
+
+                            db.updateBiayaPetik(dpList.get(holder.position).id!!.toInt(),petik)
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -127,13 +141,29 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biayaFermentasi = dialog.et_fermentasi_biaya_fermentasi.text.toString()
                         val biayaMuat = dialog.et_fermentasi_biaya_muat.text.toString()
                         if (biayaFermentasi.isEmpty() or biayaMuat.isEmpty()){
-
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
                         }else{
                             val fermentasi = Fermentasi()
                             fermentasi.biaya_fermentasi = biayaFermentasi.toInt()
                             fermentasi.biaya_muat = biayaMuat.toInt()
-                            db.updateBiayaFermentasi(dpList.get(holder.position).id!!.toInt(),fermentasi)
 
+                            val biayaUpdate:Int = fermentasi.biaya_fermentasi + fermentasi.biaya_muat
+                            val biayaAsal:Int = db.getBiayaFermentasi(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
+                            db.updateBiayaFermentasi(dpList.get(holder.position).id!!.toInt(),fermentasi)
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -165,12 +195,30 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biayaKawal = dialog.et_transport_biaya_kawal.text.toString()
                         val biayaBongkar = dialog.et_transport_biaya_bongkar.text.toString()
                         if (biayaBongkar.isEmpty() or biayaKawal.isEmpty() or biayaBongkar.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val transport = Transportasi()
                             transport.biaya_bongkar = biayaBongkar.toInt()
                             transport.biaya_kawal = biayaKawal.toInt()
                             transport.biaya_transport = biayaTransport.toInt()
+
+                            val biayaUpdate:Int = transport.biaya_bongkar + transport.biaya_kawal + transport.biaya_transport
+                            val biayaAsal:Int = db.getBiayaTransport(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaTransport(dpList.get(holder.position).id!!.toInt(),transport)
 
                             notifyItemChanged(position)
@@ -205,6 +253,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biayaJemur = dialog.et_pulp1_biaya_jemur.text.toString()
                         val biayaMuat = dialog.et_pulp1_biaya_muat.text.toString()
                         if (biayaPulping.isEmpty() or biayaFermentasi.isEmpty() or biayaCuci.isEmpty() or biayaJemur.isEmpty() or biayaMuat.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = pulpingSatu()
@@ -213,6 +262,23 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                             proses.biaya_cuci = biayaCuci.toInt()
                             proses.biaya_jemur = biayaJemur.toInt()
                             proses.biaya_muat = biayaMuat.toInt()
+
+                            val biayaUpdate:Int = proses.biaya_pulping + proses.biaya_fermentasi + proses.biaya_cuci + proses.biaya_jemur + proses.biaya_muat
+                            val biayaAsal:Int = db.getBiayaPulpSatu(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaPulpSatu(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
@@ -243,10 +309,28 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.btn_dp_submit.setOnClickListener {
                         val biaya = dialog.et_pulp2_biaya_pulping.text.toString()
                         if (biaya.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = pulpingDua()
                             proses.biaya = biaya.toInt()
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaPulpDua(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaPulpDua(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
@@ -278,11 +362,29 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biaya = dialog.et_jemur_kadar_air_biaya_jemur.text.toString()
                         val kadarAir = dialog.et_jemur_kadar_air.text.toString()
                         if (biaya.isEmpty() or kadarAir.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = jemurKadarAir()
                             proses.biaya = biaya.toInt()
                             proses.kadarAir = kadarAir.toDouble()
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaJemurKadarAir(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaJemurKadarAir(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
@@ -313,10 +415,28 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.btn_dp_submit.setOnClickListener {
                         val biaya = dialog.et_jemur2_biaya_jemur.text.toString()
                         if (biaya.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = jemurSatu()
                             proses.biaya = biaya.toInt()
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaJemurSatu(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaJemurSatu(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
@@ -347,10 +467,28 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.btn_dp_submit.setOnClickListener {
                         val biaya = dialog.et_jemur2_biaya_jemur.text.toString()
                         if (biaya.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = jemurDua()
                             proses.biaya = biaya.toInt()
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaJemurDua(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaJemurDua(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
@@ -382,11 +520,29 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biaya = dialog.et_hulling_biaya.text.toString()
                         val kadarAir = dialog.et_hulling_kadar_air.text.toString()
                         if (biaya.isEmpty() or kadarAir.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = Hulling()
                             proses.biaya = biaya.toInt()
                             proses.kadarAir = kadarAir.toDouble()
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaHulling(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaHulling(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
@@ -417,12 +573,29 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.btn_dp_submit.setOnClickListener {
                         val biaya = dialog.et_suton_grader_biaya.text.toString()
                         if (biaya.isEmpty() or biaya.isEmpty() or biaya.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = sutonGrader()
                             proses.biaya = biaya.toInt()
-                            proses.biaya = biaya.toInt()
-                            proses.biaya = biaya.toInt()
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaSutonGrader(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
+
                             db.updateBiayaSutonGrader(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
@@ -453,11 +626,29 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.btn_dp_submit.setOnClickListener {
                         val biaya = dialog.et_size_grading_biaya.text.toString()
                         if (biaya.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = sizeGrading()
                             proses.biaya = biaya.toInt()
-                            db.updateBiayaSizeGradeing(dpList.get(holder.position).id!!.toInt(),proses)
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaSizeGrading(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
+                            db.updateBiayaSizeGrading(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
                             notifyDataSetChanged()
@@ -487,10 +678,28 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.btn_dp_submit.setOnClickListener {
                         val biaya = dialog.et_color_sorter_biaya.text.toString()
                         if (biaya.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = colorSorter()
                             proses.biaya = biaya.toInt()
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaColorSorter(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaColorSorter(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
@@ -521,10 +730,28 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.btn_dp_submit.setOnClickListener {
                         val biaya = dialog.et_hand_pick_biaya.text.toString()
                         if (biaya.isEmpty()){
+                            Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
 
                         }else{
                             val proses = handPick()
                             proses.biaya = biaya.toInt()
+
+                            val biayaUpdate:Int = proses.biaya
+                            val biayaAsal:Int = db.getBiayaHandPick(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
                             db.updateBiayaHandPick(dpList.get(holder.position).id!!.toInt(),proses)
 
                             notifyItemChanged(position)
