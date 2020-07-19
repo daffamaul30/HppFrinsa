@@ -60,6 +60,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         pros = Proses(this)
         db = DBPanen(this)
         spList.clear()
+        posisi.clear()
         val data = db.getAllData2("<>")
         data.forEach() {
             Berat = produk.getLastWeight(it)
@@ -90,8 +91,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         var data_next : ModelDaftarProduksi? = null
 
         var valid = true
-        //posisi.sort()
-        
+        println("VALID : "+valid)
+
         if (posisi.size == 1) {
             //proses = spList.get(posisi.get(0)).proses.toString()
             data = spList.find{ e->e.id.toString().startsWith(posisi[0].toString())}!!
@@ -365,6 +366,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                 } else {
 
                     Toast.makeText(parent.context, spinProses, Toast.LENGTH_SHORT).show()
+                    posisi.clear()
                 }
             }
 
