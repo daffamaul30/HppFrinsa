@@ -371,16 +371,18 @@ class Produk {
     fun mergeData(posisi: MutableList<Int>, list: MutableList<ModelDaftarProduksi>): Produk {
         val daftar: MutableList<Produk> = ArrayList()
         val produk: Produk = Produk()
+        //println("posisi"+posisi)
 
-//        posisi?.forEach {
-//            val idData: Int = list.get(it).id!!
-//            val data = db.getAllDataConditional(posisi)
-//            daftar.add(data)
-//        }
-        for (i in posisi){
-            val data = db.getAllDataConditional(i)
+        posisi?.forEach {
+            //val idData: Int = list.find{ e->e.id.toString().startsWith(it.toString())}!!.id!!
+            val data = db.getAllDataConditional(it)
             daftar.add(data)
         }
+//        for (i in posisi){
+//            val data = db.getAllDataConditional(i)
+//            println(data)
+//            daftar.add(data)
+//        }
 
         produk.produksi = mergeProduksi(daftar)
         produk.petik = mergePetik(daftar)

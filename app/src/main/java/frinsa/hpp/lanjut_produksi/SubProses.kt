@@ -329,14 +329,14 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             finish()
 
             alertDialog.dismiss()
-            posisi.clear()
+
         }
         dialog.batal_submit.setOnClickListener{
             if (posisi.size > 1) {
 
                 produk.deleteProduksiById(id)
             }
-            println("BATALKAN")
+
             alertDialog.dismiss()
         }
 
@@ -366,7 +366,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                 } else {
 
                     Toast.makeText(parent.context, spinProses, Toast.LENGTH_SHORT).show()
-                    posisi.clear()
+                    //posisi.clear()
                 }
             }
 
