@@ -372,9 +372,13 @@ class Produk {
         val daftar: MutableList<Produk> = ArrayList()
         val produk: Produk = Produk()
 
-        posisi?.forEach {
-            val idData: Int = list.get(it).id!!
-            val data = db.getAllDataConditional(idData)
+//        posisi?.forEach {
+//            val idData: Int = list.get(it).id!!
+//            val data = db.getAllDataConditional(posisi)
+//            daftar.add(data)
+//        }
+        for (i in posisi){
+            val data = db.getAllDataConditional(i)
             daftar.add(data)
         }
 

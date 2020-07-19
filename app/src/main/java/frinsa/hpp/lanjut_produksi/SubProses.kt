@@ -86,46 +86,72 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 
     private fun validation(): Pair<Boolean, String> {
         var proses = ""
+        var data : ModelDaftarProduksi? = null
+        var data_next : ModelDaftarProduksi? = null
+
         var valid = true
+        //posisi.sort()
+        
         if (posisi.size == 1) {
-            proses = spList.get(posisi.get(0)).proses.toString()
-            id = spList.get(posisi.get(0)).id!!
-            Block = spList.get(posisi.get(0)).blok.toString()
-            varietas = spList.get(posisi.get(0)).varietas.toString()
+            //proses = spList.get(posisi.get(0)).proses.toString()
+            data = spList.find{ e->e.id.toString().startsWith(posisi[0].toString())}!!
+            id = data.id!!
+            Block = data.blok.toString()
+            varietas = data.varietas.toString()
+            proses = data.proses.toString()
         }
         else if (posisi.size > 1) {
-            proses = spList.get(posisi.get(0)).proses.toString()
-            for (i in 0 until posisi.size) {
-                spList.get(posisi.get(i)).id.let {
-                    if (it != null) {
-                        listID.add(it)
-                    }
-                }
-                if (i == posisi.size-1) {
-                    break
-                } else {
-                    if (spList.get(posisi.get(i)).proses != "-" && spList.get(posisi.get(i+1)).proses != "-") {
-                        if ((spList.get(posisi.get(i)).proses != spList.get(
-                                posisi.get(i+1)).proses) || (spList.get(
-                                posisi.get(i)).tahap != spList.get(
-                                posisi.get(i+1)).tahap)) {
-                            valid = false
-                            Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
+            for (i in posisi){
+                if (data == null){
+                    data = spList.find{ e->e.id.toString().startsWith(i.toString())}!!
+                }else{
+                    if(data.proses != "-"){
+                        data_next = spList.find{ e->e.id.toString().startsWith(i.toString())}!!
+                        if(data_next.proses != "-"){
+                            if(data.proses != data_next.proses || data.tahap != data_next.tahap){
+                                valid=false
+                                Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
+                            }
                         }
-                    }
-                    else {
-                        continue
                     }
                 }
             }
+
+
+//            proses = spList.get(posisi.get(0)).proses.toString()
+//            for (i in 0 until posisi.size) {
+//                spList.get(posisi.get(i)).id.let {
+//                    if (it != null) {
+//                        listID.add(it)
+//                    }
+//                }
+//                if (i == posisi.size-1) {
+//                    break
+//                } else {
+//                    if (spList.get(posisi.get(i)).proses != "-" && spList.get(posisi.get(i+1)).proses != "-") {
+//                        if ((spList.get(posisi.get(i)).proses != spList.get(
+//                                posisi.get(i+1)).proses) || (spList.get(
+//                                posisi.get(i)).tahap != spList.get(
+//                                posisi.get(i+1)).tahap)) {
+//                            valid = false
+//                            Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
+//                        }
+//                    }
+//                    else {
+//                        continue
+//                    }
+//                }
+//            }
         }
         else {
             valid = false
             proses = ""
         }
         if (posisi.size > 1 && valid) {
+
             //MERGE DATANYA DI DATABASE (UPDATE LAGI VAR ID NYA, VAR VARIETAS NYA, VAR BLOK NYA)
             val merge = produk.mergeData(posisi, spList)
+
             id = merge.produksi.id_produksi
             Block = merge.produksi.blok
             varietas = merge.produksi.varietas
@@ -133,6 +159,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         }
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
+
         return Pair(valid, proses)
     }
 
@@ -183,7 +210,8 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
 
     fun getCode(step: String): String {
         val list = step.split(",")
-        val key = if (spList.get(posisi.get(0)).tahap != "-") spList.get(posisi.get(0)).tahap else db.getAllDataConditional(id).produksi.status
+        val tahap = spList.find{ e->e.id.toString().startsWith(posisi[0].toString())}?.tahap
+        val key = if (tahap != "-") tahap else db.getAllDataConditional(id).produksi.status
         var current = list.indexOf(key)
 //        Toast.makeText(this, list.get(current), Toast.LENGTH_SHORT).show()
         var code = list.get(current+1)
@@ -277,6 +305,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     else if (temp.produksi.bentuk == "Gabah") {
                         //
                     }
+
                 }
             }
             val step = db.getStepProses(name)
@@ -294,6 +323,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             finish()
 
             alertDialog.dismiss()
+            posisi.clear()
         }
         dialog.batal_submit.setOnClickListener{
             if (posisi.size > 1) {
@@ -326,6 +356,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                 if (parent.getItemAtPosition(position) === "Pilih Proses" ) {
                     //
                 } else {
+
                     Toast.makeText(parent.context, spinProses, Toast.LENGTH_SHORT).show()
                 }
             }

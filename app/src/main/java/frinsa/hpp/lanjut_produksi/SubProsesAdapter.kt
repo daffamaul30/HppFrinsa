@@ -52,19 +52,23 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
     }
     override fun onBindViewHolder(holder: cardViewProses, position: Int) {
         holder.bind(dpList[position])
-        posisi.clear()
+        //posisi.clear()
         holder.itemView.ceklis.setOnCheckedChangeListener(null)
 
         holder.itemView.ceklis.setOnClickListener {
             if (it.ceklis.isChecked) {
-                posisi.add(holder.position)
+                //posisi.add(holder.position)
+                posisi.add(Integer.parseInt(holder.itemView.sp_id.text.toString()))
                 //holder.itemView.ceklis.setChecked(true)
 
 
             } else {
-                posisi.remove(holder.position)
+                //posisi.remove(holder.position)
+                posisi.remove(Integer.parseInt(holder.itemView.sp_id.text.toString()))
                 //holder.itemView.ceklis.setChecked(false)
+
             }
+            println(posisi)
 //
 //            var stringBuilder = StringBuilder()
 //            posisi.forEach {
