@@ -106,11 +106,15 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     data = spList.find{ e->e.id.toString().startsWith(i.toString())}!!
                 }else{
                     if(data.proses != "-"){
-                        data_next = spList.find{ e->e.id.toString().startsWith(i.toString())}!!
-                        if(data_next.proses != "-"){
-                            if(data.proses != data_next.proses || data.tahap != data_next.tahap){
-                                valid=false
-                                Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
+                        for (j in posisi){
+                            data_next = spList.find{ e->e.id.toString().startsWith(j.toString())}!!
+                            println(data)
+                            println(data_next)
+                            if(data_next.proses != "-" || data_next.id.toString() != data.id.toString()){
+                                if(data.proses != data_next.proses || data.tahap != data_next.tahap){
+                                    valid=false
+                                    Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
                     }
@@ -156,6 +160,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             Block = merge.produksi.blok
             varietas = merge.produksi.varietas
             proses = if (merge.produksi.proses == "") "-" else merge.produksi.proses
+            println("INI ID :"+id)
         }
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
@@ -327,8 +332,10 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         }
         dialog.batal_submit.setOnClickListener{
             if (posisi.size > 1) {
+
                 produk.deleteProduksiById(id)
             }
+            println("BATALKAN")
             alertDialog.dismiss()
         }
 
