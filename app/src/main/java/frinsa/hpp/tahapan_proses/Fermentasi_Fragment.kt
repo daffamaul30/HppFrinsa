@@ -84,7 +84,7 @@ class Fermentasi_Fragment : Fragment(), View.OnClickListener {
                             }
                             if (posisi.size > 1) {
                                 posisi.forEach {
-                                    produk.deleteProduksiById(spList.get(it).id!!)
+                                    produk.deleteProduksiById(it)
                                 }
                             }
 
