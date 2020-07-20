@@ -104,18 +104,24 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         else if (posisi.size > 1) {
             for (i in posisi){
                 if (data == null || data.proses == "-"){
+
                     data = spList.find{ e->e.id.toString().startsWith(i.toString())}!!
-                }else{
-                    if(data.proses != "-"){
-                        for (j in posisi){
-                            data_next = spList.find{ e->e.id.toString().startsWith(j.toString())}!!
-                            println(data)
-                            println(data_next)
-                            if(data_next.proses != "-" || data_next.id.toString() != data.id.toString()){
-                                if(data.proses != data_next.proses || data.tahap != data_next.tahap){
-                                    valid=false
-                                }
-                            }
+                    println("data sekarang : "+data)
+                }
+            }
+            if(data!!.proses != "-"){
+                for (j in posisi){
+                    data_next = spList.find{ e->e.id.toString().startsWith(j.toString())}!!
+                    println("DATA_NEXT :"+data)
+                    if(data_next.proses != "-" && data_next.proses != data.proses){
+                        println("proses ga sama")
+                        valid = false
+                        break
+                    }else{
+                        if(data_next.tahap != data.tahap){
+                            println("TAHAP GA SAMA")
+                            valid = false
+                            break
                         }
                     }
                 }
