@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        
+
         <RelativeLayout
             android:id="@+id/chart"
             android:layout_width="match_parent"
@@ -55,107 +55,122 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:orientation="vertical">
+                    style="@style/InsideCard"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:weightSum="2">
 
-                    <TextView
-                        style="@style/Teks.TV"
+                    <TableLayout
                         android:layout_width="wrap_content"
-                        android:text="Tanggal"/>
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:stretchColumns="2"
+                        android:layout_marginEnd="5dp"
+                        android:layout_margin="10dp">
 
-                    <TextView
-                        style="@style/Teks.TV"
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Varietas"/>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:layout_column="1"
+                                android:text="Tanggal"/>
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:id="@+id/report_tanggal"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="Value"/>
+                        </TableRow>
 
-                    <TextView
-                        style="@style/Teks.TV"
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Blok"/>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:layout_column="1"
+                                android:text="Varietas"/>
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:id="@+id/report_varietas"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="Value"/>
+                        </TableRow>
 
-                    <TextView
-                        style="@style/Teks.TV"
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Berat"/>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:layout_column="1"
+                                android:text="Blok"/>
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:id="@+id/report_blok"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="Value"/>
+                        </TableRow>
 
-                    <TextView
-                        style="@style/Teks.TV"
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Kadar Air"/>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:layout_column="1"
+                                android:text="Berat"/>
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:id="@+id/report_berat"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="Value"/>
+                        </TableRow>
 
-                    <TextView
-                        style="@style/Teks.TV"
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Proses"/>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:layout_column="1"
+                                android:text="Kadar Air"/>
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:id="@+id/report_kadarair"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="Value"/>
+                        </TableRow>
 
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:layout_column="1"
+                                android:text="Proses"/>
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:id="@+id/report_proses"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="Value"/>
+                        </TableRow>
+
+                    </TableLayout>
                 </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/report_tanggal"
-                        style="@style/Teks.TV"
-                        android:gravity="end"
-                        android:layout_width="match_parent"
-                        android:text="Value"/>
-
-                    <TextView
-                        android:id="@+id/report_varietas"
-                        style="@style/Teks.TV"
-                        android:gravity="end"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_below="@id/report_tanggal"
-                        android:text="Value"/>
-
-                    <TextView
-                        android:id="@+id/report_blok"
-                        style="@style/Teks.TV"
-                        android:gravity="end"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_below="@id/report_varietas"
-                        android:text="Value"/>
-
-                    <TextView
-                        android:id="@+id/report_berat"
-                        style="@style/Teks.TV"
-                        android:gravity="end"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_below="@id/report_blok"
-                        android:text="Value"/>
-
-                    <TextView
-                        android:id="@+id/report_kadarair"
-                        style="@style/Teks.TV"
-                        android:gravity="end"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_below="@+id/report_berat"
-                        android:text="Value"/>
-
-                    <TextView
-                        android:id="@+id/report_proses"
-                        style="@style/Teks.TV"
-                        android:gravity="end"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_below="@+id/report_kadarair"
-                        android:text="Value"/>
-
-                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
