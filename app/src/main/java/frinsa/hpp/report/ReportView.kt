@@ -274,10 +274,12 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
                 intent.putExtra("biaya_colorSorter", allData.colorSorter.biaya.toString())
                 intent.putExtra("biaya_handPick", allData.handPick.biaya.toString())
 
+                finish()
                 startActivity(intent)
             }
             R.id.btn_kembali_reportview -> {
                 val intent = Intent(this@ReportView, MainDaftarProduksi::class.java)
+                finish()
                 startActivity(intent)
             }
         }
