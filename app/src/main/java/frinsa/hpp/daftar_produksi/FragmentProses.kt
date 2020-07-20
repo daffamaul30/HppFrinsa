@@ -22,6 +22,7 @@ class FragmentProses: Fragment(), View.OnClickListener {
     private var Berat: Double = 0.0
 
     lateinit var v :View
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
