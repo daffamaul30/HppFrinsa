@@ -114,12 +114,14 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                             if(data_next.proses != "-" || data_next.id.toString() != data.id.toString()){
                                 if(data.proses != data_next.proses || data.tahap != data_next.tahap){
                                     valid=false
-                                    Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }
                     }
                 }
+            }
+            if (!valid) {
+                Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
             }
 
 
