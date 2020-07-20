@@ -81,55 +81,68 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
         for (i in 0..perStep!!.size-1) {
             when (perStep!!.get(i)) {
                 "petik" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_petik"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("total_biaya_petik").toDouble())))
                 }
                 "fermentasi" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_fermentasi"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("total_biaya_ferm").toDouble())))
                 }
                 "transportasi" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_transportasi"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("total_biaya_trans").toDouble())))
                 }
                 "pulping Ceri-Gabah Basah" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_pulp1"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("total_biaya_pu1").toDouble())))
                 }
                 "pulping" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_pulp2"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_pulping2").toDouble())))
                 }
                 "jemur Kadar Air" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_JKA"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_jemurKadarAir").toDouble())))
                 }
                 "jemurI" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_jemur1"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_jemur1").toDouble())))
                 }
                 "jemurII" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_jemur2"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_jemur2").toDouble())))
                 }
                 "hulling" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_hulling"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_hulling").toDouble())))
                 }
                 "suton grader" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_sutonGrader"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_sutonGrader").toDouble())))
                 }
                 "size grading" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_sizeGrading"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_sizeGrading").toDouble())))
                 }
                 "color sorter" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_colorSorter"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_colorSorter").toDouble())))
                 }
                 "hand pick" -> {
-                    subprosesArraylist!!.add(Subproses(convertSubprosesnName(perStep!!.get(i)),
+                    subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_handPick"),
+                        convertSubprosesnName(perStep!!.get(i)),
                         produk.formatRupiah(intent.getStringExtra("biaya_handPick").toDouble())))
                 }
                 else -> {}
