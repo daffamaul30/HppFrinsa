@@ -234,11 +234,13 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
                 intent.putExtra("berat", berat_toExtra)
                 intent.putExtra("proses", proses_toExtra)
                 intent.putExtra("biaya", biaya_toExtra)
+                finish()
                 startActivity(intent)
             }
 
             R.id.btn_dashboard_detailbiaya -> {
                 val intent = Intent(this@DetailBiaya, Dashboard::class.java)
+                finish()
                 startActivity(intent)
             }
         }
