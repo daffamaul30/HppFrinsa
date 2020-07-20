@@ -16,6 +16,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import frinsa.hpp.R
+import frinsa.hpp.daftar_produksi.DaftarProduksiAdapter
 
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.*
@@ -208,11 +209,15 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                             else if (it.tahap?.toLowerCase(Locale.getDefault())!!.contains(search)){
                                 displayList.add(it)
                             }
+
                         }
+
                         rv_hasil_produksi.adapter?.notifyDataSetChanged()
+                        //println("SUKSES SEARCH")
                     }else{
                         displayList.clear()
                         displayList.addAll(spList)
+
                         rv_hasil_produksi.adapter?.notifyDataSetChanged()
                     }
                     return true

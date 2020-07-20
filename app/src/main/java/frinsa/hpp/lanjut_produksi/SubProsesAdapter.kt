@@ -41,7 +41,12 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
             itemView.sp_biaya.text = produk.formatRupiah(modelDaftarProses.biaya!!.toDouble())
             itemView.sp_tahap.text = modelDaftarProses.tahap
             itemView.sp_id.text = modelDaftarProses.id.toString()
-
+            itemView.ceklis.isChecked = false
+            if(modelDaftarProses.id in posisi){
+                //println(itemView.sp_id.text)
+                itemView.ceklis.isChecked = true
+            }
+            //itemView.ceklis.isChecked = true
 //            if(itemView.ceklis.isChecked){
 //                itemView.ceklis!!.isChecked=true
 //            }else{
@@ -54,7 +59,6 @@ class SubProsesAdapter(val context: Context?, private val dpList: MutableList<Mo
         holder.bind(dpList[position])
         //posisi.clear()
         holder.itemView.ceklis.setOnCheckedChangeListener(null)
-
         holder.itemView.ceklis.setOnClickListener {
             if (it.ceklis.isChecked) {
                 //posisi.add(holder.position)
