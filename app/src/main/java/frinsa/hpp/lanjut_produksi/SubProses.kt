@@ -103,7 +103,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         }
         else if (posisi.size > 1) {
             for (i in posisi){
-                if (data == null){
+                if (data == null || data.proses == "-"){
                     data = spList.find{ e->e.id.toString().startsWith(i.toString())}!!
                 }else{
                     if(data.proses != "-"){
