@@ -81,69 +81,82 @@ class DetailBiaya : AppCompatActivity(), View.OnClickListener {
         for (i in 0..perStep!!.size-1) {
             when (perStep!!.get(i)) {
                 "petik" -> {
+                    if (intent.getStringExtra("tanggal_petik").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_petik"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("total_biaya_petik").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("total_biaya_petik").toDouble())))}
                 }
                 "fermentasi" -> {
+                    if (intent.getStringExtra("tanggal_fermentasi").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_fermentasi"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("total_biaya_ferm").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("total_biaya_ferm").toDouble())))}
                 }
                 "transportasi" -> {
+                    if (intent.getStringExtra("tanggal_transportasi").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_transportasi"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("total_biaya_trans").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("total_biaya_trans").toDouble())))}
                 }
                 "pulping Ceri-Gabah Basah" -> {
+                    if (intent.getStringExtra("tanggal_pulp1").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_pulp1"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("total_biaya_pu1").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("total_biaya_pu1").toDouble())))}
                 }
                 "pulping" -> {
+                    if (intent.getStringExtra("tanggal_pulp2").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_pulp2"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_pulping2").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_pulping2").toDouble())))}
                 }
                 "jemur Kadar Air" -> {
+                    if (intent.getStringExtra("tanggal_JKA").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_JKA"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_jemurKadarAir").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_jemurKadarAir").toDouble())))}
                 }
                 "jemurI" -> {
+                    if (intent.getStringExtra("tanggal_jemur1").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_jemur1"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_jemur1").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_jemur1").toDouble())))}
                 }
                 "jemurII" -> {
+                    if (intent.getStringExtra("tanggal_jemur2").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_jemur2"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_jemur2").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_jemur2").toDouble())))}
                 }
                 "hulling" -> {
+                    if (intent.getStringExtra("tanggal_hulling").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_hulling"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_hulling").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_hulling").toDouble())))}
                 }
                 "suton grader" -> {
+                    if (intent.getStringExtra("tanggal_sutonGrader").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_sutonGrader"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_sutonGrader").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_sutonGrader").toDouble())))}
                 }
                 "size grading" -> {
+                    if (intent.getStringExtra("tanggal_sizeGrading").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_sizeGrading"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_sizeGrading").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_sizeGrading").toDouble())))}
                 }
                 "color sorter" -> {
+                    if (intent.getStringExtra("tanggal_colorSorter").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_colorSorter"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_colorSorter").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_colorSorter").toDouble())))}
                 }
                 "hand pick" -> {
+                    if (intent.getStringExtra("tanggal_handPick").isNotEmpty()) {
                     subprosesArraylist!!.add(Subproses(intent.getStringExtra("tanggal_handPick"),
                         convertSubprosesnName(perStep!!.get(i)),
-                        produk.formatRupiah(intent.getStringExtra("biaya_handPick").toDouble())))
+                        produk.formatRupiah(intent.getStringExtra("biaya_handPick").toDouble())))}
                 }
                 else -> {}
             }
