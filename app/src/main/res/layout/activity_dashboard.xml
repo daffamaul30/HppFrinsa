@@ -20,12 +20,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/kopi" />
+                android:src="@drawable/image" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
-                android:background="#B3BE967D">
+                android:background="#E2BE967D">
 
 
                 <ImageView
