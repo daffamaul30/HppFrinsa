@@ -229,6 +229,7 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
                 intent.putExtra("step", step_toExtra)
 
                 // Petik
+                intent.putExtra("tanggal_petik", allData.petik.tgl_petik)
                 intent.putExtra("biaya_petik_pet", allData.petik.biaya_petik.toString())
                 intent.putExtra("biaya_ojek_pet", allData.petik.biaya_ojek.toString())
                 intent.putExtra("biaya_cuci_pet", allData.petik.biaya_cuci.toString())
@@ -238,12 +239,14 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
 
 
                 // Fermentasi
+                intent.putExtra("tanggal_fermentasi", allData.fermentasi.tanggal)
                 intent.putExtra("biaya_fermentasi_ferm", allData.fermentasi.biaya_fermentasi.toString())
                 intent.putExtra("biaya_muat_ferm", allData.fermentasi.biaya_muat.toString())
                 intent.putExtra("total_biaya_ferm", (allData.fermentasi.biaya_fermentasi +
                         allData.fermentasi.biaya_muat).toString())
 
                 // Transportasi
+                intent.putExtra("tanggal_transportasi", allData.transport.tanggal)
                 intent.putExtra("biaya_transportasi_trans", allData.transport.biaya_transport.toString())
                 intent.putExtra("biaya_kawal_trans", allData.transport.biaya_kawal.toString())
                 intent.putExtra("biaya_bongkar_trans", allData.transport.biaya_bongkar.toString())
@@ -252,6 +255,7 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
                         allData.transport.biaya_bongkar).toString())
 
                 //Pulping 1
+                intent.putExtra("tanggal_pulp1", allData.pulping1.tanggal)
                 intent.putExtra("biaya_pulping_pu1", allData.pulping1.biaya_pulping.toString())
                 intent.putExtra("biaya_fermentasi_pu1", allData.pulping1.biaya_fermentasi.toString())
                 intent.putExtra("biaya_cuci_pu1", allData.pulping1.biaya_cuci.toString())
@@ -263,18 +267,42 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
                         allData.pulping1.biaya_jemur +
                         allData.pulping1.biaya_muat).toString())
 
-                //Sisanya
+                //Pulping 2
+                intent.putExtra("tanggal_pulp2", allData.pulping2.tanggal)
                 intent.putExtra("biaya_pulping2", allData.pulping2.biaya.toString())
+
+                //Jemur Kadar Air
+                intent.putExtra("tanggal_JKA", allData.jemurKadarAir.tanggal)
                 intent.putExtra("biaya_jemurKadarAir", allData.jemurKadarAir.biaya.toString())
+
+                //Jemur 1
+                intent.putExtra("tanggal_jemur1", allData.jemur1.tanggal)
                 intent.putExtra("biaya_jemur1", allData.jemur1.biaya.toString())
+
+                //Jemur 2
+                intent.putExtra("tanggal_jemur2", allData.jemur2.tanggal)
                 intent.putExtra("biaya_jemur2", allData.jemur2.biaya.toString())
+
+                //Hulling
+                intent.putExtra("tanggal_hulling", allData.hulling.tanggal)
                 intent.putExtra("biaya_hulling", allData.hulling.biaya.toString())
+
+                //Suton Grader
+                intent.putExtra("tanggal_sutonGrader", allData.sutonGrader.tanggal)
                 intent.putExtra("biaya_sutonGrader", allData.sutonGrader.biaya.toString())
+
+                //Size Grading
+                intent.putExtra("tanggal_sizeGrading", allData.sizeGrading.tanggal)
                 intent.putExtra("biaya_sizeGrading", allData.sizeGrading.biaya.toString())
+
+                //Color Sorter
+                intent.putExtra("tanggal_colorSorter", allData.colorSorter.tanggal)
                 intent.putExtra("biaya_colorSorter", allData.colorSorter.biaya.toString())
+
+                //Hand Pick
+                intent.putExtra("tanggal_handPick", allData.handPick.tanggal)
                 intent.putExtra("biaya_handPick", allData.handPick.biaya.toString())
 
-                finish()
                 startActivity(intent)
             }
             R.id.btn_kembali_reportview -> {

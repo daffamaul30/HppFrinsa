@@ -39,6 +39,7 @@ class AdapterSubproses(
         position: Int
     ) {
         // ganti nama subproses
+        holder.tglSubproses.setText(dataList!![position].tanggal_sub)
         holder.txtSubproses.setText(dataList!![position].nama_sub)
         holder.totalPerSub.setText(dataList!![position].total_biaya_sub)
 
@@ -133,6 +134,7 @@ class AdapterSubproses(
     }
 
     inner class SubprosesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tglSubproses: TextView = itemView.findViewById(R.id.card_tgl_subproses)
         val txtSubproses: TextView = itemView.findViewById(R.id.judul_card)
         val totalPerSub: TextView = itemView.findViewById(R.id.card_total_sub)
         val rvRincian: RecyclerView = itemView.findViewById(R.id.rv_rincian)
