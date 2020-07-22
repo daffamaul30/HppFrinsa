@@ -1,5 +1,6 @@
 package frinsa.hpp.daftar_produksi
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -58,6 +59,17 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
         val tahap = dpList[position].tahap
 
         holder.itemView.btn_dp_edit.setOnClickListener{
+//            var intent = Intent()
+//            //intent = Intent(context, ReportView::class.java)
+//            intent.putExtra("id", dpList[holder.position].id!!.toString())
+//            intent.putExtra("tanggal", dpList[position].tanggal)
+//            intent.putExtra("varietas", dpList[position].varietas)
+//            intent.putExtra("blok", dpList[position].blok)
+//            intent.putExtra("berat", dpList[position].berat.toString() + " Kg")
+//            intent.putExtra("proses", dpList[position].proses)
+//            val biaya = produk.formatRupiah(dpList[position].biaya!!.toDouble())
+//            intent.putExtra("biaya", biaya)
+//            context!!.startActivity(intent)
             when (tahap){
                 "petik" -> {
                     val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_petik,null)
@@ -70,8 +82,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
-                    alertDialog.window?.attributes?.windowAnimations =
-                        R.style.DialogAnim_Up_Down
+                    alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
                     alertDialog.show()
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -84,7 +95,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biayaCuci = dialog.et_petik_biaya_cuci.text.toString()
                         if (biayaPetik.isEmpty() or biayaOjek.isEmpty() or biayaCuci.isEmpty()){
                             Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
-                            //Pesan klo ada yg kosong, blm kepikiran
                         }else{
 
                             val petik = Petik()

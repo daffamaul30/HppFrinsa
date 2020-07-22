@@ -12,8 +12,8 @@ class MainDaftarProduksi : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager){
         val adapter = ViewPagerAdapterDaftarProduksi(supportFragmentManager)
-        adapter.populateFragment(FragmentProses(),"Proses")
-        adapter.populateFragment(FragmentSelesai(),"Selesai")
+//        adapter.populateFragment(FragmentProses(),"Proses")
+//        adapter.populateFragment(FragmentSelesai(),"Selesai")
         viewPager.adapter = adapter
         tabDaftarProduksi.setupWithViewPager(viewPager)
     }

@@ -1,6 +1,7 @@
 package frinsa.hpp.daftar_produksi
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -8,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import frinsa.hpp.R
 import frinsa.hpp.data.DBPanen
 import frinsa.hpp.data.Produk
-import kotlinx.android.synthetic.main.card_daftar_produksi.view.*
 import kotlinx.android.synthetic.main.fragment_produksi.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -61,7 +61,6 @@ class FragmentProses: Fragment(), View.OnClickListener {
         rv_produksi.adapter = DaftarProduksiAdapter(context,displayPList)
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
@@ -79,6 +78,7 @@ class FragmentProses: Fragment(), View.OnClickListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText!!.isNotEmpty()){
+                    refreshData()
                     displayPList.clear()
                     val search = newText.toLowerCase(Locale.getDefault())
                     dpPList.forEach {
@@ -101,13 +101,57 @@ class FragmentProses: Fragment(), View.OnClickListener {
                     rv_produksi.adapter?.notifyDataSetChanged()
                 }
                 else{
-                    displayPList.clear()
-                    displayPList.addAll(dpPList)
+//                    displayPList.clear()
+//                    displayPList.addAll(dpPList)
+                    refreshData()
                     rv_produksi.adapter?.notifyDataSetChanged()
                 }
                 return true
             }
         })
+    }
+
+    fun refreshData(){
+        Log.e("DB","Refresh Data")
+        this.dpPList.clear()
+        this.displayPList.clear()
+        val data = db.getAllData2("<>")
+        data.forEach() {
+            Berat = produk.getLastWeight(it)
+            this.dpPList.add(
+                ModelDaftarProduksi(
+                    id = it.produksi?.id_produksi,
+                    tanggal = it.petik?.tgl_petik,
+                    blok = it.produksi?.blok,
+                    varietas = it.produksi?.varietas,
+                    berat = if (it.produksi.proses == "-") it.petik.berat else Berat,
+                    proses = it.produksi?.proses,
+                    biaya = produk.getTotalBiaya(it),
+                    tahap = it.produksi?.status
+                )
+            )
+        }
+        displayPList.addAll(dpPList)
+        rv_produksi.adapter?.notifyDataSetChanged()
+    }
+
+    override fun onResume() {
+        Log.e("DEBUG","onResume of fragment proses")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.e("DEBUG","onPause of fragment proses")
+        super.onPause()
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isVisibleToUser){
+            Log.e("Visibilty Proses","True")
+        }else{
+            Log.e("Visibilty Proses","False")
+        }
     }
 
     override fun onClick(v: View) {
