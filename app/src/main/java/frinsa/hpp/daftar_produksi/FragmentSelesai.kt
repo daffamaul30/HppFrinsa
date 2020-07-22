@@ -115,7 +115,7 @@ class FragmentSelesai: Fragment(), View.OnClickListener {
         Log.e("DB","Refresh Data S")
         this.dpSList.clear()
         this.displaySList.clear()
-        val data = db.getAllData2("<>")
+        val data = db.getAllData2("=")
         data.forEach() {
             Berat = produk.getLastWeight(it)
             this.dpSList.add(
