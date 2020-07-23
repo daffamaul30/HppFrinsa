@@ -322,7 +322,29 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                         }
                     }
                     else if (temp.produksi.bentuk == "Gabah") {
-                        //
+                        val step = db.getStepProses(name)
+                        val list = step.split(",")
+                        val before = list.find {item->item.contains("jemur")}
+                        var current = list.indexOf("suton grader")
+                        var code = list.get(current - 1)
+                        db.updateStatus(id, code)
+                        if (code == "hulling") {
+                            val hul = Hulling(
+                                tanggal = temp.petik.tgl_petik,
+                                berat = temp.petik.berat.toDouble(),
+                                kadarAir = 0.0,
+                                biaya = 0
+                            )
+                            db.updateKadarAir(temp.produksi.id_produksi, hul, TABLE_HULLING, COL_ID_PRODUKSI_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
+                        }
+                        else if (code == "jemurII") {
+                            val jem = jemurDua(
+                                tanggal = temp.petik.tgl_petik,
+                                berat = temp.petik.berat.toDouble(),
+                                biaya = 0
+                            )
+                            db.updateStandard(id, jem, TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
+                        }
                     }
 
                 }
