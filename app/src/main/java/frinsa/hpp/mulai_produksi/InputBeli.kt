@@ -307,7 +307,7 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                                     val before = list.find {item->item.contains("jemur")}
                                     var current = list.indexOf(before)
                                     var code = list.get(current-1)
-                                    status = ""
+                                    status = code
                                 }
                                 else {
                                     status = "-"

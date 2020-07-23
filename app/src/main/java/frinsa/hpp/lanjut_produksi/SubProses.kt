@@ -21,7 +21,9 @@ import frinsa.hpp.daftar_produksi.DaftarProduksiAdapter
 import frinsa.hpp.daftar_produksi.ModelDaftarProduksi
 import frinsa.hpp.data.*
 import frinsa.hpp.data.tahap.Hulling
+import frinsa.hpp.data.tahap.Transportasi
 import frinsa.hpp.data.tahap.jemurDua
+import frinsa.hpp.data.tahap.pulpingDua
 
 import frinsa.hpp.tahapan_proses.TahapanProses
 
@@ -325,25 +327,26 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                         val step = db.getStepProses(name)
                         val list = step.split(",")
                         val before = list.find {item->item.contains("jemur")}
-                        var current = list.indexOf("suton grader")
+                        var current = list.indexOf(before)
                         var code = list.get(current - 1)
                         db.updateStatus(id, code)
-                        if (code == "hulling") {
-                            val hul = Hulling(
+                        if (code == "transportasi") {
+                            val trans = Transportasi(
                                 tanggal = temp.petik.tgl_petik,
                                 berat = temp.petik.berat.toDouble(),
-                                kadarAir = 0.0,
-                                biaya = 0
+                                biaya_transport = 0,
+                                biaya_kawal = 0,
+                                biaya_bongkar = 0
                             )
-                            db.updateKadarAir(temp.produksi.id_produksi, hul, TABLE_HULLING, COL_ID_PRODUKSI_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
+                            db.updateTransportasi(temp.produksi.id_produksi, trans)
                         }
-                        else if (code == "jemurII") {
-                            val jem = jemurDua(
+                        else if (code == "pulping") {
+                            val pul = pulpingDua(
                                 tanggal = temp.petik.tgl_petik,
                                 berat = temp.petik.berat.toDouble(),
                                 biaya = 0
                             )
-                            db.updateStandard(id, jem, TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
+                            db.updateStandard(id, pul, TABLE_PULPING2, COL_ID_PRODUKSI_PULPING2, COL_TGL_PULPING2, COL_BERAT_PULPING2, COL_BIAYA_PULPING2)
                         }
                     }
 
