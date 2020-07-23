@@ -27,7 +27,6 @@
                 android:layout_height="270dp"
                 android:background="#E2BE967D">
 
-
                 <ImageView
                     android:id="@+id/logoDashboard"
                     android:layout_width="90dp"
@@ -150,7 +149,7 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="110dp"
+                            android:layout_height="108dp"
                             android:background="#f5f5f5"
                             app:srcCompat="@drawable/ic_lanjutkan_produksi" />
 
@@ -178,7 +177,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:layout_margin="32dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginEnd="30dp"
             android:backgroundTint="#507E75"
             android:elevation="10dp"
             android:src="@drawable/ic_baseline_add_24"
@@ -188,11 +188,41 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/export_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#c52c47"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        android:src="@drawable/ic_export"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/floating_container" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/import_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#c52c47"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        android:src="@drawable/ic_import"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/export_btn"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/varietas_baru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="135dp"
         android:backgroundTint="#c52c47"
         android:clickable="true"
         android:elevation="10dp"
@@ -207,7 +237,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="#c52c47"
         android:clickable="true"
         android:elevation="10dp"
@@ -222,7 +252,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="#c52c47"
         android:clickable="true"
         android:elevation="10dp"
@@ -231,6 +261,40 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/blok_baru"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_import"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/fab_text_bg"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/Import"
+        android:textColor="#ffffff"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/import_btn"
+        app:layout_constraintEnd_toStartOf="@+id/import_btn"
+        app:layout_constraintTop_toTopOf="@+id/import_btn" />
+
+    <TextView
+        android:id="@+id/tv_export"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/fab_text_bg"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/Export"
+        android:textColor="#ffffff"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/export_btn"
+        app:layout_constraintEnd_toStartOf="@+id/export_btn"
+        app:layout_constraintTop_toTopOf="@+id/export_btn" />
 
     <TextView
         android:id="@+id/tv_varietas_baru"

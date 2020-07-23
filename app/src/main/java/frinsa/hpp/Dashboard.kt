@@ -55,18 +55,20 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         varietas_baru.startAnimation(mClose)
         blok_baru.startAnimation(mClose)
         proses_baru.startAnimation(mClose)
+        import_btn.startAnimation(mClose)
+        export_btn.startAnimation(mClose)
         tv_varietas_baru.startAnimation(mClose)
         tv_blok_baru.startAnimation(mClose)
         tv_proses_baru.startAnimation(mClose)
+        tv_import.startAnimation(mClose)
+        tv_export.startAnimation(mClose)
         floatingActionButton.startAnimation(mRotate2)
 
         varietas_baru.isClickable = false
         blok_baru.isClickable = false
         proses_baru.isClickable = false
-
-        tv_varietas_baru.visibility = View.INVISIBLE
-        tv_blok_baru.visibility = View.INVISIBLE
-        tv_proses_baru.visibility = View.INVISIBLE
+        import_btn.isClickable = false
+        export_btn.isClickable = false
 
         isOpen = false
     }
@@ -75,14 +77,14 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         varietas_baru.startAnimation(mOpen)
         blok_baru.startAnimation(mOpen)
         proses_baru.startAnimation(mOpen)
+        import_btn.startAnimation(mOpen)
+        export_btn.startAnimation(mOpen)
         tv_varietas_baru.startAnimation(mOpen)
         tv_blok_baru.startAnimation(mOpen)
         tv_proses_baru.startAnimation(mOpen)
+        tv_import.startAnimation(mOpen)
+        tv_export.startAnimation(mOpen)
         floatingActionButton.startAnimation(mRotate1)
-
-        tv_varietas_baru.visibility = View.VISIBLE
-        tv_blok_baru.visibility = View.VISIBLE
-        tv_proses_baru.visibility = View.VISIBLE
 
         isOpen = true
     }
@@ -140,6 +142,12 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                         val intent = Intent(this@Dashboard, TambahProses::class.java)
                         startActivity(intent)
                         close()
+                    }
+                    import_btn.setOnClickListener {
+                        //
+                    }
+                    export_btn.setOnClickListener {
+                        //
                     }
                 }
             }
