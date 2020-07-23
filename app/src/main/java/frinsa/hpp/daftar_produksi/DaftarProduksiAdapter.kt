@@ -59,19 +59,11 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
         val tahap = dpList[position].tahap
 
         holder.itemView.btn_dp_edit.setOnClickListener{
-//            var intent = Intent()
-//            //intent = Intent(context, ReportView::class.java)
-//            intent.putExtra("id", dpList[holder.position].id!!.toString())
-//            intent.putExtra("tanggal", dpList[position].tanggal)
-//            intent.putExtra("varietas", dpList[position].varietas)
-//            intent.putExtra("blok", dpList[position].blok)
-//            intent.putExtra("berat", dpList[position].berat.toString() + " Kg")
-//            intent.putExtra("proses", dpList[position].proses)
-//            val biaya = produk.formatRupiah(dpList[position].biaya!!.toDouble())
-//            intent.putExtra("biaya", biaya)
-//            context!!.startActivity(intent)
+
             when (tahap){
                 "petik" -> {
+                    var sumber = "Beli"
+                    sumber = db.getSumberPetik(dpList.get(holder.position).id!!.toInt())
                     val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_petik,null)
                     val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
                     dialog.edt_dp_tgl.text = dpList[position].tanggal
@@ -82,11 +74,18 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
+                    if(sumber=="Beli"){
+
+                        dialog.et_petik_biaya_ojek.isEnabled = false
+                        dialog.tv_petik_biaya_ojek.setTextColor(Color.parseColor("#c2a7a9"))
+
+                    }
                     alertDialog.window?.attributes?.windowAnimations = R.style.DialogAnim_Up_Down
                     alertDialog.show()
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -95,6 +94,36 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         val biayaCuci = dialog.et_petik_biaya_cuci.text.toString()
                         if (biayaPetik.isEmpty() or biayaOjek.isEmpty() or biayaCuci.isEmpty()){
                             Toast.makeText(context, "Nominal Biaya Harus Di Isi", Toast.LENGTH_SHORT).show()
+                        }else if(sumber == "Beli"){
+
+                            val petik = Petik()
+                            petik.biaya_petik = biayaPetik.toInt()
+                            petik.biaya_ojek = 0
+                            petik.biaya_cuci = biayaCuci.toInt()
+
+                            //Auto Refresh Data
+                            val biayaUpdate:Int = petik.biaya_petik + petik.biaya_cuci
+                            val biayaAsal:Int = db.getBiayaPetik(dpList.get(holder.position).id!!.toInt())
+                            val biayaDPList:Int = dpList[position].biaya!!.toInt()
+                            val model = ModelDaftarProduksi(
+                                id = dpList[position].id,
+                                tanggal = dpList[position].tanggal,
+                                blok = dpList[position].blok,
+                                varietas = dpList[position].varietas,
+                                berat = dpList[position].berat,
+                                proses = dpList[position].proses,
+                                biaya = biayaDPList + biayaUpdate - biayaAsal,
+                                tahap = dpList[position].tahap
+                            )
+                            dpList.removeAt(position)
+                            dpList.add(position,model)
+
+
+                            db.updateBiayaPetik(dpList.get(holder.position).id!!.toInt(),petik)
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
+                            notifyItemChanged(position)
+                            notifyDataSetChanged()
+                            alertDialog.dismiss()
                         }else{
 
                             val petik = Petik()
@@ -121,6 +150,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
 
                             db.updateBiayaPetik(dpList.get(holder.position).id!!.toInt(),petik)
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -145,6 +175,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -174,6 +205,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                             dpList.add(position,model)
 
                             db.updateBiayaFermentasi(dpList.get(holder.position).id!!.toInt(),fermentasi)
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -198,6 +230,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -231,6 +264,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaTransport(dpList.get(holder.position).id!!.toInt(),transport)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -254,6 +288,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -291,6 +326,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaPulpSatu(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -314,6 +350,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -343,6 +380,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaPulpDua(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -366,6 +404,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -397,6 +436,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaJemurKadarAir(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -420,6 +460,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -449,6 +490,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaJemurSatu(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -472,6 +514,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -501,6 +544,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaJemurDua(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -524,6 +568,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -555,6 +600,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaHulling(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -578,6 +624,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -608,6 +655,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaSutonGrader(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -631,6 +679,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -660,6 +709,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaSizeGrading(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -683,6 +733,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -712,6 +763,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaColorSorter(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()
@@ -735,6 +787,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                     dialog.btn_dp_batal.setOnClickListener{
+                        Toast.makeText(context, "Edit Biaya Dibatalkan", Toast.LENGTH_SHORT).show()
                         alertDialog.dismiss()
                     }
                     dialog.btn_dp_submit.setOnClickListener {
@@ -764,6 +817,7 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
 
                             db.updateBiayaHandPick(dpList.get(holder.position).id!!.toInt(),proses)
 
+                            Toast.makeText(context, "Biaya Berhasil Diubah", Toast.LENGTH_SHORT).show()
                             notifyItemChanged(position)
                             notifyDataSetChanged()
                             alertDialog.dismiss()

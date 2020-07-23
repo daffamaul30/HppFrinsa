@@ -1230,6 +1230,15 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         return total
     }
 
+    fun getSumberPetik(id:Int):String {
+        val db = this.readableDatabase
+        val result = db.rawQuery("SELECT * FROM $TABLE_PRODUKSI WHERE $COL_ID_PRODUKSI = $id", null)
+
+        result.moveToFirst()
+        var sumber = result.getString(result.getColumnIndex(COL_SUMBER))
+        return sumber
+    }
+
     fun updateBiayaPulpSatu(id: Int, p: pulpingSatu ):Boolean{
         val db = this.writableDatabase
 
