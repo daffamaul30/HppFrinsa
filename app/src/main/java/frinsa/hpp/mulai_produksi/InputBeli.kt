@@ -304,7 +304,8 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                                 if (proses != "-") {
                                     val step = db.getStepProses(proses)
                                     val list = step.split(",")
-                                    var current = list.indexOf("")
+                                    val before = list.find {item->item.contains("jemur")}
+                                    var current = list.indexOf(before)
                                     var code = list.get(current+1)
                                     status = ""
                                 }
