@@ -59,7 +59,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
         val tahap = dpList[position].tahap
 
         holder.itemView.btn_dp_edit.setOnClickListener{
-
             when (tahap){
                 "petik" -> {
                     var sumber = "Beli"
