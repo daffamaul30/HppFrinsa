@@ -11,7 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.kishan.askpermission.AskPermission
+import com.kishan.askpermission.ErrorCallback
+import com.kishan.askpermission.PermissionCallback
+import com.kishan.askpermission.PermissionInterface
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import frinsa.hpp.data.Blok
 import frinsa.hpp.data.ExportExcel
@@ -24,7 +29,7 @@ import kotlinx.android.synthetic.main.dialog_menu_mulai_produksi.view.*
 import kotlinx.android.synthetic.main.dialog_submit_exit.view.*
 
 
-class Dashboard : AppCompatActivity(), View.OnClickListener {
+class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback, ErrorCallback {
     private lateinit var mOpen: Animation
     private lateinit var mClose: Animation
     private lateinit var mRotate1: Animation
@@ -36,11 +41,11 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
     private lateinit var blk: Blok
     private lateinit var excel : ExportExcel
     private val context = this
-
+    private val REQUEST_PERMISSIONS = 20
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-
+        reqPermission()
         vari = Varietas(context)
         blk = Blok(context)
         excel = ExportExcel(context)
@@ -177,6 +182,52 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         dialog.batal_submit_exit.setOnClickListener{
             alertDialog.dismiss()
         }
+    }
+    fun reqPermission() {
+
+        AskPermission.Builder(this).setPermissions(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+            .setCallback(this)
+            .setErrorCallback(this)
+            .request(REQUEST_PERMISSIONS)
+    }
+
+    override fun onShowSettings(
+        permissionInterface: PermissionInterface,
+        requestCode: Int
+    ) {
+        val builder =
+            androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setMessage("We need permissions for this app. Open setting screen?")
+        builder.setPositiveButton(
+            "oke"
+        ) { dialog, which -> permissionInterface.onSettingsShown() }
+        builder.setNegativeButton("cancel", null)
+        builder.show()
+    }
+
+    override fun onShowRationalDialog(
+        permissionInterface: PermissionInterface,
+        requestCode: Int
+    ) {
+        val builder =
+            androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setMessage("Permission dibutuhkan untuk membuat data excel")
+        builder.setPositiveButton(
+            "oke"
+        ) { dialog, which -> permissionInterface.onDialogShown() }
+        builder.setNegativeButton("cancel", null)
+        builder.show()
+    }
+
+    override fun onPermissionsGranted(requestCode: Int) {
+        Toast.makeText(this, "Permissions Received.", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPermissionsDenied(requestCode: Int) {
+        Toast.makeText(this, "Permissions Denied.", Toast.LENGTH_LONG).show()
     }
 
 }

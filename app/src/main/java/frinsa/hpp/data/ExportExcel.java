@@ -3,6 +3,7 @@ package frinsa.hpp.data;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,10 +13,15 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.ajts.androidmads.library.SQLiteToExcel;
+import com.kishan.askpermission.AskPermission;
+import com.kishan.askpermission.ErrorCallback;
+import com.kishan.askpermission.PermissionCallback;
+import com.kishan.askpermission.PermissionInterface;
 
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -28,12 +34,16 @@ import java.util.Locale;
 
 import static java.security.AccessController.getContext;
 
-public class ExportExcel extends AppCompatActivity {
-    Context context ;
+public class ExportExcel extends AppCompatActivity  {
+    Context context;
+
     public ExportExcel(Context context){
         this.context = context;
-        System.out.println("CONSTRUCT");
+        //reqPermission();
     }
+
+
+
     public void ExportData() {
 
         //CHECK IF YOU HAVE WRITE PERMISSIONS OR RETURN

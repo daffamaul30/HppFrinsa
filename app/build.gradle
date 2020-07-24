@@ -45,4 +45,6 @@ dependencies {
 
     compile 'com.aldoapps:autoformatedittext:0.9.3'
     compile 'com.ajts.androidmads.SQLite2Excel:library:1.0.2'
+    compile 'com.kishan.askpermission:askpermission:1.0.3'
+
 }
