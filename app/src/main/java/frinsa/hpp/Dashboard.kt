@@ -37,7 +37,6 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
 
     private lateinit var vari: Varietas
     private lateinit var blk: Blok
-    private lateinit var excel : ExportExcel
     private val context = this
     private val REQUEST_PERMISSIONS = 20
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +45,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
         reqPermission()
         vari = Varietas(context)
         blk = Blok(context)
-        excel = ExportExcel(context)
-
+        
         mOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         mClose = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         mRotate1 = AnimationUtils.loadAnimation(this, R.anim.rotate1)
@@ -156,7 +154,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
 //                    }
                     export_btn.setOnClickListener {
 
-                        excel.ExportData()
+
 
                     }
                 }
