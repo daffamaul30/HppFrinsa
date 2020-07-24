@@ -169,6 +169,19 @@
                                 android:text="Value"/>
                         </TableRow>
 
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+                            <TextView
+                                style="@style/Teks.TV"
+                                android:id="@+id/report_belidari"
+                                android:layout_column="1"
+                                android:layout_height="wrap_content"
+                                android:text="Value"
+                                />
+                        </TableRow>
+
                     </TableLayout>
                 </LinearLayout>
 

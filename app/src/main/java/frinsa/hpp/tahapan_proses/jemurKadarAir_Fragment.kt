@@ -128,7 +128,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
         tvTgl = input_tgl_jemurKadarAir.text.toString()
         edtBerat = et_berat_jemurKadarAir.text.toString()
         edtOngkosJemur = et_ongkos_jemur_jemurKadarAir.text.toString()
-        edtKadarAir = et_ongkos_jemur_jemurKadarAir.text.toString()
+        edtKadarAir = et_kadar_air_jemurKadarAir.text.toString()
 
         var isEmptyFields = false
 

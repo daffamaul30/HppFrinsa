@@ -60,6 +60,7 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         val berat: TextView = findViewById(R.id.report_berat)
         val kadar: TextView = findViewById(R.id.report_kadarair)
         val proses: TextView = findViewById(R.id.report_proses)
+        val kebun: TextView = findViewById(R.id.report_belidari)
         btn_detail_reportview.setOnClickListener(this)
         btn_kembali_reportview.setOnClickListener(this)
 
@@ -85,6 +86,10 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         kadar.text = (allData.jemurKadarAir.kadarAir + allData.hulling.kadarAir).toString()
         proses.text = proses_toExtra
         biaya.text = biaya_toExtra
+        kebun.text = "Beli dari " + allData.produksi.beli_dari
+        if (allData.produksi.beli_dari.equals("-")) {
+            kebun.text = "Panen dari Kebun Sendiri"
+        }
         //=====================================
     }
 

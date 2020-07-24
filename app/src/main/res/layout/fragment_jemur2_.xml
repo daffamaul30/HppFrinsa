@@ -77,7 +77,7 @@
                 <EditText
                     android:id="@+id/et_berat_jemur2"
                     style="@style/ET"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     style="@style/Teks.TV"

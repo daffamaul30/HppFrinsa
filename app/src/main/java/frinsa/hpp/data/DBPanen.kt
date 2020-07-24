@@ -644,6 +644,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
                 JemurKadarAir.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_KADAR_AIR)).toInt()
                 JemurKadarAir.tanggal = result.getString(result.getColumnIndex(COL_TGL_KADAR_AIR))
                 JemurKadarAir.berat = result.getString(result.getColumnIndex(COL_BERAT_KADAR_AIR)).toDouble()
+                JemurKadarAir.kadarAir = result.getString(result.getColumnIndex(COL_KDR_AIR_KADAR_AIR)).toDouble()
                 JemurKadarAir.biaya = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR_KADAR_AIR)).toInt()
 
                 var Pulping1 = pulpingSatu()
@@ -798,6 +799,7 @@ class DBPanen(var context: Context): SQLiteOpenHelper(context,
         JemurKadarAir.id2 = result.getString(result.getColumnIndex(COL_ID_PRODUKSI_KADAR_AIR)).toInt()
         JemurKadarAir.tanggal = result.getString(result.getColumnIndex(COL_TGL_KADAR_AIR))
         JemurKadarAir.berat = result.getString(result.getColumnIndex(COL_BERAT_KADAR_AIR)).toDouble()
+        JemurKadarAir.kadarAir = result.getString(result.getColumnIndex(COL_KDR_AIR_KADAR_AIR)).toDouble()
         JemurKadarAir.biaya = result.getString(result.getColumnIndex(COL_BIAYA_JEMUR_KADAR_AIR)).toInt()
 
         var Pulping1 = pulpingSatu()
