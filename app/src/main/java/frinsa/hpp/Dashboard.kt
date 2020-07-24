@@ -3,7 +3,6 @@ package frinsa.hpp
 import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -19,7 +18,6 @@ import com.kishan.askpermission.PermissionCallback
 import com.kishan.askpermission.PermissionInterface
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import frinsa.hpp.data.Blok
-import frinsa.hpp.data.ExportExcel
 import frinsa.hpp.data.Varietas
 import frinsa.hpp.lanjut_produksi.SubProses
 import frinsa.hpp.mulai_produksi.InputBeli
@@ -39,7 +37,6 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
 
     private lateinit var vari: Varietas
     private lateinit var blk: Blok
-    private lateinit var excel : ExportExcel
     private val context = this
     private val REQUEST_PERMISSIONS = 20
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,8 +45,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
         reqPermission()
         vari = Varietas(context)
         blk = Blok(context)
-        excel = ExportExcel(context)
-
+        
         mOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         mClose = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         mRotate1 = AnimationUtils.loadAnimation(this, R.anim.rotate1)
@@ -158,7 +154,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
 //                    }
                     export_btn.setOnClickListener {
 
-                        excel.ExportData()
+
 
                     }
                 }
