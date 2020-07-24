@@ -1,7 +1,9 @@
 package frinsa.hpp
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,6 +14,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import frinsa.hpp.data.Blok
+import frinsa.hpp.data.ExportExcel
 import frinsa.hpp.data.Varietas
 import frinsa.hpp.lanjut_produksi.SubProses
 import frinsa.hpp.mulai_produksi.InputBeli
@@ -31,6 +34,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var vari: Varietas
     private lateinit var blk: Blok
+    private lateinit var excel : ExportExcel
     private val context = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +43,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
 
         vari = Varietas(context)
         blk = Blok(context)
+        excel = ExportExcel(context)
 
         mOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         mClose = AnimationUtils.loadAnimation(this, R.anim.fab_close)
@@ -55,7 +60,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         varietas_baru.startAnimation(mClose)
         blok_baru.startAnimation(mClose)
         proses_baru.startAnimation(mClose)
-        import_btn.startAnimation(mClose)
+        //import_btn.startAnimation(mClose)
         export_btn.startAnimation(mClose)
         tv_varietas_baru.startAnimation(mClose)
         tv_blok_baru.startAnimation(mClose)
@@ -67,7 +72,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         varietas_baru.isClickable = false
         blok_baru.isClickable = false
         proses_baru.isClickable = false
-        import_btn.isClickable = false
+        //import_btn.isClickable = false
         export_btn.isClickable = false
 
         isOpen = false
@@ -77,7 +82,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
         varietas_baru.startAnimation(mOpen)
         blok_baru.startAnimation(mOpen)
         proses_baru.startAnimation(mOpen)
-        import_btn.startAnimation(mOpen)
+        //import_btn.startAnimation(mOpen)
         export_btn.startAnimation(mOpen)
         tv_varietas_baru.startAnimation(mOpen)
         tv_blok_baru.startAnimation(mOpen)
@@ -143,11 +148,13 @@ class Dashboard : AppCompatActivity(), View.OnClickListener {
                         startActivity(intent)
                         close()
                     }
-                    import_btn.setOnClickListener {
-                        //
-                    }
+//                    import_btn.setOnClickListener {
+//                        //
+//                    }
                     export_btn.setOnClickListener {
-                        //
+
+                        excel.ExportData()
+
                     }
                 }
             }

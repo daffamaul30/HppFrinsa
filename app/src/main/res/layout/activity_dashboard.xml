@@ -202,20 +202,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/floating_container" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/import_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="15dp"
-        android:backgroundTint="#c52c47"
-        android:clickable="true"
-        android:elevation="10dp"
-        android:focusable="true"
-        android:src="@drawable/ic_import"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/export_btn"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/import_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="120dp"-->
+<!--        android:layout_marginBottom="15dp"-->
+<!--        android:backgroundTint="#c52c47"-->
+<!--        android:clickable="true"-->
+<!--        android:elevation="10dp"-->
+<!--        android:focusable="true"-->
+<!--        android:src="@drawable/ic_import"-->
+<!--        android:visibility="invisible"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/export_btn"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/varietas_baru"
