@@ -42,6 +42,7 @@ dependencies {
     //floating button
     implementation 'com.google.android.material:material:1.1.0-alpha10'
     implementation 'com.jjoe64:graphview:4.2.1'
+    implementation 'com.opencsv:opencsv:4.0'
 
     compile 'com.aldoapps:autoformatedittext:0.9.3'
     compile 'com.ajts.androidmads.SQLite2Excel:library:1.0.2'
