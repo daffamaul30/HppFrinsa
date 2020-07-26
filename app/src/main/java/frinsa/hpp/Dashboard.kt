@@ -220,11 +220,11 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
     }
 
     override fun onPermissionsGranted(requestCode: Int) {
-        Toast.makeText(this, "Permissions Received.", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, "Permissions Received.", Toast.LENGTH_LONG).show()
     }
 
     override fun onPermissionsDenied(requestCode: Int) {
-        Toast.makeText(this, "Permissions Denied.", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, "Permissions Denied.", Toast.LENGTH_LONG).show()
     }
 
 }

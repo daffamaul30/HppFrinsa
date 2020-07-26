@@ -66,6 +66,7 @@ class writeExcel(val context: Context?) {
             csvWriter.writeNext(CSV_HEADER)
 
             data.forEach() {
+                Berat = produk.getLastWeight(it)
                 val berat = if (it.produksi.proses == "-") it.petik.berat else Berat
                 val x = arrayOf<String>(
                     it.produksi.id_produksi.toString(),
@@ -189,14 +190,11 @@ class writeExcel(val context: Context?) {
         var data = db.getAllData2("<>")
 
 
-
         var fileWriter: FileWriter? = null
         var csvWriter: CSVWriter? = null
         var waktu = Timestamp(System.currentTimeMillis()).toString().substring(0,Timestamp(System.currentTimeMillis()).toString().length-7)
         waktu = waktu.replace(':',' ')
-        println(waktu)
         var dir = Environment.getExternalStorageDirectory().toString()+"/hppfrinsa_"+waktu+".csv"
-        println(dir)
 
         try {
 
@@ -205,12 +203,13 @@ class writeExcel(val context: Context?) {
             // write String Array
             csvWriter = CSVWriter(fileWriter,
                 CSVWriter.DEFAULT_SEPARATOR,
-                CSVWriter.NO_QUOTE_CHARACTER,
+//                CSVWriter.NO_QUOTE_CHARACTER,
                 CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                 CSVWriter.DEFAULT_LINE_END)
             csvWriter.writeNext(CSV_HEADER)
 
             data.forEach() {
+                Berat = produk.getLastWeight(it)
                 val berat = if (it.produksi.proses == "-") it.petik.berat else Berat
                 val x = arrayOf<String>(
                     it.produksi.id_produksi.toString(),
@@ -289,6 +288,7 @@ class writeExcel(val context: Context?) {
             }
             data = db.getAllData2("=")
             data.forEach() {
+                Berat = produk.getLastWeight(it)
                 val berat = if (it.produksi.proses == "-") it.petik.berat else Berat
                 val x = arrayOf<String>(
                     it.produksi.id_produksi.toString(),
