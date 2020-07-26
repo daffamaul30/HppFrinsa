@@ -12,13 +12,16 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+
 import com.kishan.askpermission.AskPermission
 import com.kishan.askpermission.ErrorCallback
 import com.kishan.askpermission.PermissionCallback
 import com.kishan.askpermission.PermissionInterface
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import frinsa.hpp.data.Blok
+
 import frinsa.hpp.data.Varietas
+import frinsa.hpp.data.writeExcel
 import frinsa.hpp.lanjut_produksi.SubProses
 import frinsa.hpp.mulai_produksi.InputBeli
 import frinsa.hpp.mulai_produksi.InputPanen
@@ -34,7 +37,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
     private lateinit var mRotate2: Animation
 
     private var isOpen: Boolean = false
-
+    private lateinit var excel: writeExcel
     private lateinit var vari: Varietas
     private lateinit var blk: Blok
     private val context = this
@@ -45,6 +48,7 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
         reqPermission()
         vari = Varietas(context)
         blk = Blok(context)
+        excel = writeExcel(context)
         
         mOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         mClose = AnimationUtils.loadAnimation(this, R.anim.fab_close)
@@ -150,12 +154,24 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
                         close()
                     }
                     export_btn.setOnClickListener {
+<<<<<<< HEAD
                         
+=======
+                        // if export NOW
+                        excel.export()
+                        //if export by date, masukin ke variabel date1 date2
+                        //excel.export(date1,date2)
+
+
+>>>>>>> 08a7117b3fa16d3ffca6531b6ee5e98c345e5924
                     }
                 }
             }
         }
     }
+
+
+
 
     override fun onBackPressed() {
 //        super.onBackPressed()
