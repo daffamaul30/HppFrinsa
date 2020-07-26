@@ -5,7 +5,10 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "frinsa.hpp"
         minSdkVersion 21
@@ -44,8 +47,12 @@ dependencies {
     implementation 'com.jjoe64:graphview:4.2.1'
     implementation 'com.opencsv:opencsv:4.0'
 
-    compile 'com.aldoapps:autoformatedittext:0.9.3'
-    compile 'com.ajts.androidmads.SQLite2Excel:library:1.0.2'
-    compile 'com.kishan.askpermission:askpermission:1.0.3'
+    implementation 'com.aldoapps:autoformatedittext:0.9.3'
+    implementation 'com.ajts.androidmads.SQLite2Excel:library:1.0.2'
+    implementation 'com.kishan.askpermission:askpermission:1.0.3'
+
+    // Google Drive
+    implementation 'io.github.rybalkinsd:kohttp:0.12.0'
+
 
 }

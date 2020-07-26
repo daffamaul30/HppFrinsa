@@ -12,12 +12,14 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+
 import com.kishan.askpermission.AskPermission
 import com.kishan.askpermission.ErrorCallback
 import com.kishan.askpermission.PermissionCallback
 import com.kishan.askpermission.PermissionInterface
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import frinsa.hpp.data.Blok
+
 import frinsa.hpp.data.Varietas
 import frinsa.hpp.data.writeExcel
 import frinsa.hpp.lanjut_produksi.SubProses
@@ -166,6 +168,9 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
             }
         }
     }
+
+
+
 
     override fun onBackPressed() {
 //        super.onBackPressed()
