@@ -153,16 +153,17 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
                         startActivity(intent)
                         close()
                     }
-//                    import_btn.setOnClickListener {
-//                        //
-//                    }
                     export_btn.setOnClickListener {
+<<<<<<< HEAD
+                        
+=======
                         // if export NOW
                         excel.export()
                         //if export by date, masukin ke variabel date1 date2
                         //excel.export(date1,date2)
 
 
+>>>>>>> 08a7117b3fa16d3ffca6531b6ee5e98c345e5924
                     }
                 }
             }
