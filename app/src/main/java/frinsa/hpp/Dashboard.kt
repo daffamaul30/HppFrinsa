@@ -65,12 +65,10 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
         varietas_baru.startAnimation(mClose)
         blok_baru.startAnimation(mClose)
         proses_baru.startAnimation(mClose)
-        //import_btn.startAnimation(mClose)
         export_btn.startAnimation(mClose)
         tv_varietas_baru.startAnimation(mClose)
         tv_blok_baru.startAnimation(mClose)
         tv_proses_baru.startAnimation(mClose)
-        tv_import.startAnimation(mClose)
         tv_export.startAnimation(mClose)
         floatingActionButton.startAnimation(mRotate2)
 
@@ -87,12 +85,10 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
         varietas_baru.startAnimation(mOpen)
         blok_baru.startAnimation(mOpen)
         proses_baru.startAnimation(mOpen)
-        //import_btn.startAnimation(mOpen)
         export_btn.startAnimation(mOpen)
         tv_varietas_baru.startAnimation(mOpen)
         tv_blok_baru.startAnimation(mOpen)
         tv_proses_baru.startAnimation(mOpen)
-        tv_import.startAnimation(mOpen)
         tv_export.startAnimation(mOpen)
         floatingActionButton.startAnimation(mRotate1)
 
@@ -154,16 +150,10 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
                         close()
                     }
                     export_btn.setOnClickListener {
-<<<<<<< HEAD
-                        
-=======
                         // if export NOW
                         excel.export()
                         //if export by date, masukin ke variabel date1 date2
                         //excel.export(date1,date2)
-
-
->>>>>>> 08a7117b3fa16d3ffca6531b6ee5e98c345e5924
                     }
                 }
             }
