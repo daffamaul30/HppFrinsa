@@ -83,7 +83,7 @@ class ReportView : AppCompatActivity(), View.OnClickListener {
         varietas.text = varietas_toExtra
         blok.text = blok_toExtra
         berat.text = berat_toExtra
-        kadar.text = (allData.jemurKadarAir.kadarAir + allData.hulling.kadarAir).toString()
+        kadar.text = if ((allData.jemurKadarAir.kadarAir + allData.hulling.kadarAir).toString() != "0.0") (allData.jemurKadarAir.kadarAir + allData.hulling.kadarAir).toString() else "Not Set"
         proses.text = proses_toExtra
         biaya.text = biaya_toExtra
         kebun.text = "Beli dari " + allData.produksi.beli_dari
