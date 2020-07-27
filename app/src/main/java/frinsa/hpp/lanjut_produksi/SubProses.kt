@@ -94,7 +94,6 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         var data_next : ModelDaftarProduksi? = null
 
         var valid = true
-        println("VALID : "+valid)
 
         if (posisi.size == 1) {
             //proses = spList.get(posisi.get(0)).proses.toString()
@@ -109,7 +108,6 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                 if (data == null || data.proses == "-"){
 
                     data = spList.find{ e->e.id.toString().startsWith(i.toString())}!!
-                    println("data sekarang : "+data)
                 }
             }
             if(data!!.proses != "-"){
@@ -117,12 +115,10 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                     data_next = spList.find{ e->e.id.toString().startsWith(j.toString())}!!
                     println("DATA_NEXT :"+data)
                     if(data_next.proses != "-" && data_next.proses != data.proses){
-                        println("proses ga sama")
                         valid = false
                         break
                     }else{
                         if(data_next.tahap != data.tahap){
-                            println("TAHAP GA SAMA")
                             valid = false
                             break
                         }
@@ -132,32 +128,6 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             if (!valid) {
                 Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
             }
-
-
-//            proses = spList.get(posisi.get(0)).proses.toString()
-//            for (i in 0 until posisi.size) {
-//                spList.get(posisi.get(i)).id.let {
-//                    if (it != null) {
-//                        listID.add(it)
-//                    }
-//                }
-//                if (i == posisi.size-1) {
-//                    break
-//                } else {
-//                    if (spList.get(posisi.get(i)).proses != "-" && spList.get(posisi.get(i+1)).proses != "-") {
-//                        if ((spList.get(posisi.get(i)).proses != spList.get(
-//                                posisi.get(i+1)).proses) || (spList.get(
-//                                posisi.get(i)).tahap != spList.get(
-//                                posisi.get(i+1)).tahap)) {
-//                            valid = false
-//                            Toast.makeText(this, "Pilih item dengan proses dan tahap yang sama", Toast.LENGTH_LONG).show()
-//                        }
-//                    }
-//                    else {
-//                        continue
-//                    }
-//                }
-//            }
         }
         else {
             valid = false
@@ -172,7 +142,6 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
             Block = merge.produksi.blok
             varietas = merge.produksi.varietas
             proses = if (merge.produksi.proses == "") "-" else merge.produksi.proses
-            println("INI ID :"+id)
         }
 
 //        Toast.makeText(this, proses, Toast.LENGTH_SHORT).show()
@@ -305,23 +274,23 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                         var current = list.indexOf("suton grader")
                         var code = list.get(current - 1)
                         db.updateStatus(id, code)
-                        if (code == "hulling") {
-                            val hul = Hulling(
-                                tanggal = temp.petik.tgl_petik,
-                                berat = temp.petik.berat.toDouble(),
-                                kadarAir = 0.0,
-                                biaya = 0
-                            )
-                            db.updateKadarAir(temp.produksi.id_produksi, hul, TABLE_HULLING, COL_ID_PRODUKSI_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
-                        }
-                        else if (code == "jemurII") {
-                            val jem = jemurDua(
-                                tanggal = temp.petik.tgl_petik,
-                                berat = temp.petik.berat.toDouble(),
-                                biaya = 0
-                            )
-                            db.updateStandard(id, jem, TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
-                        }
+//                        if (code == "hulling") {
+//                            val hul = Hulling(
+//                                tanggal = temp.petik.tgl_petik,
+//                                berat = temp.petik.berat.toDouble(),
+//                                kadarAir = 0.0,
+//                                biaya = 0
+//                            )
+//                            db.updateKadarAir(temp.produksi.id_produksi, hul, TABLE_HULLING, COL_ID_PRODUKSI_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
+//                        }
+//                        else if (code == "jemurII") {
+//                            val jem = jemurDua(
+//                                tanggal = temp.petik.tgl_petik,
+//                                berat = temp.petik.berat.toDouble(),
+//                                biaya = 0
+//                            )
+//                            db.updateStandard(id, jem, TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
+//                        }
                     }
                     else if (temp.produksi.bentuk == "Gabah") {
                         val step = db.getStepProses(name)
@@ -330,24 +299,24 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
                         var current = list.indexOf(before)
                         var code = list.get(current - 1)
                         db.updateStatus(id, code)
-                        if (code == "transportasi") {
-                            val trans = Transportasi(
-                                tanggal = temp.petik.tgl_petik,
-                                berat = temp.petik.berat.toDouble(),
-                                biaya_transport = 0,
-                                biaya_kawal = 0,
-                                biaya_bongkar = 0
-                            )
-                            db.updateTransportasi(temp.produksi.id_produksi, trans)
-                        }
-                        else if (code == "pulping") {
-                            val pul = pulpingDua(
-                                tanggal = temp.petik.tgl_petik,
-                                berat = temp.petik.berat.toDouble(),
-                                biaya = 0
-                            )
-                            db.updateStandard(id, pul, TABLE_PULPING2, COL_ID_PRODUKSI_PULPING2, COL_TGL_PULPING2, COL_BERAT_PULPING2, COL_BIAYA_PULPING2)
-                        }
+//                        if (code == "transportasi") {
+//                            val trans = Transportasi(
+//                                tanggal = temp.petik.tgl_petik,
+//                                berat = temp.petik.berat.toDouble(),
+//                                biaya_transport = 0,
+//                                biaya_kawal = 0,
+//                                biaya_bongkar = 0
+//                            )
+//                            db.updateTransportasi(temp.produksi.id_produksi, trans)
+//                        }
+//                        else if (code == "pulping") {
+//                            val pul = pulpingDua(
+//                                tanggal = temp.petik.tgl_petik,
+//                                berat = temp.petik.berat.toDouble(),
+//                                biaya = 0
+//                            )
+//                            db.updateStandard(id, pul, TABLE_PULPING2, COL_ID_PRODUKSI_PULPING2, COL_TGL_PULPING2, COL_BERAT_PULPING2, COL_BIAYA_PULPING2)
+//                        }
                     }
 
                 }

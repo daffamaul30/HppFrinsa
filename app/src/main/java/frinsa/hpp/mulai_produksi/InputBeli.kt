@@ -346,30 +346,30 @@ class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChecke
                             biaya_cuci = ongkosCuci
                         )
                         produk.insertFirst(produksi, petik)
-                        if (terpilih == "Asalan") {
-                            if (status == "hulling") {
-                                val hul = Hulling(
-                                    tanggal = tvTanggal,
-                                    berat = edtBerat.toDouble(),
-                                    kadarAir = 0.0,
-                                    biaya = 0
-                                )
-                                val id = db.getIdProduksi(TABLE_PRODUKSI)
-                                db.updateKadarAir(id, hul, TABLE_HULLING, COL_ID_PRODUKSI_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
-                            }
-                            else if (status == "jemurII") {
-                                val jem = jemurDua(
-                                    tanggal = tvTanggal,
-                                    berat = edtBerat.toDouble(),
-                                    biaya = 0
-                                )
-                                val id = db.getIdProduksi(TABLE_PRODUKSI)
-                                db.updateStandard(id, jem, TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
-                            }
-                        }
-                        else {
-                            //
-                        }
+//                        if (terpilih == "Asalan") {
+//                            if (status == "hulling") {
+//                                val hul = Hulling(
+//                                    tanggal = tvTanggal,
+//                                    berat = edtBerat.toDouble(),
+//                                    kadarAir = 0.0,
+//                                    biaya = 0
+//                                )
+//                                val id = db.getIdProduksi(TABLE_PRODUKSI)
+//                                db.updateKadarAir(id, hul, TABLE_HULLING, COL_ID_PRODUKSI_HULLING, COL_TGL_HULLING, COL_BERAT_HULLING, COL_KDR_AIR_HULLING, COL_BIAYA_HULLING)
+//                            }
+//                            else if (status == "jemurII") {
+//                                val jem = jemurDua(
+//                                    tanggal = tvTanggal,
+//                                    berat = edtBerat.toDouble(),
+//                                    biaya = 0
+//                                )
+//                                val id = db.getIdProduksi(TABLE_PRODUKSI)
+//                                db.updateStandard(id, jem, TABLE_JEMUR2, COL_ID_PRODUKSI_JEMUR2, COL_TGL_JEMUR2, COL_BERAT_JEMUR2, COL_BIAYA_JEMUR2)
+//                            }
+//                        }
+//                        else {
+//                            //
+//                        }
 
                         //Intent menggunakan putextra
                         val intent = Intent(this@InputBeli, ReviewHasilBeli::class.java)
