@@ -25,7 +25,7 @@ class jemurKadarAir_Fragment : Fragment(), View.OnClickListener {
     var idData: Int = 0
     var Varietas : String = ""
     var Blok : String = ""
-    private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
+    private val dateFormat = SimpleDateFormat("yyy/MM/dd", Locale.ROOT)
 
     //Deklarasi semua edit text / textview yg akan divalidasi
     private lateinit var tvTgl: String

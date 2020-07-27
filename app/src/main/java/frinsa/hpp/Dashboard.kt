@@ -2,32 +2,43 @@ package frinsa.hpp
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
+import androidx.fragment.app.FragmentActivity
 import com.kishan.askpermission.AskPermission
 import com.kishan.askpermission.ErrorCallback
 import com.kishan.askpermission.PermissionCallback
 import com.kishan.askpermission.PermissionInterface
 import frinsa.hpp.daftar_produksi.MainDaftarProduksi
 import frinsa.hpp.data.Blok
-
 import frinsa.hpp.data.Varietas
 import frinsa.hpp.data.writeExcel
 import frinsa.hpp.lanjut_produksi.SubProses
 import frinsa.hpp.mulai_produksi.InputBeli
 import frinsa.hpp.mulai_produksi.InputPanen
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_input_beli.*
+import kotlinx.android.synthetic.main.detail_biaya.*
 import kotlinx.android.synthetic.main.dialog_menu_mulai_produksi.view.*
+import kotlinx.android.synthetic.main.dialog_set_tanggal_export.*
+import kotlinx.android.synthetic.main.dialog_set_tanggal_export.view.*
+import kotlinx.android.synthetic.main.dialog_submit.view.*
 import kotlinx.android.synthetic.main.dialog_submit_exit.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback, ErrorCallback {
@@ -35,6 +46,8 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
     private lateinit var mClose: Animation
     private lateinit var mRotate1: Animation
     private lateinit var mRotate2: Animation
+
+    private val dateFormat = SimpleDateFormat("yyy/MM/dd", Locale.ROOT)
 
     private var isOpen: Boolean = false
     private lateinit var excel: writeExcel
@@ -45,6 +58,9 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+        //
+
+        //
         reqPermission()
         vari = Varietas(context)
         blk = Blok(context)
@@ -150,17 +166,86 @@ class Dashboard : AppCompatActivity(), View.OnClickListener, PermissionCallback,
                         close()
                     }
                     export_btn.setOnClickListener {
-                        // if export NOW
-                        excel.export()
-                        //if export by date, masukin ke variabel date1 date2
-                        //excel.export(date1,date2)
+                        val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_set_tanggal_export, null)
+                        val builder = AlertDialog.Builder(this).setView(dialog)
+                        val alertDialog =  builder.create()
+                        alertDialog.window?.attributes?.windowAnimations =
+                            R.style.DialogAnim_Fade
+                        alertDialog.show()
+                        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                        dialog.tgl_dari.setOnClickListener(View.OnClickListener {
+                            dialogTgl(dialog.tgl_dari)
+                        })
+                        dialog.tgl_sampai.setOnClickListener(View.OnClickListener {
+                            dialogTgl(dialog.tgl_sampai)
+                        })
+
+                        dialog.submit_atur_tanggal_export.setOnClickListener {
+                            var valid = true
+                            if (dialog.tgl_dari.text.isEmpty()) {
+                                valid = false
+                                dialog.tgl_dari.error = "Harud diisi!"
+                            }
+                            if (dialog.tgl_sampai.text.isEmpty()) {
+                                valid = false
+                                dialog.tgl_sampai.error = "Harud diisi!"
+                            }
+                            if (dialog.tgl_dari.text.toString() > dialog.tgl_sampai.text.toString()) {
+                                valid = false
+                                Toast.makeText(this, "Tanggal awal harus sebelum tanggal akhir", Toast.LENGTH_SHORT).show()
+                            }
+                            if (valid) {
+                                ekspor(dialog.tgl_dari.text.toString(), dialog.tgl_sampai.text.toString())
+
+                                alertDialog.dismiss()
+                            }
+
+                        }
+                        dialog.batal_atur_tanggal_export.setOnClickListener{
+                            alertDialog.dismiss()
+                        }
                     }
                 }
             }
         }
     }
 
+    fun dialogTgl(id: EditText) {
+        val now = Calendar.getInstance()
+        val datePicker = DatePickerDialog(
+            this, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                now.set(Calendar.YEAR, year)
+                now.set(Calendar.MONTH, month)
+                now.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                id.setText(dateFormat.format(now.time))
+            },
+            now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+    }
 
+    fun ekspor(d1: String, d2: String) {
+//        Toast.makeText(this, d1, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, d2, Toast.LENGTH_SHORT).show()
+        val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_submit, null)
+        val builder = AlertDialog.Builder(this).setView(dialog)
+        dialog.tv_submit.text = "Apakah rentang tanggal sudah benar?"
+        val alertDialog =  builder.create()
+        alertDialog.window?.attributes?.windowAnimations =
+            R.style.DialogAnim_Fade
+        alertDialog.show()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.submit_submit.setOnClickListener {
+            excel.export(d1, d2)
+
+            alertDialog.dismiss()
+        }
+        dialog.batal_submit.setOnClickListener{
+            alertDialog.dismiss()
+        }
+    }
 
 
     override fun onBackPressed() {

@@ -14,7 +14,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="varietas">Varietas</string>
-    <string name="tgl_input">DD/MM/YYYY</string>
+    <string name="tgl_input">YYYY/MM/DD</string>
     <string name="blok">Blok</string>
     <string name="berat">Berat</string>
     <string name="kolektif_dari">Kolektif Dari</string>

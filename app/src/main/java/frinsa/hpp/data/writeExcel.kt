@@ -46,11 +46,14 @@ class writeExcel(val context: Context?) {
         db = DBPanen(this.context!!)
         produk = Produk(this.context!!)
         var data = db.getAllByDate(date1,date2)
+//        var data = db.getAllData2("<>")
+        val d1 = date1.replace("/", "-")
+        val d2 = date2.replace("/", "-")
 
         var fileWriter: FileWriter? = null
         var csvWriter: CSVWriter? = null
 
-        var dir = Environment.getExternalStorageDirectory().toString()+"/hppfrinsa_"+date1+"_"+date2+".csv"
+        var dir = Environment.getExternalStorageDirectory().toString()+"/hppfrinsa_"+d1+"_"+d2+".csv"
         println(dir)
 
         try {
@@ -60,7 +63,7 @@ class writeExcel(val context: Context?) {
             // write String Array
             csvWriter = CSVWriter(fileWriter,
                 CSVWriter.DEFAULT_SEPARATOR,
-                CSVWriter.NO_QUOTE_CHARACTER,
+//                CSVWriter.NO_QUOTE_CHARACTER,
                 CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                 CSVWriter.DEFAULT_LINE_END)
             csvWriter.writeNext(CSV_HEADER)

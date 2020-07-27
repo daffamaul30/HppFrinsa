@@ -25,7 +25,7 @@ class JemurI_Fragment: Fragment(),View.OnClickListener{
     var idData: Int = 0
     var Varietas : String = ""
     var Blok : String = ""
-    private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
+    private val dateFormat = SimpleDateFormat("yyy/MM/dd", Locale.ROOT)
     private lateinit var tvTgl: String
     private lateinit var edtBerat: String
     private lateinit var edtOngkosJemur2: String

@@ -25,7 +25,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class InputBeli : AppCompatActivity(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
-    private val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ROOT)
+    private val dateFormat = SimpleDateFormat("yyy/MM/dd", Locale.ROOT)
 
     private val blok: MutableList<String> = ArrayList()
     private val varietas: MutableList<String> = ArrayList()

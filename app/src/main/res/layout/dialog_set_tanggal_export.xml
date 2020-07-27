@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_calendar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/tgl_dari"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:focusable="false"
+            android:hint="@string/pilih_tanggal"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/tgl_sampai"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:focusable="false"
+            android:hint="@string/pilih_tanggal"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/batal_atur_tanggal_export"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_toLeftOf="@+id/submit_atur_tanggal_export"
+            android:background="@drawable/btn_batal"
+            android:text="@string/batal"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/submit_atur_tanggal_export"
+            style="@style/Button.Kirim.Proses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_kirim"
+            android:padding="5dp"
+            android:text="@string/pilih" />
+    </RelativeLayout>
+</LinearLayout>
