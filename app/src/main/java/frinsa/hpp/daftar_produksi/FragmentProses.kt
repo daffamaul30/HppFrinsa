@@ -40,7 +40,7 @@ class FragmentProses: Fragment(), View.OnClickListener {
         db = DBPanen(requireContext())
         val data = db.getAllData2("<>")
         data.forEach() {
-            Berat = produk.getLastWeight(it)
+            Berat = if (it.produksi.sumber == "Beli") it.petik.berat else produk.getLastWeight(it)
             dpPList.add(
                 ModelDaftarProduksi(
                     id = it.produksi?.id_produksi,
