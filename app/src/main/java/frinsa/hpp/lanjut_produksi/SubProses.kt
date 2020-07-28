@@ -66,7 +66,7 @@ class SubProses: AppCompatActivity(), View.OnClickListener {
         posisi.clear()
         val data = db.getAllData2("<>")
         data.forEach() {
-            Berat = produk.getLastWeight(it)
+            Berat = if (it.produksi.sumber == "Beli") it.petik.berat else produk.getLastWeight(it)
             spList.add(
                 ModelDaftarProduksi(
                     id = it.produksi.id_produksi,
