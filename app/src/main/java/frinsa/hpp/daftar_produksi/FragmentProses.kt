@@ -101,8 +101,6 @@ class FragmentProses: Fragment(), View.OnClickListener {
                     rv_produksi.adapter?.notifyDataSetChanged()
                 }
                 else{
-//                    displayPList.clear()
-//                    displayPList.addAll(dpPList)
                     refreshData()
                     rv_produksi.adapter?.notifyDataSetChanged()
                 }

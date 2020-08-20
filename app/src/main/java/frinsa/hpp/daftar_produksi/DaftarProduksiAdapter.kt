@@ -41,7 +41,11 @@ import kotlinx.android.synthetic.main.dialog_submit.view.*
 
 
 //2nd Adapter bagian Recycler View
-class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableList<ModelDaftarProduksi>): RecyclerView.Adapter<DaftarProduksiAdapter.cardViewHolder>(){
+class DaftarProduksiAdapter (
+    val context: Context?,
+    private val dpList: MutableList<ModelDaftarProduksi>
+): RecyclerView.Adapter<DaftarProduksiAdapter.cardViewHolder>(){
+
     val produk: Produk = Produk(context!!)
     private var db = DBPanen(context!!)
 
@@ -156,7 +160,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                         }
                     }
                 }
-                //proses lain ngikut petik klo dah jadi
                 "fermentasi" -> {
                     val dialog = LayoutInflater.from(context).inflate(R.layout.dialog_edit_fermentasi,null)
                     val builder = AlertDialog.Builder(context).setView(dialog).setTitle("")
@@ -165,7 +168,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -220,7 +222,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -278,7 +279,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -340,7 +340,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -394,7 +393,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -450,7 +448,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -504,7 +501,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -558,7 +554,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -614,7 +609,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -669,7 +663,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =
@@ -777,7 +770,6 @@ class DaftarProduksiAdapter (val context: Context?, private val dpList: MutableL
                     dialog.edt_dp_blok.text = dpList[position].blok
                     dialog.edt_dp_berat.text = dpList[position].berat.toString() + " Kg"
                     dialog.edt_dp_proses.text = dpList[position].proses
-                    //dialog.edt_dp_biaya.text = produk.formatRupiah(dpList[position].biaya!!.toDouble())
                     dialog.edt_dp_tahap.text = dpList[position].tahap
                     val alertDialog = builder.create()
                     alertDialog.window?.attributes?.windowAnimations =

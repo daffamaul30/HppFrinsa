@@ -5,13 +5,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class ViewPagerAdapterDaftarProduksi(fm: FragmentManager?): FragmentPagerAdapter(fm!!) {
-    //var fragmentList = arrayListOf<Fragment>()
-    //var titleList = arrayListOf<String>()
-
-//    fun populateFragment(fragment: Fragment, title:String){
-//        fragmentList.add(fragment)
-//        titleList.add(title)
-//    }
 
     override fun getItem(position: Int): Fragment{
         if (position==0){

@@ -101,8 +101,6 @@ class FragmentSelesai: Fragment(), View.OnClickListener {
                     rv_produksi_selesai.adapter?.notifyDataSetChanged()
                 }
                 else{
-//                    displaySList.clear()
-//                    displaySList.addAll(dpSList)
                     refreshDataS()
                     rv_produksi_selesai.adapter?.notifyDataSetChanged()
                 }
